@@ -53,7 +53,8 @@ typedef struct {
 	const double maxVal;
 } parameterProperties_struct;
 
-const parameterProperties_struct parameterProperties[kNumParams] = {
+const parameterProperties_struct parameterProperties[kNumParams] = 
+{
   {"Osc 1 Waveform", 156, 148},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
   {"Osc 2 Waveform", 156, 387},
@@ -148,16 +149,26 @@ void OhmBass::CreateParams() {
 
 void OhmBass::CreateGraphics() {
 	IGraphics* pGraphics = MakeGraphics(this, kWidth, kHeight);
+
+	//background
 	pGraphics->AttachBackground(BG_ID, BG_FN);
+
+	//keybooards
 	IBitmap whiteKeyImage = pGraphics->LoadIBitmap(WHITE_KEY_ID, WHITE_KEY_FN, 6);
 	IBitmap blackKeyImage = pGraphics->LoadIBitmap(BLACK_KEY_ID, BLACK_KEY_FN);
 	//                            C#     D#          F#      G#      A# (Quantos PX as notas # deslocam pra esquerda) 
-	int keyCoordinates[12] = { 0, 20, 33, 57, 67, 99, 120, 132, 155, 165, 189, 198}; 
+	int keyCoordinates[12] = { 0, 20, 33, 57, 67, 99, 120, 132, 155, 165, 189, 198 };
 	mVirtualKeyboard = new IKeyboardControl(this, kKeybX, kKeybY, virtualKeyboardMinimumNoteNumber, /* octaves: */ 2, &whiteKeyImage, &blackKeyImage, keyCoordinates);
 	pGraphics->AttachControl(mVirtualKeyboard);
+
+	//Oscilattors
 	IBitmap waveformBitmap = pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
 	IBitmap filterModeBitmap = pGraphics->LoadIBitmap(FILTERMODE_ID, FILTERMODE_FN, 3);
+
+	//knobs
 	IBitmap knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
+
+
 	for (int i = 0; i < kNumParams; i++) {
 		const parameterProperties_struct& properties = parameterProperties[i];
 		IControl* control;
