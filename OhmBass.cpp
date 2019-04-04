@@ -19,6 +19,10 @@ enum EParams
 	// Oscillator Section:
 	mOsc1Waveform = 0,
 	mOsc1PitchMod,
+	mOsc1BtnSaw,
+	mOsc1BtnSin,
+	mOsc1BtnSq,
+	mOsc1BtnTri,
 	mOsc2Waveform,
 	mOsc2PitchMod,
 	mOscMix,
@@ -57,6 +61,10 @@ const parameterProperties_struct parameterProperties[kNumParams] =
 {
   {"Osc 1 Waveform", 156, 148},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
+  {"Osc 1 Button Saw", 40, 206, 0.0, 0.0, 1.0},
+  {"Osc 1 Button Sine", 99, 206, 0.0, 0.0, 1.0},
+  {"Osc 1 Button Square", 159, 206, 0.0, 0.0, 1.0},
+  {"Osc 1 Button Trian", 219, 206, 0.0, 0.0, 1.0},
   {"Osc 2 Waveform", 156, 387},
   {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
   {"Osc Mix", 480, 200, 0.5, 0.0, 1.0},
@@ -102,6 +110,19 @@ void OhmBass::CreateParams() {
 		IParam* param = GetParam(i);
 		const parameterProperties_struct& properties = parameterProperties[i];
 		switch (i) {
+			// Bool Parameters:
+		case mOsc1BtnSaw:
+			param->InitBool(properties.name, TRUE);
+			// For VST3:
+			param->SetDisplayText(0, properties.name);
+			break;
+		case mOsc1BtnSin:
+		case mOsc1BtnSq:
+		case mOsc1BtnTri:
+			param->InitBool(properties.name, FALSE);
+			// For VST3:
+			param->SetDisplayText(0, properties.name);
+			break;
 			// Enum Parameters:
 		case mOsc1Waveform:
 		case mOsc2Waveform:
@@ -168,6 +189,13 @@ void OhmBass::CreateGraphics() {
 	//knobs
 	IBitmap knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
 
+	//waves buttons
+	IBitmap btnSawWaveImage = pGraphics->LoadIBitmap(BUTTONWAVESAW_ID, BUTTONWAVESAW_FN, 2);
+	IBitmap btnSinWaveImage = pGraphics->LoadIBitmap(BUTTONWAVESINE_ID, BUTTONWAVESINE_FN, 2);
+	IBitmap btnSqWaveImage = pGraphics->LoadIBitmap(BUTTONWAVESQUARE_ID, BUTTONWAVESQUARE_FN, 2);
+	IBitmap btnTriWaveImage = pGraphics->LoadIBitmap(BUTTONWAVETRIAN_ID, BUTTONWAVETRIAN_FN, 2);
+
+
 
 	for (int i = 0; i < kNumParams; i++) {
 		const parameterProperties_struct& properties = parameterProperties[i];
@@ -175,6 +203,22 @@ void OhmBass::CreateGraphics() {
 		IBitmap* graphic;
 		switch (i) {
 			// Switches:
+		case mOsc1BtnSaw:
+			graphic = &btnSawWaveImage;
+			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
+			break;
+		case mOsc1BtnSin:
+			graphic = &btnSinWaveImage;
+			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
+			break;
+		case mOsc1BtnSq:
+			graphic = &btnSqWaveImage;
+			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
+			break;
+		case mOsc1BtnTri:
+			graphic = &btnTriWaveImage;
+			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
+			break;
 		case mOsc1Waveform:
 		case mOsc2Waveform:
 		case mLFOWaveform:
@@ -239,6 +283,12 @@ void OhmBass::OnParamChange(int paramIdx)
 		using std::bind;
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
+			case mOsc1BtnSaw:
+			case mOsc1BtnSin:
+			case mOsc1BtnSq:
+			case mOsc1BtnTri:
+				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
+				break;
 			case mOsc1Waveform:
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1,static_cast<Oscillator::OscillatorMode>(param->Int()));
 				break;

@@ -60,27 +60,38 @@ instrument determined by PLUG _IS _INST
 #define PLUG_DOES_STATE_CHUNKS 0
 
 
-// Unique IDs for each image resource.
+// ===== UNIQUE IDS =====================
+// --- Regular Interface ----
 #define BG_ID						101
 #define WHITE_KEY_ID				102
 #define BLACK_KEY_ID				103
 #define WAVEFORM_ID					104
 #define FILTERMODE_ID				107
 #define KNOB_MEDIUM_ID				108
+// --- Waves Buttons ----
+#define BUTTONWAVESAW_ID			109
+#define BUTTONWAVESINE_ID			110
+#define BUTTONWAVESQUARE_ID			111
+#define BUTTONWAVETRIAN_ID			112
 
 
 
 
 
-
-
-// Image resource locations for this plug.
+// ===== IMAGES LOCATIONS =====================//
+// --- Regular Interface ---- //
 #define BG_FN         "resources/img/bg.png"
 #define WHITE_KEY_FN  "resources/img/whitekey.png"
 #define BLACK_KEY_FN  "resources/img/blackkey.png"
 #define WAVEFORM_FN   "resources/img/waveform.png"
 #define KNOB_MEDIUM   "resources/img/knob_medium.png"
 #define FILTERMODE_FN "resources/img/filtermode.png"
+// --- Waves Buttons ---- //
+#define BUTTONWAVESAW_FN "resources/img/wavesbuttons/buttonsaw.png"
+#define BUTTONWAVESINE_FN "resources/img/wavesbuttons/buttonsine.png"
+#define BUTTONWAVESQUARE_FN "resources/img/wavesbuttons/buttonsquare.png"
+#define BUTTONWAVETRIAN_FN "resources/img/wavesbuttons/buttontrian.png"
+
 
 
 
