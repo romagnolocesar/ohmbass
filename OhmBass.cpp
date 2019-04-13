@@ -11,6 +11,7 @@
 #include <algorithm>
 
 const int kNumPrograms = 5;
+IGraphics* pGraphics;
 
 const double parameterStep = 0.001;
 
@@ -47,6 +48,8 @@ enum EParams
 	mFilterEnvRelease,
 	kNumParams
 };
+
+IControl* control;
 
 typedef struct {
 	const char* name;
@@ -169,7 +172,7 @@ void OhmBass::CreateParams() {
 }
 
 void OhmBass::CreateGraphics() {
-	IGraphics* pGraphics = MakeGraphics(this, kWidth, kHeight);
+	pGraphics = MakeGraphics(this, kWidth, kHeight);
 
 	//background
 	pGraphics->AttachBackground(BG_ID, BG_FN);
@@ -199,7 +202,6 @@ void OhmBass::CreateGraphics() {
 
 	for (int i = 0; i < kNumParams; i++) {
 		const parameterProperties_struct& properties = parameterProperties[i];
-		IControl* control;
 		IBitmap* graphic;
 		switch (i) {
 			// Switches:
@@ -284,8 +286,14 @@ void OhmBass::OnParamChange(int paramIdx)
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
 			case mOsc1BtnSaw:
+				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
+				break;
 			case mOsc1BtnSin:
+				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
+				break;
 			case mOsc1BtnSq:
+				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
+				break;
 			case mOsc1BtnTri:
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
 				break;
