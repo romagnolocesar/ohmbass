@@ -62,6 +62,10 @@ typedef struct {
 
 const parameterProperties_struct parameterProperties[kNumParams] = 
 {
+  /*{"Osc 1 Button Sine", 99, 206},
+  {"Osc 1 Button Saw", 40, 206},
+  {"Osc 1 Button Square", 159, 206},
+  {"Osc 1 Button Trian", 219, 206},*/
   {"Osc 1 Buttons Waves", 99, 206},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
   {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
@@ -102,11 +106,32 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 }
 OhmBass::~OhmBass() {}
+//VOLTAR 64 VOZES
 void OhmBass::CreateParams() {
 	for (int i = 0; i < kNumParams; i++) {
 		IParam* param = GetParam(i);
 		const parameterProperties_struct& properties = parameterProperties[i];
 		switch (i) {
+		/*case mOsc1BtnSin:
+			param->InitEnum(properties.name, 
+				Oscillator::OSCILLATOR_MODE_SINE,
+			    Oscillator::kNumOscillatorModes);
+			break;
+		case mOsc1BtnSaw:
+			param->InitEnum(properties.name,
+				Oscillator::OSCILLATOR_MODE_SAW,
+				Oscillator::kNumOscillatorModes);
+			break;
+		case mOsc1BtnSq:
+			param->InitEnum(properties.name,
+				Oscillator::OSCILLATOR_MODE_SQUARE,
+				Oscillator::kNumOscillatorModes);
+			break;
+		case mOsc1BtnTri:
+			param->InitEnum(properties.name,
+				Oscillator::OSCILLATOR_MODE_TRIANGLE,
+				Oscillator::kNumOscillatorModes);
+			break;*/
 		case mOsc1BtnWaves:
 			param->InitEnum(properties.name,
 				Oscillator::OSCILLATOR_MODE_SINE,
