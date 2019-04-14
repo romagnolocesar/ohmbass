@@ -10,16 +10,17 @@
 #include <math.h>
 #include <algorithm>
 
+
 const int kNumPrograms = 5;
+IGraphics* pGraphics;
 
 const double parameterStep = 0.001;
 
 enum EParams
 {
 	// Oscillator Section:
-	mOsc1Waveform = 0,
+	mBgBtnOscWaves = 0,
 	mOsc1PitchMod,
-	mOsc2Waveform,
 	mOsc2PitchMod,
 	mOscMix,
 	// Filter Section:
@@ -44,6 +45,8 @@ enum EParams
 	kNumParams
 };
 
+IControl* control;
+
 typedef struct {
 	const char* name;
 	const int x;
@@ -53,10 +56,14 @@ typedef struct {
 	const double maxVal;
 } parameterProperties_struct;
 
-const parameterProperties_struct parameterProperties[kNumParams] = {
-  {"Osc 1 Waveform", 156, 148},
+const parameterProperties_struct parameterProperties[kNumParams] = 
+{
+  /*{"ICon Osc 1 Button Sine", 99, 206},
+  {"Icon Osc 1 Button Saw", 40, 206},
+  {"Icon Osc 1 Button Square", 159, 206},
+  {"Icon Osc 1 Button Trian", 219, 206},*/
+  {"Bg Btn Osc 1 Waves", 99, 206, 0.0, 0.0, 1.0},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
-  {"Osc 2 Waveform", 156, 387},
   {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
   {"Osc Mix", 480, 200, 0.5, 0.0, 1.0},
   {"Filter Mode", 875, 300},
@@ -95,20 +102,25 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 }
 OhmBass::~OhmBass() {}
-
 void OhmBass::CreateParams() {
 	for (int i = 0; i < kNumParams; i++) {
 		IParam* param = GetParam(i);
 		const parameterProperties_struct& properties = parameterProperties[i];
 		switch (i) {
-			// Enum Parameters:
-		case mOsc1Waveform:
-		case mOsc2Waveform:
-			param->InitEnum(properties.name,
-				Oscillator::OSCILLATOR_MODE_SAW,
-				Oscillator::kNumOscillatorModes);
-			// For VST3:
-			param->SetDisplayText(0, properties.name);
+		/*case mIconOsc1BtnSin:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break; 
+		case mIconOsc1BtnSaw:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break;
+		case mIconOsc1BtnSq:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break;
+		case mIconOsc1BtnTri:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break;*/
+		case mBgBtnOscWaves:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
 			break;
 		case mLFOWaveform:
 			param->InitEnum(properties.name,
@@ -122,7 +134,6 @@ void OhmBass::CreateParams() {
 				Filter::FILTER_MODE_LOWPASS,
 				Filter::kNumFilterModes);
 			break;
-			// Double Parameters:
 		default:
 			param->InitDouble(properties.name,
 				properties.defaultVal,
@@ -147,25 +158,50 @@ void OhmBass::CreateParams() {
 }
 
 void OhmBass::CreateGraphics() {
-	IGraphics* pGraphics = MakeGraphics(this, kWidth, kHeight);
+	pGraphics = MakeGraphics(this, kWidth, kHeight);
+
+	//background
 	pGraphics->AttachBackground(BG_ID, BG_FN);
+
+	//keybooards
 	IBitmap whiteKeyImage = pGraphics->LoadIBitmap(WHITE_KEY_ID, WHITE_KEY_FN, 6);
 	IBitmap blackKeyImage = pGraphics->LoadIBitmap(BLACK_KEY_ID, BLACK_KEY_FN);
 	//                            C#     D#          F#      G#      A# (Quantos PX as notas # deslocam pra esquerda) 
-	int keyCoordinates[12] = { 0, 20, 33, 57, 67, 99, 120, 132, 155, 165, 189, 198}; 
+	int keyCoordinates[12] = { 0, 20, 33, 57, 67, 99, 120, 132, 155, 165, 189, 198 };
 	mVirtualKeyboard = new IKeyboardControl(this, kKeybX, kKeybY, virtualKeyboardMinimumNoteNumber, /* octaves: */ 2, &whiteKeyImage, &blackKeyImage, keyCoordinates);
 	pGraphics->AttachControl(mVirtualKeyboard);
+
+	//Oscilattors
 	IBitmap waveformBitmap = pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
 	IBitmap filterModeBitmap = pGraphics->LoadIBitmap(FILTERMODE_ID, FILTERMODE_FN, 3);
+
+	//knobs
 	IBitmap knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
+
+	//waves buttons
+		//icons
+	IBitmap iconSawWaveOn = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
+	IBitmap iconSawWaveOff = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
+	IBitmap iconSineWaveOn = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
+	IBitmap iconSineWaveOff = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
+	IBitmap iconSquareWaveOn = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
+	IBitmap iconSquareWaveOff = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
+	IBitmap iconTriangleWaveOn = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
+	IBitmap iconTriangleWaveOff = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
+
+	IBitmap bgBtnOscWaves = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
+
+
+
 	for (int i = 0; i < kNumParams; i++) {
 		const parameterProperties_struct& properties = parameterProperties[i];
-		IControl* control;
+		IParam* param = GetParam(i);
 		IBitmap* graphic;
 		switch (i) {
-			// Switches:
-		case mOsc1Waveform:
-		case mOsc2Waveform:
+		case mBgBtnOscWaves:
+			graphic = &bgBtnOscWaves;
+			control = new IRadioButtonsControl(this, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
+			break;
 		case mLFOWaveform:
 			graphic = &waveformBitmap;
 			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
@@ -228,15 +264,15 @@ void OhmBass::OnParamChange(int paramIdx)
 		using std::bind;
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
-			case mOsc1Waveform:
-				changer = bind(&VoiceManager::setOscillatorMode, _1, 1,static_cast<Oscillator::OscillatorMode>(param->Int()));
+			case mBgBtnOscWaves:
+				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
 				break;
 			case mOsc1PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
 				break;
-			case mOsc2Waveform:
+			/*case mOsc2Waveform:
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;
+				break;*/
 			case mOsc2PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 				break;

@@ -28,6 +28,7 @@ public:
 	inline bool GetKeyStatus(int key) const { return mMIDIReceiver.getKeyStatus(key); };
 	static const int virtualKeyboardMinimumNoteNumber = 23;
 	int lastVirtualKeyboardNoteNumber;
+	
 
 private:
 	double mFrequency;
