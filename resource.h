@@ -69,11 +69,15 @@ instrument determined by PLUG _IS _INST
 #define FILTERMODE_ID				107
 #define KNOB_MEDIUM_ID				108
 // --- Waves Buttons ----
-#define BUTTONWAVESAW_ID			109
-#define BUTTONWAVESINE_ID			110
-#define BUTTONWAVESQUARE_ID			111
-#define BUTTONWAVETRIAN_ID			112
-#define BUTTONWAVESALL_ID			113
+#define BGBTNOSCWAVES_ID			113
+#define ICONSAWWAVEON_ID			114					
+#define ICONSAWWAVEOFF_ID			115		
+#define ICONSINEWAVEON_ID			116		
+#define ICONSINEWAVEOFF_ID			117		
+#define ICONSQUAREWAVEON_ID			118	    
+#define ICONSQUAREWAVEOFF_ID		119	    
+#define ICONTRIANGLEWAVEON_ID		120		
+#define ICONTRIANGLEWAVEOFF_ID		121		
 
 
 
@@ -88,11 +92,16 @@ instrument determined by PLUG _IS _INST
 #define KNOB_MEDIUM   "resources/img/knob_medium.png"
 #define FILTERMODE_FN "resources/img/filtermode.png"
 // --- Waves Buttons ---- //
-#define BUTTONWAVESAW_FN "resources/img/wavesbuttons/buttonsaw.png"
-#define BUTTONWAVESINE_FN "resources/img/wavesbuttons/buttonsine.png"
-#define BUTTONWAVESQUARE_FN "resources/img/wavesbuttons/buttonsquare.png"
-#define BUTTONWAVETRIAN_FN "resources/img/wavesbuttons/buttontrian.png"
-#define BUTTONWAVESALL_FN "resources/img/wavesbuttons/buttonwavesall.png"
+#define BGBTNOSCWAVES_FN					"resources/img/wavesbuttons/bg_btn_osc_waves.png"
+#define ICONSAWWAVEON_FN				"resources/img/wavesbuttons/icon_saw_wave_on.png"
+#define ICONSAWWAVEOFF_FN				"resources/img/wavesbuttons/icon_saw_wave_off.png"
+#define ICONSINEWAVEON_FN			"resources/img/wavesbuttons/icon_sine_wave_on.png"
+#define ICONSINEWAVEOFF_FN			"resources/img/wavesbuttons/icon_sine_wave_off.png"
+#define ICONSQUAREWAVEON_FN			"resources/img/wavesbuttons/icon_square_wave_on.png"
+#define ICONSQUAREWAVEOFF_FN			"resources/img/wavesbuttons/icon_square_wave_off.png"
+#define ICONTRIANGLEWAVEON_FN		"resources/img/wavesbuttons/icon_triangle_wave_on.png"
+#define ICONTRIANGLEWAVEOFF_FN		"resources/img/wavesbuttons/icon_triangle_wave_off.png"
+
 
 
 

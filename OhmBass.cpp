@@ -19,11 +19,7 @@ const double parameterStep = 0.001;
 enum EParams
 {
 	// Oscillator Section:
-	/*mOsc1BtnSin = 0,
-	mOsc1BtnSaw,
-	mOsc1BtnSq,
-	mOsc1BtnTri,*/
-	mOsc1BtnWaves,
+	mBgBtnOscWaves = 0,
 	mOsc1PitchMod,
 	mOsc2PitchMod,
 	mOscMix,
@@ -62,7 +58,11 @@ typedef struct {
 
 const parameterProperties_struct parameterProperties[kNumParams] = 
 {
-  {"Osc 1 Buttons Waves", 99, 206},
+  /*{"ICon Osc 1 Button Sine", 99, 206},
+  {"Icon Osc 1 Button Saw", 40, 206},
+  {"Icon Osc 1 Button Square", 159, 206},
+  {"Icon Osc 1 Button Trian", 219, 206},*/
+  {"Bg Btn Osc 1 Waves", 99, 206, 0.0, 0.0, 1.0},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
   {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
   {"Osc Mix", 480, 200, 0.5, 0.0, 1.0},
@@ -107,11 +107,21 @@ void OhmBass::CreateParams() {
 		IParam* param = GetParam(i);
 		const parameterProperties_struct& properties = parameterProperties[i];
 		switch (i) {
-		case mOsc1BtnWaves:
-			param->InitEnum(properties.name,
-				Oscillator::OSCILLATOR_MODE_SINE,
-				Oscillator::kNumOscillatorModes);
+		/*case mIconOsc1BtnSin:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
 			break; 
+		case mIconOsc1BtnSaw:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break;
+		case mIconOsc1BtnSq:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break;
+		case mIconOsc1BtnTri:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break;*/
+		case mBgBtnOscWaves:
+			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break;
 		case mLFOWaveform:
 			param->InitEnum(properties.name,
 				Oscillator::OSCILLATOR_MODE_TRIANGLE,
@@ -169,37 +179,29 @@ void OhmBass::CreateGraphics() {
 	IBitmap knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
 
 	//waves buttons
-	IBitmap btnSawWaveImage = pGraphics->LoadIBitmap(BUTTONWAVESAW_ID, BUTTONWAVESAW_FN, 2);
-	IBitmap btnSinWaveImage = pGraphics->LoadIBitmap(BUTTONWAVESINE_ID, BUTTONWAVESINE_FN, 2);
-	IBitmap btnSqWaveImage = pGraphics->LoadIBitmap(BUTTONWAVESQUARE_ID, BUTTONWAVESQUARE_FN, 2);
-	IBitmap btnTriWaveImage = pGraphics->LoadIBitmap(BUTTONWAVETRIAN_ID, BUTTONWAVETRIAN_FN, 2);
-	IBitmap btnWavesImage = pGraphics->LoadIBitmap(BUTTONWAVESALL_ID, BUTTONWAVESALL_FN, 2);
+		//icons
+	IBitmap iconSawWaveOn = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
+	IBitmap iconSawWaveOff = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
+	IBitmap iconSineWaveOn = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
+	IBitmap iconSineWaveOff = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
+	IBitmap iconSquareWaveOn = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
+	IBitmap iconSquareWaveOff = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
+	IBitmap iconTriangleWaveOn = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
+	IBitmap iconTriangleWaveOff = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
+
+	IBitmap bgBtnOscWaves = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
 
 
 
 	for (int i = 0; i < kNumParams; i++) {
 		const parameterProperties_struct& properties = parameterProperties[i];
+		IParam* param = GetParam(i);
 		IBitmap* graphic;
-		IRECT mIRect;
 		switch (i) {
-			// Switches:
-		case mOsc1BtnWaves:
-			graphic = &btnWavesImage;
-			mIRect={ 40, 206, graphic};
-			control = new IRadioButtonsControl(this, mIRect, i, 4, graphic, EDirection::kHorizontal);
+		case mBgBtnOscWaves:
+			graphic = &bgBtnOscWaves;
+			control = new IRadioButtonsControl(this, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
 			break;
-		/*case mOsc1BtnSin:
-			graphic = &btnSinWaveImage;
-			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
-			break;
-		case mOsc1BtnSq:
-			graphic = &btnSqWaveImage;
-			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
-			break;
-		case mOsc1BtnTri:
-			graphic = &btnTriWaveImage;
-			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
-			break;*/
 		case mLFOWaveform:
 			graphic = &waveformBitmap;
 			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
@@ -262,22 +264,7 @@ void OhmBass::OnParamChange(int paramIdx)
 		using std::bind;
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
-			/*case mOsc1BtnSaw:
-				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;
-			case mOsc1BtnSin:
-				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;
-			case mOsc1BtnSq:
-				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;
-			case mOsc1BtnTri:
-				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;*/
-			/*case mOsc1Waveform:
-				changer = bind(&VoiceManager::setOscillatorMode, _1, 1,static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;*/
-			case mOsc1BtnWaves:
+			case mBgBtnOscWaves:
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
 				break;
 			case mOsc1PitchMod:
