@@ -73,6 +73,7 @@ instrument determined by PLUG _IS _INST
 #define BUTTONWAVESINE_ID			110
 #define BUTTONWAVESQUARE_ID			111
 #define BUTTONWAVETRIAN_ID			112
+#define BUTTONWAVESALL_ID			113
 
 
 
@@ -91,6 +92,7 @@ instrument determined by PLUG _IS _INST
 #define BUTTONWAVESINE_FN "resources/img/wavesbuttons/buttonsine.png"
 #define BUTTONWAVESQUARE_FN "resources/img/wavesbuttons/buttonsquare.png"
 #define BUTTONWAVETRIAN_FN "resources/img/wavesbuttons/buttontrian.png"
+#define BUTTONWAVESALL_FN "resources/img/wavesbuttons/buttonwavesall.png"
 
 
 
