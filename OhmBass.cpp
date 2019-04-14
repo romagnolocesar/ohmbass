@@ -10,6 +10,7 @@
 #include <math.h>
 #include <algorithm>
 
+
 const int kNumPrograms = 5;
 IGraphics* pGraphics;
 
@@ -18,13 +19,11 @@ const double parameterStep = 0.001;
 enum EParams
 {
 	// Oscillator Section:
-	mOsc1Waveform = 0,
-	mOsc1PitchMod,
+	mOsc1BtnSin = 0,
 	mOsc1BtnSaw,
-	mOsc1BtnSin,
 	mOsc1BtnSq,
 	mOsc1BtnTri,
-	mOsc2Waveform,
+	mOsc1PitchMod,
 	mOsc2PitchMod,
 	mOscMix,
 	// Filter Section:
@@ -62,13 +61,11 @@ typedef struct {
 
 const parameterProperties_struct parameterProperties[kNumParams] = 
 {
-  {"Osc 1 Waveform", 156, 148},
+  {"Osc 1 Button Sine", 99, 206},
+  {"Osc 1 Button Saw", 40, 206},
+  {"Osc 1 Button Square", 159, 206},
+  {"Osc 1 Button Trian", 219, 206},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
-  {"Osc 1 Button Saw", 40, 206, 0.0, 0.0, 1.0},
-  {"Osc 1 Button Sine", 99, 206, 0.0, 0.0, 1.0},
-  {"Osc 1 Button Square", 159, 206, 0.0, 0.0, 1.0},
-  {"Osc 1 Button Trian", 219, 206, 0.0, 0.0, 1.0},
-  {"Osc 2 Waveform", 156, 387},
   {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
   {"Osc Mix", 480, 200, 0.5, 0.0, 1.0},
   {"Filter Mode", 875, 300},
@@ -107,33 +104,31 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 }
 OhmBass::~OhmBass() {}
-
+//VOLTAR 64 VOZES
 void OhmBass::CreateParams() {
 	for (int i = 0; i < kNumParams; i++) {
 		IParam* param = GetParam(i);
 		const parameterProperties_struct& properties = parameterProperties[i];
 		switch (i) {
-			// Bool Parameters:
-		case mOsc1BtnSaw:
-			param->InitBool(properties.name, TRUE);
-			// For VST3:
-			param->SetDisplayText(0, properties.name);
-			break;
 		case mOsc1BtnSin:
-		case mOsc1BtnSq:
-		case mOsc1BtnTri:
-			param->InitBool(properties.name, FALSE);
-			// For VST3:
-			param->SetDisplayText(0, properties.name);
+			param->InitEnum(properties.name, 
+				Oscillator::OSCILLATOR_MODE_SINE,
+			    Oscillator::kNumOscillatorModes);
 			break;
-			// Enum Parameters:
-		case mOsc1Waveform:
-		case mOsc2Waveform:
+		case mOsc1BtnSaw:
 			param->InitEnum(properties.name,
 				Oscillator::OSCILLATOR_MODE_SAW,
 				Oscillator::kNumOscillatorModes);
-			// For VST3:
-			param->SetDisplayText(0, properties.name);
+			break;
+		case mOsc1BtnSq:
+			param->InitEnum(properties.name,
+				Oscillator::OSCILLATOR_MODE_SQUARE,
+				Oscillator::kNumOscillatorModes);
+			break;
+		case mOsc1BtnTri:
+			param->InitEnum(properties.name,
+				Oscillator::OSCILLATOR_MODE_TRIANGLE,
+				Oscillator::kNumOscillatorModes);
 			break;
 		case mLFOWaveform:
 			param->InitEnum(properties.name,
@@ -147,7 +142,6 @@ void OhmBass::CreateParams() {
 				Filter::FILTER_MODE_LOWPASS,
 				Filter::kNumFilterModes);
 			break;
-			// Double Parameters:
 		default:
 			param->InitDouble(properties.name,
 				properties.defaultVal,
@@ -221,8 +215,6 @@ void OhmBass::CreateGraphics() {
 			graphic = &btnTriWaveImage;
 			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
 			break;
-		case mOsc1Waveform:
-		case mOsc2Waveform:
 		case mLFOWaveform:
 			graphic = &waveformBitmap;
 			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
@@ -297,15 +289,15 @@ void OhmBass::OnParamChange(int paramIdx)
 			case mOsc1BtnTri:
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
 				break;
-			case mOsc1Waveform:
+			/*case mOsc1Waveform:
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1,static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;
+				break;*/
 			case mOsc1PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
 				break;
-			case mOsc2Waveform:
+			/*case mOsc2Waveform:
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;
+				break;*/
 			case mOsc2PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 				break;

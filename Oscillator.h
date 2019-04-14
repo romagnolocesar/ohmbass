@@ -1,13 +1,13 @@
 //
-//  Oscillator.h
-//  Synthesis
+//  OhmmBass.h
+//  OhmBass
 //
-//  Created by Martin on 08.04.14.
+//  Created by ActiOhm - 2019.
 //
 //
 
-#ifndef __Spaciala__Oscillator__
-#define __Spaciala__Oscillator__
+#ifndef __OhmBass__Oscillator__
+#define __OhmBass__Oscillator__
 
 #include <math.h>
 
@@ -49,4 +49,4 @@ protected:
 	double mPitchMod;
 };
 
-#endif /* defined(__Spaciala__Oscillator__) */
+#endif /* defined(__OhmBass__Oscillator__) */

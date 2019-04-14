@@ -79,7 +79,7 @@ public:
 		voice.setFilterLFOAmount(amount);
 	}
 private:
-	static const int NumberOfVoices = 64;
+	static const int NumberOfVoices = 2;
 	Voice voices[NumberOfVoices];
 	Oscillator mLFO;
 	Voice* findFreeVoice();
