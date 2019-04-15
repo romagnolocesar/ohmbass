@@ -254,6 +254,7 @@ void OhmBass::OnParamChange(int paramIdx)
 {
 	IMutexLock lock(this);
 	IParam* param = GetParam(paramIdx);
+	int idxWaveMode = 0;
 	if (paramIdx == mLFOWaveform) {
 		voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
 	}
@@ -262,10 +263,13 @@ void OhmBass::OnParamChange(int paramIdx)
 	}else {
 		using std::placeholders::_1;
 		using std::bind;
+		
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
 			case mBgBtnOscWaves:
-				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(param->Int()));
+				idxWaveMode = param->Int();
+				idxWaveMode--;
+				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
 				break;
 			case mOsc1PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
