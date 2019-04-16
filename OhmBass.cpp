@@ -266,7 +266,7 @@ void OhmBass::OnParamChange(int paramIdx)
 		
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
-			case mBgBtnOscWaves:
+			case mBgBtnOscWaves: 
 				idxWaveMode = param->Int();
 				idxWaveMode--;
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
