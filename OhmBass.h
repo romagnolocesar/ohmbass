@@ -31,6 +31,7 @@ public:
 	
 
 private:
+	bool isParametersInitialized = FALSE; // All parameters were trigged when opening the GUI for the first time
 	double mFrequency;
 	void CreatePresets();
 	MIDIReceiver mMIDIReceiver;

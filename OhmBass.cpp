@@ -10,12 +10,12 @@
 #include <math.h>
 #include <algorithm>
 
-
-const int kNumPrograms = 5;
 IGraphics* pGraphics;
-
+IControl* control;
+IControl* controlSineOn;
+const int kNumPrograms = 5;
 const double parameterStep = 0.001;
-
+bool isParametersInitialized = FALSE;
 
 
 
@@ -56,8 +56,6 @@ enum EParams
 	kNumParams
 };
 
-
-IControl* control;
 
 typedef struct {
 	const char* name;
@@ -210,54 +208,55 @@ void OhmBass::CreateGraphics() {
 		//Osc1 Icons Buttons Waves
 		case mIconSineWaveOff:
 			graphic = &iconSineWaveOff;
-			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSineWaveOn:
 			graphic = &iconSineWaveOn;
-			control = new IBitmapControl(this, properties.x, properties.y, graphic);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			controlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			controlSineOn->Hide(!properties.defaultVal);
+			controlSineOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(controlSineOn);
 			break;
 		case mIconSawWaveOff:
 			graphic = &iconSawWaveOff;
-			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSawWaveOn:
 			graphic = &iconSawWaveOn;
-			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSqWaveOff:
 			graphic = &iconSquareWaveOff;
-			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSqWaveOn:
 			graphic = &iconSquareWaveOn;
-			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconTriangleWaveOff:
 			graphic = &iconTriangleWaveOff;
-			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconTriangleWaveOn:
 			graphic = &iconTriangleWaveOn;
-			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
@@ -277,9 +276,13 @@ void OhmBass::CreateGraphics() {
 			control = new IKnobMultiControl(this, properties.x, properties.y, i, graphic);
 			break;
 		}
-		pGraphics->AttachControl(control);
+		if (i != mIconSineWaveOn) {
+			pGraphics->AttachControl(control);
+		}
+		
 	}
 	AttachGraphics(pGraphics);
+	isParametersInitialized = TRUE;
 }
 
 void OhmBass::CreatePresets() {
@@ -316,6 +319,7 @@ void OhmBass::OnParamChange(int paramIdx)
 {
 	IMutexLock lock(this);
 	IParam* param = GetParam(paramIdx);
+	IControl* control2;
 	int idxWaveMode = 0;
 	if (paramIdx == mLFOWaveform) {
 		voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
@@ -350,13 +354,15 @@ void OhmBass::OnParamChange(int paramIdx)
 	else {
 		using std::placeholders::_1;
 		using std::bind;
-		
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
 			case mBgBtnOscWaves: 
 				idxWaveMode = param->Int();
 				idxWaveMode--;
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
+				if (isParametersInitialized) {
+					controlSineOn->Hide(TRUE);
+				}
 				break;
 			case mOsc1PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
