@@ -27,6 +27,10 @@ enum EParams
 	mIconSineWaveOn,
 	mIconSawWaveOff,
 	mIconSawWaveOn,
+	mIconSqWaveOff,
+	mIconSqWaveOn,
+	mIconTriangleWaveOff,
+	mIconTriangleWaveOn,
 	mOsc1PitchMod,
 	mOsc2PitchMod,
 	mOscMix,
@@ -65,17 +69,16 @@ typedef struct {
 } parameterProperties_struct;
 
 const parameterProperties_struct parameterProperties[kNumParams] = 
-{
-  /*{"ICon Osc 1 Button Sine", 99, 206},
-  {"Icon Osc 1 Button Saw", 40, 206},
-  {"Icon Osc 1 Button Square", 159, 206},
-  {"Icon Osc 1 Button Trian", 219, 206},*/
-	
+{	
   {"Bg Btn Osc 1 Waves", 99, 206, 0.0, 0.0, 1.0},
   {"Icon Sine Wave Off", 58, 218, TRUE},
   {"Icon Sine Wave On", 58, 218, TRUE},
   {"Icon Saw Wave Off", 114, 218, TRUE},
   {"Icon Saw Wave On", 114, 218, FALSE},
+  {"Icon Square Wave Off", 170, 218, TRUE},
+  {"Icon Square Wave On", 170, 218, FALSE},
+  {"Icon Triangle Wave Off", 226, 218, TRUE},
+  {"Icon Triangle Wave On", 226, 218, FALSE},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
   {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
   {"Osc Mix", 480, 200, 0.5, 0.0, 1.0},
@@ -209,29 +212,55 @@ void OhmBass::CreateGraphics() {
 			graphic = &iconSineWaveOff;
 			control = new IBitmapControl(this, properties.x, properties.y, graphic);
 			control->Hide(!properties.defaultVal);
-			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
-			control->GrayOut(TRUE);
+			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSineWaveOn:
 			graphic = &iconSineWaveOn;
 			control = new IBitmapControl(this, properties.x, properties.y, graphic);
 			control->Hide(!properties.defaultVal);
-			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendNone);
-			control->GrayOut(TRUE);
+			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSawWaveOff:
 			graphic = &iconSawWaveOff;
 			control = new IBitmapControl(this, properties.x, properties.y, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE);
+			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSawWaveOn:
 			graphic = &iconSawWaveOn;
 			control = new IBitmapControl(this, properties.x, properties.y, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE);
+			control->GrayOut(TRUE, 0.99f);
+			break;
+		case mIconSqWaveOff:
+			graphic = &iconSquareWaveOff;
+			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE, 0.99f);
+			break;
+		case mIconSqWaveOn:
+			graphic = &iconSquareWaveOn;
+			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE, 0.99f);
+			break;
+		case mIconTriangleWaveOff:
+			graphic = &iconTriangleWaveOff;
+			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE, 0.99f);
+			break;
+		case mIconTriangleWaveOn:
+			graphic = &iconTriangleWaveOn;
+			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE, 0.99f);
 			break;
 		//LFO
 		case mLFOWaveform:
@@ -304,6 +333,18 @@ void OhmBass::OnParamChange(int paramIdx)
 
 	}
 	else if (paramIdx == mIconSawWaveOn) {
+
+	}
+	else if (paramIdx == mIconSqWaveOff) {
+
+	}
+	else if (paramIdx == mIconSqWaveOn) {
+
+	}
+	else if (paramIdx == mIconTriangleWaveOff) {
+
+	}
+	else if (paramIdx == mIconTriangleWaveOn) {
 
 	}
 	else {
