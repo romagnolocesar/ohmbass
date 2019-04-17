@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>OhmBass</string>
 	<key>CFBundleGetInfoString</key>
-	<string>OhmBass v1.0.0 Copyright 2017 Acme Inc</string>
+	<string>1.0.0, Copyright CesarRomagnolo, 2019</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.CesarRomagnolo.vst2.OhmBass</string>
 	<key>CFBundleInfoDictionaryVersion</key>

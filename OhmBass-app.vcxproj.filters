@@ -37,7 +37,6 @@
     <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtAudio.h" />
     <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtError.h" />
     <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.h" />
-    <ClInclude Include="OscillatorGUIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -60,7 +59,6 @@
     <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugStandalone.cpp" />
     <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtAudio.cpp" />
     <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.cpp" />
-    <ClCompile Include="OscillatorGUIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />
