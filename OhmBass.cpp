@@ -16,10 +16,17 @@ IGraphics* pGraphics;
 
 const double parameterStep = 0.001;
 
+
+
+
 enum EParams
 {
 	// Oscillator Section:
 	mBgBtnOscWaves = 0,
+	mIconSineWaveOff,
+	mIconSineWaveOn,
+	mIconSawWaveOff,
+	mIconSawWaveOn,
 	mOsc1PitchMod,
 	mOsc2PitchMod,
 	mOscMix,
@@ -45,6 +52,7 @@ enum EParams
 	kNumParams
 };
 
+
 IControl* control;
 
 typedef struct {
@@ -62,7 +70,12 @@ const parameterProperties_struct parameterProperties[kNumParams] =
   {"Icon Osc 1 Button Saw", 40, 206},
   {"Icon Osc 1 Button Square", 159, 206},
   {"Icon Osc 1 Button Trian", 219, 206},*/
+	
   {"Bg Btn Osc 1 Waves", 99, 206, 0.0, 0.0, 1.0},
+  {"Icon Sine Wave Off", 58, 218, TRUE},
+  {"Icon Sine Wave On", 58, 218, TRUE},
+  {"Icon Saw Wave Off", 114, 218, TRUE},
+  {"Icon Saw Wave On", 114, 218, FALSE},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
   {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
   {"Osc Mix", 480, 200, 0.5, 0.0, 1.0},
@@ -107,18 +120,6 @@ void OhmBass::CreateParams() {
 		IParam* param = GetParam(i);
 		const parameterProperties_struct& properties = parameterProperties[i];
 		switch (i) {
-		/*case mIconOsc1BtnSin:
-			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
-			break; 
-		case mIconOsc1BtnSaw:
-			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
-			break;
-		case mIconOsc1BtnSq:
-			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
-			break;
-		case mIconOsc1BtnTri:
-			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
-			break;*/
 		case mBgBtnOscWaves:
 			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
 			break;
@@ -198,10 +199,41 @@ void OhmBass::CreateGraphics() {
 		IParam* param = GetParam(i);
 		IBitmap* graphic;
 		switch (i) {
+		//Osc1 Buttons Waves
 		case mBgBtnOscWaves:
 			graphic = &bgBtnOscWaves;
 			control = new IRadioButtonsControl(this, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
 			break;
+		//Osc1 Icons Buttons Waves
+		case mIconSineWaveOff:
+			graphic = &iconSineWaveOff;
+			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control->Hide(!properties.defaultVal);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->GrayOut(TRUE);
+			break;
+		case mIconSineWaveOn:
+			graphic = &iconSineWaveOn;
+			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control->Hide(!properties.defaultVal);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendNone);
+			control->GrayOut(TRUE);
+			break;
+		case mIconSawWaveOff:
+			graphic = &iconSawWaveOff;
+			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE);
+			break;
+		case mIconSawWaveOn:
+			graphic = &iconSawWaveOn;
+			control = new IBitmapControl(this, properties.x, properties.y, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE);
+			break;
+		//LFO
 		case mLFOWaveform:
 			graphic = &waveformBitmap;
 			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
@@ -223,6 +255,7 @@ void OhmBass::CreateGraphics() {
 
 void OhmBass::CreatePresets() {
 }
+
 
 void OhmBass::ProcessDoubleReplacing(
 	double** inputs,
@@ -260,7 +293,20 @@ void OhmBass::OnParamChange(int paramIdx)
 	}
 	else if (paramIdx == mLFOFrequency) {
 		voiceManager.setLFOFrequency(param->Value());
-	}else {
+	}
+	else if (paramIdx == mIconSineWaveOff) {
+		
+	}
+	else if (paramIdx == mIconSineWaveOn) {
+
+	}
+	else if (paramIdx == mIconSawWaveOff) {
+
+	}
+	else if (paramIdx == mIconSawWaveOn) {
+
+	}
+	else {
 		using std::placeholders::_1;
 		using std::bind;
 		
@@ -274,9 +320,6 @@ void OhmBass::OnParamChange(int paramIdx)
 			case mOsc1PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
 				break;
-			/*case mOsc2Waveform:
-				changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(param->Int()));
-				break;*/
 			case mOsc2PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 				break;
