@@ -17,10 +17,10 @@ IControl* Osc1ControlSineOn;
 IControl* Osc1ControlSawOn;
 IControl* Osc1ControlSquareOn;
 IControl* Osc1ControlTriagleOn;
-IControl* Osc2ControlSineOn;
-IControl* Osc2ControlSawOn;
-IControl* Osc2ControlSquareOn;
-IControl* Osc2ControlTriagleOn;
+//IControl* Osc2ControlSineOn;
+//IControl* Osc2ControlSawOn;
+//IControl* Osc2ControlSquareOn;
+//IControl* Osc2ControlTriagleOn;
 
 const int kNumPrograms = 5;
 const double parameterStep = 0.001;
@@ -288,7 +288,7 @@ void OhmBass::CreateGraphics() {
 			control = new IKnobMultiControl(this, properties.x, properties.y, i, graphic);
 			break;
 		}
-		if (i != mIconSineWaveOn) {
+		if (i != mIconSineWaveOn && i != mIconSawWaveOn && i != mIconSqWaveOn && i != mIconTriangleWaveOn) {
 			pGraphics->AttachControl(control);
 		}
 		
@@ -440,6 +440,34 @@ void OhmBass::ProcessMidiMsg(IMidiMsg* pMsg) {
 	mVirtualKeyboard->SetDirty();
 }
 
+void OhmBass::ToggleIconsWavesButtons(int nOsc, int idxWaveMode) {
+	switch (idxWaveMode){
+		case 0:
+			Osc1ControlSineOn->Hide(FALSE);
+			Osc1ControlSawOn->Hide(TRUE);
+			Osc1ControlSquareOn->Hide(TRUE);
+			Osc1ControlTriagleOn->Hide(TRUE);
+			break;
+		case 1:
+			Osc1ControlSineOn->Hide(TRUE);
+			Osc1ControlSawOn->Hide(FALSE);
+			Osc1ControlSquareOn->Hide(TRUE);
+			Osc1ControlTriagleOn->Hide(TRUE);
+			break;
+		case 2:
+			Osc1ControlSineOn->Hide(TRUE);
+			Osc1ControlSawOn->Hide(TRUE);
+			Osc1ControlSquareOn->Hide(FALSE);
+			Osc1ControlTriagleOn->Hide(TRUE);
+			break;
+		case 3:
+			Osc1ControlSineOn->Hide(TRUE);
+			Osc1ControlSawOn->Hide(TRUE);
+			Osc1ControlSquareOn->Hide(TRUE);
+			Osc1ControlTriagleOn->Hide(FALSE);
+			break;
+	}
+}
 void OhmBass::processVirtualKeyboard() {
 	IKeyboardControl* virtualKeyboard = (IKeyboardControl*)mVirtualKeyboard;
 	int virtualKeyboardNoteNumber = virtualKeyboard->GetKey() + virtualKeyboardMinimumNoteNumber;
