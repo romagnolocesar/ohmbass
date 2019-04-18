@@ -1,8 +1,8 @@
 //
-//  Oscillator.h
+//  MIDIReceiver.h
 //  Synthesis
 //
-//  Created by ActiOhm on 08.04.14.
+//  Created by ActiOhm
 //
 //
 
@@ -48,4 +48,4 @@ public:
 	Signal2< int, int > noteOff;
 };
 
-#endif /* defined(__Spaciala__MIDIReceiver__) */
+#endif /* defined(__OhmmBass__MIDIReceiver__) */

@@ -1,5 +1,5 @@
-#ifndef __Spaciala__EnvelopeGenerator__
-#define __Spaciala__EnvelopeGenerator__
+#ifndef __OhmmBass__EnvelopeGenerator__
+#define __OhmmBass__EnvelopeGenerator__
 
 #include <cmath>
 #include "GallantSignal.h"
@@ -58,4 +58,4 @@ private:
 	unsigned long long nextStageSampleIndex;
 };
 
-#endif /* defined(__Spaciala__EnvelopeGenerator__) */
+#endif /* defined(__OhmmBass__EnvelopeGenerator__) */
