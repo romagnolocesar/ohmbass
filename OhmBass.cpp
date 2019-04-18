@@ -189,8 +189,7 @@ void OhmBass::CreateGraphics() {
 	//knobs
 	IBitmap knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
 
-	//waves buttons
-		//icons
+	//waves buttons icons
 	IBitmap iconSawWaveOn = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
 	IBitmap iconSawWaveOff = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	IBitmap iconSineWaveOn = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
