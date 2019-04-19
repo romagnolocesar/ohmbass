@@ -5,6 +5,7 @@
 #pragma clang diagnostic pop
 #include "IControl.h"
 #include "IKeyboardControl.h"
+#include "controlsManager.h"
 #include "resource.h"
 
 #include <math.h>

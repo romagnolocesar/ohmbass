@@ -58,7 +58,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tracer|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -279,6 +279,7 @@
     <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.h" />
     <ClInclude Include="app_wrapper\app_main.h" />
     <ClInclude Include="app_wrapper\app_resource.h" />
+    <ClInclude Include="controlsManager.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="EnvelopeGenerator.h" />
     <ClInclude Include="OhmBass.h" />
@@ -300,6 +301,7 @@
     <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.cpp" />
     <ClCompile Include="app_wrapper\app_dialog.cpp" />
     <ClCompile Include="app_wrapper\app_main.cpp" />
+    <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="Filter.cpp" />
