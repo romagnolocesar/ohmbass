@@ -210,18 +210,18 @@ void OhmBass::CreateGraphics() {
 	IBitmap knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
 
 	//waves buttons icons
-	IBitmap iconSawWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
-	IBitmap iconSawWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	IBitmap iconSineWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
 	IBitmap iconSineWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
+	IBitmap iconSawWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
+	IBitmap iconSawWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	IBitmap iconSquareWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
 	IBitmap iconSquareWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
 	IBitmap iconTriangleWaveOnOsc1 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
 	IBitmap iconTriangleWaveOffOsc1 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
-	IBitmap iconSawWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
-	IBitmap iconSawWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	IBitmap iconSineWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
 	IBitmap iconSineWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
+	IBitmap iconSawWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
+	IBitmap iconSawWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	IBitmap iconSquareWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
 	IBitmap iconSquareWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
 	IBitmap iconTriangleWaveOnOsc2 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
@@ -263,14 +263,12 @@ void OhmBass::CreateGraphics() {
 		case mIconSawWaveOffOsc1:
 			graphic = &iconSawWaveOffOsc1;
 			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSawWaveOnOsc1:
 			graphic = &iconSawWaveOnOsc1;
 			Osc1ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc1ControlSawOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			Osc1ControlSawOn->Hide(!properties.defaultVal);
 			Osc1ControlSawOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(Osc1ControlSawOn);
@@ -278,14 +276,12 @@ void OhmBass::CreateGraphics() {
 		case mIconSqWaveOffOsc1:
 			graphic = &iconSquareWaveOffOsc1;
 			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconSqWaveOnOsc1:
 			graphic = &iconSquareWaveOnOsc1;
 			Osc1ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc1ControlSquareOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			Osc1ControlSquareOn->Hide(!properties.defaultVal);
 			Osc1ControlSquareOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(Osc1ControlSquareOn);
@@ -293,14 +289,12 @@ void OhmBass::CreateGraphics() {
 		case mIconTriangleWaveOffOsc1:
 			graphic = &iconTriangleWaveOffOsc1;
 			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
 		case mIconTriangleWaveOnOsc1:
 			graphic = &iconTriangleWaveOnOsc1;
 			Osc1ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc1ControlTriagleOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			Osc1ControlTriagleOn->Hide(!properties.defaultVal);
 			Osc1ControlTriagleOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(Osc1ControlTriagleOn);
@@ -319,7 +313,7 @@ void OhmBass::CreateGraphics() {
 			Osc2ControlSineOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(Osc2ControlSineOn);
 			break;
-		case mIconSawWaveOffOsc2:
+			case mIconSawWaveOffOsc2:
 			graphic = &iconSawWaveOffOsc2;
 			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
@@ -379,9 +373,7 @@ void OhmBass::CreateGraphics() {
 			control = new IKnobMultiControl(this, properties.x, properties.y, i, graphic);
 			break;
 		}
-		if (i != mIconSineWaveOnOsc1 && i != mIconSawWaveOnOsc1 && i != mIconSqWaveOnOsc1 && i != mIconTriangleWaveOnOsc1) {
-			pGraphics->AttachControl(control);
-		}else if (i != mIconSineWaveOnOsc2 && i != mIconSawWaveOnOsc2 && i != mIconSqWaveOnOsc2 && i != mIconTriangleWaveOnOsc2) {
+		if (i != mIconSineWaveOnOsc1 && i != mIconSawWaveOnOsc1 && i != mIconSqWaveOnOsc1 && i != mIconTriangleWaveOnOsc1 && i != mIconSineWaveOnOsc2 && i != mIconSawWaveOnOsc2 && i != mIconSqWaveOnOsc2 && i != mIconTriangleWaveOnOsc2) {
 			pGraphics->AttachControl(control);
 		}
 		
