@@ -1,77 +1,24 @@
 #include "OhmBass.h"
+#include "controlsManager.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmain"
 #include "IPlug_include_in_plug_src.h"
 #pragma clang diagnostic pop
-#include "IControl.h"
 #include "IKeyboardControl.h"
-#include "controlsManager.h"
 #include "resource.h"
 
 #include <math.h>
 #include <algorithm>
 
 IGraphics* pGraphics;
-IControl* control;
 
-IControl* Osc1ControlSineOn;
-IControl* Osc1ControlSawOn;
-IControl* Osc1ControlSquareOn;
-IControl* Osc1ControlTriagleOn;
-IControl* Osc2ControlSineOn;
-IControl* Osc2ControlSawOn;
-IControl* Osc2ControlSquareOn;
-IControl* Osc2ControlTriagleOn;
+controlsManager* iControlsManager = new controlsManager();
+
 
 const int kNumPrograms = 5;
 const double parameterStep = 0.001;
 bool isParametersInitialized = FALSE;
-
-enum EParams
-{
-	// Oscillator Section:
-	mBgBtnOscWavesOsc1 = 0,
-	mBgBtnOscWavesOsc2,
-	mIconSineWaveOffOsc1,
-	mIconSineWaveOnOsc1,
-	mIconSawWaveOffOsc1,
-	mIconSawWaveOnOsc1,
-	mIconSqWaveOffOsc1,
-	mIconSqWaveOnOsc1,
-	mIconTriangleWaveOffOsc1,
-	mIconTriangleWaveOnOsc1,
-	mIconSineWaveOffOsc2,
-	mIconSineWaveOnOsc2,
-	mIconSawWaveOffOsc2,
-	mIconSawWaveOnOsc2,
-	mIconSqWaveOffOsc2,
-	mIconSqWaveOnOsc2,
-	mIconTriangleWaveOffOsc2,
-	mIconTriangleWaveOnOsc2,
-	mOsc1PitchMod,
-	mOsc2PitchMod,
-	mOscMix,
-	// Filter Section:
-	mFilterMode,
-	mFilterCutoff,
-	mFilterResonance,
-	mFilterLfoAmount,
-	mFilterEnvAmount,
-	// LFO:
-	mLFOWaveform,
-	mLFOFrequency,
-	// Volume Envelope:
-	mVolumeEnvAttack,
-	mVolumeEnvDecay,
-	mVolumeEnvSustain,
-	mVolumeEnvRelease,
-	// Filter Envelope:
-	mFilterEnvAttack,
-	mFilterEnvDecay,
-	mFilterEnvSustain,
-	mFilterEnvRelease,
-	kNumParams
-};
+const int kNumParams = iControlsManager->kNumParams;
 
 
 typedef struct {
@@ -147,20 +94,20 @@ void OhmBass::CreateParams() {
 		IParam* param = GetParam(i);
 		const parameterProperties_struct& properties = parameterProperties[i];
 		switch (i) {
-		case mBgBtnOscWavesOsc1:
+		case controlsManager::mBgBtnOscWavesOsc1:
 			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
 			break;
-		case mBgBtnOscWavesOsc2:
+		case controlsManager::mBgBtnOscWavesOsc2:
 			param->InitInt(properties.name, 1, 1, 4, "osc2waves");
 			break;
-		case mLFOWaveform:
+		case controlsManager::mLFOWaveform:
 			param->InitEnum(properties.name,
 				Oscillator::OSCILLATOR_MODE_TRIANGLE,
 				Oscillator::kNumOscillatorModes);
 			// For VST3:
 			param->SetDisplayText(0, properties.name);
 			break;
-		case mFilterMode:
+		case controlsManager::mFilterMode:
 			param->InitEnum(properties.name,
 				Filter::FILTER_MODE_LOWPASS,
 				Filter::kNumFilterModes);
@@ -174,15 +121,15 @@ void OhmBass::CreateParams() {
 			break;
 		}
 	}
-	GetParam(mFilterCutoff)->SetShape(2);
-	GetParam(mVolumeEnvAttack)->SetShape(3);
-	GetParam(mFilterEnvAttack)->SetShape(3);
-	GetParam(mVolumeEnvDecay)->SetShape(3);
-	GetParam(mFilterEnvDecay)->SetShape(3);
-	GetParam(mVolumeEnvSustain)->SetShape(2);
-	GetParam(mFilterEnvSustain)->SetShape(2);
-	GetParam(mVolumeEnvRelease)->SetShape(3);
-	GetParam(mFilterEnvRelease)->SetShape(3);
+	GetParam(controlsManager::mFilterCutoff)->SetShape(2);
+	GetParam(controlsManager::mVolumeEnvAttack)->SetShape(3);
+	GetParam(controlsManager::mFilterEnvAttack)->SetShape(3);
+	GetParam(controlsManager::mVolumeEnvDecay)->SetShape(3);
+	GetParam(controlsManager::mFilterEnvDecay)->SetShape(3);
+	GetParam(controlsManager::mVolumeEnvSustain)->SetShape(2);
+	GetParam(controlsManager::mFilterEnvSustain)->SetShape(2);
+	GetParam(controlsManager::mVolumeEnvRelease)->SetShape(3);
+	GetParam(controlsManager::mFilterEnvRelease)->SetShape(3);
 	for (int i = 0; i < kNumParams; i++) {
 		OnParamChange(i);
 	}
@@ -238,143 +185,151 @@ void OhmBass::CreateGraphics() {
 		IBitmap* graphic;
 		switch (i) {
 		//Buttons Waves
-		case mBgBtnOscWavesOsc1:
+		case controlsManager::mBgBtnOscWavesOsc1:
 			graphic = &bgBtnOscWavesOsc1;
-			control = new IRadioButtonsControl(this, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
+			iControlsManager->control = new IRadioButtonsControl(this, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
 			break;
-		case mBgBtnOscWavesOsc2:
+		case controlsManager::mBgBtnOscWavesOsc2:
 			graphic = &bgBtnOscWavesOsc2;
-			control = new IRadioButtonsControl(this, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
+			iControlsManager->control = new IRadioButtonsControl(this, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
 			break;
 		//Osc1 Icons Buttons Waves
-		case mIconSineWaveOffOsc1:
+		case controlsManager::mIconSineWaveOffOsc1:
 			graphic = &iconSineWaveOffOsc1;
-			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control->Hide(!properties.defaultVal);
+			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSineWaveOnOsc1:
+		case controlsManager::mIconSineWaveOnOsc1:
 			graphic = &iconSineWaveOnOsc1;
-			Osc1ControlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc1ControlSineOn->Hide(!properties.defaultVal);
-			Osc1ControlSineOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(Osc1ControlSineOn);
+			iControlsManager->Osc1ControlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->Osc1ControlSineOn->Hide(!properties.defaultVal);
+			iControlsManager->Osc1ControlSineOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(iControlsManager->Osc1ControlSineOn);
 			break;
-		case mIconSawWaveOffOsc1:
+		case iControlsManager->mIconSawWaveOffOsc1:
 			graphic = &iconSawWaveOffOsc1;
-			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control->Hide(!properties.defaultVal);
+			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSawWaveOnOsc1:
+		case iControlsManager->mIconSawWaveOnOsc1:
 			graphic = &iconSawWaveOnOsc1;
-			Osc1ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc1ControlSawOn->Hide(!properties.defaultVal);
-			Osc1ControlSawOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(Osc1ControlSawOn);
+			iControlsManager->Osc1ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->Osc1ControlSawOn->Hide(!properties.defaultVal);
+			iControlsManager->Osc1ControlSawOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(iControlsManager->Osc1ControlSawOn);
 			break;
-		case mIconSqWaveOffOsc1:
+		case iControlsManager->mIconSqWaveOffOsc1:
 			graphic = &iconSquareWaveOffOsc1;
-			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control->Hide(!properties.defaultVal);
+			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSqWaveOnOsc1:
+		case iControlsManager->mIconSqWaveOnOsc1:
 			graphic = &iconSquareWaveOnOsc1;
-			Osc1ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc1ControlSquareOn->Hide(!properties.defaultVal);
-			Osc1ControlSquareOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(Osc1ControlSquareOn);
+			iControlsManager->Osc1ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->Osc1ControlSquareOn->Hide(!properties.defaultVal);
+			iControlsManager->Osc1ControlSquareOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(iControlsManager->Osc1ControlSquareOn);
 			break;
-		case mIconTriangleWaveOffOsc1:
+		case iControlsManager->mIconTriangleWaveOffOsc1:
 			graphic = &iconTriangleWaveOffOsc1;
-			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control->Hide(!properties.defaultVal);
+			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconTriangleWaveOnOsc1:
+		case iControlsManager->mIconTriangleWaveOnOsc1:
 			graphic = &iconTriangleWaveOnOsc1;
-			Osc1ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc1ControlTriagleOn->Hide(!properties.defaultVal);
-			Osc1ControlTriagleOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(Osc1ControlTriagleOn);
+			iControlsManager->Osc1ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->Osc1ControlTriagleOn->Hide(!properties.defaultVal);
+			iControlsManager->Osc1ControlTriagleOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(iControlsManager->Osc1ControlTriagleOn);
 			break;
 		//Osc2 Icons Buttons Waves
-		case mIconSineWaveOffOsc2:
+		case iControlsManager->mIconSineWaveOffOsc2:
 			graphic = &iconSineWaveOffOsc2;
-			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control->Hide(!properties.defaultVal);
+			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSineWaveOnOsc2:
+		case iControlsManager->mIconSineWaveOnOsc2:
 			graphic = &iconSineWaveOnOsc2;
-			Osc2ControlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc2ControlSineOn->Hide(!properties.defaultVal);
-			Osc2ControlSineOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(Osc2ControlSineOn);
+			iControlsManager->Osc2ControlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->Osc2ControlSineOn->Hide(!properties.defaultVal);
+			iControlsManager->Osc2ControlSineOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(iControlsManager->Osc2ControlSineOn);
 			break;
-			case mIconSawWaveOffOsc2:
+		case iControlsManager->mIconSawWaveOffOsc2:
 			graphic = &iconSawWaveOffOsc2;
-			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			iControlsManager->control->Hide(!properties.defaultVal);
+			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSawWaveOnOsc2:
+		case iControlsManager->mIconSawWaveOnOsc2:
 			graphic = &iconSawWaveOnOsc2;
-			Osc2ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc2ControlSawOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
-			Osc2ControlSawOn->Hide(!properties.defaultVal);
-			Osc2ControlSawOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(Osc2ControlSawOn);
+			iControlsManager->Osc2ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->Osc2ControlSawOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			iControlsManager->Osc2ControlSawOn->Hide(!properties.defaultVal);
+			iControlsManager->Osc2ControlSawOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(iControlsManager->Osc2ControlSawOn);
 			break;
-		case mIconSqWaveOffOsc2:
+		case iControlsManager->mIconSqWaveOffOsc2:
 			graphic = &iconSquareWaveOffOsc2;
-			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			iControlsManager->control->Hide(!properties.defaultVal);
+			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSqWaveOnOsc2:
+		case iControlsManager->mIconSqWaveOnOsc2:
 			graphic = &iconSquareWaveOnOsc2;
-			Osc2ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc2ControlSquareOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
-			Osc2ControlSquareOn->Hide(!properties.defaultVal);
-			Osc2ControlSquareOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(Osc2ControlSquareOn);
+			iControlsManager->Osc2ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->Osc2ControlSquareOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			iControlsManager->Osc2ControlSquareOn->Hide(!properties.defaultVal);
+			iControlsManager->Osc2ControlSquareOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(iControlsManager->Osc2ControlSquareOn);
 			break;
-		case mIconTriangleWaveOffOsc2:
+		case iControlsManager->mIconTriangleWaveOffOsc2:
 			graphic = &iconTriangleWaveOffOsc2;
-			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
-			control->Hide(!properties.defaultVal);
-			control->GrayOut(TRUE, 0.99f);
+			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			iControlsManager->control->Hide(!properties.defaultVal);
+			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconTriangleWaveOnOsc2:
+		case iControlsManager->mIconTriangleWaveOnOsc2:
 			graphic = &iconTriangleWaveOnOsc2;
-			Osc2ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
-			Osc2ControlTriagleOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
-			Osc2ControlTriagleOn->Hide(!properties.defaultVal);
-			Osc2ControlTriagleOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(Osc2ControlTriagleOn);
+			iControlsManager->Osc2ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->Osc2ControlTriagleOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			iControlsManager->Osc2ControlTriagleOn->Hide(!properties.defaultVal);
+			iControlsManager->Osc2ControlTriagleOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(iControlsManager->Osc2ControlTriagleOn);
 			break;
 		//LFO
-		case mLFOWaveform:
+		case iControlsManager->mLFOWaveform:
 			graphic = &waveformBitmap;
-			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
 			break;
-		case mFilterMode:
+		case iControlsManager->mFilterMode:
 			graphic = &filterModeBitmap;
-			control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
 			break;
 			// Knobs:
 		default:
 			graphic = &knobBitmap;
-			control = new IKnobMultiControl(this, properties.x, properties.y, i, graphic);
+			iControlsManager->control = new IKnobMultiControl(this, properties.x, properties.y, i, graphic);
 			break;
 		}
-		if (i != mIconSineWaveOnOsc1 && i != mIconSawWaveOnOsc1 && i != mIconSqWaveOnOsc1 && i != mIconTriangleWaveOnOsc1 && i != mIconSineWaveOnOsc2 && i != mIconSawWaveOnOsc2 && i != mIconSqWaveOnOsc2 && i != mIconTriangleWaveOnOsc2) {
-			pGraphics->AttachControl(control);
+		if (
+			i != iControlsManager->mIconSineWaveOnOsc1 && 
+			i != iControlsManager->mIconSawWaveOnOsc1 && 
+			i != iControlsManager->mIconSqWaveOnOsc1 && 
+			i != iControlsManager->mIconTriangleWaveOnOsc1 && 
+			i != iControlsManager->mIconSineWaveOnOsc2 && 
+			i != iControlsManager->mIconSawWaveOnOsc2 && 
+			i != iControlsManager->mIconSqWaveOnOsc2 && 
+			i != iControlsManager->mIconTriangleWaveOnOsc2) {
+			pGraphics->AttachControl(iControlsManager->control);
 		}
 		
 	}
@@ -417,82 +372,82 @@ void OhmBass::OnParamChange(int paramIdx)
 	IMutexLock lock(this);
 	IParam* param = GetParam(paramIdx);
 	int idxWaveMode = 0;
-	if (paramIdx == mLFOWaveform) {
+	if (paramIdx == iControlsManager->mLFOWaveform) {
 		voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
 	}
-	else if (paramIdx == mLFOFrequency) {
+	else if (paramIdx == iControlsManager->mLFOFrequency) {
 		voiceManager.setLFOFrequency(param->Value());
 	}
-	else if (paramIdx == mIconSineWaveOffOsc1) {
+	else if (paramIdx == iControlsManager->mIconSineWaveOffOsc1) {
 		
 	}
-	else if (paramIdx == mIconSineWaveOnOsc1) {
+	else if (paramIdx == iControlsManager->mIconSineWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconSawWaveOffOsc1) {
+	else if (paramIdx == iControlsManager->mIconSawWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconSawWaveOnOsc1) {
+	else if (paramIdx == iControlsManager->mIconSawWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconSqWaveOffOsc1) {
+	else if (paramIdx == iControlsManager->mIconSqWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconSqWaveOnOsc1) {
+	else if (paramIdx == iControlsManager->mIconSqWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconTriangleWaveOffOsc1) {
+	else if (paramIdx == iControlsManager->mIconTriangleWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconTriangleWaveOnOsc1) {
+	else if (paramIdx == iControlsManager->mIconTriangleWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconSineWaveOffOsc1) {
+	else if (paramIdx == iControlsManager->mIconSineWaveOffOsc1) {
 		
 	}
-	else if (paramIdx == mIconSineWaveOnOsc1) {
+	else if (paramIdx == iControlsManager->mIconSineWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconSawWaveOffOsc1) {
+	else if (paramIdx == iControlsManager->mIconSawWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconSawWaveOnOsc1) {
+	else if (paramIdx == iControlsManager->mIconSawWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconSqWaveOffOsc1) {
+	else if (paramIdx == iControlsManager->mIconSqWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconSqWaveOnOsc1) {
+	else if (paramIdx == iControlsManager->mIconSqWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconTriangleWaveOffOsc1) {
+	else if (paramIdx == iControlsManager->mIconTriangleWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconTriangleWaveOnOsc1) {
+	else if (paramIdx == iControlsManager->mIconTriangleWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconSineWaveOffOsc2) {
+	else if (paramIdx == iControlsManager->mIconSineWaveOffOsc2) {
 
 	}
-	else if (paramIdx == mIconSineWaveOnOsc2) {
+	else if (paramIdx == iControlsManager->mIconSineWaveOnOsc2) {
 
 	}
-	else if (paramIdx == mIconSawWaveOffOsc2) {
+	else if (paramIdx == iControlsManager->mIconSawWaveOffOsc2) {
 
 	}
-	else if (paramIdx == mIconSawWaveOnOsc2) {
+	else if (paramIdx == iControlsManager->mIconSawWaveOnOsc2) {
 
 	}
-	else if (paramIdx == mIconSqWaveOffOsc2) {
+	else if (paramIdx == iControlsManager->mIconSqWaveOffOsc2) {
 
 	}
-	else if (paramIdx == mIconSqWaveOnOsc2) {
+	else if (paramIdx == iControlsManager->mIconSqWaveOnOsc2) {
 
 	}
-	else if (paramIdx == mIconTriangleWaveOffOsc2) {
+	else if (paramIdx == iControlsManager->mIconTriangleWaveOffOsc2) {
 
 	}
-	else if (paramIdx == mIconTriangleWaveOnOsc2) {
+	else if (paramIdx == iControlsManager->mIconTriangleWaveOnOsc2) {
 
 	}
 	else {
@@ -500,7 +455,7 @@ void OhmBass::OnParamChange(int paramIdx)
 		using std::bind;
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
-			case mBgBtnOscWavesOsc1:
+			case iControlsManager->mBgBtnOscWavesOsc1:
 				idxWaveMode = param->Int();
 				idxWaveMode--;
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
@@ -508,7 +463,7 @@ void OhmBass::OnParamChange(int paramIdx)
 					ToggleIconsWavesButtons(1, idxWaveMode);
 				}
 				break;
-			case mBgBtnOscWavesOsc2:
+			case iControlsManager->mBgBtnOscWavesOsc2:
 				idxWaveMode = param->Int();
 				idxWaveMode--;
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
@@ -516,55 +471,55 @@ void OhmBass::OnParamChange(int paramIdx)
 					ToggleIconsWavesButtons(2, idxWaveMode);
 				}
 				break;
-			case mOsc1PitchMod:
+			case iControlsManager->mOsc1PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
 				break;
-			case mOsc2PitchMod:
+			case iControlsManager->mOsc2PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 				break;
-			case mOscMix:
+			case iControlsManager->mOscMix:
 				changer = bind(&VoiceManager::setOscillatorMix, _1, param->Value());
 				break;
 				// Filter Section:
-			case mFilterMode:
+			case iControlsManager->mFilterMode:
 				changer = bind(&VoiceManager::setFilterMode, _1, static_cast<Filter::FilterMode>(param->Int()));
 				break;
-			case mFilterCutoff:
+			case iControlsManager->mFilterCutoff:
 				changer = bind(&VoiceManager::setFilterCutoff, _1, param->Value());
 				break;
-			case mFilterResonance:
+			case iControlsManager->mFilterResonance:
 				changer = bind(&VoiceManager::setFilterResonance, _1, param->Value());
 				break;
-			case mFilterLfoAmount:
+			case iControlsManager->mFilterLfoAmount:
 				changer = bind(&VoiceManager::setFilterLFOAmount, _1, param->Value());
 				break;
-			case mFilterEnvAmount:
+			case iControlsManager->mFilterEnvAmount:
 				changer = bind(&VoiceManager::setFilterEnvAmount, _1, param->Value());
 				break;
 				// Volume Envelope:
-			case mVolumeEnvAttack:
+			case iControlsManager->mVolumeEnvAttack:
 				changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_ATTACK, param->Value());
 				break;
-			case mVolumeEnvDecay:
+			case iControlsManager->mVolumeEnvDecay:
 				changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_DECAY, param->Value());
 				break;
-			case mVolumeEnvSustain:
+			case iControlsManager->mVolumeEnvSustain:
 				changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_SUSTAIN, param->Value());
 				break;
-			case mVolumeEnvRelease:
+			case iControlsManager->mVolumeEnvRelease:
 				changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_RELEASE, param->Value());
 				break;
 				// Filter Envelope:
-			case mFilterEnvAttack:
+			case iControlsManager->mFilterEnvAttack:
 				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_ATTACK, param->Value());
 				break;
-			case mFilterEnvDecay:
+			case iControlsManager->mFilterEnvDecay:
 				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_DECAY, param->Value());
 				break;
-			case mFilterEnvSustain:
+			case iControlsManager->mFilterEnvSustain:
 				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_SUSTAIN, param->Value());
 				break;
-			case mFilterEnvRelease:
+			case iControlsManager->mFilterEnvRelease:
 				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_RELEASE, param->Value());
 				break;
 		}
@@ -584,28 +539,28 @@ void OhmBass::ToggleIconsWavesButtons(int nOsc, int idxWaveMode) {
 	if (nOsc == 1) {
 		switch (idxWaveMode) {
 		case 0:
-			Osc1ControlSineOn->Hide(FALSE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSineOn->Hide(FALSE);
+			iControlsManager->Osc1ControlSawOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSquareOn->Hide(TRUE);
+			iControlsManager->Osc1ControlTriagleOn->Hide(TRUE);
 			break;
 		case 1:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(FALSE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSineOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSawOn->Hide(FALSE);
+			iControlsManager->Osc1ControlSquareOn->Hide(TRUE);
+			iControlsManager->Osc1ControlTriagleOn->Hide(TRUE);
 			break;
 		case 2:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(FALSE);
-			Osc1ControlTriagleOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSineOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSawOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSquareOn->Hide(FALSE);
+			iControlsManager->Osc1ControlTriagleOn->Hide(TRUE);
 			break;
 		case 3:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(FALSE);
+			iControlsManager->Osc1ControlSineOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSawOn->Hide(TRUE);
+			iControlsManager->Osc1ControlSquareOn->Hide(TRUE);
+			iControlsManager->Osc1ControlTriagleOn->Hide(FALSE);
 			break;
 		}
 
@@ -613,28 +568,28 @@ void OhmBass::ToggleIconsWavesButtons(int nOsc, int idxWaveMode) {
 	else if (nOsc == 2) {
 		switch (idxWaveMode) {
 		case 0:
-			Osc2ControlSineOn->Hide(FALSE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSineOn->Hide(FALSE);
+			iControlsManager->Osc2ControlSawOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSquareOn->Hide(TRUE);
+			iControlsManager->Osc2ControlTriagleOn->Hide(TRUE);
 			break;
 		case 1:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(FALSE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSineOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSawOn->Hide(FALSE);
+			iControlsManager->Osc2ControlSquareOn->Hide(TRUE);
+			iControlsManager->Osc2ControlTriagleOn->Hide(TRUE);
 			break;
 		case 2:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(FALSE);
-			Osc2ControlTriagleOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSineOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSawOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSquareOn->Hide(FALSE);
+			iControlsManager->Osc2ControlTriagleOn->Hide(TRUE);
 			break;
 		case 3:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(FALSE);
+			iControlsManager->Osc2ControlSineOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSawOn->Hide(TRUE);
+			iControlsManager->Osc2ControlSquareOn->Hide(TRUE);
+			iControlsManager->Osc2ControlTriagleOn->Hide(FALSE);
 			break;
 		}
 
