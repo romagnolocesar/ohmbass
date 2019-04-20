@@ -4,7 +4,8 @@ class controlsManager
 public:
 	controlsManager();
 	~controlsManager();
+	
 
-
+	
 };
 

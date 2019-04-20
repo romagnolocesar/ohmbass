@@ -18,29 +18,36 @@ IControl* Osc1ControlSineOn;
 IControl* Osc1ControlSawOn;
 IControl* Osc1ControlSquareOn;
 IControl* Osc1ControlTriagleOn;
-//IControl* Osc2ControlSineOn;
-//IControl* Osc2ControlSawOn;
-//IControl* Osc2ControlSquareOn;
-//IControl* Osc2ControlTriagleOn;
+IControl* Osc2ControlSineOn;
+IControl* Osc2ControlSawOn;
+IControl* Osc2ControlSquareOn;
+IControl* Osc2ControlTriagleOn;
 
 const int kNumPrograms = 5;
 const double parameterStep = 0.001;
 bool isParametersInitialized = FALSE;
 
-
-
 enum EParams
 {
 	// Oscillator Section:
-	mBgBtnOscWaves = 0,
-	mIconSineWaveOff,
-	mIconSineWaveOn,
-	mIconSawWaveOff,
-	mIconSawWaveOn,
-	mIconSqWaveOff,
-	mIconSqWaveOn,
-	mIconTriangleWaveOff,
-	mIconTriangleWaveOn,
+	mBgBtnOscWavesOsc1 = 0,
+	mBgBtnOscWavesOsc2,
+	mIconSineWaveOffOsc1,
+	mIconSineWaveOnOsc1,
+	mIconSawWaveOffOsc1,
+	mIconSawWaveOnOsc1,
+	mIconSqWaveOffOsc1,
+	mIconSqWaveOnOsc1,
+	mIconTriangleWaveOffOsc1,
+	mIconTriangleWaveOnOsc1,
+	mIconSineWaveOffOsc2,
+	mIconSineWaveOnOsc2,
+	mIconSawWaveOffOsc2,
+	mIconSawWaveOnOsc2,
+	mIconSqWaveOffOsc2,
+	mIconSqWaveOnOsc2,
+	mIconTriangleWaveOffOsc2,
+	mIconTriangleWaveOnOsc2,
 	mOsc1PitchMod,
 	mOsc2PitchMod,
 	mOscMix,
@@ -79,14 +86,23 @@ typedef struct {
 const parameterProperties_struct parameterProperties[kNumParams] = 
 {	
   {"Bg Btn Osc 1 Waves", 99, 206, 0.0, 0.0, 1.0},
-  {"Icon Sine Wave Off", 58, 218, TRUE},
-  {"Icon Sine Wave On", 58, 218, TRUE},
-  {"Icon Saw Wave Off", 114, 218, TRUE},
-  {"Icon Saw Wave On", 114, 218, FALSE},
-  {"Icon Square Wave Off", 170, 218, TRUE},
-  {"Icon Square Wave On", 170, 218, FALSE},
-  {"Icon Triangle Wave Off", 226, 218, TRUE},
-  {"Icon Triangle Wave On", 226, 218, FALSE},
+  {"Bg Btn Osc 2 Waves", 99, 306, 0.0, 0.0, 1.0},
+  {"Icon Sine Wave Off OSC1", 58, 218, TRUE},
+  {"Icon Sine Wave On OSC1", 58, 218, TRUE},
+  {"Icon Saw Wave Off OSC1", 114, 218, TRUE},
+  {"Icon Saw Wave On OSC1", 114, 218, FALSE},
+  {"Icon Square Wave Off OSC1", 170, 218, TRUE},
+  {"Icon Square Wave On OSC1", 170, 218, FALSE},
+  {"Icon Triangle Wave Off OSC1", 226, 218, TRUE},
+  {"Icon Triangle Wave On OSC1", 226, 218, FALSE},
+  {"Icon Sine Wave Off OSC2", 58, 318, TRUE},
+  {"Icon Sine Wave On OSC2", 58, 318, TRUE},
+  {"Icon Saw Wave Off OSC2", 114, 318, TRUE},
+  {"Icon Saw Wave On OSC2", 114, 318, FALSE},
+  {"Icon Square Wave Off OSC2", 170, 318, TRUE},
+  {"Icon Square Wave On OSC2", 170, 318, FALSE},
+  {"Icon Triangle Wave Off OSC2", 226, 318, TRUE},
+  {"Icon Triangle Wave On OSC2", 226, 318, FALSE},
   {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
   {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
   {"Osc Mix", 480, 200, 0.5, 0.0, 1.0},
@@ -131,8 +147,11 @@ void OhmBass::CreateParams() {
 		IParam* param = GetParam(i);
 		const parameterProperties_struct& properties = parameterProperties[i];
 		switch (i) {
-		case mBgBtnOscWaves:
+		case mBgBtnOscWavesOsc1:
 			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
+			break;
+		case mBgBtnOscWavesOsc2:
+			param->InitInt(properties.name, 1, 1, 4, "osc2waves");
 			break;
 		case mLFOWaveform:
 			param->InitEnum(properties.name,
@@ -191,16 +210,25 @@ void OhmBass::CreateGraphics() {
 	IBitmap knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
 
 	//waves buttons icons
-	IBitmap iconSawWaveOn = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
-	IBitmap iconSawWaveOff = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
-	IBitmap iconSineWaveOn = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
-	IBitmap iconSineWaveOff = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
-	IBitmap iconSquareWaveOn = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
-	IBitmap iconSquareWaveOff = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
-	IBitmap iconTriangleWaveOn = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
-	IBitmap iconTriangleWaveOff = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
+	IBitmap iconSawWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
+	IBitmap iconSawWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
+	IBitmap iconSineWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
+	IBitmap iconSineWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
+	IBitmap iconSquareWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
+	IBitmap iconSquareWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
+	IBitmap iconTriangleWaveOnOsc1 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
+	IBitmap iconTriangleWaveOffOsc1 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
+	IBitmap iconSawWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
+	IBitmap iconSawWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
+	IBitmap iconSineWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
+	IBitmap iconSineWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
+	IBitmap iconSquareWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
+	IBitmap iconSquareWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
+	IBitmap iconTriangleWaveOnOsc2 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
+	IBitmap iconTriangleWaveOffOsc2 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
 
-	IBitmap bgBtnOscWaves = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
+	IBitmap bgBtnOscWavesOsc1 = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
+	IBitmap bgBtnOscWavesOsc2 = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
 
 
 
@@ -209,69 +237,132 @@ void OhmBass::CreateGraphics() {
 		IParam* param = GetParam(i);
 		IBitmap* graphic;
 		switch (i) {
-		//Osc1 Buttons Waves
-		case mBgBtnOscWaves:
-			graphic = &bgBtnOscWaves;
+		//Buttons Waves
+		case mBgBtnOscWavesOsc1:
+			graphic = &bgBtnOscWavesOsc1;
 			control = new IRadioButtonsControl(this, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
 			break;
+		case mBgBtnOscWavesOsc2:
+			graphic = &bgBtnOscWavesOsc2;
+			control = new IRadioButtonsControl(this, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
+			break;
 		//Osc1 Icons Buttons Waves
-		case mIconSineWaveOff:
-			graphic = &iconSineWaveOff;
+		case mIconSineWaveOffOsc1:
+			graphic = &iconSineWaveOffOsc1;
 			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSineWaveOn:
-			graphic = &iconSineWaveOn;
+		case mIconSineWaveOnOsc1:
+			graphic = &iconSineWaveOnOsc1;
 			Osc1ControlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			Osc1ControlSineOn->Hide(!properties.defaultVal);
 			Osc1ControlSineOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(Osc1ControlSineOn);
 			break;
-		case mIconSawWaveOff:
-			graphic = &iconSawWaveOff;
+		case mIconSawWaveOffOsc1:
+			graphic = &iconSawWaveOffOsc1;
 			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSawWaveOn:
-			graphic = &iconSawWaveOn;
+		case mIconSawWaveOnOsc1:
+			graphic = &iconSawWaveOnOsc1;
 			Osc1ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			Osc1ControlSawOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			Osc1ControlSawOn->Hide(!properties.defaultVal);
 			Osc1ControlSawOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(Osc1ControlSawOn);
 			break;
-		case mIconSqWaveOff:
-			graphic = &iconSquareWaveOff;
+		case mIconSqWaveOffOsc1:
+			graphic = &iconSquareWaveOffOsc1;
 			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconSqWaveOn:
-			graphic = &iconSquareWaveOn;
+		case mIconSqWaveOnOsc1:
+			graphic = &iconSquareWaveOnOsc1;
 			Osc1ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			Osc1ControlSquareOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			Osc1ControlSquareOn->Hide(!properties.defaultVal);
 			Osc1ControlSquareOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(Osc1ControlSquareOn);
 			break;
-		case mIconTriangleWaveOff:
-			graphic = &iconTriangleWaveOff;
+		case mIconTriangleWaveOffOsc1:
+			graphic = &iconTriangleWaveOffOsc1;
 			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			control->Hide(!properties.defaultVal);
 			control->GrayOut(TRUE, 0.99f);
 			break;
-		case mIconTriangleWaveOn:
-			graphic = &iconTriangleWaveOn;
+		case mIconTriangleWaveOnOsc1:
+			graphic = &iconTriangleWaveOnOsc1;
 			Osc1ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			Osc1ControlTriagleOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			Osc1ControlTriagleOn->Hide(!properties.defaultVal);
 			Osc1ControlTriagleOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(Osc1ControlTriagleOn);
+			break;
+		//Osc2 Icons Buttons Waves
+		case mIconSineWaveOffOsc2:
+			graphic = &iconSineWaveOffOsc2;
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE, 0.99f);
+			break;
+		case mIconSineWaveOnOsc2:
+			graphic = &iconSineWaveOnOsc2;
+			Osc2ControlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			Osc2ControlSineOn->Hide(!properties.defaultVal);
+			Osc2ControlSineOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(Osc2ControlSineOn);
+			break;
+		case mIconSawWaveOffOsc2:
+			graphic = &iconSawWaveOffOsc2;
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE, 0.99f);
+			break;
+		case mIconSawWaveOnOsc2:
+			graphic = &iconSawWaveOnOsc2;
+			Osc2ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			Osc2ControlSawOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			Osc2ControlSawOn->Hide(!properties.defaultVal);
+			Osc2ControlSawOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(Osc2ControlSawOn);
+			break;
+		case mIconSqWaveOffOsc2:
+			graphic = &iconSquareWaveOffOsc2;
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE, 0.99f);
+			break;
+		case mIconSqWaveOnOsc2:
+			graphic = &iconSquareWaveOnOsc2;
+			Osc2ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			Osc2ControlSquareOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			Osc2ControlSquareOn->Hide(!properties.defaultVal);
+			Osc2ControlSquareOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(Osc2ControlSquareOn);
+			break;
+		case mIconTriangleWaveOffOsc2:
+			graphic = &iconTriangleWaveOffOsc2;
+			control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			control->Hide(!properties.defaultVal);
+			control->GrayOut(TRUE, 0.99f);
+			break;
+		case mIconTriangleWaveOnOsc2:
+			graphic = &iconTriangleWaveOnOsc2;
+			Osc2ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
+			Osc2ControlTriagleOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
+			Osc2ControlTriagleOn->Hide(!properties.defaultVal);
+			Osc2ControlTriagleOn->GrayOut(TRUE, 0.99f);
+			pGraphics->AttachControl(Osc2ControlTriagleOn);
 			break;
 		//LFO
 		case mLFOWaveform:
@@ -288,7 +379,9 @@ void OhmBass::CreateGraphics() {
 			control = new IKnobMultiControl(this, properties.x, properties.y, i, graphic);
 			break;
 		}
-		if (i != mIconSineWaveOn && i != mIconSawWaveOn && i != mIconSqWaveOn && i != mIconTriangleWaveOn) {
+		if (i != mIconSineWaveOnOsc1 && i != mIconSawWaveOnOsc1 && i != mIconSqWaveOnOsc1 && i != mIconTriangleWaveOnOsc1) {
+			pGraphics->AttachControl(control);
+		}else if (i != mIconSineWaveOnOsc2 && i != mIconSawWaveOnOsc2 && i != mIconSqWaveOnOsc2 && i != mIconTriangleWaveOnOsc2) {
 			pGraphics->AttachControl(control);
 		}
 		
@@ -331,7 +424,6 @@ void OhmBass::OnParamChange(int paramIdx)
 {
 	IMutexLock lock(this);
 	IParam* param = GetParam(paramIdx);
-	IControl* control2;
 	int idxWaveMode = 0;
 	if (paramIdx == mLFOWaveform) {
 		voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
@@ -339,28 +431,76 @@ void OhmBass::OnParamChange(int paramIdx)
 	else if (paramIdx == mLFOFrequency) {
 		voiceManager.setLFOFrequency(param->Value());
 	}
-	else if (paramIdx == mIconSineWaveOff) {
+	else if (paramIdx == mIconSineWaveOffOsc1) {
 		
 	}
-	else if (paramIdx == mIconSineWaveOn) {
+	else if (paramIdx == mIconSineWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconSawWaveOff) {
+	else if (paramIdx == mIconSawWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconSawWaveOn) {
+	else if (paramIdx == mIconSawWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconSqWaveOff) {
+	else if (paramIdx == mIconSqWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconSqWaveOn) {
+	else if (paramIdx == mIconSqWaveOnOsc1) {
 
 	}
-	else if (paramIdx == mIconTriangleWaveOff) {
+	else if (paramIdx == mIconTriangleWaveOffOsc1) {
 
 	}
-	else if (paramIdx == mIconTriangleWaveOn) {
+	else if (paramIdx == mIconTriangleWaveOnOsc1) {
+
+	}
+	else if (paramIdx == mIconSineWaveOffOsc1) {
+		
+	}
+	else if (paramIdx == mIconSineWaveOnOsc1) {
+
+	}
+	else if (paramIdx == mIconSawWaveOffOsc1) {
+
+	}
+	else if (paramIdx == mIconSawWaveOnOsc1) {
+
+	}
+	else if (paramIdx == mIconSqWaveOffOsc1) {
+
+	}
+	else if (paramIdx == mIconSqWaveOnOsc1) {
+
+	}
+	else if (paramIdx == mIconTriangleWaveOffOsc1) {
+
+	}
+	else if (paramIdx == mIconTriangleWaveOnOsc1) {
+
+	}
+	else if (paramIdx == mIconSineWaveOffOsc2) {
+
+	}
+	else if (paramIdx == mIconSineWaveOnOsc2) {
+
+	}
+	else if (paramIdx == mIconSawWaveOffOsc2) {
+
+	}
+	else if (paramIdx == mIconSawWaveOnOsc2) {
+
+	}
+	else if (paramIdx == mIconSqWaveOffOsc2) {
+
+	}
+	else if (paramIdx == mIconSqWaveOnOsc2) {
+
+	}
+	else if (paramIdx == mIconTriangleWaveOffOsc2) {
+
+	}
+	else if (paramIdx == mIconTriangleWaveOnOsc2) {
 
 	}
 	else {
@@ -368,12 +508,20 @@ void OhmBass::OnParamChange(int paramIdx)
 		using std::bind;
 		VoiceManager::VoiceChangerFunction changer;
 		switch (paramIdx) {
-			case mBgBtnOscWaves: 
+			case mBgBtnOscWavesOsc1:
 				idxWaveMode = param->Int();
 				idxWaveMode--;
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
 				if (isParametersInitialized) {
 					ToggleIconsWavesButtons(1, idxWaveMode);
+				}
+				break;
+			case mBgBtnOscWavesOsc2:
+				idxWaveMode = param->Int();
+				idxWaveMode--;
+				changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
+				if (isParametersInitialized) {
+					ToggleIconsWavesButtons(2, idxWaveMode);
 				}
 				break;
 			case mOsc1PitchMod:
@@ -441,7 +589,8 @@ void OhmBass::ProcessMidiMsg(IMidiMsg* pMsg) {
 }
 
 void OhmBass::ToggleIconsWavesButtons(int nOsc, int idxWaveMode) {
-	switch (idxWaveMode){
+	if (nOsc == 1) {
+		switch (idxWaveMode) {
 		case 0:
 			Osc1ControlSineOn->Hide(FALSE);
 			Osc1ControlSawOn->Hide(TRUE);
@@ -466,6 +615,37 @@ void OhmBass::ToggleIconsWavesButtons(int nOsc, int idxWaveMode) {
 			Osc1ControlSquareOn->Hide(TRUE);
 			Osc1ControlTriagleOn->Hide(FALSE);
 			break;
+		}
+
+	}
+	else if (nOsc == 2) {
+		switch (idxWaveMode) {
+		case 0:
+			Osc2ControlSineOn->Hide(FALSE);
+			Osc2ControlSawOn->Hide(TRUE);
+			Osc2ControlSquareOn->Hide(TRUE);
+			Osc2ControlTriagleOn->Hide(TRUE);
+			break;
+		case 1:
+			Osc2ControlSineOn->Hide(TRUE);
+			Osc2ControlSawOn->Hide(FALSE);
+			Osc2ControlSquareOn->Hide(TRUE);
+			Osc2ControlTriagleOn->Hide(TRUE);
+			break;
+		case 2:
+			Osc2ControlSineOn->Hide(TRUE);
+			Osc2ControlSawOn->Hide(TRUE);
+			Osc2ControlSquareOn->Hide(FALSE);
+			Osc2ControlTriagleOn->Hide(TRUE);
+			break;
+		case 3:
+			Osc2ControlSineOn->Hide(TRUE);
+			Osc2ControlSawOn->Hide(TRUE);
+			Osc2ControlSquareOn->Hide(TRUE);
+			Osc2ControlTriagleOn->Hide(FALSE);
+			break;
+		}
+
 	}
 }
 void OhmBass::processVirtualKeyboard() {

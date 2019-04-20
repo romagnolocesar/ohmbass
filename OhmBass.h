@@ -3,7 +3,7 @@
 
 #include "IPlug_include_in_plug_hdr.h"
 #pragma clang diagnostic pop
-
+#include "controlsManager.h"
 #include "VoiceManager.h"
 #include "MIDIReceiver.h"
 #include <functional>
