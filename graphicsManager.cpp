@@ -43,8 +43,8 @@ void graphicsManager::loadKnobs()
 
 void graphicsManager::loadFaders()
 {
-	this->fadersHandlerOn = pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
-	this->fadersHandlerOff = pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
+	this->fadersHandlerOsc1 = pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
+	this->fadersHandlerOsc2 = pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
 }
 
 
@@ -91,12 +91,12 @@ void graphicsManager::attachGraphicsInControls(IPlug* myOhmBass,controlsManager*
 			graphic = &bgBtnOscWavesOsc2;
 			iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
 			break;
-		case controlsManager::mFadersHandlerOn:
-			graphic = &fadersHandlerOn;
+		case controlsManager::mFadersHandlerOsc1:
+			graphic = &fadersHandlerOsc1;
 			iControlsManager->control = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
 			break;
-		case controlsManager::mFadersHandlerOff:
-			graphic = &fadersHandlerOff;
+		case controlsManager::mFadersHandlerOsc2:
+			graphic = &fadersHandlerOsc2;
 			iControlsManager->control = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
 			break;
 			//Osc1 Icons Buttons Waves

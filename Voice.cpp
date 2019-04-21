@@ -7,7 +7,10 @@ double Voice::nextSample() {
 
 	double oscillatorOneOutput = mOscillatorOne.nextSample();
 	double oscillatorTwoOutput = mOscillatorTwo.nextSample();
-	double oscillatorSum = ((1 - mOscillatorMix) * oscillatorOneOutput) + (mOscillatorMix * oscillatorTwoOutput);
+	//Old way, when you use percentage for sum two oscilator
+	//double oscillatorSum = ((1 - mOscillatorMix) * oscillatorOneOutput) + (mOscillatorMix * oscillatorTwoOutput); 
+	//Actiohm way, independent outputs
+	double oscillatorSum = (oscillatorOneOutput*mOscilatorOneOutput) + (oscillatorTwoOutput*mOscilatorTwoOutput);
 
 	double volumeEnvelopeValue = mVolumeEnvelope.nextSample();
 	double filterEnvelopeValue = mFilterEnvelope.nextSample();

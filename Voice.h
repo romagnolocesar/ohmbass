@@ -9,25 +9,27 @@ class Voice
 {
 public:
 	friend class VoiceManager;
-    Voice()
-    : mNoteNumber(-1),
-    mVelocity(0),
-    mFilterEnvelopeAmount(0.0),
-    mFilterLFOAmount(0.0),
-    mOscillatorOnePitchAmount(0.0),
-    mOscillatorTwoPitchAmount(0.0),
-    mOscillatorMix(0.5),
-    mLFOValue(0.0),
-    isActive(false) {
-        // Set myself free everytime my volume envelope has fully faded out of RELEASE stage:
-        mVolumeEnvelope.finishedEnvelopeCycle.Connect(this, &Voice::setFree);
-    };
+	Voice()
+		: mNoteNumber(-1),
+		mVelocity(0),
+		mFilterEnvelopeAmount(0.0),
+		mFilterLFOAmount(0.0),
+		mOscillatorOnePitchAmount(0.0),
+		mOscillatorTwoPitchAmount(0.0),
+		mOscilatorOneOutput(0.5),
+		mOscilatorTwoOutput(0.5),
+		mLFOValue(0.0),
+	isActive(false) {
+		// Set myself free everytime my volume envelope has fully faded out of RELEASE stage:
+		mVolumeEnvelope.finishedEnvelopeCycle.Connect(this, &Voice::setFree);
+	};
 
 	inline void setFilterEnvelopeAmount(double amount) { mFilterEnvelopeAmount = amount; }
 	inline void setFilterLFOAmount(double amount) { mFilterLFOAmount = amount; }
 	inline void setOscillatorOnePitchAmount(double amount) { mOscillatorOnePitchAmount = amount; }
 	inline void setOscillatorTwoPitchAmount(double amount) { mOscillatorTwoPitchAmount = amount; }
-	inline void setOscillatorMix(double mix) { mOscillatorMix = mix; }
+	inline void setOscillatorOneOutput(double amount) { mOscilatorOneOutput = amount; }
+	inline void setOscillatorTwoOutput(double amount) { mOscilatorTwoOutput = amount; }
 	inline void setLFOValue(double value) { mLFOValue = value; }
 
 	inline void setNoteNumber(int noteNumber) {
@@ -51,7 +53,8 @@ private:
 	int mVelocity;
 
 	double mFilterEnvelopeAmount;
-	double mOscillatorMix;
+	double mOscilatorOneOutput;
+	double mOscilatorTwoOutput;
 	double mFilterLFOAmount;
 	double mOscillatorOnePitchAmount;
 	double mOscillatorTwoPitchAmount;

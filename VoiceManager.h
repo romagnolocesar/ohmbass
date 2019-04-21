@@ -60,8 +60,11 @@ public:
 			break;
 		}
 	}
-	static void setOscillatorMix(Voice& voice, double value) {
-		voice.setOscillatorMix(value);
+	static void setOscillatorOneOutput(Voice& voice, double value) {
+		voice.setOscillatorOneOutput(value);
+	}
+	static void setOscillatorTwoOutput(Voice& voice, double value) {
+		voice.setOscillatorTwoOutput(value);
 	}
 	static void setFilterCutoff(Voice& voice, double cutoff) {
 		voice.mFilter.setCutoff(cutoff);

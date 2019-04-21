@@ -45,8 +45,8 @@ public:
 		//knobs
 		knobBitmap,
 		//Faders
-		fadersHandlerOn,
-		fadersHandlerOff;
+		fadersHandlerOsc1,
+		fadersHandlerOsc2;
 			
 
 	IGraphics* pGraphics;

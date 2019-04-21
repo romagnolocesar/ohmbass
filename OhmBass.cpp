@@ -130,16 +130,18 @@ void OhmBass::OnParamChange(int paramIdx)
 					iControlsManager->ToggleIconsWavesButtons(2, idxWaveMode);
 				}
 				break;
+			case iControlsManager->mFadersHandlerOsc1:
+				changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
+				break;
+			case iControlsManager->mFadersHandlerOsc2:
+				changer = bind(&VoiceManager::setOscillatorTwoOutput, _1, param->Value());
+				break;
 			case iControlsManager->mOsc1PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
 				break;
 			case iControlsManager->mOsc2PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 				break;
-				//Oscillator Mix
-			/*case iControlsManager->mOscMix:
-				changer = bind(&VoiceManager::setOscillatorMix, _1, param->Value());
-				break;*/
 				// Filter Section:
 			case iControlsManager->mFilterMode:
 				changer = bind(&VoiceManager::setFilterMode, _1, static_cast<Filter::FilterMode>(param->Int()));
