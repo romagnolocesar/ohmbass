@@ -2,9 +2,11 @@
 #include "OhmBass.h"
 #include "IControl.h"
 
+
 class controlsManager
 {
 public:
+
 	const double parameterStep = 0.001;
 
 	enum EParams
@@ -30,9 +32,11 @@ public:
 		mIconTriangleWaveOnOsc2,
 		mOsc1PitchMod,
 		mOsc2PitchMod,
-		mFadersHandlerOsc1,
-		mFadersHandlerOsc2,
-		//mOscMix,
+		//Faders
+		mFadersHandlerOffOsc1,
+		mFadersHandlerOffOsc2,
+		mFadersHandlerOnOsc1,
+		mFadersHandlerOnOsc2,
 		// Filter Section:
 		mFilterMode,
 		mFilterCutoff,
@@ -74,6 +78,14 @@ public:
 	IControl* Osc2ControlSquareOn;
 	IControl* Osc2ControlTriagleOn;
 
+	IControl* Osc1FaderHandlerOff;
+	IControl* Osc2FaderHandlerOff;
+	IControl* Osc1FaderHandlerOn;
+	IControl* Osc2FaderHandlerOn;
+	
+
+
+
 	parameterProperties_struct getParameterProperties(int idx) {
 		return parameterProperties[idx];
 	};
@@ -105,9 +117,10 @@ private:
 	  {"Icon Triangle Wave On OSC2", 226, 318, FALSE},
 	  {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
 	  {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
-	  {"Fader Handler Osc1", 429, 210, 0.5, 0.0, 1.0},
-	  {"Fader Handler Osc2", 510, 210, 0.5, 0.0, 1.0},
-	  //{"Osc Mix", 480, 200, 0.5, 0.0, 1.0},
+	  {"Fader Handler Off Osc1", 429, 210, 0.8, 0.0, 1.0},
+	  {"Fader Handler Off Osc2", 510, 210, 0.0, 0.0, 1.0},
+	  {"Fader Handler On Osc1", 429, 210, 0.8, 0.0, 1.0},
+	  {"Fader Handler On Osc2", 510, 210, 0.0, 0.0, 1.0},
 	  {"Filter Mode", 875, 300},
 	  {"Filter Cutoff", 635, 343, 0.99, 0.0, 0.99},
 	  {"Filter Resonance", 730, 343, 0.0, 0.0, 1.0},

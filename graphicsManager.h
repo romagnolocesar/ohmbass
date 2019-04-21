@@ -45,13 +45,16 @@ public:
 		//knobs
 		knobBitmap,
 		//Faders
-		fadersHandlerOsc1,
-		fadersHandlerOsc2;
+		fadersHandlerOffOsc1,
+		fadersHandlerOffOsc2,
+		fadersHandlerOnOsc1,
+		fadersHandlerOnOsc2;
 			
 
 	IGraphics* pGraphics;
 	static const int virtualKeyboardMinimumNoteNumber = 23;
 	static int lastVirtualKeyboardNoteNumber;
+
 
 	graphicsManager();
 	~graphicsManager();
@@ -65,6 +68,8 @@ public:
 	void loadFaders();
 	void loadOscWavesButtonsBackgrounds();
 	void attachGraphicsInControls(IPlug* myOhmBass, controlsManager* iControlsManager);
+
+	void ToggleFaderState(IPlug* myOhmBass, controlsManager* iControlsManager, int paramIdx, bool state);
 
 private:
 	

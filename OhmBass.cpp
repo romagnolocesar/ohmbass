@@ -8,6 +8,7 @@
 #include <math.h>
 #include <algorithm>
 
+
 //Helpers for managers elements
 controlsManager* iControlsManager = new controlsManager();
 graphicsManager* iGraphicsManager = new graphicsManager();
@@ -130,12 +131,53 @@ void OhmBass::OnParamChange(int paramIdx)
 					iControlsManager->ToggleIconsWavesButtons(2, idxWaveMode);
 				}
 				break;
-			case iControlsManager->mFadersHandlerOsc1:
+				//Faders Oscillators
+			case iControlsManager->mFadersHandlerOffOsc1:
+				if (isPluginInitialized) {
+					iControlsManager->Osc1FaderHandlerOff->Hide(TRUE);
+					iControlsManager->Osc1FaderHandlerOff->GrayOut(TRUE, 0.99f);
+
+					iControlsManager->Osc1FaderHandlerOn->Hide(FALSE);
+					iControlsManager->Osc1FaderHandlerOn->GrayOut(FALSE);
+
+					iControlsManager->Osc2FaderHandlerOn->Hide(TRUE);
+					iControlsManager->Osc2FaderHandlerOn->GrayOut(TRUE, 0.99f);
+
+					iControlsManager->Osc2FaderHandlerOff->Hide(FALSE);
+					iControlsManager->Osc2FaderHandlerOff->GrayOut(FALSE);
+				}
 				changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
 				break;
-			case iControlsManager->mFadersHandlerOsc2:
-				changer = bind(&VoiceManager::setOscillatorTwoOutput, _1, param->Value());
+			case iControlsManager->mFadersHandlerOnOsc1:
+				if (isPluginInitialized) {
+					iControlsManager->Osc1FaderHandlerOff->SetValueFromPlug(param->Value());
+				}
+				changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
 				break;
+			case iControlsManager->mFadersHandlerOffOsc2:
+				if (isPluginInitialized) {
+					iControlsManager->Osc2FaderHandlerOff->Hide(TRUE);
+					iControlsManager->Osc2FaderHandlerOff->GrayOut(TRUE, 0.99f);
+
+					iControlsManager->Osc2FaderHandlerOn->Hide(FALSE);
+					iControlsManager->Osc2FaderHandlerOn->GrayOut(FALSE);
+
+					iControlsManager->Osc1FaderHandlerOn->Hide(TRUE);
+					iControlsManager->Osc1FaderHandlerOn->GrayOut(TRUE, 0.99f);
+
+					iControlsManager->Osc1FaderHandlerOff->Hide(FALSE);
+					iControlsManager->Osc1FaderHandlerOff->GrayOut(FALSE);
+
+					changer = bind(&VoiceManager::setOscillatorTwoOutput, _1, param->Value());
+				}
+				break;
+			case iControlsManager->mFadersHandlerOnOsc2:
+				if (isPluginInitialized) {
+					iControlsManager->Osc2FaderHandlerOff->SetValueFromPlug(param->Value());
+				}
+				changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
+				break;
+				//Pitch Osc
 			case iControlsManager->mOsc1PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
 				break;

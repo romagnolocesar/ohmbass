@@ -16,8 +16,8 @@ public:
 		mFilterLFOAmount(0.0),
 		mOscillatorOnePitchAmount(0.0),
 		mOscillatorTwoPitchAmount(0.0),
-		mOscilatorOneOutput(0.5),
-		mOscilatorTwoOutput(0.5),
+		mOscilatorOneOutput(0.8),
+		mOscilatorTwoOutput(0.0),
 		mLFOValue(0.0),
 	isActive(false) {
 		// Set myself free everytime my volume envelope has fully faded out of RELEASE stage:

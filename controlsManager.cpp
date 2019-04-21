@@ -1,5 +1,7 @@
 #include "OhmBass.h";
 #include "controlsManager.h"
+#include "graphicsManager.h"
+
 
 
 void controlsManager::createParams(IPlug* myOhmBass)
@@ -14,10 +16,17 @@ void controlsManager::createParams(IPlug* myOhmBass)
 		case mBgBtnOscWavesOsc2:
 			param->InitInt(properties.name, 1, 1, 4, "osc2waves");
 			break;
-		case mFadersHandlerOsc1:
+			//Faders Oscillators
+		case mFadersHandlerOffOsc1:
 			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
 			break;
-		case mFadersHandlerOsc2:
+		case mFadersHandlerOffOsc2:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
+		case mFadersHandlerOnOsc1:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
+		case mFadersHandlerOnOsc2:
 			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
 			break;
 		case mLFOWaveform:
@@ -123,4 +132,5 @@ void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
 
 	}
 }
+
 

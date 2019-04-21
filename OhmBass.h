@@ -16,11 +16,13 @@ public:
 	OhmBass(IPlugInstanceInfo instanceInfo);
 	~OhmBass();
 
+
 	void Reset();
 	void OnParamChange(int paramIdx);
 	void ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames);
 	// to receive MIDI messages:
 	void ProcessMidiMsg(IMidiMsg* pMsg);
+
 
 	// Needed for the GUI keyboard:
 	// Should return non-zero if one or more keys are playing.
