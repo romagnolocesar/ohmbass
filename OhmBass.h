@@ -44,7 +44,6 @@ private:
 
 	Oscillator mLFO;
 
-	void CreateParams();
 	void CreateGraphics();
 };
 

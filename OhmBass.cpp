@@ -31,7 +31,7 @@ enum ELayout
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
 
-	CreateParams();
+	iControlsManager->createParams(this);
 	CreateGraphics();
 	CreatePresets();
 
@@ -39,9 +39,6 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 }
 OhmBass::~OhmBass() {}
-void OhmBass::CreateParams() {
-	iControlsManager->createParams(this);
-}
 
 void OhmBass::CreateGraphics() {
 	pGraphics = MakeGraphics(this, kWidth, kHeight);
@@ -286,79 +283,33 @@ void OhmBass::OnParamChange(int paramIdx)
 	else if (paramIdx == iControlsManager->mLFOFrequency) {
 		voiceManager.setLFOFrequency(param->Value());
 	}
-	else if (paramIdx == iControlsManager->mIconSineWaveOffOsc1) {
-		
-	}
-	else if (paramIdx == iControlsManager->mIconSineWaveOnOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSawWaveOffOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSawWaveOnOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSqWaveOffOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSqWaveOnOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconTriangleWaveOffOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconTriangleWaveOnOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSineWaveOffOsc1) {
-		
-	}
-	else if (paramIdx == iControlsManager->mIconSineWaveOnOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSawWaveOffOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSawWaveOnOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSqWaveOffOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSqWaveOnOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconTriangleWaveOffOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconTriangleWaveOnOsc1) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSineWaveOffOsc2) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSineWaveOnOsc2) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSawWaveOffOsc2) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSawWaveOnOsc2) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSqWaveOffOsc2) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconSqWaveOnOsc2) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconTriangleWaveOffOsc2) {
-
-	}
-	else if (paramIdx == iControlsManager->mIconTriangleWaveOnOsc2) {
-
-	}
-	else {
+	else if (paramIdx == iControlsManager->mIconSineWaveOffOsc1 ||
+		paramIdx == iControlsManager->mIconSineWaveOnOsc1 ||
+		paramIdx == iControlsManager->mIconSawWaveOffOsc1 ||
+		paramIdx == iControlsManager->mIconSawWaveOnOsc1 ||
+		paramIdx == iControlsManager->mIconSqWaveOffOsc1 ||
+		paramIdx == iControlsManager->mIconSqWaveOnOsc1 ||
+		paramIdx == iControlsManager->mIconTriangleWaveOffOsc1 ||
+		paramIdx == iControlsManager->mIconTriangleWaveOnOsc1 ||
+		paramIdx == iControlsManager->mIconSineWaveOffOsc1 ||
+		paramIdx == iControlsManager->mIconSineWaveOnOsc1 ||
+		paramIdx == iControlsManager->mIconSawWaveOffOsc1 ||
+		paramIdx == iControlsManager->mIconSawWaveOnOsc1 ||
+		paramIdx == iControlsManager->mIconSqWaveOffOsc1 ||
+		paramIdx == iControlsManager->mIconSqWaveOnOsc1 ||
+		paramIdx == iControlsManager->mIconTriangleWaveOffOsc1 ||
+		paramIdx == iControlsManager->mIconTriangleWaveOnOsc1 ||
+		paramIdx == iControlsManager->mIconSineWaveOffOsc2 ||
+		paramIdx == iControlsManager->mIconSineWaveOnOsc2 ||
+		paramIdx == iControlsManager->mIconSawWaveOffOsc2 ||
+		paramIdx == iControlsManager->mIconSawWaveOnOsc2 ||
+		paramIdx == iControlsManager->mIconSqWaveOffOsc2 ||
+		paramIdx == iControlsManager->mIconSqWaveOnOsc2 ||
+		paramIdx == iControlsManager->mIconTriangleWaveOffOsc2 ||
+		paramIdx == iControlsManager->mIconTriangleWaveOnOsc2
+		) {
+		//blank
+	} else {
 		using std::placeholders::_1;
 		using std::bind;
 		VoiceManager::VoiceChangerFunction changer;

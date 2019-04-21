@@ -62,7 +62,7 @@ public:
 		const double maxVal;
 	} parameterProperties_struct;
 
-	const parameterProperties_struct parameterProperties[kNumParams] =
+	parameterProperties_struct parameterProperties[kNumParams] =
 	{
 	  {"Bg Btn Osc 1 Waves", 99, 206, 0.0, 0.0, 1.0},
 	  {"Bg Btn Osc 2 Waves", 99, 306, 0.0, 0.0, 1.0},

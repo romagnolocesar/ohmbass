@@ -45,6 +45,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 	myOhmBass->GetParam(mFilterEnvSustain)->SetShape(2);
 	myOhmBass->GetParam(mVolumeEnvRelease)->SetShape(3);
 	myOhmBass->GetParam(mFilterEnvRelease)->SetShape(3);
+
 	for (int i = 0; i < kNumParams; i++) {
 		myOhmBass->OnParamChange(i);
 	}
