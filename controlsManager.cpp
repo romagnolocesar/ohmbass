@@ -2,12 +2,3 @@
 
 
 
-
-controlsManager::controlsManager()
-{
-}
-
-
-controlsManager::~controlsManager()
-{
-}
