@@ -241,8 +241,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugVST.cpp" />
+    <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
     <ClCompile Include="Filter.cpp" />
+    <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="MIDIReceiver.cpp" />
     <ClCompile Include="Oscillator.cpp" />

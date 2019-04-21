@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="OhmBass.cpp" />
-    <ClCompile Include="..\..\WDL\IPlug\IPlugVST.cpp">
-      <Filter>vst2</Filter>
-    </ClCompile>
     <ClCompile Include="MIDIReceiver.cpp" />
     <ClCompile Include="Oscillator.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
@@ -12,13 +9,14 @@
     <ClCompile Include="Voice.cpp" />
     <ClCompile Include="VoiceManager.cpp" />
     <ClCompile Include="PolyBLEPOscillator.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugVST.cpp" />
+    <ClCompile Include="controlsManager.cpp" />
+    <ClCompile Include="graphicsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="..\..\WDL\IPlug\IPlugVST.h">
-      <Filter>vst2</Filter>
-    </ClInclude>
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />

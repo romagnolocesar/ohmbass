@@ -453,8 +453,10 @@ CALL ..\..\SDKs\AAX_SDK\Utilities\CreatePackage.bat $(OutDir) ..\..\SDKs\AAX_SDK
     <ClCompile Include="..\..\SDKs\WDL\IPlug\AAX\AAX_CIPlugParameters.cpp" />
     <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugAAX.cpp" />
     <ClCompile Include="..\..\SDKs\WDL\IPlug\AAX\IPlugAAX_Describe.cpp" />
+    <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
     <ClCompile Include="Filter.cpp" />
+    <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="MIDIReceiver.cpp" />
     <ClCompile Include="Oscillator.cpp" />

@@ -12,49 +12,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\WDL\IPlug\Hosts.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IBitmapMonoText.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IControl.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IGraphics.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IGraphicsWin.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IParam.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IPlugBase.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IPlugStructs.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IPopupMenu.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\Log.cpp">
-      <Filter>IPlug</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\AAX\AAX_CIPlugParameters.cpp">
-      <Filter>IPlug\AAX</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\IPlugAAX.cpp">
-      <Filter>IPlug\AAX</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WDL\IPlug\AAX\IPlugAAX_Describe.cpp">
-      <Filter>IPlug\AAX</Filter>
-    </ClCompile>
     <ClCompile Include="OhmBass.cpp" />
-    <ClCompile Include="..\..\AAX_SDK\Interfaces\AAX_Exports.cpp">
-      <Filter>Libs</Filter>
-    </ClCompile>
     <ClCompile Include="MIDIReceiver.cpp" />
     <ClCompile Include="Oscillator.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
@@ -62,80 +20,52 @@
     <ClCompile Include="Voice.cpp" />
     <ClCompile Include="VoiceManager.cpp" />
     <ClCompile Include="PolyBLEPOscillator.cpp" />
+    <ClCompile Include="..\..\SDKs\AAX_SDK\Interfaces\AAX_Exports.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\Hosts.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IBitmapMonoText.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IControl.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IGraphics.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IGraphicsWin.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IParam.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugBase.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugStructs.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IPopupMenu.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\Log.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\AAX\AAX_CIPlugParameters.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugAAX.cpp" />
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\AAX\IPlugAAX_Describe.cpp" />
+    <ClCompile Include="controlsManager.cpp" />
+    <ClCompile Include="graphicsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\WDL\IPlug\Containers.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\Hosts.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IBitmapMonoText.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IControl.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IGraphics.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IGraphicsWin.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IKeyboardControl.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IMidiQueue.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IParam.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IPlug_include_in_plug_hdr.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IPlug_include_in_plug_src.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IPlugBase.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IPlugOSDetect.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IPlugStructs.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IPopupMenu.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\Log.h">
-      <Filter>IPlug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\AAX\AAX_CIPlugParameters.h">
-      <Filter>IPlug\AAX</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\WDL\IPlug\IPlugAAX.h">
-      <Filter>IPlug\AAX</Filter>
-    </ClInclude>
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\Containers.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\Hosts.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IBitmapMonoText.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IControl.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IGraphics.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IGraphicsWin.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IKeyboardControl.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IMidiQueue.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IParam.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlug_include_in_plug_hdr.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlug_include_in_plug_src.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugBase.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugOSDetect.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugStructs.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPopupMenu.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\Log.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\AAX\AAX_CIPlugParameters.h" />
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugAAX.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\AAX_SDK\Libs\Debug\AAXLibrary_x64_D.lib">
-      <Filter>Libs</Filter>
-    </Library>
-    <Library Include="..\..\AAX_SDK\Libs\Release\AAXLibrary.lib">
-      <Filter>Libs</Filter>
-    </Library>
-    <Library Include="..\..\AAX_SDK\Libs\Debug\AAXLibrary_D.lib">
-      <Filter>Libs</Filter>
-    </Library>
-    <Library Include="..\..\AAX_SDK\Libs\Release\AAXLibrary_x64.lib">
-      <Filter>Libs</Filter>
-    </Library>
+    <Library Include="..\..\SDKs\AAX_SDK\Libs\Debug\AAXLibrary_D.lib" />
+    <Library Include="..\..\SDKs\AAX_SDK\Libs\Debug\AAXLibrary_x64_D.lib" />
+    <Library Include="..\..\SDKs\AAX_SDK\Libs\Release\AAXLibrary.lib" />
+    <Library Include="..\..\SDKs\AAX_SDK\Libs\Release\AAXLibrary_x64.lib" />
   </ItemGroup>
 </Project>

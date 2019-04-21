@@ -1,5 +1,6 @@
 #pragma once
 #include "OhmBass.h"
+#include "controlsManager.h"
 
 class graphicsManager
 {
@@ -59,6 +60,7 @@ public:
 	void loadKnobs();
 	void loadWavesIcons();
 	void loadOscWavesButtonsBackgrounds();
+	void attachGraphicsInControls(IPlug* myOhmBass, controlsManager* iControlsManager);
 
 private:
 	
