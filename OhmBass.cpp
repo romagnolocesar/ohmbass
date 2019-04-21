@@ -106,33 +106,7 @@ void OhmBass::OnParamChange(int paramIdx)
 	}
 	else if (paramIdx == iControlsManager->mLFOFrequency) {
 		voiceManager.setLFOFrequency(param->Value());
-	}
-	else if (paramIdx == iControlsManager->mIconSineWaveOffOsc1 ||
-		paramIdx == iControlsManager->mIconSineWaveOnOsc1 ||
-		paramIdx == iControlsManager->mIconSawWaveOffOsc1 ||
-		paramIdx == iControlsManager->mIconSawWaveOnOsc1 ||
-		paramIdx == iControlsManager->mIconSqWaveOffOsc1 ||
-		paramIdx == iControlsManager->mIconSqWaveOnOsc1 ||
-		paramIdx == iControlsManager->mIconTriangleWaveOffOsc1 ||
-		paramIdx == iControlsManager->mIconTriangleWaveOnOsc1 ||
-		paramIdx == iControlsManager->mIconSineWaveOffOsc1 ||
-		paramIdx == iControlsManager->mIconSineWaveOnOsc1 ||
-		paramIdx == iControlsManager->mIconSawWaveOffOsc1 ||
-		paramIdx == iControlsManager->mIconSawWaveOnOsc1 ||
-		paramIdx == iControlsManager->mIconSqWaveOffOsc1 ||
-		paramIdx == iControlsManager->mIconSqWaveOnOsc1 ||
-		paramIdx == iControlsManager->mIconTriangleWaveOffOsc1 ||
-		paramIdx == iControlsManager->mIconTriangleWaveOnOsc1 ||
-		paramIdx == iControlsManager->mIconSineWaveOffOsc2 ||
-		paramIdx == iControlsManager->mIconSineWaveOnOsc2 ||
-		paramIdx == iControlsManager->mIconSawWaveOffOsc2 ||
-		paramIdx == iControlsManager->mIconSawWaveOnOsc2 ||
-		paramIdx == iControlsManager->mIconSqWaveOffOsc2 ||
-		paramIdx == iControlsManager->mIconSqWaveOnOsc2 ||
-		paramIdx == iControlsManager->mIconTriangleWaveOffOsc2 ||
-		paramIdx == iControlsManager->mIconTriangleWaveOnOsc2
-		) {
-		//blank
+
 	} else {
 		using std::placeholders::_1;
 		using std::bind;
@@ -142,16 +116,16 @@ void OhmBass::OnParamChange(int paramIdx)
 				idxWaveMode = param->Int();
 				idxWaveMode--;
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
-				if (isParametersInitialized) {
-					ToggleIconsWavesButtons(1, idxWaveMode);
+				if (isPluginInitialized) {
+					iControlsManager->ToggleIconsWavesButtons(1, idxWaveMode);
 				}
 				break;
 			case iControlsManager->mBgBtnOscWavesOsc2:
 				idxWaveMode = param->Int();
 				idxWaveMode--;
 				changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
-				if (isParametersInitialized) {
-					ToggleIconsWavesButtons(2, idxWaveMode);
+				if (isPluginInitialized) {
+					iControlsManager->ToggleIconsWavesButtons(2, idxWaveMode);
 				}
 				break;
 			case iControlsManager->mOsc1PitchMod:
@@ -218,66 +192,6 @@ void OhmBass::ProcessMidiMsg(IMidiMsg* pMsg) {
 	iGraphicsManager->mVirtualKeyboard->SetDirty();
 }
 
-void OhmBass::ToggleIconsWavesButtons(int nOsc, int idxWaveMode) {
-	if (nOsc == 1) {
-		switch (idxWaveMode) {
-		case 0:
-			iControlsManager->Osc1ControlSineOn->Hide(FALSE);
-			iControlsManager->Osc1ControlSawOn->Hide(TRUE);
-			iControlsManager->Osc1ControlSquareOn->Hide(TRUE);
-			iControlsManager->Osc1ControlTriagleOn->Hide(TRUE);
-			break;
-		case 1:
-			iControlsManager->Osc1ControlSineOn->Hide(TRUE);
-			iControlsManager->Osc1ControlSawOn->Hide(FALSE);
-			iControlsManager->Osc1ControlSquareOn->Hide(TRUE);
-			iControlsManager->Osc1ControlTriagleOn->Hide(TRUE);
-			break;
-		case 2:
-			iControlsManager->Osc1ControlSineOn->Hide(TRUE);
-			iControlsManager->Osc1ControlSawOn->Hide(TRUE);
-			iControlsManager->Osc1ControlSquareOn->Hide(FALSE);
-			iControlsManager->Osc1ControlTriagleOn->Hide(TRUE);
-			break;
-		case 3:
-			iControlsManager->Osc1ControlSineOn->Hide(TRUE);
-			iControlsManager->Osc1ControlSawOn->Hide(TRUE);
-			iControlsManager->Osc1ControlSquareOn->Hide(TRUE);
-			iControlsManager->Osc1ControlTriagleOn->Hide(FALSE);
-			break;
-		}
-
-	}
-	else if (nOsc == 2) {
-		switch (idxWaveMode) {
-		case 0:
-			iControlsManager->Osc2ControlSineOn->Hide(FALSE);
-			iControlsManager->Osc2ControlSawOn->Hide(TRUE);
-			iControlsManager->Osc2ControlSquareOn->Hide(TRUE);
-			iControlsManager->Osc2ControlTriagleOn->Hide(TRUE);
-			break;
-		case 1:
-			iControlsManager->Osc2ControlSineOn->Hide(TRUE);
-			iControlsManager->Osc2ControlSawOn->Hide(FALSE);
-			iControlsManager->Osc2ControlSquareOn->Hide(TRUE);
-			iControlsManager->Osc2ControlTriagleOn->Hide(TRUE);
-			break;
-		case 2:
-			iControlsManager->Osc2ControlSineOn->Hide(TRUE);
-			iControlsManager->Osc2ControlSawOn->Hide(TRUE);
-			iControlsManager->Osc2ControlSquareOn->Hide(FALSE);
-			iControlsManager->Osc2ControlTriagleOn->Hide(TRUE);
-			break;
-		case 3:
-			iControlsManager->Osc2ControlSineOn->Hide(TRUE);
-			iControlsManager->Osc2ControlSawOn->Hide(TRUE);
-			iControlsManager->Osc2ControlSquareOn->Hide(TRUE);
-			iControlsManager->Osc2ControlTriagleOn->Hide(FALSE);
-			break;
-		}
-
-	}
-}
 
 void OhmBass::processVirtualKeyboard() {
 	IKeyboardControl* virtualKeyboard = (IKeyboardControl*)iGraphicsManager->mVirtualKeyboard;

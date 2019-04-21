@@ -78,6 +78,7 @@ public:
 
 	void createParams(IPlug* myOhmBass);
 	int getKNumParams();
+	void ToggleIconsWavesButtons(int nOsc, int idxWaveMode);
 
 private:
 	parameterProperties_struct parameterProperties[kNumParams] =

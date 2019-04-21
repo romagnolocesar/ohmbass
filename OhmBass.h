@@ -46,8 +46,6 @@ private:
 	Oscillator mLFO;
 
 	void CreateKeyboard();
-
-	void CreateGraphics();
 	void CreateMainDisplay();
 };
 
