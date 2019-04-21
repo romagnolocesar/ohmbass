@@ -53,7 +53,7 @@ public:
 		kNumParams
 	};
 
-	typedef struct{
+	typedef struct {
 		const char* name;
 		const int x;
 		const int y;
@@ -62,6 +62,24 @@ public:
 		const double maxVal;
 	} parameterProperties_struct;
 
+	IControl* control;
+	IControl* Osc1ControlSineOn;
+	IControl* Osc1ControlSawOn;
+	IControl* Osc1ControlSquareOn;
+	IControl* Osc1ControlTriagleOn;
+	IControl* Osc2ControlSineOn;
+	IControl* Osc2ControlSawOn;
+	IControl* Osc2ControlSquareOn;
+	IControl* Osc2ControlTriagleOn;
+
+	parameterProperties_struct getParameterProperties(int idx) {
+		return parameterProperties[idx];
+	};
+
+	void createParams(IPlug* myOhmBass);
+	int getKNumParams();
+
+private:
 	parameterProperties_struct parameterProperties[kNumParams] =
 	{
 	  {"Bg Btn Osc 1 Waves", 99, 206, 0.0, 0.0, 1.0},
@@ -101,26 +119,6 @@ public:
 	  {"Filter Env Sustain", 820, 193, 0.1, 0.001, 1.0},
 	  {"Filter Env Release", 915, 193, 1.0, 0.01, 15.0}
 	};
-
-
-	IControl* control;
-	IControl* Osc1ControlSineOn;
-	IControl* Osc1ControlSawOn;
-	IControl* Osc1ControlSquareOn;
-	IControl* Osc1ControlTriagleOn;
-	IControl* Osc2ControlSineOn;
-	IControl* Osc2ControlSawOn;
-	IControl* Osc2ControlSquareOn;
-	IControl* Osc2ControlTriagleOn;
-
-
-	parameterProperties_struct getParameterProperties(int idx) {
-		return parameterProperties[idx];
-	};
-
-	void createParams(IPlug* myOhmBass);
-
-	
 
 	
 };

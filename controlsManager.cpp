@@ -51,3 +51,8 @@ void controlsManager::createParams(IPlug* myOhmBass)
 	}
 }
 
+int controlsManager::getKNumParams()
+{
+	return this->kNumParams;
+}
+

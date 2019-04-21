@@ -4,6 +4,7 @@
 #include "IPlug_include_in_plug_hdr.h"
 #pragma clang diagnostic pop
 #include "controlsManager.h"
+#include "graphicsManager.h"
 #include "VoiceManager.h"
 #include "MIDIReceiver.h"
 #include <functional>
@@ -27,8 +28,8 @@ public:
 	inline int GetNumKeys() const { return mMIDIReceiver.getNumKeys(); };
 	// Should return true if the specified key is playing.
 	inline bool GetKeyStatus(int key) const { return mMIDIReceiver.getKeyStatus(key); };
-	static const int virtualKeyboardMinimumNoteNumber = 23;
-	int lastVirtualKeyboardNoteNumber;
+	int lastVirtualKeyboardNoteNumber = graphicsManager::lastVirtualKeyboardNoteNumber;
+	int virtualKeyboardMinimumNoteNumber = graphicsManager::virtualKeyboardMinimumNoteNumber;
 	
 
 private:
@@ -36,7 +37,7 @@ private:
 	double mFrequency;
 	void CreatePresets();
 	MIDIReceiver mMIDIReceiver;
-	IControl* mVirtualKeyboard;
+	
 	void processVirtualKeyboard();
 	VoiceManager voiceManager;
 
@@ -44,7 +45,10 @@ private:
 
 	Oscillator mLFO;
 
+	void CreateKeyboard();
+
 	void CreateGraphics();
+	void CreateMainDisplay();
 };
 
 #endif

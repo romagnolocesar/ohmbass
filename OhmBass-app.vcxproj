@@ -282,6 +282,7 @@
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="EnvelopeGenerator.h" />
+    <ClInclude Include="graphicsManager.h" />
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="Filter.h" />
     <ClInclude Include="GallantSignal.h" />
@@ -303,6 +304,7 @@
     <ClCompile Include="app_wrapper\app_main.cpp" />
     <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
+    <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="MIDIReceiver.cpp" />

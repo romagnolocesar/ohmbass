@@ -3,35 +3,36 @@
 #pragma clang diagnostic ignored "-Wmain"
 #include "IPlug_include_in_plug_src.h"
 #pragma clang diagnostic pop
-#include "IKeyboardControl.h"
 #include "resource.h"
-
+#include "IKeyboardControl.h"
 #include <math.h>
 #include <algorithm>
 
-IGraphics* pGraphics;
 
 controlsManager* iControlsManager = new controlsManager();
+graphicsManager* iGraphicsManager = new graphicsManager();
 
 const int kNumPrograms = 5;
 bool isParametersInitialized = FALSE;
-const int kNumParams = iControlsManager->kNumParams;
+const int kNumParams = iControlsManager->getKNumParams();
 
 
 
 
-enum ELayout
-{
-	kWidth = GUI_WIDTH,
-	kHeight = GUI_HEIGHT,
-	kKeybX = 36,
-	kKeybY = 606
-};
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
 
 	iControlsManager->createParams(this);
+	CreateMainDisplay();
+	iGraphicsManager->AttachBackgroundMainDisplay();
+	iGraphicsManager->loadKeyboard();
+	iGraphicsManager->loadOscWavesModes();
+	iGraphicsManager->loadFiltersModes();
+	iGraphicsManager->loadKnobs();
+	iGraphicsManager->loadWavesIcons();
+	iGraphicsManager->loadOscWavesButtonsBackgrounds();
+	CreateKeyboard();
 	CreateGraphics();
 	CreatePresets();
 
@@ -40,48 +41,26 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 }
 OhmBass::~OhmBass() {}
 
-void OhmBass::CreateGraphics() {
-	pGraphics = MakeGraphics(this, kWidth, kHeight);
+void OhmBass::CreateMainDisplay() {
+	iGraphicsManager->pGraphics = MakeGraphics(this, iGraphicsManager->kWidth, iGraphicsManager->kHeight);
+}
 
-	//background
-	pGraphics->AttachBackground(BG_ID, BG_FN);
-
-	//keybooards
-	IBitmap whiteKeyImage = pGraphics->LoadIBitmap(WHITE_KEY_ID, WHITE_KEY_FN, 6);
-	IBitmap blackKeyImage = pGraphics->LoadIBitmap(BLACK_KEY_ID, BLACK_KEY_FN);
+void OhmBass::CreateKeyboard() {
 	//                            C#     D#          F#      G#      A# (Quantos PX as notas # deslocam pra esquerda) 
 	int keyCoordinates[12] = { 0, 20, 33, 57, 67, 99, 120, 132, 155, 165, 189, 198 };
-	mVirtualKeyboard = new IKeyboardControl(this, kKeybX, kKeybY, virtualKeyboardMinimumNoteNumber, /* octaves: */ 2, &whiteKeyImage, &blackKeyImage, keyCoordinates);
-	pGraphics->AttachControl(mVirtualKeyboard);
-
-	//Oscilattors
-	IBitmap waveformBitmap = pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
-	IBitmap filterModeBitmap = pGraphics->LoadIBitmap(FILTERMODE_ID, FILTERMODE_FN, 3);
-
-	//knobs
-	IBitmap knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
-
-	//waves buttons icons
-	IBitmap iconSineWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
-	IBitmap iconSineWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
-	IBitmap iconSawWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
-	IBitmap iconSawWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
-	IBitmap iconSquareWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
-	IBitmap iconSquareWaveOffOsc1 = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
-	IBitmap iconTriangleWaveOnOsc1 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
-	IBitmap iconTriangleWaveOffOsc1 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
-	IBitmap iconSineWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
-	IBitmap iconSineWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
-	IBitmap iconSawWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
-	IBitmap iconSawWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
-	IBitmap iconSquareWaveOnOsc2 = pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
-	IBitmap iconSquareWaveOffOsc2 = pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
-	IBitmap iconTriangleWaveOnOsc2 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
-	IBitmap iconTriangleWaveOffOsc2 = pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
-
-	IBitmap bgBtnOscWavesOsc1 = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
-	IBitmap bgBtnOscWavesOsc2 = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
-
+	iGraphicsManager->mVirtualKeyboard = new IKeyboardControl(
+		this,
+		iGraphicsManager->kKeybX,
+		iGraphicsManager->kKeybY,
+		iGraphicsManager->virtualKeyboardMinimumNoteNumber,
+		2,/* octaves: */
+		&iGraphicsManager->whiteKeyImage,
+		&iGraphicsManager->blackKeyImage,
+		keyCoordinates
+	);
+	iGraphicsManager->pGraphics->AttachControl(iGraphicsManager->mVirtualKeyboard);
+}
+void OhmBass::CreateGraphics() {
 
 
 	for (int i = 0; i < kNumParams; i++) {
@@ -91,137 +70,137 @@ void OhmBass::CreateGraphics() {
 		switch (i) {
 		//Buttons Waves
 		case controlsManager::mBgBtnOscWavesOsc1:
-			graphic = &bgBtnOscWavesOsc1;
+			graphic = &iGraphicsManager->bgBtnOscWavesOsc1;
 			iControlsManager->control = new IRadioButtonsControl(this, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
 			break;
 		case controlsManager::mBgBtnOscWavesOsc2:
-			graphic = &bgBtnOscWavesOsc2;
+			graphic = &iGraphicsManager->bgBtnOscWavesOsc2;
 			iControlsManager->control = new IRadioButtonsControl(this, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
 			break;
 		//Osc1 Icons Buttons Waves
 		case controlsManager::mIconSineWaveOffOsc1:
-			graphic = &iconSineWaveOffOsc1;
+			graphic = &iGraphicsManager->iconSineWaveOffOsc1;
 			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->control->Hide(!properties.defaultVal);
 			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
 		case controlsManager::mIconSineWaveOnOsc1:
-			graphic = &iconSineWaveOnOsc1;
+			graphic = &iGraphicsManager->iconSineWaveOnOsc1;
 			iControlsManager->Osc1ControlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->Osc1ControlSineOn->Hide(!properties.defaultVal);
 			iControlsManager->Osc1ControlSineOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(iControlsManager->Osc1ControlSineOn);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->Osc1ControlSineOn);
 			break;
 		case iControlsManager->mIconSawWaveOffOsc1:
-			graphic = &iconSawWaveOffOsc1;
+			graphic = &iGraphicsManager->iconSawWaveOffOsc1;
 			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->control->Hide(!properties.defaultVal);
 			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
 		case iControlsManager->mIconSawWaveOnOsc1:
-			graphic = &iconSawWaveOnOsc1;
+			graphic = &iGraphicsManager->iconSawWaveOnOsc1;
 			iControlsManager->Osc1ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->Osc1ControlSawOn->Hide(!properties.defaultVal);
 			iControlsManager->Osc1ControlSawOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(iControlsManager->Osc1ControlSawOn);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->Osc1ControlSawOn);
 			break;
 		case iControlsManager->mIconSqWaveOffOsc1:
-			graphic = &iconSquareWaveOffOsc1;
+			graphic = &iGraphicsManager->iconSquareWaveOffOsc1;
 			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->control->Hide(!properties.defaultVal);
 			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
 		case iControlsManager->mIconSqWaveOnOsc1:
-			graphic = &iconSquareWaveOnOsc1;
+			graphic = &iGraphicsManager->iconSquareWaveOnOsc1;
 			iControlsManager->Osc1ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->Osc1ControlSquareOn->Hide(!properties.defaultVal);
 			iControlsManager->Osc1ControlSquareOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(iControlsManager->Osc1ControlSquareOn);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->Osc1ControlSquareOn);
 			break;
 		case iControlsManager->mIconTriangleWaveOffOsc1:
-			graphic = &iconTriangleWaveOffOsc1;
+			graphic = &iGraphicsManager->iconTriangleWaveOffOsc1;
 			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->control->Hide(!properties.defaultVal);
 			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
 		case iControlsManager->mIconTriangleWaveOnOsc1:
-			graphic = &iconTriangleWaveOnOsc1;
+			graphic = &iGraphicsManager->iconTriangleWaveOnOsc1;
 			iControlsManager->Osc1ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->Osc1ControlTriagleOn->Hide(!properties.defaultVal);
 			iControlsManager->Osc1ControlTriagleOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(iControlsManager->Osc1ControlTriagleOn);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->Osc1ControlTriagleOn);
 			break;
 		//Osc2 Icons Buttons Waves
 		case iControlsManager->mIconSineWaveOffOsc2:
-			graphic = &iconSineWaveOffOsc2;
+			graphic = &iGraphicsManager->iconSineWaveOffOsc2;
 			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->control->Hide(!properties.defaultVal);
 			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
 		case iControlsManager->mIconSineWaveOnOsc2:
-			graphic = &iconSineWaveOnOsc2;
+			graphic = &iGraphicsManager->iconSineWaveOnOsc2;
 			iControlsManager->Osc2ControlSineOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->Osc2ControlSineOn->Hide(!properties.defaultVal);
 			iControlsManager->Osc2ControlSineOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(iControlsManager->Osc2ControlSineOn);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->Osc2ControlSineOn);
 			break;
 		case iControlsManager->mIconSawWaveOffOsc2:
-			graphic = &iconSawWaveOffOsc2;
+			graphic = &iGraphicsManager->iconSawWaveOffOsc2;
 			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			iControlsManager->control->Hide(!properties.defaultVal);
 			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
 		case iControlsManager->mIconSawWaveOnOsc2:
-			graphic = &iconSawWaveOnOsc2;
+			graphic = &iGraphicsManager->iconSawWaveOnOsc2;
 			iControlsManager->Osc2ControlSawOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->Osc2ControlSawOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			iControlsManager->Osc2ControlSawOn->Hide(!properties.defaultVal);
 			iControlsManager->Osc2ControlSawOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(iControlsManager->Osc2ControlSawOn);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->Osc2ControlSawOn);
 			break;
 		case iControlsManager->mIconSqWaveOffOsc2:
-			graphic = &iconSquareWaveOffOsc2;
+			graphic = &iGraphicsManager->iconSquareWaveOffOsc2;
 			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			iControlsManager->control->Hide(!properties.defaultVal);
 			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
 		case iControlsManager->mIconSqWaveOnOsc2:
-			graphic = &iconSquareWaveOnOsc2;
+			graphic = &iGraphicsManager->iconSquareWaveOnOsc2;
 			iControlsManager->Osc2ControlSquareOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->Osc2ControlSquareOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			iControlsManager->Osc2ControlSquareOn->Hide(!properties.defaultVal);
 			iControlsManager->Osc2ControlSquareOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(iControlsManager->Osc2ControlSquareOn);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->Osc2ControlSquareOn);
 			break;
 		case iControlsManager->mIconTriangleWaveOffOsc2:
-			graphic = &iconTriangleWaveOffOsc2;
+			graphic = &iGraphicsManager->iconTriangleWaveOffOsc2;
 			iControlsManager->control = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->control->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			iControlsManager->control->Hide(!properties.defaultVal);
 			iControlsManager->control->GrayOut(TRUE, 0.99f);
 			break;
 		case iControlsManager->mIconTriangleWaveOnOsc2:
-			graphic = &iconTriangleWaveOnOsc2;
+			graphic = &iGraphicsManager->iconTriangleWaveOnOsc2;
 			iControlsManager->Osc2ControlTriagleOn = new IBitmapControl(this, properties.x, properties.y, i, graphic);
 			iControlsManager->Osc2ControlTriagleOn->SetBlendMethod(IChannelBlend::EBlendMethod::kBlendColorDodge);
 			iControlsManager->Osc2ControlTriagleOn->Hide(!properties.defaultVal);
 			iControlsManager->Osc2ControlTriagleOn->GrayOut(TRUE, 0.99f);
-			pGraphics->AttachControl(iControlsManager->Osc2ControlTriagleOn);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->Osc2ControlTriagleOn);
 			break;
 		//LFO
 		case iControlsManager->mLFOWaveform:
-			graphic = &waveformBitmap;
+			graphic = &iGraphicsManager->waveformBitmap;
 			iControlsManager->control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
 			break;
 		case iControlsManager->mFilterMode:
-			graphic = &filterModeBitmap;
+			graphic = &iGraphicsManager->filterModeBitmap;
 			iControlsManager->control = new ISwitchControl(this, properties.x, properties.y, i, graphic);
 			break;
 			// Knobs:
 		default:
-			graphic = &knobBitmap;
+			graphic = &iGraphicsManager->knobBitmap;
 			iControlsManager->control = new IKnobMultiControl(this, properties.x, properties.y, i, graphic);
 			break;
 		}
@@ -234,11 +213,11 @@ void OhmBass::CreateGraphics() {
 			i != iControlsManager->mIconSawWaveOnOsc2 && 
 			i != iControlsManager->mIconSqWaveOnOsc2 && 
 			i != iControlsManager->mIconTriangleWaveOnOsc2) {
-			pGraphics->AttachControl(iControlsManager->control);
+			iGraphicsManager->pGraphics->AttachControl(iControlsManager->control);
 		}
 		
 	}
-	AttachGraphics(pGraphics);
+	AttachGraphics(iGraphicsManager->pGraphics);
 	isParametersInitialized = TRUE;
 }
 
@@ -391,7 +370,7 @@ void OhmBass::OnParamChange(int paramIdx)
 
 void OhmBass::ProcessMidiMsg(IMidiMsg* pMsg) {
 	mMIDIReceiver.onMessageReceived(pMsg);
-	mVirtualKeyboard->SetDirty();
+	iGraphicsManager->mVirtualKeyboard->SetDirty();
 }
 
 void OhmBass::ToggleIconsWavesButtons(int nOsc, int idxWaveMode) {
@@ -455,7 +434,7 @@ void OhmBass::ToggleIconsWavesButtons(int nOsc, int idxWaveMode) {
 	}
 }
 void OhmBass::processVirtualKeyboard() {
-	IKeyboardControl* virtualKeyboard = (IKeyboardControl*)mVirtualKeyboard;
+	IKeyboardControl* virtualKeyboard = (IKeyboardControl*)iGraphicsManager->mVirtualKeyboard;
 	int virtualKeyboardNoteNumber = virtualKeyboard->GetKey() + virtualKeyboardMinimumNoteNumber;
 
 	if (lastVirtualKeyboardNoteNumber >= virtualKeyboardMinimumNoteNumber && virtualKeyboardNoteNumber != lastVirtualKeyboardNoteNumber) {
