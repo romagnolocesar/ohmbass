@@ -1,9 +1,12 @@
 #pragma once
+#include "OhmBass.h"
 #include "IControl.h"
 
 class controlsManager
 {
 public:
+	const double parameterStep = 0.001;
+
 	enum EParams
 	{
 		// Oscillator Section:
@@ -110,11 +113,12 @@ public:
 	IControl* Osc2ControlSquareOn;
 	IControl* Osc2ControlTriagleOn;
 
-	
 
 	parameterProperties_struct getParameterProperties(int idx) {
 		return parameterProperties[idx];
 	};
+
+	void createParams(IPlug* myOhmBass);
 
 	
 

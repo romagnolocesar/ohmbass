@@ -14,7 +14,6 @@ IGraphics* pGraphics;
 controlsManager* iControlsManager = new controlsManager();
 
 const int kNumPrograms = 5;
-const double parameterStep = 0.001;
 bool isParametersInitialized = FALSE;
 const int kNumParams = iControlsManager->kNumParams;
 
@@ -41,49 +40,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 }
 OhmBass::~OhmBass() {}
 void OhmBass::CreateParams() {
-	for (int i = 0; i < kNumParams; i++) {
-		IParam* param = GetParam(i);
-		controlsManager::parameterProperties_struct properties = iControlsManager->getParameterProperties(i);
-		switch (i) {
-		case controlsManager::mBgBtnOscWavesOsc1:
-			param->InitInt(properties.name, 1, 1, 4, "osc1waves");
-			break;
-		case controlsManager::mBgBtnOscWavesOsc2:
-			param->InitInt(properties.name, 1, 1, 4, "osc2waves");
-			break;
-		case controlsManager::mLFOWaveform:
-			param->InitEnum(properties.name,
-				Oscillator::OSCILLATOR_MODE_TRIANGLE,
-				Oscillator::kNumOscillatorModes);
-			// For VST3:
-			param->SetDisplayText(0, properties.name);
-			break;
-		case controlsManager::mFilterMode:
-			param->InitEnum(properties.name,
-				Filter::FILTER_MODE_LOWPASS,
-				Filter::kNumFilterModes);
-			break;
-		default:
-			param->InitDouble(properties.name,
-				properties.defaultVal,
-				properties.minVal,
-				properties.maxVal,
-				parameterStep);
-			break;
-		}
-	}
-	GetParam(controlsManager::mFilterCutoff)->SetShape(2);
-	GetParam(controlsManager::mVolumeEnvAttack)->SetShape(3);
-	GetParam(controlsManager::mFilterEnvAttack)->SetShape(3);
-	GetParam(controlsManager::mVolumeEnvDecay)->SetShape(3);
-	GetParam(controlsManager::mFilterEnvDecay)->SetShape(3);
-	GetParam(controlsManager::mVolumeEnvSustain)->SetShape(2);
-	GetParam(controlsManager::mFilterEnvSustain)->SetShape(2);
-	GetParam(controlsManager::mVolumeEnvRelease)->SetShape(3);
-	GetParam(controlsManager::mFilterEnvRelease)->SetShape(3);
-	for (int i = 0; i < kNumParams; i++) {
-		OnParamChange(i);
-	}
+	iControlsManager->createParams(this);
 }
 
 void OhmBass::CreateGraphics() {
