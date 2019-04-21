@@ -43,7 +43,10 @@ public:
 		//filters
 		filterModeBitmap,
 		//knobs
-		knobBitmap;
+		knobBitmap,
+		//Faders
+		fadersHandlerOn,
+		fadersHandlerOff;
 			
 
 	IGraphics* pGraphics;
@@ -59,6 +62,7 @@ public:
 	void loadFiltersModes();
 	void loadKnobs();
 	void loadWavesIcons();
+	void loadFaders();
 	void loadOscWavesButtonsBackgrounds();
 	void attachGraphicsInControls(IPlug* myOhmBass, controlsManager* iControlsManager);
 

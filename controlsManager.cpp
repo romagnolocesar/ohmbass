@@ -14,6 +14,12 @@ void controlsManager::createParams(IPlug* myOhmBass)
 		case mBgBtnOscWavesOsc2:
 			param->InitInt(properties.name, 1, 1, 4, "osc2waves");
 			break;
+		case mFadersHandlerOn:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
+		case mFadersHandlerOff:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
 		case mLFOWaveform:
 			param->InitEnum(properties.name,
 				Oscillator::OSCILLATOR_MODE_TRIANGLE,

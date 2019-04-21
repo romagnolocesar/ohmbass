@@ -18,7 +18,6 @@ public:
 
 	void Reset();
 	void OnParamChange(int paramIdx);
-	void ToggleIconsWavesButtons(int nOsc, int idxWaveMode);
 	void ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames);
 	// to receive MIDI messages:
 	void ProcessMidiMsg(IMidiMsg* pMsg);

@@ -32,6 +32,8 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iGraphicsManager->loadKnobs();
 	iGraphicsManager->loadWavesIcons();
 	iGraphicsManager->loadOscWavesButtonsBackgrounds();
+	iGraphicsManager->loadFaders();
+	
 	//create keyboard
 	CreateKeyboard();
 	//Attach the controls in graphics
@@ -134,9 +136,10 @@ void OhmBass::OnParamChange(int paramIdx)
 			case iControlsManager->mOsc2PitchMod:
 				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 				break;
-			case iControlsManager->mOscMix:
+				//Oscillator Mix
+			/*case iControlsManager->mOscMix:
 				changer = bind(&VoiceManager::setOscillatorMix, _1, param->Value());
-				break;
+				break;*/
 				// Filter Section:
 			case iControlsManager->mFilterMode:
 				changer = bind(&VoiceManager::setFilterMode, _1, static_cast<Filter::FilterMode>(param->Int()));

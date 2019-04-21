@@ -41,6 +41,14 @@ void graphicsManager::loadKnobs()
 	this->knobBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM, 47);
 }
 
+void graphicsManager::loadFaders()
+{
+	this->fadersHandlerOn = pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
+	this->fadersHandlerOff = pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
+}
+
+
+
 void graphicsManager::loadWavesIcons()
 {
 	this->iconSineWaveOnOsc1 = pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
@@ -82,6 +90,14 @@ void graphicsManager::attachGraphicsInControls(IPlug* myOhmBass,controlsManager*
 		case controlsManager::mBgBtnOscWavesOsc2:
 			graphic = &bgBtnOscWavesOsc2;
 			iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
+			break;
+		case controlsManager::mFadersHandlerOn:
+			graphic = &fadersHandlerOn;
+			iControlsManager->control = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
+			break;
+		case controlsManager::mFadersHandlerOff:
+			graphic = &fadersHandlerOff;
+			iControlsManager->control = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
 			break;
 			//Osc1 Icons Buttons Waves
 		case controlsManager::mIconSineWaveOffOsc1:

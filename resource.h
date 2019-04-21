@@ -77,7 +77,11 @@ instrument determined by PLUG _IS _INST
 #define ICONSQUAREWAVEON_ID			118	    
 #define ICONSQUAREWAVEOFF_ID		119	    
 #define ICONTRIANGLEWAVEON_ID		120		
-#define ICONTRIANGLEWAVEOFF_ID		121		
+#define ICONTRIANGLEWAVEOFF_ID		121	
+// --- Faders ---- //
+#define FADERHANDLEROFF_ID			122
+#define FADERHANDLERON_ID			123
+
 
 
 
@@ -93,14 +97,18 @@ instrument determined by PLUG _IS _INST
 #define FILTERMODE_FN "resources/img/filtermode.png"
 // --- Waves Buttons ---- //
 #define BGBTNOSCWAVES_FN					"resources/img/wavesbuttons/bg_btn_osc_waves.png"
-#define ICONSAWWAVEON_FN				"resources/img/wavesbuttons/icon_saw_wave_on.png"
-#define ICONSAWWAVEOFF_FN				"resources/img/wavesbuttons/icon_saw_wave_off.png"
-#define ICONSINEWAVEON_FN			"resources/img/wavesbuttons/icon_sine_wave_on.png"
-#define ICONSINEWAVEOFF_FN			"resources/img/wavesbuttons/icon_sine_wave_off.png"
-#define ICONSQUAREWAVEON_FN			"resources/img/wavesbuttons/icon_square_wave_on.png"
-#define ICONSQUAREWAVEOFF_FN			"resources/img/wavesbuttons/icon_square_wave_off.png"
-#define ICONTRIANGLEWAVEON_FN		"resources/img/wavesbuttons/icon_triangle_wave_on.png"
-#define ICONTRIANGLEWAVEOFF_FN		"resources/img/wavesbuttons/icon_triangle_wave_off.png"
+#define ICONSAWWAVEON_FN					"resources/img/wavesbuttons/icon_saw_wave_on.png"
+#define ICONSAWWAVEOFF_FN					"resources/img/wavesbuttons/icon_saw_wave_off.png"
+#define ICONSINEWAVEON_FN					"resources/img/wavesbuttons/icon_sine_wave_on.png"
+#define ICONSINEWAVEOFF_FN					"resources/img/wavesbuttons/icon_sine_wave_off.png"
+#define ICONSQUAREWAVEON_FN					"resources/img/wavesbuttons/icon_square_wave_on.png"
+#define ICONSQUAREWAVEOFF_FN				"resources/img/wavesbuttons/icon_square_wave_off.png"
+#define ICONTRIANGLEWAVEON_FN				"resources/img/wavesbuttons/icon_triangle_wave_on.png"
+#define ICONTRIANGLEWAVEOFF_FN				"resources/img/wavesbuttons/icon_triangle_wave_off.png"
+// --- Faders ---- //
+#define FADERHANDLEROFF_FN 					"resources/img/faderoff.png"
+#define FADERHANDLERON_FN 					"resources/img/faderon.png"
+
 
 
 
