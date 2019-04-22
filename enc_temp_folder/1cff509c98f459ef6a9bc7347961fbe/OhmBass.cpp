@@ -245,19 +245,6 @@ void OhmBass::OnParamChange(int paramIdx)
 			case iControlsManager->mFilterEnvRelease:
 				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_RELEASE, param->Value());
 				break;
-			//EQ-LIBRIUM
-			case iControlsManager->mGhrEqlLowFreq:
-				iGhrrEQuilibrium->setLowFreq(param->Value);
-				break;
-			case iControlsManager->mGhrBostLowFreq:
-				iGhrrEQuilibrium->setLowBoost(param->Value);
-				break;
-			case iControlsManager->mGhrEqlLowFreq:
-				iGhrrEQuilibrium->setLowFreq(param->Value);
-				break;
-			case iControlsManager->mGhrShelfHihgFreq:
-				iGhrrEQuilibrium->setHighFreq(param->Value);
-				break;
 		}
 		if (changer) {
 			voiceManager.changeAllVoices(changer);

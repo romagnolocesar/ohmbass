@@ -59,13 +59,13 @@ public:
 		mFilterEnvSustain,
 		mFilterEnvRelease,
 		//GHRR PLACE
-			//Eq-Librium
-			mGhrtab1,
-			mGhrEqlOnTitle,
-			mGhrEqlLowFreq,
-			mGhrBostLowFreq,
-			mGhrEqlHihgFreq,
-			mGhrShelfHihgFreq,
+		//Eq-Librium
+		mGhrtab1,
+		mGhrEqlOnTitle,
+		mGhrEqlLowFreq,
+		mGhrBostLowFreq,
+		mGhrEqlHihgFreq,
+		mGhrShelfHihgFreq,
 		kNumParams
 	};
 
@@ -146,6 +146,7 @@ private:
 		{"LFO Waveform", 30, 520},
 		{"LFO Frequency", 75, 510, 6.0, 0.01, 30.0},
 		//AMPLIFICATOR ENVELOPE
+		{"Volume Env Attack", 35, 15, 0.01, 0.01, 10.0},
 		{"Volume Env Decay", 130, 15, 0.5, 0.01, 15.0},
 		{"Volume Env Sustain", 225, 15, 0.1, 0.001, 1.0},
 		{"Volume Env Release", 320, 15, 1.0, 0.01, 15.0},
@@ -153,9 +154,9 @@ private:
 		{"Filter Env Decay", 730, 193, 0.5, 0.01, 15.0},
 		{"Filter Env Sustain", 820, 193, 0.1, 0.001, 1.0},
 		{"Filter Env Release", 915, 193, 1.0, 0.01, 15.0},
-		{"Volume Env Attack", 35, 15, 0.01, 0.01, 10.0},
+		
 		//GHRR PLACE
-		{"Tab1 Ghrr", 547, 522, 0.0, 0.0, 1.0},
+		{"Tab1 Ghrr", 548, 522, 0.0, 0.0, 1.0},
 		{"Knb Eql title on", 552, 530, 0.0, 0.0, 1.0},
 		{"Knb Eql Low freq", 560, 640, 0.3, 0.0, 1.0},
 		{"Knb Bost Low freq", 639, 640, 0.5, 0.0, 1.0},

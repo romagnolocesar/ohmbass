@@ -3,6 +3,7 @@
 
 #include "IPlug_include_in_plug_hdr.h"
 #pragma clang diagnostic pop
+#include "GhrrManager.h"
 #include "controlsManager.h"
 #include "graphicsManager.h"
 #include "VoiceManager.h"
