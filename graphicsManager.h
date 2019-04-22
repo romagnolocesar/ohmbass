@@ -53,6 +53,8 @@ public:
 		fadersHandlerOnOsc2,
 		//GHRR PLACE
 			//Eq-Librium
+		knobGhrTab1,
+		knobGhrEqlTitleOn,
 		knobGhrEqlLow,
 		knobGhrEqlBost,
 		knobGhrEqlHihg,

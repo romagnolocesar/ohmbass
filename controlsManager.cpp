@@ -49,10 +49,22 @@ void controlsManager::createParams(IPlug* myOhmBass)
 			break;
 		//GHRR PLACE
 			//eQ-Librium
+		case mGhrtab1:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
+		case mGhrEqlOnTitle:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
 		case mGhrEqlLowFreq:
 			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
 			break;
-		case mGhrBostlLowFreq:
+		case mGhrBostLowFreq:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
+		case mGhrEqlHihgFreq:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
+		case mGhrShelfHihgFreq:
 			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
 			break;
 		default:

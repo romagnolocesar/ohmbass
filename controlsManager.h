@@ -60,10 +60,12 @@ public:
 		mFilterEnvRelease,
 		//GHRR PLACE
 			//Eq-Librium
+			mGhrtab1,
+			mGhrEqlOnTitle,
 			mGhrEqlLowFreq,
-			mGhrBostlLowFreq,
+			mGhrBostLowFreq,
 			mGhrEqlHihgFreq,
-			mGhrBostlHihgFreq,
+			mGhrShelfHihgFreq,
 		kNumParams
 	};
 
@@ -153,10 +155,12 @@ private:
 		{"Filter Env Release", 915, 193, 1.0, 0.01, 15.0},
 		{"Volume Env Attack", 35, 15, 0.01, 0.01, 10.0},
 		//GHRR PLACE
-		{"Knb Eql Low freq", 560, 640, 0.3, 0.0, 10.0},
-		{"Knb Bost Low freq", 639, 640, 0.5, 0.0, 10.0},
-		{"Knb Eql High freq", 718, 640, 0.5, 0.0, 10.0},
-		{"Knb Bost Hihg freq", 797, 640, 0.1, 0.0, 10.0}
+		{"Tab1 Ghrr", 547, 522, 0.0, 0.0, 1.0},
+		{"Knb Eql title on", 552, 530, 0.0, 0.0, 1.0},
+		{"Knb Eql Low freq", 560, 640, 0.3, 0.0, 1.0},
+		{"Knb Bost Low freq", 639, 640, 0.5, 0.0, 1.0},
+		{"Knb Eql High freq", 718, 640, 0.5, 0.0, 1.0},
+		{"Knb Shelf Hihg freq", 797, 640, 0.1, 0.0, 1.0}
 	};
 
 	
