@@ -78,6 +78,13 @@ void graphicsManager::loadOscWavesButtonsBackgrounds()
 	this->bgBtnOscWavesOsc2 = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
 }
 
+void graphicsManager::loadGhrrEqlControls() {
+	this->knobGhrEqlLow = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);
+	this->knobGhrEqlBost = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);
+	this->knobGhrEqlHihg = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);
+	this->knobGhrEqlShelf = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);
+}
+
 void graphicsManager::attachGraphicsInControls(IPlug* myOhmBass,controlsManager* iControlsManager)
 {
 	for (int i = 0; i < iControlsManager->kNumParams; i++) {
@@ -250,6 +257,24 @@ void graphicsManager::attachGraphicsInControls(IPlug* myOhmBass,controlsManager*
 		case iControlsManager->mFilterMode:
 			graphic = &filterModeBitmap;
 			iControlsManager->control = new ISwitchControl(myOhmBass, properties.x, properties.y, i, graphic);
+			break;
+		//GHRR PLACE
+			//Eq-Librium
+		case iControlsManager->mGhrEqlLowFreq:
+			graphic = &knobGhrEqlLow;
+			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+			break;
+		case iControlsManager->mGhrBostlLowFreq:
+			graphic = &knobGhrEqlBost;
+			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+			break;
+		case iControlsManager->mGhrEqlHihgFreq:
+			graphic = &knobGhrEqlHihg;
+			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+			break;
+		case iControlsManager->mGhrBostlHihgFreq:
+			graphic = &knobGhrEqlShelf;
+			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
 			break;
 			// Knobs:
 		default:

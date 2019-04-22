@@ -33,6 +33,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iGraphicsManager->loadKnobs();
 	iGraphicsManager->loadWavesIcons();
 	iGraphicsManager->loadOscWavesButtonsBackgrounds();
+	iGraphicsManager->loadGhrrEqlControls();
 	iGraphicsManager->loadFaders();
 	
 	//create keyboard

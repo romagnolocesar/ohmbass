@@ -47,6 +47,14 @@ void controlsManager::createParams(IPlug* myOhmBass)
 				Filter::FILTER_MODE_LOWPASS,
 				Filter::kNumFilterModes);
 			break;
+		//GHRR PLACE
+			//eQ-Librium
+		case mGhrEqlLowFreq:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
+		case mGhrBostlLowFreq:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
 		default:
 			param->InitDouble(properties.name,
 				properties.defaultVal,

@@ -81,9 +81,10 @@ instrument determined by PLUG _IS _INST
 // --- Faders ---- //
 #define FADERHANDLEROFF_ID			122
 #define FADERHANDLERON_ID			123
-#define FADERGLOW_ID			124
-
-
+#define FADERGLOW_ID				124
+// --- GRRH Place ---- //
+#define GRRHTAB1_ID					125
+#define KNOB_MEDIUM_PARAM_ID		126
 
 
 
@@ -110,6 +111,9 @@ instrument determined by PLUG _IS _INST
 #define FADERHANDLEROFF_FN 					"resources/img/faders/faderoff.png"
 #define FADERHANDLERON_FN 					"resources/img/faders/faderon.png"
 #define FADERGLOW_FN 						"resources/img/faders/glow.png"
+// --- GRRH Place ---- //
+#define GRRHTAB1_FN							"resources/img/grhhplace/tab1.png"
+#define KNOB_MEDIUM_PARAM_FN				"resources/img/knob_medium_param.png"
 
 
 

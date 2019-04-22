@@ -50,7 +50,13 @@ public:
 		fadersHandlerOffOsc1,
 		fadersHandlerOffOsc2,
 		fadersHandlerOnOsc1,
-		fadersHandlerOnOsc2;
+		fadersHandlerOnOsc2,
+		//GHRR PLACE
+			//Eq-Librium
+		knobGhrEqlLow,
+		knobGhrEqlBost,
+		knobGhrEqlHihg,
+		knobGhrEqlShelf;
 		
 			
 
@@ -72,6 +78,7 @@ public:
 	void loadWavesIcons();
 	void loadFaders();
 	void loadOscWavesButtonsBackgrounds();
+	void loadGhrrEqlControls();
 	void attachGraphicsInControls(IPlug* myOhmBass, controlsManager* iControlsManager);
 
 private:
