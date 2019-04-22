@@ -317,8 +317,6 @@
     <ResourceCompile Include="OhmBass.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\img\fader_handler_off.png" />
-    <Image Include="resources\img\fader_handler_on.png" />
     <Image Include="resources\img\oscillators\wavetype_indicator.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

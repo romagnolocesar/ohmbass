@@ -33,6 +33,8 @@ public:
 		mOsc1PitchMod,
 		mOsc2PitchMod,
 		//Faders
+		mFadersGlowOsc1,
+		mFadersGlowOsc2,
 		mFadersHandlerOffOsc1,
 		mFadersHandlerOffOsc2,
 		mFadersHandlerOnOsc1,
@@ -82,6 +84,8 @@ public:
 	IControl* Osc2FaderHandlerOff;
 	IControl* Osc1FaderHandlerOn;
 	IControl* Osc2FaderHandlerOn;
+	IControl* Osc1FaderGlow;
+	IControl* Osc2FaderGlow;
 	
 
 
@@ -117,6 +121,8 @@ private:
 	  {"Icon Triangle Wave On OSC2", 226, 318, FALSE},
 	  {"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
 	  {"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
+	  {"Fader Glow Osc1", 452, 219, 0.0, 0.0, 1.0},
+	  {"Fader Glow Osc2", 533, 219, 0.0, 0.0, 1.0},
 	  {"Fader Handler Off Osc1", 429, 210, 0.8, 0.0, 1.0},
 	  {"Fader Handler Off Osc2", 510, 210, 0.0, 0.0, 1.0},
 	  {"Fader Handler On Osc1", 429, 210, 0.8, 0.0, 1.0},

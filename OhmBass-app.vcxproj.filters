@@ -69,7 +69,5 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\img\oscillators\wavetype_indicator.png" />
-    <Image Include="resources\img\fader_handler_off.png" />
-    <Image Include="resources\img\fader_handler_on.png" />
   </ItemGroup>
 </Project>

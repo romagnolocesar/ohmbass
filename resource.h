@@ -81,6 +81,7 @@ instrument determined by PLUG _IS _INST
 // --- Faders ---- //
 #define FADERHANDLEROFF_ID			122
 #define FADERHANDLERON_ID			123
+#define FADERGLOW_ID			124
 
 
 
@@ -89,12 +90,12 @@ instrument determined by PLUG _IS _INST
 
 // ===== IMAGES LOCATIONS =====================//
 // --- Regular Interface ---- //
-#define BG_FN         "resources/img/bg.png"
-#define WHITE_KEY_FN  "resources/img/whitekey.png"
-#define BLACK_KEY_FN  "resources/img/blackkey.png"
-#define WAVEFORM_FN   "resources/img/waveform.png"
-#define KNOB_MEDIUM   "resources/img/knob_medium.png"
-#define FILTERMODE_FN "resources/img/filtermode.png"
+#define BG_FN								"resources/img/bg.png"
+#define WHITE_KEY_FN						"resources/img/whitekey.png"
+#define BLACK_KEY_FN						"resources/img/blackkey.png"
+#define WAVEFORM_FN							"resources/img/waveform.png"
+#define KNOB_MEDIUM							"resources/img/knob_medium.png"
+#define FILTERMODE_FN						"resources/img/filtermode.png"
 // --- Waves Buttons ---- //
 #define BGBTNOSCWAVES_FN					"resources/img/wavesbuttons/bg_btn_osc_waves.png"
 #define ICONSAWWAVEON_FN					"resources/img/wavesbuttons/icon_saw_wave_on.png"
@@ -106,8 +107,9 @@ instrument determined by PLUG _IS _INST
 #define ICONTRIANGLEWAVEON_FN				"resources/img/wavesbuttons/icon_triangle_wave_on.png"
 #define ICONTRIANGLEWAVEOFF_FN				"resources/img/wavesbuttons/icon_triangle_wave_off.png"
 // --- Faders ---- //
-#define FADERHANDLEROFF_FN 					"resources/img/faderoff.png"
-#define FADERHANDLERON_FN 					"resources/img/faderon.png"
+#define FADERHANDLEROFF_FN 					"resources/img/faders/faderoff.png"
+#define FADERHANDLERON_FN 					"resources/img/faders/faderon.png"
+#define FADERGLOW_FN 						"resources/img/faders/glow.png"
 
 
 

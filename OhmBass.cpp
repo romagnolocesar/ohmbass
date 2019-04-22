@@ -41,10 +41,13 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iGraphicsManager->attachGraphicsInControls(this, iControlsManager);
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
+
 	//Flag to indicate when the plugin was full started
 	isPluginInitialized = TRUE;
 	//Create all default presets
 	CreatePresets();
+
+	
 
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
@@ -131,7 +134,7 @@ void OhmBass::OnParamChange(int paramIdx)
 					iControlsManager->ToggleIconsWavesButtons(2, idxWaveMode);
 				}
 				break;
-				//Faders Oscillators
+				//FADERS
 			case iControlsManager->mFadersHandlerOffOsc1:
 				if (isPluginInitialized) {
 					iControlsManager->Osc1FaderHandlerOff->Hide(TRUE);
@@ -145,14 +148,21 @@ void OhmBass::OnParamChange(int paramIdx)
 
 					iControlsManager->Osc2FaderHandlerOff->Hide(FALSE);
 					iControlsManager->Osc2FaderHandlerOff->GrayOut(FALSE);
+
+					iControlsManager->Osc1FaderHandlerOn->SetValueFromPlug(param->Value());
+					iControlsManager->Osc1FaderHandlerOff->SetValueFromPlug(param->Value());
+
+
+					changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
 				}
-				changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
 				break;
 			case iControlsManager->mFadersHandlerOnOsc1:
 				if (isPluginInitialized) {
 					iControlsManager->Osc1FaderHandlerOff->SetValueFromPlug(param->Value());
+					iControlsManager->Osc1FaderHandlerOn->SetValueFromPlug(param->Value());
+
+					changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
 				}
-				changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
 				break;
 			case iControlsManager->mFadersHandlerOffOsc2:
 				if (isPluginInitialized) {
@@ -168,14 +178,20 @@ void OhmBass::OnParamChange(int paramIdx)
 					iControlsManager->Osc1FaderHandlerOff->Hide(FALSE);
 					iControlsManager->Osc1FaderHandlerOff->GrayOut(FALSE);
 
+					iControlsManager->Osc2FaderHandlerOn->SetValueFromPlug(param->Value());
+					iControlsManager->Osc2FaderHandlerOff->SetValueFromPlug(param->Value());
+
+
 					changer = bind(&VoiceManager::setOscillatorTwoOutput, _1, param->Value());
 				}
 				break;
 			case iControlsManager->mFadersHandlerOnOsc2:
 				if (isPluginInitialized) {
 					iControlsManager->Osc2FaderHandlerOff->SetValueFromPlug(param->Value());
+					iControlsManager->Osc2FaderHandlerOn->SetValueFromPlug(param->Value());
+
+					changer = bind(&VoiceManager::setOscillatorTwoOutput, _1, param->Value());
 				}
-				changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
 				break;
 				//Pitch Osc
 			case iControlsManager->mOsc1PitchMod:

@@ -17,6 +17,12 @@ void controlsManager::createParams(IPlug* myOhmBass)
 			param->InitInt(properties.name, 1, 1, 4, "osc2waves");
 			break;
 			//Faders Oscillators
+		case mFadersGlowOsc1:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
+		case mFadersGlowOsc2:
+			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
+			break;
 		case mFadersHandlerOffOsc1:
 			param->InitDouble(properties.name, properties.defaultVal, properties.minVal, properties.maxVal, 1);
 			break;
@@ -132,5 +138,6 @@ void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
 
 	}
 }
+
 
 

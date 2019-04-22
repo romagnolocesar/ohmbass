@@ -41,10 +41,14 @@ void graphicsManager::loadKnobs()
 
 void graphicsManager::loadFaders()
 {
+	//Faders
 	this->fadersHandlerOnOsc1 = pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
 	this->fadersHandlerOnOsc2 = pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
 	this->fadersHandlerOffOsc1 = pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
 	this->fadersHandlerOffOsc2 = pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
+	//Glows
+	this->faderGlowBarOsc1 = pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
+	this->faderGlowBarOsc2 = pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
 }
 
 
@@ -76,7 +80,7 @@ void graphicsManager::loadOscWavesButtonsBackgrounds()
 
 void graphicsManager::attachGraphicsInControls(IPlug* myOhmBass,controlsManager* iControlsManager)
 {
-	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
+	for (int i = 0; i < iControlsManager->kNumParams; i++) {
 		controlsManager::parameterProperties_struct properties = iControlsManager->getParameterProperties(i);
 		IParam* param = myOhmBass->GetParam(i);
 		IBitmap* graphic;
@@ -116,8 +120,16 @@ void graphicsManager::attachGraphicsInControls(IPlug* myOhmBass,controlsManager*
 			iControlsManager->Osc2FaderHandlerOn->GrayOut(TRUE, 0.99f);
 			pGraphics->AttachControl(iControlsManager->Osc2FaderHandlerOn);
 			break;
-
-
+		case controlsManager::mFadersGlowOsc1:
+			graphic = &faderGlowBarOsc1;
+			iControlsManager->Osc1FaderGlow = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
+			pGraphics->AttachControl(iControlsManager->Osc1FaderGlow);
+			break;
+		case controlsManager::mFadersGlowOsc2:
+			graphic = &faderGlowBarOsc2;
+			iControlsManager->Osc2FaderGlow = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
+			pGraphics->AttachControl(iControlsManager->Osc2FaderGlow);
+			break;
 			//Osc1 Icons Buttons Waves
 		case controlsManager::mIconSineWaveOffOsc1:
 			graphic = &iconSineWaveOffOsc1;
@@ -257,27 +269,13 @@ void graphicsManager::attachGraphicsInControls(IPlug* myOhmBass,controlsManager*
 			i != iControlsManager->mFadersHandlerOffOsc1 &&
 			i != iControlsManager->mFadersHandlerOffOsc2 &&
 			i != iControlsManager->mFadersHandlerOnOsc1 &&
-			i != iControlsManager->mFadersHandlerOnOsc2) {
+			i != iControlsManager->mFadersHandlerOnOsc2 &&
+			i != iControlsManager->mFadersGlowOsc1 &&
+			i != iControlsManager->mFadersGlowOsc2) {
 			pGraphics->AttachControl(iControlsManager->control);
 		}
 
 	}
-}
-
-void graphicsManager::ToggleFaderState(IPlug* myOhmBass, controlsManager* iControlsManager, int paramIdx, bool state)
-{	
-	//controlsManager::parameterProperties_struct properties = iControlsManager->getParameterProperties(paramIdx);
-	//IParam* param = myOhmBass->GetParam(paramIdx);
-	//IBitmap* graphic;
-	//if (paramIdx == controlsManager::mFadersHandlerOsc1) {
-	//	/*this->fadersHandlerOsc1 = pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
-	//	iControlsManager->Osc1FaderHandler->Redraw();*/
-	//	/*graphic = &fadersHandlerOnOsc1;
-	//	iControlsManager->Osc1FaderHandler->AddAuxParam
-	//	
-	//	iControlsManager->Osc1FaderHandler = new IFaderControl(myOhmBass, properties.x, properties.y, 210, paramIdx, graphic, EDirection::kVertical);
-	//	pGraphics->AttachControl(iControlsManager->Osc1FaderHandler);*/
-	//}
 }
 
 
