@@ -37,10 +37,10 @@ double PolyBLEPOscillator::nextSample() {
 		value += poly_blep(t);
 		value -= poly_blep(fmod(t + 0.5, 1.0));
 		if (mOscillatorMode == OSCILLATOR_MODE_TRIANGLE) {
-            // Leaky integrator: y[n] = A * x[n] + (1 - A) * y[n-1]
-            value = mPhaseIncrement * value + (1 - mPhaseIncrement) * lastOutput;
-            lastOutput = value;
-        }
+			// Leaky integrator: y[n] = A * x[n] + (1 - A) * y[n-1]
+			value = mPhaseIncrement * value + (1 - mPhaseIncrement) * lastOutput;
+			lastOutput = value;
+		}
 	}
 
 	mPhase += mPhaseIncrement;

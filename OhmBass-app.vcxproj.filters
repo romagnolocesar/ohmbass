@@ -39,8 +39,9 @@
     <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.h" />
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="graphicsManager.h" />
-    <ClInclude Include="GhrrManager.h" />
-    <ClInclude Include="GhrrEQuilibrium.h" />
+    <ClInclude Include="ModulesManager.h" />
+    <ClInclude Include="Modules.h" />
+    <ClInclude Include="ModEQuilibrium.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -65,8 +66,7 @@
     <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.cpp" />
     <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
-    <ClCompile Include="GhrrManager.cpp" />
-    <ClCompile Include="GhrrEQuilibrium.cpp" />
+    <ClCompile Include="ModEQuilibrium.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />

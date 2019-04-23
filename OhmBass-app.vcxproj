@@ -282,8 +282,9 @@
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="EnvelopeGenerator.h" />
-    <ClInclude Include="GhrrEQuilibrium.h" />
-    <ClInclude Include="GhrrManager.h" />
+    <ClInclude Include="ModEQuilibrium.h" />
+    <ClInclude Include="Modules.h" />
+    <ClInclude Include="ModulesManager.h" />
     <ClInclude Include="graphicsManager.h" />
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="Filter.h" />
@@ -306,8 +307,7 @@
     <ClCompile Include="app_wrapper\app_main.cpp" />
     <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
-    <ClCompile Include="GhrrEQuilibrium.cpp" />
-    <ClCompile Include="GhrrManager.cpp" />
+    <ClCompile Include="ModEQuilibrium.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="Filter.cpp" />

@@ -1,10 +1,10 @@
 #include "OhmBass.h"
+#include "Modules.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmain"
 #include "IPlug_include_in_plug_src.h"
 #pragma clang diagnostic pop
 #include "resource.h"
-#include "GhrrEQuilibrium.h"
 #include "IKeyboardControl.h"
 #include <math.h>
 #include <algorithm>
@@ -13,7 +13,7 @@
 //Helpers for managers elements
 controlsManager* iControlsManager = new controlsManager();
 graphicsManager* iGraphicsManager = new graphicsManager();
-GhrrEQuilibrium* iGhrrEQuilibrium = new GhrrEQuilibrium();
+ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
 
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
@@ -247,16 +247,16 @@ void OhmBass::OnParamChange(int paramIdx)
 				break;
 			//EQ-LIBRIUM
 			case iControlsManager->mGhrEqlLowFreq:
-				iGhrrEQuilibrium->setLowFreq(param->Value);
+				iModEQuilibrium->setLowFreq(param->Value());
 				break;
 			case iControlsManager->mGhrBostLowFreq:
-				iGhrrEQuilibrium->setLowBoost(param->Value);
+				iModEQuilibrium->setLowBoost(param->Value());
 				break;
-			case iControlsManager->mGhrEqlLowFreq:
-				iGhrrEQuilibrium->setLowFreq(param->Value);
+			case iControlsManager->mGhrEqlHihgFreq:
+				iModEQuilibrium->setHighFreq(param->Value());
 				break;
 			case iControlsManager->mGhrShelfHihgFreq:
-				iGhrrEQuilibrium->setHighFreq(param->Value);
+				iModEQuilibrium->setHighShelf(param->Value());
 				break;
 		}
 		if (changer) {

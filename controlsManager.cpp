@@ -1,4 +1,4 @@
-#include "OhmBass.h";
+#include "OhmBass.h"
 #include "controlsManager.h"
 #include "graphicsManager.h"
 

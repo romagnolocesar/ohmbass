@@ -3,8 +3,7 @@
 #include "IControl.h"
 
 
-class controlsManager
-{
+class controlsManager{
 public:
 
 	const double parameterStep = 0.001;
