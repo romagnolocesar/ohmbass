@@ -10,6 +10,9 @@
     <Filter Include="app\ASIO_SDK">
       <UniqueIdentifier>{b91b9db4-5584-4959-a395-7394ba3cf5a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{903e275f-9264-4570-b76b-5b7fc212b019}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_wrapper\app_main.h">
@@ -41,7 +44,9 @@
     <ClInclude Include="graphicsManager.h" />
     <ClInclude Include="ModulesManager.h" />
     <ClInclude Include="Modules.h" />
-    <ClInclude Include="ModEQuilibrium.h" />
+    <ClInclude Include="ModEQuilibrium.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -66,7 +71,9 @@
     <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.cpp" />
     <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
-    <ClCompile Include="ModEQuilibrium.cpp" />
+    <ClCompile Include="ModEQuilibrium.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />
