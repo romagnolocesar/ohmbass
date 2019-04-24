@@ -3,13 +3,13 @@
 class Modules
 {
 public:
-	static enum EModulesType {
-		EQUILIBRIUM,
+	static enum EModulesName {
+		EQUILIBRIUM
 	};
 
 	Modules::Modules(){}
 	Modules::~Modules() {}
 
-	EModulesType myType;
+	EModulesName moduleName;
 };
 

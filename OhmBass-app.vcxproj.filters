@@ -47,6 +47,7 @@
     <ClInclude Include="ModEQuilibrium.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="modelControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -74,6 +75,7 @@
     <ClCompile Include="ModEQuilibrium.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="modelControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />

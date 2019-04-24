@@ -4,10 +4,10 @@
 #include "IPlug_include_in_plug_hdr.h"
 #pragma clang diagnostic pop
 #include "Modules.h"
-#include "ModEQuilibrium.h"
 #include "ModulesManager.h"
 #include "controlsManager.h"
 #include "graphicsManager.h"
+#include "ModEQuilibrium.h"
 #include "VoiceManager.h"
 #include "MIDIReceiver.h"
 #include <functional>
@@ -18,6 +18,7 @@ class OhmBass : public IPlug
 public:
 	OhmBass(IPlugInstanceInfo instanceInfo);
 	~OhmBass();
+	
 
 
 	void Reset();

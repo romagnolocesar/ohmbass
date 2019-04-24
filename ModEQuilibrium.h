@@ -1,20 +1,25 @@
 #pragma once
-#include "Modules.h"
+#include "OhmBass.h"
+#include "controlsManager.h"
 
 class ModEQuilibrium : public Modules
 {
 public:
-	const Modules::EModulesType moduleType = EQUILIBRIUM;
+	EModulesName moduleName = EQUILIBRIUM;
+
 
 	void setLowFreq(double newLowFreq);
 	void setLowBoost(double newLowBoost);
 	void setHighFreq(double newHighFreq);
 	void setHighShelf(double newHighShelf);
 
+	void init(controlsManager* IControlsManager);
+
 	double getLowFreq();
 	double getLowBoost();
 	double getHighFreq();
 	double getHighShelf();
+
 	
 private:
 	double lowFreq, lowBoost, highFreq, highShelf;
