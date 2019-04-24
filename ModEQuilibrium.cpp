@@ -42,12 +42,12 @@ double ModEQuilibrium::getHighShelf()
 }
 
 void ModEQuilibrium::init(controlsManager* IControlsManager) {
-	IControlsManager->addParam(EQUILIBRIUM, "Tab1 Ghrr", 548, 522, 0.0, 0.0, 1.0);
-	IControlsManager->addParam(EQUILIBRIUM, "Knb Eql title on", 552, 530, 0.0, 0.0, 1.0);
-	IControlsManager->addParam(EQUILIBRIUM, "Knb Eql Low freq", 560, 640, 0.3, 0.0, 1.0);
-	IControlsManager->addParam(EQUILIBRIUM, "Knb Bost Low freq", 639, 640, 0.5, 0.0, 1.0);
-	IControlsManager->addParam(EQUILIBRIUM, "Knb Eql High freq", 718, 640, 0.5, 0.0, 1.0);
-	IControlsManager->addParam(EQUILIBRIUM, "Knb Shelf Hihg freq", 797, 640, 0.1, 0.0, 1.0);
+	IControlsManager->addParam(this->moduleName, "Tab1 Ghrr", ControlsModel::DOUBLE, 548, 522, 0.0, 0.0, 1.0);
+	IControlsManager->addParam(this->moduleName, "Knb Eql title on", ControlsModel::DOUBLE, 552, 530, 0.0, 0.0, 1.0);
+	IControlsManager->addParam(this->moduleName, "Knb Eql Low freq", ControlsModel::DOUBLE, 560, 640, 0.3, 0.0, 1.0);
+	IControlsManager->addParam(this->moduleName, "Knb Bost Low freq", ControlsModel::DOUBLE, 639, 640, 0.5, 0.0, 1.0);
+	IControlsManager->addParam(this->moduleName, "Knb Eql High freq", ControlsModel::DOUBLE, 718, 640, 0.5, 0.0, 1.0);
+	IControlsManager->addParam(this->moduleName, "Knb Shelf Hihg freq", ControlsModel::DOUBLE, 797, 640, 0.1, 0.0, 1.0);
 }
 
 

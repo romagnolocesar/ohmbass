@@ -6,6 +6,46 @@
 
 void controlsManager::createParams(IPlug* myOhmBass)
 {
+	
+	for (int i = 0; i < Count(); i++) {
+		IParam* param = myOhmBass->GetParam(i);
+		switch (collection[i]->dataType){
+			case ControlsModel::DOUBLE:
+				param->InitDouble(
+					collection[i]->alias,
+					collection[i]->defaultVal,
+					collection[i]->minVal,
+					collection[i]->maxVal,
+					1
+				);
+				break;
+			case ControlsModel::INT:
+				param->InitInt(
+					collection[i]->alias,
+					collection[i]->defaultVal,
+					collection[i]->minVal,
+					collection[i]->maxVal,
+					collection[i]->alias
+				);
+				break;
+			default:
+				param->InitDouble(
+					collection[i]->alias,
+					collection[i]->defaultVal,
+					collection[i]->minVal,
+					collection[i]->maxVal,
+					parameterStep
+				);
+	}
+
+		
+	}
+	for (int i = 0; i < Count(); i++) {
+		myOhmBass->OnParamChange(i);
+	}
+
+	
+
 	//for (int i = 0; i < kNumParams; i++) {
 	//	IParam* param = myOhmBass->GetParam(i);
 	//	parameterProperties_struct properties = this->getParameterProperties(i);
@@ -94,7 +134,8 @@ void controlsManager::createParams(IPlug* myOhmBass)
 
 int controlsManager::getKNumParams()
 {
-	return this->kNumParams;
+	//return this->kNumParams;
+	return 50;
 }
 
 void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)

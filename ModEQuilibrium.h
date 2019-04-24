@@ -2,7 +2,7 @@
 #include "OhmBass.h"
 #include "controlsManager.h"
 
-class ModEQuilibrium : public Modules
+class ModEQuilibrium : public ModulesModel
 {
 public:
 	EModulesName moduleName = EQUILIBRIUM;
@@ -19,7 +19,7 @@ public:
 	double getLowBoost();
 	double getHighFreq();
 	double getHighShelf();
-
+ 
 	
 private:
 	double lowFreq, lowBoost, highFreq, highShelf;

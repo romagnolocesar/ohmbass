@@ -1,5 +1,5 @@
 #include "OhmBass.h"
-#include "Modules.h"
+#include "ModulesModel.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmain"
 #include "IPlug_include_in_plug_src.h"
@@ -19,6 +19,7 @@ controlsManager* iControlsManager = new controlsManager();
 graphicsManager* iGraphicsManager = new graphicsManager();
 
 //Load Modules
+ModOscillators* iModOscillators = new ModOscillators();
 ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
 
 const int kNumParams = iControlsManager->getKNumParams(); //Qtd for params
@@ -28,6 +29,8 @@ const int kNumParams = iControlsManager->getKNumParams(); //Qtd for params
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
 
+	//Initializing all modules
+	iModOscillators->init(iControlsManager);
 	iModEQuilibrium->init(iControlsManager);
 
 	//crete all params

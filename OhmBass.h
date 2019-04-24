@@ -1,14 +1,18 @@
 #ifndef __OHMBASS__
 #define __OHMBASS__
-
 #include "IPlug_include_in_plug_hdr.h"
 #pragma clang diagnostic pop
-#include "Modules.h"
+//Helpers
+#include "ModulesModel.h"
 #include "ModulesManager.h"
 #include "controlsManager.h"
 #include "graphicsManager.h"
+//Modules
+#include "ModOscillators.h"
 #include "ModEQuilibrium.h"
+//Voices
 #include "VoiceManager.h"
+//MIDI
 #include "MIDIReceiver.h"
 #include <functional>
 

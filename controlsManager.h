@@ -1,8 +1,8 @@
 #pragma once
 #include "OhmBass.h"
 #include "IControl.h"
-#include "modelControl.h"
-#include "Modules.h"
+#include "ControlsModel.h"
+#include "ModulesModel.h"
 #include <vector> using namespace std; 
 
 
@@ -11,16 +11,23 @@ class controlsManager{
 public:
 
 	const double parameterStep = 0.001;
-	std::vector<class modelControl * > collection;
 
-	void addParam(Modules::EModulesName moduleName, char* alias, int x, int y, double defaultVal, double minVal, double maxVal) {
+	std::vector<class ControlsModel * > collection;
+
+	void addParam(ModulesModel::EModulesName moduleName, char* alias, ControlsModel::EControlsDataType dataType, int x, int y, double defaultVal, double minVal, double maxVal) {
 		int idx = this->Count();
-		modelControl* myControl = new modelControl(moduleName, idx, alias, x, y, defaultVal, minVal, maxVal);
+		ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultVal, minVal, maxVal);
+		this->AddCollection(myControl);
+	};
+
+	void addParam(ModulesModel::EModulesName moduleName, char* alias, ControlsModel::EControlsDataType dataType, int x, int y, bool state) {
+		int idx = this->Count();
+		ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, state);
 		this->AddCollection(myControl);
 	};
 
 
-	int AddCollection(modelControl* myInstance)
+	int AddCollection(ControlsModel* myInstance)
 	{
 		collection.push_back(myInstance);
 		return (collection.size() - 1);
@@ -134,26 +141,7 @@ private:
 	//parameterProperties_struct parameterProperties[kNumParams] =
 	//{
 	//	//OSCILLATORS	
-	//	{"Bg Btn Osc 1 Waves", 99, 206, 0.0, 0.0, 1.0},
-	//	{"Bg Btn Osc 2 Waves", 99, 306, 0.0, 0.0, 1.0},
-	//	{"Icon Sine Wave Off OSC1", 58, 218, TRUE},
-	//	{"Icon Sine Wave On OSC1", 58, 218, TRUE},
-	//	{"Icon Saw Wave Off OSC1", 114, 218, TRUE},
-	//	{"Icon Saw Wave On OSC1", 114, 218, FALSE},
-	//	{"Icon Square Wave Off OSC1", 170, 218, TRUE},
-	//	{"Icon Square Wave On OSC1", 170, 218, FALSE},
-	//	{"Icon Triangle Wave Off OSC1", 226, 218, TRUE},
-	//	{"Icon Triangle Wave On OSC1", 226, 218, FALSE},
-	//	{"Icon Sine Wave Off OSC2", 58, 318, TRUE},
-	//	{"Icon Sine Wave On OSC2", 58, 318, TRUE},
-	//	{"Icon Saw Wave Off OSC2", 114, 318, TRUE},
-	//	{"Icon Saw Wave On OSC2", 114, 318, FALSE},
-	//	{"Icon Square Wave Off OSC2", 170, 318, TRUE},
-	//	{"Icon Square Wave On OSC2", 170, 318, FALSE},
-	//	{"Icon Triangle Wave Off OSC2", 226, 318, TRUE},
-	//	{"Icon Triangle Wave On OSC2", 226, 318, FALSE},
-	//	{"Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0},
-	//	{"Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0},
+	//	
 	//	//GAIN FADERS
 	//	{"Fader Glow Osc1", 452, 219, 0.0, 0.0, 1.0},
 	//	{"Fader Glow Osc2", 533, 219, 0.0, 0.0, 1.0},

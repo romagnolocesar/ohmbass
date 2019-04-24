@@ -13,6 +13,9 @@
     <Filter Include="Modules">
       <UniqueIdentifier>{903e275f-9264-4570-b76b-5b7fc212b019}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{a5ff62e1-fb5b-48e5-b88b-e0d697c89f76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_wrapper\app_main.h">
@@ -43,11 +46,18 @@
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="graphicsManager.h" />
     <ClInclude Include="ModulesManager.h" />
-    <ClInclude Include="Modules.h" />
     <ClInclude Include="ModEQuilibrium.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="modelControl.h" />
+    <ClInclude Include="ModOscillators.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulesModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlsModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -75,7 +85,12 @@
     <ClCompile Include="ModEQuilibrium.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="modelControl.cpp" />
+    <ClCompile Include="ModOscillators.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlsModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />
