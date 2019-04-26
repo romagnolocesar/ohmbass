@@ -12,10 +12,13 @@ ModOscillators::~ModOscillators()
 }
 
 void ModOscillators::init(controlsManager* IControlsManager) {
-	//pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
 
-	IControlsManager->addParam(this->moduleName, "Bg Btn Osc 1 Waves", ControlsModel::INT, 99, 206, 1, 1, 4);
-	IControlsManager->addParam(this->moduleName, "Bg Btn Osc 2 Waves", ControlsModel::INT, 99, 306, 1, 1, 4);
+	pBitmap = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
+	graphicType = GraphicsModel::RADIOBUTTONSCONTROL;
+	iGraphic = new GraphicsModel(&pBitmap, graphicType);
+
+	IControlsManager->addParam(this->moduleName, "Bg Btn Osc 1 Waves", ControlsModel::INT, 99, 206, 1, 1, 4, iGraphic);
+	/*IControlsManager->addParam(this->moduleName, "Bg Btn Osc 2 Waves", ControlsModel::INT, 99, 306, 1, 1, 4);
 	IControlsManager->addParam(this->moduleName, "Icon Sine Wave Off OSC1", ControlsModel::NONE, 58, 218, TRUE);
 	IControlsManager->addParam(this->moduleName, "Icon Sine Wave On OSC1", ControlsModel::NONE, 58, 218, TRUE);
 	IControlsManager->addParam(this->moduleName, "Icon Saw Wave Off OSC1", ControlsModel::NONE, 114, 218, TRUE);
@@ -33,5 +36,5 @@ void ModOscillators::init(controlsManager* IControlsManager) {
 	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave Off OSC2", ControlsModel::NONE, 226, 318, TRUE);
 	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave On OSC2", ControlsModel::NONE, 226, 318, FALSE);
 	IControlsManager->addParam(this->moduleName, "Osc 1 Pitch Mod", ControlsModel::NONE, 308, 195, 0.0, 0.0, 1.0);
-	IControlsManager->addParam(this->moduleName, "Osc 2 Pitch Mod", ControlsModel::NONE, 308, 295, 0.0, 0.0, 1.0);
+	IControlsManager->addParam(this->moduleName, "Osc 2 Pitch Mod", ControlsModel::NONE, 308, 295, 0.0, 0.0, 1.0);*/
 }

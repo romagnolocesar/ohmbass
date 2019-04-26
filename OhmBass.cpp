@@ -34,9 +34,9 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//create the main display
 	CreateMainDisplay();
 	//load all graphics
-	/*iGraphicsManager->AttachBackgroundMainDisplay();
+	iGraphicsManager->AttachBackgroundMainDisplay();
 	iGraphicsManager->loadKeyboard();
-	iGraphicsManager->loadOscWavesModes();
+	/*iGraphicsManager->loadOscWavesModes();
 	iGraphicsManager->loadFiltersModes();
 	iGraphicsManager->loadKnobs();
 	iGraphicsManager->loadWavesIcons();
@@ -49,7 +49,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Attach the controls in graphics
 	/*iGraphicsManager->attachGraphicsInControls(this, iControlsManager);*/
 	//Attach all graphics with your respective controls in main screen
-	/*AttachGraphics(iGraphicsManager->pGraphics);*/
+	AttachGraphics(iGraphicsManager->pGraphics);
 
 	//Flag to indicate when the plugin was full started
 	isPluginInitialized = TRUE;

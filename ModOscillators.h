@@ -1,6 +1,7 @@
 #include "controlsManager.h"
 
 
+
 class ModOscillators : public ModulesModel
 {
 public:
@@ -9,7 +10,10 @@ public:
 	ModOscillators();
 	~ModOscillators();
 
+	IBitmap pBitmap;
 	IGraphics* pGraphics;
+	GraphicsModel::EGraphicsType graphicType;
+	GraphicsModel* iGraphic;
 
 	void init(controlsManager* IControlsManager);
 };
