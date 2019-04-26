@@ -283,7 +283,11 @@
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="EnvelopeGenerator.h" />
     <ClInclude Include="ControlsModel.h" />
+    <ClInclude Include="graphicsModel.h" />
+    <ClInclude Include="ModAmpEnvelope.h" />
     <ClInclude Include="ModEQuilibrium.h" />
+    <ClInclude Include="ModFilters.h" />
+    <ClInclude Include="ModGainFaders.h" />
     <ClInclude Include="ModOscillators.h" />
     <ClInclude Include="ModulesModel.h" />
     <ClInclude Include="ModulesManager.h" />
@@ -310,8 +314,12 @@
     <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
     <ClCompile Include="ControlsModel.cpp" />
+    <ClCompile Include="graphicsModel.cpp" />
+    <ClCompile Include="ModAmpEnvelope.cpp" />
     <ClCompile Include="ModEQuilibrium.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
+    <ClCompile Include="ModFilters.cpp" />
+    <ClCompile Include="ModGainFaders.cpp" />
     <ClCompile Include="ModOscillators.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="Filter.cpp" />

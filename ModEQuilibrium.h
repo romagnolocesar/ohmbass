@@ -1,6 +1,5 @@
 #pragma once
-#include "OhmBass.h"
-#include "controlsManager.h"
+#include "ModulesModel.h"
 
 class ModEQuilibrium : public ModulesModel
 {
@@ -13,7 +12,7 @@ public:
 	void setHighFreq(double newHighFreq);
 	void setHighShelf(double newHighShelf);
 
-	void init(controlsManager* IControlsManager);
+	/*void init(controlsManager* IControlsManager);*/
 
 	double getLowFreq();
 	double getLowBoost();

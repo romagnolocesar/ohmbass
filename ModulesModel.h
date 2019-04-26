@@ -1,11 +1,14 @@
-#pragma once
-
 class ModulesModel
 {
 public:
 	static enum EModulesName {
-		EQUILIBRIUM,
-		OSCILATORS
+		OSCILATORS,
+		GAINFADERS,
+		FILTERS,
+		AMPENVELOPE,
+		FILTERENVELOPE,
+		EQUILIBRIUM
+
 	};
 
 	ModulesModel::ModulesModel(){}

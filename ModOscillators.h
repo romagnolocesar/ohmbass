@@ -1,6 +1,5 @@
-#pragma once
-#include "OhmBass.h"
 #include "controlsManager.h"
+
 
 class ModOscillators : public ModulesModel
 {
@@ -9,6 +8,8 @@ public:
 
 	ModOscillators();
 	~ModOscillators();
+
+	IGraphics* pGraphics;
 
 	void init(controlsManager* IControlsManager);
 };

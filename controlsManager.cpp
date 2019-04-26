@@ -1,8 +1,60 @@
-#include "OhmBass.h"
 #include "controlsManager.h"
-#include "graphicsManager.h"
+
+void controlsManager::addParam(
+	ModulesModel::EModulesName moduleName,
+	char* alias,
+	ControlsModel::EControlsDataType dataType,
+	int x,
+	int y,
+	double defaultVal,
+	double minVal,
+	double maxVal,
+	GraphicsModel* graphicsModel
+){
+	int idx = this->Count();
+	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultVal, minVal, maxVal, graphicsModel);
+	this->AddCollection(myControl);
+};
+
+void controlsManager::addParam(
+	ModulesModel::EModulesName moduleName,
+	char* alias,
+	ControlsModel::EControlsDataType dataType,
+	int x,
+	int y,
+	bool state,
+	GraphicsModel* graphicsModel
+) {
+	int idx = this->Count();
+	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, state, graphicsModel);
+	this->AddCollection(myControl);
+};
+void controlsManager::addParam(
+	ModulesModel::EModulesName moduleName,
+	char* alias,
+	ControlsModel::EControlsDataType dataType,
+	int x,
+	int y,
+	int defaultValEnum,
+	int Enums,
+	GraphicsModel* graphicsModel
+) {
+	int idx = this->Count();
+	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultValEnum, Enums, graphicsModel);
+	this->AddCollection(myControl);
+};
 
 
+int controlsManager::AddCollection(ControlsModel* myInstance)
+{
+	collection.push_back(myInstance);
+	return (collection.size() - 1);
+}
+
+int controlsManager::Count(void)
+{
+	return collection.size();
+}
 
 void controlsManager::createParams(IPlug* myOhmBass)
 {
@@ -26,6 +78,13 @@ void controlsManager::createParams(IPlug* myOhmBass)
 					collection[i]->minVal,
 					collection[i]->maxVal,
 					collection[i]->alias
+				);
+				break;
+			case ControlsModel::ENUM:
+				param->InitEnum(
+					collection[i]->alias,
+					collection[i]->defaultValEnum,
+					collection[i]->Enums
 				);
 				break;
 			default:
@@ -140,7 +199,7 @@ int controlsManager::getKNumParams()
 
 void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
 {
-	if (nOsc == 1) {
+	/*if (nOsc == 1) {
 		switch (idxWaveMode) {
 		case 0:
 			Osc1ControlSineOn->Hide(FALSE);
@@ -197,7 +256,7 @@ void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
 			break;
 		}
 
-	}
+	}*/
 }
 
 

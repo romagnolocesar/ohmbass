@@ -1,5 +1,5 @@
+#pragma once
 #include "OhmBass.h"
-#include "ModulesModel.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmain"
 #include "IPlug_include_in_plug_src.h"
@@ -18,9 +18,7 @@ bool isPluginInitialized = FALSE;
 controlsManager* iControlsManager = new controlsManager();
 graphicsManager* iGraphicsManager = new graphicsManager();
 
-//Load Modules
-ModOscillators* iModOscillators = new ModOscillators();
-ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
+
 
 const int kNumParams = iControlsManager->getKNumParams(); //Qtd for params
 
@@ -29,16 +27,14 @@ const int kNumParams = iControlsManager->getKNumParams(); //Qtd for params
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
 
-	//Initializing all modules
-	iModOscillators->init(iControlsManager);
-	iModEQuilibrium->init(iControlsManager);
+	
 
 	//crete all params
 	iControlsManager->createParams(this);
 	//create the main display
 	CreateMainDisplay();
 	//load all graphics
-	iGraphicsManager->AttachBackgroundMainDisplay();
+	/*iGraphicsManager->AttachBackgroundMainDisplay();
 	iGraphicsManager->loadKeyboard();
 	iGraphicsManager->loadOscWavesModes();
 	iGraphicsManager->loadFiltersModes();
@@ -46,14 +42,14 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iGraphicsManager->loadWavesIcons();
 	iGraphicsManager->loadOscWavesButtonsBackgrounds();
 	iGraphicsManager->loadGhrrEqlControls();
-	iGraphicsManager->loadFaders();
+	iGraphicsManager->loadFaders();*/
 	
 	//create keyboard
 	CreateKeyboard();
 	//Attach the controls in graphics
-	iGraphicsManager->attachGraphicsInControls(this, iControlsManager);
+	/*iGraphicsManager->attachGraphicsInControls(this, iControlsManager);*/
 	//Attach all graphics with your respective controls in main screen
-	AttachGraphics(iGraphicsManager->pGraphics);
+	/*AttachGraphics(iGraphicsManager->pGraphics);*/
 
 	//Flag to indicate when the plugin was full started
 	isPluginInitialized = TRUE;

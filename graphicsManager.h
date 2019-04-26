@@ -1,5 +1,4 @@
 #pragma once
-#include "OhmBass.h"
 #include "controlsManager.h"
 
 class graphicsManager

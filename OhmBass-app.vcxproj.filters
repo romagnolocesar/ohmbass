@@ -45,7 +45,6 @@
     <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.h" />
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="graphicsManager.h" />
-    <ClInclude Include="ModulesManager.h" />
     <ClInclude Include="ModEQuilibrium.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -56,6 +55,19 @@
       <Filter>Models</Filter>
     </ClInclude>
     <ClInclude Include="ControlsModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ModGainFaders.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulesManager.h" />
+    <ClInclude Include="ModFilters.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModAmpEnvelope.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="graphicsModel.h">
       <Filter>Models</Filter>
     </ClInclude>
   </ItemGroup>
@@ -89,6 +101,18 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ControlsModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ModGainFaders.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModFilters.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModAmpEnvelope.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="graphicsModel.cpp">
       <Filter>Models</Filter>
     </ClCompile>
   </ItemGroup>

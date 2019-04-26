@@ -1,15 +1,18 @@
-#ifndef __OHMBASS__
+#ifndef __OHMBASS_H
 #define __OHMBASS__
 #include "IPlug_include_in_plug_hdr.h"
 #pragma clang diagnostic pop
-//Helpers
-#include "ModulesModel.h"
-#include "ModulesManager.h"
+//Managers
 #include "controlsManager.h"
 #include "graphicsManager.h"
+//#include "ModulesModel.h"
+
 //Modules
 #include "ModOscillators.h"
-#include "ModEQuilibrium.h"
+//#include "ModGainFaders.h"
+//#include "ModFilters.h"
+//#include "ModAmpEnvelope.h"
+//#include "ModEQuilibrium.h"
 //Voices
 #include "VoiceManager.h"
 //MIDI
@@ -22,7 +25,13 @@ class OhmBass : public IPlug
 public:
 	OhmBass(IPlugInstanceInfo instanceInfo);
 	~OhmBass();
-	
+
+	//Load Modules
+	ModOscillators* iModOscillators = new ModOscillators();
+	//ModGainFaders* iModGainFaders = new ModGainFaders();
+	//ModFilters* iModFilters = new ModFilters();
+	//ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
+	//ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
 
 
 	void Reset();

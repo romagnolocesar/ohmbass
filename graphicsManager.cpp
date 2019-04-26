@@ -1,5 +1,5 @@
-#include "OhmBass.h"
-#include "controlsManager.h"
+#include "IPlug_include_in_plug_hdr.h"
+#include "graphicsManager.h"
 
 
 graphicsManager::graphicsManager()
