@@ -15,9 +15,15 @@ void ModOscillators::init(controlsManager* IControlsManager) {
 
 	pBitmap = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
 	graphicType = GraphicsModel::RADIOBUTTONSCONTROL;
-	iGraphic = new GraphicsModel(&pBitmap, graphicType);
-
+	IRECT iRect = IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4));
+	EDirection* EDirection;
+	iGraphic = new GraphicsModel(&pBitmap, graphicType, iRect, EDirection);
+	
 	IControlsManager->addParam(this->moduleName, "Bg Btn Osc 1 Waves", ControlsModel::INT, 99, 206, 1, 1, 4, iGraphic);
+
+
+
+
 	/*IControlsManager->addParam(this->moduleName, "Bg Btn Osc 2 Waves", ControlsModel::INT, 99, 306, 1, 1, 4);
 	IControlsManager->addParam(this->moduleName, "Icon Sine Wave Off OSC1", ControlsModel::NONE, 58, 218, TRUE);
 	IControlsManager->addParam(this->moduleName, "Icon Sine Wave On OSC1", ControlsModel::NONE, 58, 218, TRUE);

@@ -6,9 +6,6 @@
 //Load Modules
 #include <vector> using namespace std; 
 
-
-
-
 class controlsManager{
 public:
 
@@ -49,6 +46,7 @@ public:
 		GraphicsModel* graphicsModel
 		);
 
+	void attachGraphicsInControls(IPlug* myOhmBass);
 
 	int AddCollection(ControlsModel* myInstance);
 

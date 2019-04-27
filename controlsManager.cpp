@@ -42,7 +42,8 @@ void controlsManager::addParam(
 	int idx = this->Count();
 	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultValEnum, Enums, graphicsModel);
 	this->AddCollection(myControl);
-};
+}
+
 
 
 int controlsManager::AddCollection(ControlsModel* myInstance)
@@ -56,9 +57,35 @@ int controlsManager::Count(void)
 	return collection.size();
 }
 
+void controlsManager::attachGraphicsInControls(IPlug* myOhmBass) {
+	IControl* control;
+	IBitmap* graphic;
+	IRECT iRect;
+	for (int i = 0; i < Count(); i++) {
+		IParam* param = myOhmBass->GetParam(i);
+		switch (collection[i]->graphicsModel->graphicsType) {
+		case GraphicsModel::RADIOBUTTONSCONTROL:
+			graphic = collection[i]->graphicsModel->bitmap;
+			control = new IRadioButtonsControl(myOhmBass, iRect, i, 4, graphic, kHorizontal);
+			break;
+		}
+	}
+}
+
 void controlsManager::createParams(IPlug* myOhmBass)
 {
 	
+	//	IBitmap* graphic;
+	//	switch (i) {
+	//		//Buttons Waves
+	//	case controlsManager::mBgBtnOscWavesOsc1:
+	//		graphic = &bgBtnOscWavesOsc1;
+	//		iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
+	//		break;
+	//	case controlsManager::mBgBtnOscWavesOsc2:
+	//		graphic = &bgBtnOscWavesOsc2;
+	//		iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
+	//		break;
 	for (int i = 0; i < Count(); i++) {
 		IParam* param = myOhmBass->GetParam(i);
 		switch (collection[i]->dataType){

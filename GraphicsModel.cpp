@@ -1,17 +1,9 @@
 #include "GraphicsModel.h"
 
-
-GraphicsModel::GraphicsModel()
+GraphicsModel::GraphicsModel(IBitmap * bitmap, GraphicsModel::EGraphicsType graphicsType, IRECT iRect, EDirection* eDirection)
 {
-}
-
-
-GraphicsModel::~GraphicsModel()
-{
-}
-
-GraphicsModel::GraphicsModel(IBitmap* bitmap, EGraphicsType graphicsType) {
-
 	this->bitmap = bitmap;
 	this->graphicsType = graphicsType;
+	this->iRect = iRect;
+	this->eDirection = eDirection;
 };

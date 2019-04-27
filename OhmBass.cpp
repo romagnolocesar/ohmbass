@@ -27,15 +27,14 @@ const int kNumParams = iControlsManager->getKNumParams(); //Qtd for params
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
 
-	
-
 	//crete all params
 	iControlsManager->createParams(this);
 	//create the main display
 	CreateMainDisplay();
 	//load all graphics
-	iGraphicsManager->AttachBackgroundMainDisplay();
-	iGraphicsManager->loadKeyboard();
+	iGraphicsManager->attachBackgroundMainDisplay();
+
+	//iGraphicsManager->loadKeyboard();
 	/*iGraphicsManager->loadOscWavesModes();
 	iGraphicsManager->loadFiltersModes();
 	iGraphicsManager->loadKnobs();
@@ -47,7 +46,8 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//create keyboard
 	CreateKeyboard();
 	//Attach the controls in graphics
-	/*iGraphicsManager->attachGraphicsInControls(this, iControlsManager);*/
+	iGraphicsManager->attachGraphicsInControls(this, iControlsManager);
+
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
 

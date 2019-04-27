@@ -1,5 +1,5 @@
-#include "IPlugStructs.h"
 #include <vector> using namespace std; 
+#include "IControl.h"
 
 
 class GraphicsModel
@@ -11,14 +11,14 @@ public:
 
 	IBitmap* bitmap;
 	EGraphicsType graphicsType;
-
-
-	GraphicsModel();
-	~GraphicsModel();
+	IRECT iRect;
+	EDirection* eDirection;
 
 	GraphicsModel::GraphicsModel(
 		IBitmap* bitmap,
-		GraphicsModel::EGraphicsType graphicsType
+		GraphicsModel::EGraphicsType graphicsType,
+		IRECT iRect,
+		EDirection* eDirection
 	);
 };
 
