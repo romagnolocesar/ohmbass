@@ -1,4 +1,6 @@
+#include "OhmBass.h"
 #include "controlsManager.h"
+
 
 void controlsManager::addParam(
 	ModulesModel::EModulesName moduleName,
@@ -13,6 +15,7 @@ void controlsManager::addParam(
 ){
 	int idx = this->Count();
 	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultVal, minVal, maxVal, graphicsModel);
+	
 	this->AddCollection(myControl);
 };
 
@@ -52,24 +55,15 @@ int controlsManager::AddCollection(ControlsModel* myInstance)
 	return (collection.size() - 1);
 }
 
+int controlsManager::AddControlsCollection(IControl* myInstance)
+{
+	controlCollection.push_back(myInstance);
+	return (controlCollection.size() - 1);
+}
+
 int controlsManager::Count(void)
 {
 	return collection.size();
-}
-
-void controlsManager::attachGraphicsInControls(IPlug* myOhmBass) {
-	IControl* control;
-	IBitmap* graphic;
-	IRECT iRect;
-	for (int i = 0; i < Count(); i++) {
-		IParam* param = myOhmBass->GetParam(i);
-		switch (collection[i]->graphicsModel->graphicsType) {
-		case GraphicsModel::RADIOBUTTONSCONTROL:
-			graphic = collection[i]->graphicsModel->bitmap;
-			control = new IRadioButtonsControl(myOhmBass, iRect, i, 4, graphic, kHorizontal);
-			break;
-		}
-	}
 }
 
 void controlsManager::createParams(IPlug* myOhmBass)
@@ -86,7 +80,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 	//		graphic = &bgBtnOscWavesOsc2;
 	//		iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
 	//		break;
-	for (int i = 0; i < Count(); i++) {
+	for (int i = 0; i < kNumParams ; i++) {
 		IParam* param = myOhmBass->GetParam(i);
 		switch (collection[i]->dataType){
 			case ControlsModel::DOUBLE:
@@ -123,6 +117,8 @@ void controlsManager::createParams(IPlug* myOhmBass)
 					parameterStep
 				);
 	}
+
+
 
 		
 	}
@@ -221,7 +217,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 50;
+	return 1;
 }
 
 void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)

@@ -3,6 +3,7 @@
 #pragma once
 #include "ControlsModel.h"
 #include "IPlug_include_in_plug_hdr.h"
+
 //Load Modules
 #include <vector> using namespace std; 
 
@@ -10,9 +11,12 @@ class controlsManager{
 public:
 
 	const double parameterStep = 0.001;
-	
-
 	std::vector<class ControlsModel * > collection;
+	std::vector<class IControl * > controlCollection;
+
+	IControl* control;
+
+	int kNumParams = getKNumParams();
 
 	void addParam(
 		ModulesModel::EModulesName moduleName, 
@@ -46,13 +50,12 @@ public:
 		GraphicsModel* graphicsModel
 		);
 
-	void attachGraphicsInControls(IPlug* myOhmBass);
 
 	int AddCollection(ControlsModel* myInstance);
+	int AddControlsCollection(IControl* myInstance);
 
 	int Count(void);
 
-	int kNumParams;
 
 	//enum EParams
 	//{
@@ -148,7 +151,7 @@ public:
 	};*/
 
 	void createParams(IPlug* myOhmBass);
-	int getKNumParams();
+	static int getKNumParams();
 	void ToggleIconsWavesButtons(int nOsc, int idxWaveMode);
 
 private:

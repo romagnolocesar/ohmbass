@@ -26,6 +26,10 @@ public:
 	OhmBass(IPlugInstanceInfo instanceInfo);
 	~OhmBass();
 
+	//Helpers for managers elements
+	controlsManager* iControlsManager = new controlsManager();
+	graphicsManager* iGraphicsManager = new graphicsManager();
+
 	//Load Modules
 	ModOscillators* iModOscillators = new ModOscillators();
 	//ModGainFaders* iModGainFaders = new ModGainFaders();
@@ -33,6 +37,8 @@ public:
 	//ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
 	//ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
 
+
+	
 
 	void Reset();
 	void OnParamChange(int paramIdx);

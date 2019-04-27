@@ -10,29 +10,43 @@
 #include <algorithm>
 
 
-
-
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
-//Helpers for managers elements
-controlsManager* iControlsManager = new controlsManager();
-graphicsManager* iGraphicsManager = new graphicsManager();
 
-
-
-const int kNumParams = iControlsManager->getKNumParams(); //Qtd for params
+const int kNumParams = 1; //Qtd for params
 
 
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
 
-	//crete all params
-	iControlsManager->createParams(this);
 	//create the main display
 	CreateMainDisplay();
-	//load all graphics
+
+	//Initializing
+	iModOscillators->init(iControlsManager, iGraphicsManager->pGraphics);
+
+	
+	
+	//create all params
+	iControlsManager->createParams(this);
+
+	
+
+	
+
+	
+	
+
+	
+
+	
+	//Attach Background in Main Display
 	iGraphicsManager->attachBackgroundMainDisplay();
+
+
+	iGraphicsManager->attachControlsInControls(this, iControlsManager);
+
 
 	//iGraphicsManager->loadKeyboard();
 	/*iGraphicsManager->loadOscWavesModes();
@@ -45,18 +59,17 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	
 	//create keyboard
 	CreateKeyboard();
-	//Attach the controls in graphics
-	iGraphicsManager->attachGraphicsInControls(this, iControlsManager);
+
+	
+
+	//Flag to indicate when the plugin was full started
+	isPluginInitialized = TRUE;
 
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
 
-	//Flag to indicate when the plugin was full started
-	isPluginInitialized = TRUE;
 	//Create all default presets
 	CreatePresets();
-
-	
 
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);

@@ -1,24 +1,14 @@
 #include "ModOscillators.h"
+#include "IGraphics.h"
 
 
 
-ModOscillators::ModOscillators()
-{
-}
+void ModOscillators::init(controlsManager* IControlsManager, IGraphics* pGraphics) {
 
-
-ModOscillators::~ModOscillators()
-{
-}
-
-void ModOscillators::init(controlsManager* IControlsManager) {
-
-	pBitmap = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
+	IBitmap pBitmap = pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
 	graphicType = GraphicsModel::RADIOBUTTONSCONTROL;
 	IRECT iRect = IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4));
-	EDirection* EDirection;
-	iGraphic = new GraphicsModel(&pBitmap, graphicType, iRect, EDirection);
-	
+	iGraphic = new GraphicsModel(&pBitmap, graphicType, iRect, EDirection::kHorizontal);
 	IControlsManager->addParam(this->moduleName, "Bg Btn Osc 1 Waves", ControlsModel::INT, 99, 206, 1, 1, 4, iGraphic);
 
 

@@ -13,6 +13,7 @@ public:
 	};
 
 	IControl* mVirtualKeyboard;
+	IGraphics* pGraphics;
 
 	IBitmap //icons
 	//	iconSineWaveOnOsc1,
@@ -60,8 +61,6 @@ public:
 	//	knobGhrEqlShelf;
 	//	
 	//		
-
-	IGraphics* pGraphics;
 	static const int virtualKeyboardMinimumNoteNumber = 23;
 	static int lastVirtualKeyboardNoteNumber;
 
@@ -72,7 +71,7 @@ public:
 	~graphicsManager();
 
 	void attachBackgroundMainDisplay();
-	void attachGraphicsInControls(IPlug* myOhmBass, controlsManager* iControlsManager);
+	void attachControlsInControls(IPlug* myOhmBass, controlsManager* iControlsManager);
 	/*void loadKeyboard();
 	void loadOscWavesModes();
 	void loadFiltersModes();

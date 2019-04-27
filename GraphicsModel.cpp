@@ -1,6 +1,6 @@
 #include "GraphicsModel.h"
 
-GraphicsModel::GraphicsModel(IBitmap * bitmap, GraphicsModel::EGraphicsType graphicsType, IRECT iRect, EDirection* eDirection)
+GraphicsModel::GraphicsModel(IBitmap * bitmap, GraphicsModel::EGraphicsType graphicsType, IRECT iRect, EDirection eDirection)
 {
 	this->bitmap = bitmap;
 	this->graphicsType = graphicsType;

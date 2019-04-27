@@ -12,13 +12,13 @@ public:
 	IBitmap* bitmap;
 	EGraphicsType graphicsType;
 	IRECT iRect;
-	EDirection* eDirection;
+	EDirection eDirection;
 
 	GraphicsModel::GraphicsModel(
 		IBitmap* bitmap,
 		GraphicsModel::EGraphicsType graphicsType,
 		IRECT iRect,
-		EDirection* eDirection
+		EDirection eDirection
 	);
 };
 
