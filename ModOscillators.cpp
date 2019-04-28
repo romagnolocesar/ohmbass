@@ -1,7 +1,5 @@
 #include "ModOscillators.h"
 
-
-
 void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
 
 	/* Waves Buttons of Oscillator 1*/
@@ -99,19 +97,18 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave On OSC2", ControlsModel::NONE, 226, 318, FALSE, iGraphic);
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN);
+	/* Oscillators LFO Pitch */
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
 	graphicType = GraphicsModel::KNOBMULTICONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	IControlsManager->addParam(this->moduleName, "Osc 1 Pitch Mod", ControlsModel::DOUBLE, 308, 195, 0.0, 0.0, 1.0, iGraphic);
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN);
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
 	graphicType = GraphicsModel::KNOBMULTICONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	IControlsManager->addParam(this->moduleName, "Osc 2 Pitch Mod", ControlsModel::DOUBLE, 308, 295, 0.0, 0.0, 1.0, iGraphic);
 
 }
-
-
 
 
 

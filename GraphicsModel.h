@@ -8,7 +8,9 @@ public:
 	static enum EGraphicsType {
 		RADIOBUTTONSCONTROL,
 		BITMAPCONTROL,
-		KNOBMULTICONTROL
+		KNOBMULTICONTROL,
+		FADERCONTROL
+
 	};
 
 	IBitmap bitmap;

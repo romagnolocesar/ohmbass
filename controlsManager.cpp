@@ -1,7 +1,6 @@
 #include "OhmBass.h"
 #include "controlsManager.h"
 
-
 void controlsManager::addParam(
 	ModulesModel::EModulesName moduleName,
 	char* alias,
@@ -32,6 +31,7 @@ void controlsManager::addParam(
 	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, state, graphicsModel);
 	this->AddModelsCollection(myControl);
 };
+
 void controlsManager::addParam(
 	ModulesModel::EModulesName moduleName,
 	char* alias,
@@ -49,71 +49,72 @@ void controlsManager::addParam(
 
 
 
+
 int controlsManager::AddModelsCollection(ControlsModel* myInstance)
 {
 	controlsModelsCollection.push_back(myInstance);
 	return (controlsModelsCollection.size() - 1);
-}
+};
 
 int controlsManager::AddControlsCollection(IControl* myInstance)
 {
 	controlsCollection.push_back(myInstance);
 	return (controlsCollection.size() - 1);
-}
+};
 
 int controlsManager::Count(void)
 {
 	return controlsModelsCollection.size();
-}
+};
 
 void controlsManager::createParams(IPlug* myOhmBass)
 {
-	for (int i = 0; i < kNumParams ; i++) {
+	for (int i = 0; i < kNumParams; i++) {
 		IParam* param = myOhmBass->GetParam(i);
-		switch (controlsModelsCollection[i]->dataType){
+		switch (controlsModelsCollection[i]->dataType) {
 		case ControlsModel::DOUBLE:
-				param->InitDouble(
-					controlsModelsCollection[i]->alias,
-					controlsModelsCollection[i]->defaultVal,
-					controlsModelsCollection[i]->minVal,
-					controlsModelsCollection[i]->maxVal,
-					1
-				);
-				break;
-			case ControlsModel::INT:
-				param->InitInt(
-					controlsModelsCollection[i]->alias,
-					controlsModelsCollection[i]->defaultVal,
-					controlsModelsCollection[i]->minVal,
-					controlsModelsCollection[i]->maxVal,
-					controlsModelsCollection[i]->alias
-				);
-				break;
-			case ControlsModel::ENUM:
-				param->InitEnum(
-					controlsModelsCollection[i]->alias,
-					controlsModelsCollection[i]->defaultValEnum,
-					controlsModelsCollection[i]->Enums
-				);
-				break;
-			default:
-				param->InitDouble(
-					controlsModelsCollection[i]->alias,
-					controlsModelsCollection[i]->defaultVal,
-					controlsModelsCollection[i]->minVal,
-					controlsModelsCollection[i]->maxVal,
-					parameterStep
-				);
-	}
+			param->InitDouble(
+				controlsModelsCollection[i]->alias,
+				controlsModelsCollection[i]->defaultVal,
+				controlsModelsCollection[i]->minVal,
+				controlsModelsCollection[i]->maxVal,
+				1
+			);
+			break;
+		case ControlsModel::INT:
+			param->InitInt(
+				controlsModelsCollection[i]->alias,
+				controlsModelsCollection[i]->defaultVal,
+				controlsModelsCollection[i]->minVal,
+				controlsModelsCollection[i]->maxVal,
+				controlsModelsCollection[i]->alias
+			);
+			break;
+		case ControlsModel::ENUM:
+			param->InitEnum(
+				controlsModelsCollection[i]->alias,
+				controlsModelsCollection[i]->defaultValEnum,
+				controlsModelsCollection[i]->Enums
+			);
+			break;
+		default:
+			param->InitDouble(
+				controlsModelsCollection[i]->alias,
+				controlsModelsCollection[i]->defaultVal,
+				controlsModelsCollection[i]->minVal,
+				controlsModelsCollection[i]->maxVal,
+				parameterStep
+			);
+		}
 
 
 
-		
+
 	}
 	for (int i = 0; i < Count(); i++) {
 		myOhmBass->OnParamChange(i);
 	}
-
+}
 	
 
 	//for (int i = 0; i < kNumParams; i++) {
@@ -200,7 +201,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 	//for (int i = 0; i < kNumParams; i++) {
 	//	myOhmBass->OnParamChange(i);
 	//}
-}
+
 
 int controlsManager::getKNumParams()
 {

@@ -1,16 +1,18 @@
-#pragma once
-#include "OhmBass.h"
 #include "controlsManager.h"
+#include "graphicsManager.h"
 
 class ModGainFaders :
 	public ModulesModel
 {
 public:
-	ModGainFaders();
-	~ModGainFaders();
-
 	EModulesName moduleName = GAINFADERS;
 
-	/*void ModGainFaders::init(controlsManager* IControlsManager);*/
+	IBitmap pBitmap;
+	IRECT iRect;
+	GraphicsModel::EGraphicsType graphicType;
+	GraphicsModel* iGraphic;
+	EDirection* EDirection;
+
+	void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 };
 

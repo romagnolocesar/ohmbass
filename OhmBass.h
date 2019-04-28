@@ -9,7 +9,7 @@
 
 //Modules
 #include "ModOscillators.h"
-//#include "ModGainFaders.h"
+#include "ModGainFaders.h"
 //#include "ModFilters.h"
 //#include "ModAmpEnvelope.h"
 //#include "ModEQuilibrium.h"
@@ -32,7 +32,7 @@ public:
 
 	//Load Modules
 	ModOscillators* iModOscillators = new ModOscillators();
-	//ModGainFaders* iModGainFaders = new ModGainFaders();
+	ModGainFaders* iModGainFaders = new ModGainFaders();
 	//ModFilters* iModFilters = new ModFilters();
 	//ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
 	//ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();

@@ -13,7 +13,7 @@
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
 
-const int kNumParams = 20; //Qtd for params
+const int kNumParams = 22; //Qtd for params
 
 
 
@@ -25,6 +25,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 
 	//Initializing all modules (controls)
 	iModOscillators->init(iControlsManager, iGraphicsManager);
+	iModGainFaders->init(iControlsManager, iGraphicsManager);
 
 	
 	//create all params

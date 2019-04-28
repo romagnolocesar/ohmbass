@@ -13,11 +13,6 @@ public:
 		NONE
 	};
 
-	static enum EGraphicsType {
-		RADIOBUTTONSCONTROL
-	};
-
-
 	ControlsModel(
 		ModulesModel::EModulesName moduleName,
 		int idx,
@@ -51,6 +46,16 @@ public:
 		int Enums,
 		GraphicsModel* graphicsModel
 	);
+	ControlsModel(
+		GraphicsModel* graphicsModel,
+		int idx,
+		ModulesModel::EModulesName moduleName,
+		EControlsDataType dataType,
+		char* alias,
+		int x,
+		int y,
+		int lenght	
+	);
 
 	~ControlsModel();
 
@@ -60,12 +65,13 @@ public:
 	char* alias;
 	int x;
 	int y;
+	int lenght;
 	double defaultVal;
 	int defaultValEnum;
 	double minVal;
 	double maxVal;
 	bool state;
-	EControlsDataType dataType;
 	int Enums;
+	EControlsDataType dataType;
 	GraphicsModel* graphicsModel;
 };

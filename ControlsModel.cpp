@@ -39,7 +39,20 @@ ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ECo
 	this->Enums = Oscillator::kNumOscillatorModes;
 	this->graphicsModel = graphicsModel;
 }
+
+ControlsModel::ControlsModel(GraphicsModel * graphicsModel, int idx, ModulesModel::EModulesName moduleName, EControlsDataType dataType, char * alias, int x, int y, int lenght)
+{
+	this->moduleName = moduleName;
+	this->dataType = dataType;
+	this->idx = idx;
+	this->alias = alias;
+	this->x = x;
+	this->y = y;
+	this->lenght = lenght;
+	this->graphicsModel = graphicsModel;
+}
 			
+
 ControlsModel::~ControlsModel()
 {
 }
