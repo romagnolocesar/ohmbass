@@ -7,7 +7,8 @@ class GraphicsModel
 public:
 	static enum EGraphicsType {
 		RADIOBUTTONSCONTROL,
-		BITMAPCONTROL
+		BITMAPCONTROL,
+		KNOBMULTICONTROL
 	};
 
 	IBitmap bitmap;

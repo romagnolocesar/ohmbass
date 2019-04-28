@@ -95,7 +95,7 @@ instrument determined by PLUG _IS _INST
 #define WHITE_KEY_FN						"resources/img/whitekey.png"
 #define BLACK_KEY_FN						"resources/img/blackkey.png"
 #define WAVEFORM_FN							"resources/img/waveform.png"
-#define KNOB_MEDIUM							"resources/img/knob_medium.png"
+#define KNOB_MEDIUM_FN						"resources/img/knob_medium.png"
 #define FILTERMODE_FN						"resources/img/filtermode.png"
 // --- Waves Buttons ---- //
 #define BGBTNOSCWAVES_FN					"resources/img/wavesbuttons/bg_btn_osc_waves.png"

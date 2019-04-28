@@ -21,18 +21,28 @@ void graphicsManager::attachBackgroundMainDisplay()
 void graphicsManager::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager) {
 	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
 		IParam* param = myOhmBass->GetParam(i);
+		IBitmap graphic = iControlsManager->controlsModelsCollection[i]->graphicsModel->bitmap;
+		IControl * control;
+
 		switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
 		case GraphicsModel::RADIOBUTTONSCONTROL:
-			IBitmap graphic = iControlsManager->controlsModelsCollection[i]->graphicsModel->bitmap;
-			IControl* control = new IRadioButtonsControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->graphicsModel->iRect, i, 4, &graphic, kHorizontal);
-			pGraphics->AttachControl(control);
-			iControlsManager->AddControlsCollection(control);
+			control = new IRadioButtonsControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->graphicsModel->iRect, i, 4, &graphic, kHorizontal);
 			break;
+		case GraphicsModel::BITMAPCONTROL:
+			control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+				break;
+		case GraphicsModel::KNOBMULTICONTROL:
+			control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+			break;
+		
 		}
+
+		iControlsManager->AddControlsCollection(control);
+		pGraphics->AttachControl(control);
 	}
-	
 
 }
+	
 
 //void graphicsManager::loadKeyboard()
 //{
@@ -88,117 +98,117 @@ void graphicsManager::doModelsControlsInIControlsCollection(IPlug* myOhmBass, co
 
 //void graphicsManager::attachGraphicsInControls(IPlug* myOhmBass,controlsManager* iControlsManager)
 //{
-	//for (int i = 0; i < iControlsManager->kNumParams; i++) {
-	//	controlsManager::parameterProperties_struct properties = iControlsManager->getParameterProperties(i);
-	//	IParam* param = myOhmBass->GetParam(i);
-	//	IBitmap* graphic;
-	//	switch (i) {
-	//		//Buttons Waves
-	//	case controlsManager::mBgBtnOscWavesOsc1:
-	//		graphic = &bgBtnOscWavesOsc1;
-	//		iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
-	//		break;
-	//	case controlsManager::mBgBtnOscWavesOsc2:
-	//		graphic = &bgBtnOscWavesOsc2;
-	//		iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
-	//		break;
-
-	//		//Faders Oscillators
-	//	case controlsManager::mFadersHandlerOffOsc1:
-	//		graphic = &fadersHandlerOffOsc1;
-	//		iControlsManager->Osc1FaderHandlerOff = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
-	//		pGraphics->AttachControl(iControlsManager->Osc1FaderHandlerOff);
-	//		break;
-	//	case controlsManager::mFadersHandlerOffOsc2:
-	//		graphic = &fadersHandlerOffOsc2;
-	//		iControlsManager->Osc2FaderHandlerOff = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
-	//		pGraphics->AttachControl(iControlsManager->Osc2FaderHandlerOff);
-	//		break;
-	//	case controlsManager::mFadersHandlerOnOsc1:
-	//		graphic = &fadersHandlerOnOsc1;
-	//		iControlsManager->Osc1FaderHandlerOn = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
-	//		iControlsManager->Osc1FaderHandlerOn->Hide(TRUE);
-	//		iControlsManager->Osc1FaderHandlerOn->GrayOut(TRUE, 0.99f);
-	//		pGraphics->AttachControl(iControlsManager->Osc1FaderHandlerOn);
-	//		break;
-	//	case controlsManager::mFadersHandlerOnOsc2:
-	//		graphic = &fadersHandlerOnOsc2;
-	//		iControlsManager->Osc2FaderHandlerOn = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
-	//		iControlsManager->Osc2FaderHandlerOn->Hide(TRUE);
-	//		iControlsManager->Osc2FaderHandlerOn->GrayOut(TRUE, 0.99f);
-	//		pGraphics->AttachControl(iControlsManager->Osc2FaderHandlerOn);
-	//		break;
-	//	case controlsManager::mFadersGlowOsc1:
-	//		graphic = &faderGlowBarOsc1;
-	//		iControlsManager->Osc1FaderGlow = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		pGraphics->AttachControl(iControlsManager->Osc1FaderGlow);
-	//		break;
-	//	case controlsManager::mFadersGlowOsc2:
-	//		graphic = &faderGlowBarOsc2;
-	//		iControlsManager->Osc2FaderGlow = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		pGraphics->AttachControl(iControlsManager->Osc2FaderGlow);
-	//		break;
-	
-	//		//LFO
-	//	case iControlsManager->mLFOWaveform:
-	//		graphic = &waveformBitmap;
-	//		iControlsManager->control = new ISwitchControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//	case iControlsManager->mFilterMode:
-	//		graphic = &filterModeBitmap;
-	//		iControlsManager->control = new ISwitchControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//	//GHRR PLACE
-	//		//Eq-Librium
-	//	case iControlsManager->mGhrtab1:
-	//		graphic = &knobGhrTab1;
-	//		iControlsManager->control = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//	case iControlsManager->mGhrEqlOnTitle:
-	//		graphic = &knobGhrEqlTitleOn;
-	//		iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//	case iControlsManager->mGhrEqlLowFreq:
-	//		graphic = &knobGhrEqlLow;
-	//		iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//	case iControlsManager->mGhrBostLowFreq:
-	//		graphic = &knobGhrEqlBost;
-	//		iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//	case iControlsManager->mGhrEqlHihgFreq:
-	//		graphic = &knobGhrEqlHihg;
-	//		iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//	case iControlsManager->mGhrShelfHihgFreq:
-	//		graphic = &knobGhrEqlShelf;
-	//		iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//		// Knobs:
-	//	default:
-	//		graphic = &knobBitmap;
-	//		iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
-	//		break;
-	//	}
-	//	if (
-	//		i != iControlsManager->mIconSineWaveOnOsc1 &&
-	//		i != iControlsManager->mIconSawWaveOnOsc1 &&
-	//		i != iControlsManager->mIconSqWaveOnOsc1 &&
-	//		i != iControlsManager->mIconTriangleWaveOnOsc1 &&
-	//		i != iControlsManager->mIconSineWaveOnOsc2 &&
-	//		i != iControlsManager->mIconSawWaveOnOsc2 &&
-	//		i != iControlsManager->mIconSqWaveOnOsc2 &&
-	//		i != iControlsManager->mIconTriangleWaveOnOsc2 &&
-	//		i != iControlsManager->mFadersHandlerOffOsc1 &&
-	//		i != iControlsManager->mFadersHandlerOffOsc2 &&
-	//		i != iControlsManager->mFadersHandlerOnOsc1 &&
-	//		i != iControlsManager->mFadersHandlerOnOsc2 &&
-	//		i != iControlsManager->mFadersGlowOsc1 &&
-	//		i != iControlsManager->mFadersGlowOsc2) {
-	//		pGraphics->AttachControl(iControlsManager->control);
-	//	}
-
-	//}
+//	for (int i = 0; i < iControlsManager->kNumParams; i++) {
+//		controlsManager::parameterProperties_struct properties = iControlsManager->getParameterProperties(i);
+//		IParam* param = myOhmBass->GetParam(i);
+//		IBitmap* graphic;
+//		switch (i) {
+//			//Buttons Waves
+//		case controlsManager::mBgBtnOscWavesOsc1:
+//			graphic = &bgBtnOscWavesOsc1;
+//			iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
+//			break;
+//		case controlsManager::mBgBtnOscWavesOsc2:
+//			graphic = &bgBtnOscWavesOsc2;
+//			iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
+//			break;
+//
+//			//Faders Oscillators
+//		case controlsManager::mFadersHandlerOffOsc1:
+//			graphic = &fadersHandlerOffOsc1;
+//			iControlsManager->Osc1FaderHandlerOff = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
+//			pGraphics->AttachControl(iControlsManager->Osc1FaderHandlerOff);
+//			break;
+//		case controlsManager::mFadersHandlerOffOsc2:
+//			graphic = &fadersHandlerOffOsc2;
+//			iControlsManager->Osc2FaderHandlerOff = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
+//			pGraphics->AttachControl(iControlsManager->Osc2FaderHandlerOff);
+//			break;
+//		case controlsManager::mFadersHandlerOnOsc1:
+//			graphic = &fadersHandlerOnOsc1;
+//			iControlsManager->Osc1FaderHandlerOn = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
+//			iControlsManager->Osc1FaderHandlerOn->Hide(TRUE);
+//			iControlsManager->Osc1FaderHandlerOn->GrayOut(TRUE, 0.99f);
+//			pGraphics->AttachControl(iControlsManager->Osc1FaderHandlerOn);
+//			break;
+//		case controlsManager::mFadersHandlerOnOsc2:
+//			graphic = &fadersHandlerOnOsc2;
+//			iControlsManager->Osc2FaderHandlerOn = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
+//			iControlsManager->Osc2FaderHandlerOn->Hide(TRUE);
+//			iControlsManager->Osc2FaderHandlerOn->GrayOut(TRUE, 0.99f);
+//			pGraphics->AttachControl(iControlsManager->Osc2FaderHandlerOn);
+//			break;
+//		case controlsManager::mFadersGlowOsc1:
+//			graphic = &faderGlowBarOsc1;
+//			iControlsManager->Osc1FaderGlow = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			pGraphics->AttachControl(iControlsManager->Osc1FaderGlow);
+//			break;
+//		case controlsManager::mFadersGlowOsc2:
+//			graphic = &faderGlowBarOsc2;
+//			iControlsManager->Osc2FaderGlow = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			pGraphics->AttachControl(iControlsManager->Osc2FaderGlow);
+//			break;
+//	
+//			//LFO
+//		case iControlsManager->mLFOWaveform:
+//			graphic = &waveformBitmap;
+//			iControlsManager->control = new ISwitchControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//		case iControlsManager->mFilterMode:
+//			graphic = &filterModeBitmap;
+//			iControlsManager->control = new ISwitchControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//		//GHRR PLACE
+//			//Eq-Librium
+//		case iControlsManager->mGhrtab1:
+//			graphic = &knobGhrTab1;
+//			iControlsManager->control = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//		case iControlsManager->mGhrEqlOnTitle:
+//			graphic = &knobGhrEqlTitleOn;
+//			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//		case iControlsManager->mGhrEqlLowFreq:
+//			graphic = &knobGhrEqlLow;
+//			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//		case iControlsManager->mGhrBostLowFreq:
+//			graphic = &knobGhrEqlBost;
+//			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//		case iControlsManager->mGhrEqlHihgFreq:
+//			graphic = &knobGhrEqlHihg;
+//			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//		case iControlsManager->mGhrShelfHihgFreq:
+//			graphic = &knobGhrEqlShelf;
+//			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//			// Knobs:
+//		default:
+//			graphic = &knobBitmap;
+//			iControlsManager->control = new IKnobMultiControl(myOhmBass, properties.x, properties.y, i, graphic);
+//			break;
+//		}
+//		if (
+//			i != iControlsManager->mIconSineWaveOnOsc1 &&
+//			i != iControlsManager->mIconSawWaveOnOsc1 &&
+//			i != iControlsManager->mIconSqWaveOnOsc1 &&
+//			i != iControlsManager->mIconTriangleWaveOnOsc1 &&
+//			i != iControlsManager->mIconSineWaveOnOsc2 &&
+//			i != iControlsManager->mIconSawWaveOnOsc2 &&
+//			i != iControlsManager->mIconSqWaveOnOsc2 &&
+//			i != iControlsManager->mIconTriangleWaveOnOsc2 &&
+//			i != iControlsManager->mFadersHandlerOffOsc1 &&
+//			i != iControlsManager->mFadersHandlerOffOsc2 &&
+//			i != iControlsManager->mFadersHandlerOnOsc1 &&
+//			i != iControlsManager->mFadersHandlerOnOsc2 &&
+//			i != iControlsManager->mFadersGlowOsc1 &&
+//			i != iControlsManager->mFadersGlowOsc2) {
+//			pGraphics->AttachControl(iControlsManager->control);
+//		}
+//
+//	}
 //}
 
 

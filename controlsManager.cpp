@@ -205,7 +205,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 4;
+	return 20;
 }
 
 void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
