@@ -7,33 +7,21 @@ void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGr
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	IControlsManager->addParam(this->moduleName, "Fader Glow Osc1", ControlsModel::DOUBLE, 452, 219, 0.0, 0.0, 1.0, iGraphic);
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	IControlsManager->addParam(this->moduleName, "Fader Glow Osc2", ControlsModel::DOUBLE, 533, 219, 0.0, 0.0, 1.0, iGraphic);
-
-	/* Handlers */
-	/*pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
-	graphicType = GraphicsModel::FADERCONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName,  ControlsModel::DOUBLE, 429, 210, 210, iGraphic,  kVertical);
-
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
-	graphicType = GraphicsModel::FADERCONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler Off Osc2", ControlsModel::DOUBLE, 510, 210, 210, iGraphic,  kVertical);
-
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
-	graphicType = GraphicsModel::FADERCONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler On Osc1", ControlsModel::DOUBLE, 429, 210, 210, iGraphic, kVertical);
-
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
-	graphicType = GraphicsModel::FADERCONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler On Osc2", ControlsModel::DOUBLE, 510, 210, 210, iGraphic, kVertical);*/
-
 }
+
+	//void ModGainFaders::init(controlsManager* IControlsManager) {
+//
+//	IControlsManager->addParam(this->moduleName, "Fader Glow Osc1", ControlsModel::DOUBLE, 452, 219, 0.0, 0.0, 1.0);
+//	IControlsManager->addParam(this->moduleName, "Fader Glow Osc2", ControlsModel::DOUBLE, 533, 219, 0.0, 0.0, 1.0);
+//	IControlsManager->addParam(this->moduleName, "Fader Handler Off Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0);
+//	IControlsManager->addParam(this->moduleName, "Fader Handler Off Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0);
+//	IControlsManager->addParam(this->moduleName, "Fader Handler On Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0);
+//	IControlsManager->addParam(this->moduleName, "Fader Handler On Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0);
+//}
 
 
 //void ModGainFaders::init(controlsManager* IControlsManager) {

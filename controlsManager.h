@@ -18,6 +18,7 @@ public:
 
 	int kNumParams = getKNumParams();
 
+	//RADIOBUTTON
 	void addParam(
 		ModulesModel::EModulesName moduleName, 
 		char* alias, 
@@ -30,7 +31,7 @@ public:
 		GraphicsModel* graphicsModel
 	);
 
-
+	//BITMAPCONTROL
 	void addParam(
 		ModulesModel::EModulesName moduleName, 
 		char* alias, 
@@ -41,16 +42,17 @@ public:
 		GraphicsModel* graphicsModel
 	);
 
+	//KNOBMULTICONTROL
 	void addParam(
-		ModulesModel::EModulesName moduleName,
-		char* alias,
-		ControlsModel::EControlsDataType dataType,
-		int x,
-		int y,
-		int defaultValEnum,
+		ModulesModel::EModulesName moduleName, 
+		char* alias, 
+		ControlsModel::EControlsDataType dataType, 
+		int x, 
+		int y, 
+		int defaultValEnum, 
 		int Enums,
 		GraphicsModel* graphicsModel
-	);
+);
 
 
 	int AddModelsCollection(ControlsModel* myInstance);

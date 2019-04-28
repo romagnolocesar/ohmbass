@@ -49,7 +49,6 @@ void controlsManager::addParam(
 
 
 
-
 int controlsManager::AddModelsCollection(ControlsModel* myInstance)
 {
 	controlsModelsCollection.push_back(myInstance);

@@ -12,6 +12,7 @@ public:
 	GraphicsModel::EGraphicsType graphicType;
 	GraphicsModel* iGraphic;
 	EDirection* EDirection;
+	double length;
 
 	void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 };
