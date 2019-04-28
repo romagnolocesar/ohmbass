@@ -16,7 +16,7 @@ void controlsManager::addParam(
 	int idx = this->Count();
 	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultVal, minVal, maxVal, graphicsModel);
 	
-	this->AddCollection(myControl);
+	this->AddModelsCollection(myControl);
 };
 
 void controlsManager::addParam(
@@ -30,7 +30,7 @@ void controlsManager::addParam(
 ) {
 	int idx = this->Count();
 	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, state, graphicsModel);
-	this->AddCollection(myControl);
+	this->AddModelsCollection(myControl);
 };
 void controlsManager::addParam(
 	ModulesModel::EModulesName moduleName,
@@ -44,76 +44,64 @@ void controlsManager::addParam(
 ) {
 	int idx = this->Count();
 	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultValEnum, Enums, graphicsModel);
-	this->AddCollection(myControl);
+	this->AddModelsCollection(myControl);
 }
 
 
 
-int controlsManager::AddCollection(ControlsModel* myInstance)
+int controlsManager::AddModelsCollection(ControlsModel* myInstance)
 {
-	collection.push_back(myInstance);
-	return (collection.size() - 1);
+	controlsModelsCollection.push_back(myInstance);
+	return (controlsModelsCollection.size() - 1);
 }
 
 int controlsManager::AddControlsCollection(IControl* myInstance)
 {
-	controlCollection.push_back(myInstance);
-	return (controlCollection.size() - 1);
+	controlsCollection.push_back(myInstance);
+	return (controlsCollection.size() - 1);
 }
 
 int controlsManager::Count(void)
 {
-	return collection.size();
+	return controlsModelsCollection.size();
 }
 
 void controlsManager::createParams(IPlug* myOhmBass)
 {
-	
-	//	IBitmap* graphic;
-	//	switch (i) {
-	//		//Buttons Waves
-	//	case controlsManager::mBgBtnOscWavesOsc1:
-	//		graphic = &bgBtnOscWavesOsc1;
-	//		iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4)), i, 4, graphic, kHorizontal);
-	//		break;
-	//	case controlsManager::mBgBtnOscWavesOsc2:
-	//		graphic = &bgBtnOscWavesOsc2;
-	//		iControlsManager->control = new IRadioButtonsControl(myOhmBass, IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4)), i, 4, graphic, kHorizontal);
-	//		break;
 	for (int i = 0; i < kNumParams ; i++) {
 		IParam* param = myOhmBass->GetParam(i);
-		switch (collection[i]->dataType){
-			case ControlsModel::DOUBLE:
+		switch (controlsModelsCollection[i]->dataType){
+		case ControlsModel::DOUBLE:
 				param->InitDouble(
-					collection[i]->alias,
-					collection[i]->defaultVal,
-					collection[i]->minVal,
-					collection[i]->maxVal,
+					controlsModelsCollection[i]->alias,
+					controlsModelsCollection[i]->defaultVal,
+					controlsModelsCollection[i]->minVal,
+					controlsModelsCollection[i]->maxVal,
 					1
 				);
 				break;
 			case ControlsModel::INT:
 				param->InitInt(
-					collection[i]->alias,
-					collection[i]->defaultVal,
-					collection[i]->minVal,
-					collection[i]->maxVal,
-					collection[i]->alias
+					controlsModelsCollection[i]->alias,
+					controlsModelsCollection[i]->defaultVal,
+					controlsModelsCollection[i]->minVal,
+					controlsModelsCollection[i]->maxVal,
+					controlsModelsCollection[i]->alias
 				);
 				break;
 			case ControlsModel::ENUM:
 				param->InitEnum(
-					collection[i]->alias,
-					collection[i]->defaultValEnum,
-					collection[i]->Enums
+					controlsModelsCollection[i]->alias,
+					controlsModelsCollection[i]->defaultValEnum,
+					controlsModelsCollection[i]->Enums
 				);
 				break;
 			default:
 				param->InitDouble(
-					collection[i]->alias,
-					collection[i]->defaultVal,
-					collection[i]->minVal,
-					collection[i]->maxVal,
+					controlsModelsCollection[i]->alias,
+					controlsModelsCollection[i]->defaultVal,
+					controlsModelsCollection[i]->minVal,
+					controlsModelsCollection[i]->maxVal,
 					parameterStep
 				);
 	}
@@ -217,7 +205,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 1;
+	return 4;
 }
 
 void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)

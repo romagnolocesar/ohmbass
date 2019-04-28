@@ -11,8 +11,8 @@ class controlsManager{
 public:
 
 	const double parameterStep = 0.001;
-	std::vector<class ControlsModel * > collection;
-	std::vector<class IControl * > controlCollection;
+	std::vector<class ControlsModel * > controlsModelsCollection;
+	std::vector<class IControl * > controlsCollection;
 
 	IControl* control;
 
@@ -51,7 +51,7 @@ public:
 		);
 
 
-	int AddCollection(ControlsModel* myInstance);
+	int AddModelsCollection(ControlsModel* myInstance);
 	int AddControlsCollection(IControl* myInstance);
 
 	int Count(void);

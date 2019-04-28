@@ -71,7 +71,7 @@ public:
 	~graphicsManager();
 
 	void attachBackgroundMainDisplay();
-	void attachControlsInControls(IPlug* myOhmBass, controlsManager* iControlsManager);
+	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager);
 	/*void loadKeyboard();
 	void loadOscWavesModes();
 	void loadFiltersModes();

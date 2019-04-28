@@ -13,7 +13,7 @@
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
 
-const int kNumParams = 1; //Qtd for params
+const int kNumParams = 4; //Qtd for params
 
 
 
@@ -23,29 +23,19 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//create the main display
 	CreateMainDisplay();
 
-	//Initializing
+	//Initializing all modules (controls)
 	iModOscillators->init(iControlsManager, iGraphicsManager);
 
-	
 	
 	//create all params
 	iControlsManager->createParams(this);
 
 	
-
-	
-
-	
-	
-
-	
-
-	
 	//Attach Background in Main Display
 	iGraphicsManager->attachBackgroundMainDisplay();
 
-
-	iGraphicsManager->attachControlsInControls(this, iControlsManager);
+	//Creating a Collection of IControls objects
+	iGraphicsManager->doModelsControlsInIControlsCollection(this, iControlsManager);
 
 
 	//iGraphicsManager->loadKeyboard();

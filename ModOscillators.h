@@ -8,6 +8,7 @@ public:
 	EModulesName moduleName = OSCILATORS;
 
 	IBitmap pBitmap;
+	IRECT iRect;
 	GraphicsModel::EGraphicsType graphicType;
 	GraphicsModel* iGraphic;
 	EDirection* EDirection;

@@ -37,9 +37,6 @@ public:
 	//ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
 	//ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
 
-
-	
-
 	void Reset();
 	void OnParamChange(int paramIdx);
 	void ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames);

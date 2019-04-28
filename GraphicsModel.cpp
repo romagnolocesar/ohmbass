@@ -7,3 +7,9 @@ GraphicsModel::GraphicsModel(IBitmap bitmap, GraphicsModel::EGraphicsType graphi
 	this->iRect = iRect;
 	this->eDirection = eDirection;
 };
+
+GraphicsModel::GraphicsModel(IBitmap bitmap, GraphicsModel::EGraphicsType graphicsType)
+{
+	this->bitmap = bitmap;
+	this->graphicsType = graphicsType;
+};
