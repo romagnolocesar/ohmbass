@@ -24,7 +24,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	CreateMainDisplay();
 
 	//Initializing
-	iModOscillators->init(iControlsManager, iGraphicsManager->pGraphics);
+	iModOscillators->init(iControlsManager, iGraphicsManager);
 
 	
 	

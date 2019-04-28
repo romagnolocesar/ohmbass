@@ -19,15 +19,14 @@ void graphicsManager::attachBackgroundMainDisplay()
 	pGraphics->AttachBackground(BG_ID, BG_FN);
 }
 void graphicsManager::attachControlsInControls(IPlug* myOhmBass, controlsManager* iControlsManager) {
-	IBitmap* graphic;
-	IRECT iRect;
+	//IBitmap graphic;
+	//IRECT iRect;
 	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
 		IParam* param = myOhmBass->GetParam(i);
-		IControl* control;
 		switch (iControlsManager->collection[i]->graphicsModel->graphicsType) {
 		case GraphicsModel::RADIOBUTTONSCONTROL:
-			graphic = iControlsManager->collection[i]->graphicsModel->bitmap;
-			control = new IRadioButtonsControl(myOhmBass, iRect, i, 4, graphic, kHorizontal);
+			IBitmap graphic = iControlsManager->collection[i]->graphicsModel->bitmap;
+			IControl* control = new IRadioButtonsControl(myOhmBass, iControlsManager->collection[i]->graphicsModel->iRect, i, 4, &graphic, kHorizontal);
 			pGraphics->AttachControl(control);
 			iControlsManager->AddControlsCollection(control);
 			break;

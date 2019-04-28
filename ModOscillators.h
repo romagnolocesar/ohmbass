@@ -1,5 +1,5 @@
 #include "controlsManager.h"
-#include "IGraphics.h"
+#include "graphicsManager.h"
 
 
 class ModOscillators : public ModulesModel
@@ -12,6 +12,6 @@ public:
 	GraphicsModel* iGraphic;
 	EDirection* EDirection;
 
-	void init(controlsManager* IControlsManager, IGraphics* pGraphics);
+	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 };
 

@@ -9,13 +9,13 @@ public:
 		RADIOBUTTONSCONTROL
 	};
 
-	IBitmap* bitmap;
+	IBitmap bitmap;
 	EGraphicsType graphicsType;
 	IRECT iRect;
 	EDirection eDirection;
 
 	GraphicsModel::GraphicsModel(
-		IBitmap* bitmap,
+		IBitmap bitmap,
 		GraphicsModel::EGraphicsType graphicsType,
 		IRECT iRect,
 		EDirection eDirection
