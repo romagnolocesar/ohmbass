@@ -13,7 +13,7 @@
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
 
-const int kNumParams = 22; //Qtd for params
+const int kNumParams = 25; //Qtd for params
 
 
 

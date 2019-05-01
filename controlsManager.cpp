@@ -10,7 +10,8 @@ void controlsManager::addParam(
 	double defaultVal,
 	double minVal,
 	double maxVal,
-	GraphicsModel* graphicsModel
+	GraphicsModel* graphicsModel,
+	EDirection mDirection
 ){
 	int idx = this->Count();
 	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultVal, minVal, maxVal, graphicsModel);
@@ -205,7 +206,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 20;
+	return 25;
 }
 
 void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)

@@ -18,7 +18,6 @@ public:
 
 	int kNumParams = getKNumParams();
 
-	//RADIOBUTTON
 	void addParam(
 		ModulesModel::EModulesName moduleName, 
 		char* alias, 
@@ -28,10 +27,10 @@ public:
 		double defaultVal, 
 		double minVal, 
 		double maxVal, 
-		GraphicsModel* graphicsModel
+		GraphicsModel* graphicsModel,
+		EDirection mDirection = kVertical
 	);
 
-	//BITMAPCONTROL
 	void addParam(
 		ModulesModel::EModulesName moduleName, 
 		char* alias, 
@@ -42,7 +41,6 @@ public:
 		GraphicsModel* graphicsModel
 	);
 
-	//KNOBMULTICONTROL
 	void addParam(
 		ModulesModel::EModulesName moduleName, 
 		char* alias, 
