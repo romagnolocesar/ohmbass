@@ -23,7 +23,8 @@ public:
 		double defaultVal,
 		double minVal,
 		double maxVal,
-		GraphicsModel* graphicsModel
+		GraphicsModel* graphicsModel,
+		bool hide = FALSE
 	);
 	ControlsModel(
 		ModulesModel::EModulesName moduleName,
@@ -33,7 +34,8 @@ public:
 		int x,
 		int y,
 		bool state,
-		GraphicsModel* graphicsModel
+		GraphicsModel* graphicsModel,
+		bool hide = FALSE
 	);
 	ControlsModel(
 		ModulesModel::EModulesName moduleName,
@@ -44,7 +46,8 @@ public:
 		int y,
 		int defaultValEnum,
 		int Enums,
-		GraphicsModel* graphicsModel
+		GraphicsModel* graphicsModel,
+		bool hide = FALSE
 	);
 	ControlsModel(
 		GraphicsModel* graphicsModel,
@@ -54,7 +57,8 @@ public:
 		char* alias,
 		int x,
 		int y,
-		int lenght	
+		int lenght,
+		bool hide = FALSE
 	);
 
 	~ControlsModel();
@@ -72,6 +76,7 @@ public:
 	double maxVal;
 	bool state;
 	int Enums;
+	bool hide = FALSE;
 	EControlsDataType dataType;
 	GraphicsModel* graphicsModel;
 };

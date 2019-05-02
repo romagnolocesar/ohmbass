@@ -13,7 +13,7 @@
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
 
-const int kNumParams = 25; //Qtd for params
+const int kNumParams = 26; //Qtd for params
 
 
 
@@ -117,9 +117,15 @@ void OhmBass::Reset()
 
 void OhmBass::OnParamChange(int paramIdx)
 {
-//	IMutexLock lock(this);
-//	IParam* param = GetParam(paramIdx);
-//	int idxWaveMode = 0;
+	IMutexLock lock(this);
+	IParam* param = GetParam(paramIdx);
+	int idxWaveMode = 0;
+	if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
+		iModGainFaders->OnParamChange(iControlsManager, paramIdx);
+	}
+	
+
+
 //	if (paramIdx == iControlsManager->mLFOWaveform) {
 //		voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
 //	}

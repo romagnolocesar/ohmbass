@@ -28,7 +28,8 @@ public:
 		double minVal, 
 		double maxVal, 
 		GraphicsModel* graphicsModel,
-		EDirection mDirection = kVertical
+		EDirection mDirection = kVertical,
+		bool hide = FALSE
 	);
 
 	void addParam(
@@ -38,7 +39,8 @@ public:
 		int x, 
 		int y, 
 		bool state,
-		GraphicsModel* graphicsModel
+		GraphicsModel* graphicsModel,
+		bool hide = FALSE
 	);
 
 	void addParam(
@@ -49,7 +51,8 @@ public:
 		int y, 
 		int defaultValEnum, 
 		int Enums,
-		GraphicsModel* graphicsModel
+		GraphicsModel* graphicsModel,
+		bool hide = FALSE
 );
 
 

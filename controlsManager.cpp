@@ -11,10 +11,11 @@ void controlsManager::addParam(
 	double minVal,
 	double maxVal,
 	GraphicsModel* graphicsModel,
-	EDirection mDirection
+	EDirection mDirection,
+	bool hide
 ){
 	int idx = this->Count();
-	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultVal, minVal, maxVal, graphicsModel);
+	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultVal, minVal, maxVal, graphicsModel, hide);
 	
 	this->AddModelsCollection(myControl);
 };
@@ -26,10 +27,11 @@ void controlsManager::addParam(
 	int x,
 	int y,
 	bool state,
-	GraphicsModel* graphicsModel
+	GraphicsModel* graphicsModel,
+	bool hide
 ) {
 	int idx = this->Count();
-	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, state, graphicsModel);
+	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, state, graphicsModel, hide);
 	this->AddModelsCollection(myControl);
 };
 
@@ -41,10 +43,11 @@ void controlsManager::addParam(
 	int y,
 	int defaultValEnum,
 	int Enums,
-	GraphicsModel* graphicsModel
+	GraphicsModel* graphicsModel,
+	bool hide
 ) {
 	int idx = this->Count();
-	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultValEnum, Enums, graphicsModel);
+	ControlsModel* myControl = new ControlsModel(moduleName, idx, dataType, alias, x, y, defaultValEnum, Enums, graphicsModel, hide);
 	this->AddModelsCollection(myControl);
 }
 
@@ -112,7 +115,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 
 	}
 	for (int i = 0; i < Count(); i++) {
-		myOhmBass->OnParamChange(i);
+		//myOhmBass->OnParamChange(i);
 	}
 }
 	
@@ -206,7 +209,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 25;
+	return 26;
 }
 
 void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)

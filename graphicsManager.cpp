@@ -35,8 +35,13 @@ void graphicsManager::doModelsControlsInIControlsCollection(IPlug* myOhmBass, co
 			control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 			break;
 		case GraphicsModel::FADERCONTROL:
-			control = new IFaderControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, iControlsManager->controlsModelsCollection[i]->lenght, i, &graphic, EDirection::kVertical);
+			control = new IFaderControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, 210, i, &graphic, EDirection::kVertical);
 			break;
+		}
+		if (iControlsManager->controlsModelsCollection[i]->hide) {
+			control->Hide(TRUE);
+			control->GrayOut(TRUE, 0.99f);
+
 		}
 
 		iControlsManager->AddControlsCollection(control);

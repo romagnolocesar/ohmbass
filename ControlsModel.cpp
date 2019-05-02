@@ -1,7 +1,7 @@
 #include "ControlsModel.h"
 #include "Oscillator.h"
 
-ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ControlsModel::EControlsDataType dataType, char* alias, int x, int y, double defaultVal, double minVal, double maxVal, GraphicsModel* graphicsModel)
+ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ControlsModel::EControlsDataType dataType, char* alias, int x, int y, double defaultVal, double minVal, double maxVal, GraphicsModel* graphicsModel, bool hide)
 {
 	this->moduleName = moduleName;
 	this->idx = idx;
@@ -12,10 +12,11 @@ ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, Con
 	this->defaultVal = defaultVal;
 	this->minVal = minVal;
 	this->maxVal = maxVal;
+	this->hide = hide;
 	this->graphicsModel = graphicsModel;
 }
 
-ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ControlsModel::EControlsDataType dataType, char* alias, int x, int y, bool state, GraphicsModel* graphicsModel)
+ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ControlsModel::EControlsDataType dataType, char* alias, int x, int y, bool state, GraphicsModel* graphicsModel, bool hide)
 {
 	this->moduleName = moduleName;
 	this->dataType = dataType;
@@ -25,9 +26,10 @@ ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, Con
 	this->y = y;
 	this->state = state;
 	this->graphicsModel = graphicsModel;
+	this->hide = hide;
 }
 
-ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, EControlsDataType dataType, char* alias, int x, int y, int defaultValEnum, int Enums, GraphicsModel* graphicsModel)
+ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, EControlsDataType dataType, char* alias, int x, int y, int defaultValEnum, int Enums, GraphicsModel* graphicsModel, bool hide)
 {
 	this->moduleName = moduleName;
 	this->dataType = dataType;
@@ -38,9 +40,10 @@ ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ECo
 	this->defaultValEnum = Oscillator::OSCILLATOR_MODE_TRIANGLE;
 	this->Enums = Oscillator::kNumOscillatorModes;
 	this->graphicsModel = graphicsModel;
+	this->hide = hide;
 }
 
-ControlsModel::ControlsModel(GraphicsModel * graphicsModel, int idx, ModulesModel::EModulesName moduleName, EControlsDataType dataType, char * alias, int x, int y, int lenght)
+ControlsModel::ControlsModel(GraphicsModel * graphicsModel, int idx, ModulesModel::EModulesName moduleName, EControlsDataType dataType, char * alias, int x, int y, int lenght, bool hide)
 {
 	this->moduleName = moduleName;
 	this->dataType = dataType;
@@ -50,6 +53,7 @@ ControlsModel::ControlsModel(GraphicsModel * graphicsModel, int idx, ModulesMode
 	this->y = y;
 	this->lenght = lenght;
 	this->graphicsModel = graphicsModel;
+	this->hide = hide;
 }
 			
 

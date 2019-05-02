@@ -13,24 +13,32 @@ void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGr
 	IControlsManager->addParam(this->moduleName, "Fader Glow Osc2", ControlsModel::DOUBLE, 533, 219, 0.0, 0.0, 1.0, iGraphic, kVertical);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
-	graphicType = GraphicsModel::BITMAPCONTROL;
+	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler ON Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical);
+	IControlsManager->addParam(this->moduleName, "Fader Handler ON Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical, TRUE);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
-	graphicType = GraphicsModel::BITMAPCONTROL;
+	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	IControlsManager->addParam(this->moduleName, "Fader Handler OFF Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
-	graphicType = GraphicsModel::BITMAPCONTROL;
+	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler ON Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0, iGraphic, kVertical);
+	IControlsManager->addParam(this->moduleName, "Fader Handler ON Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0, iGraphic, kVertical, TRUE);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
-	graphicType = GraphicsModel::BITMAPCONTROL;
+	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	IControlsManager->addParam(this->moduleName, "Fader Handler OFF Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0, iGraphic, kVertical);
+}
+
+void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx)
+{
+	if (IControlsManager->controlsCollection[paramIdx]) {
+		//IControlsManager->controlsCollection[paramIdx]->GrayOut();
+		//IControlsManager->controlsCollection[paramIdx]->Hide();
+	}	
 }
 
 
