@@ -14,11 +14,12 @@ public:
 	EDirection* EDirection;
 	IGraphics* pGraphics;
 	int mapWavesIconsIdx[2][4][2];
+	int mBgBtnOscWavesOsc1, mBgBtnOscWavesOsc2;
 
 	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
 	void fillSetOfWavesIcons(IPlug* myOhmBass, controlsManager* iControlsManager);
 	void OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized);
-	void ToggleIconsWavesButtons(int nOsc, int idxWaveMode);
+	void ToggleIconsWavesButtons(controlsManager* IControlsManager, int nOsc, int idxWaveMode);
 };
 

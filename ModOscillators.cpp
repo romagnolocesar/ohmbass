@@ -193,6 +193,12 @@ void ModOscillators::fillSetOfWavesIcons(IPlug* myOhmBass, controlsManager* iCon
 		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave On OSC2") == 0) {
 			mapWavesIconsIdx[1][3][1] = i;
 		}
+		else if (strcmp(param->GetNameForHost(), "Bg Btn Osc 1 Waves") == 0) {
+			mBgBtnOscWavesOsc1 = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Bg Btn Osc 2 Waves") == 0) {
+			mBgBtnOscWavesOsc2 = i;
+		}
 	}	
 }
 
@@ -201,44 +207,45 @@ void ModOscillators::OnParamChange(controlsManager* IControlsManager, int paramI
 {
 	IParam * param;
 	param = IControlsManager->controlsCollection[paramIdx]->GetParam();
-	/*if (!isPluginInitialized && IControlsManager->controlsCollection[paramIdx]) {
-		IControlsManager->controlsCollection[paramIdx]->GrayOut(TRUE, 0.99f);
-		IControlsManager->controlsCollection[paramIdx]->Hide(TRUE);
+	int idxWaveMode = param->Int();
+	idxWaveMode--;
+	if (isPluginInitialized) {
+		if (paramIdx == mBgBtnOscWavesOsc1) {
+			ToggleIconsWavesButtons(IControlsManager, 1, idxWaveMode);
+		}
+		else if (paramIdx == mBgBtnOscWavesOsc2) {
+			ToggleIconsWavesButtons(IControlsManager, 2, idxWaveMode);
+		}
+		
 	}
-	else if (param->GetNameForHost() == "cesar") {
-		IControlsManager->controlsCollection[paramIdx]->GrayOut(TRUE, 0.99f);
-		IControlsManager->controlsCollection[paramIdx]->Hide(TRUE);
-	} */
-
-	
 }
-void ModOscillators::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
+void ModOscillators::ToggleIconsWavesButtons(controlsManager* IControlsManager, int nOsc, int idxWaveMode)
 {
-	/*if (nOsc == 1) {
+	if (nOsc == 1) {
 		switch (idxWaveMode) {
 		case 0:
-			Osc1ControlSineOn->Hide(FALSE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][0][1]]->Hide(FALSE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][1][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][2][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][3][1]]->Hide(TRUE);
 			break;
 		case 1:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(FALSE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][0][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][1][1]]->Hide(FALSE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][2][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][3][1]]->Hide(TRUE);
 			break;
 		case 2:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(FALSE);
-			Osc1ControlTriagleOn->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][0][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][1][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][2][1]]->Hide(FALSE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][3][1]]->Hide(TRUE);
 			break;
 		case 3:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(FALSE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][0][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][1][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][2][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[0][3][1]]->Hide(FALSE);
 			break;
 		}
 
@@ -246,32 +253,31 @@ void ModOscillators::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
 	else if (nOsc == 2) {
 		switch (idxWaveMode) {
 		case 0:
-			Osc2ControlSineOn->Hide(FALSE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][0][1]]->Hide(FALSE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][1][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][2][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][3][1]]->Hide(TRUE);
 			break;
 		case 1:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(FALSE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][0][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][1][1]]->Hide(FALSE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][2][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][3][1]]->Hide(TRUE);
 			break;
 		case 2:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(FALSE);
-			Osc2ControlTriagleOn->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][0][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][1][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][2][1]]->Hide(FALSE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][3][1]]->Hide(TRUE);
 			break;
 		case 3:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(FALSE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][0][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][1][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][2][1]]->Hide(TRUE);
+			IControlsManager->controlsCollection[mapWavesIconsIdx[1][3][1]]->Hide(FALSE);
 			break;
 		}
-
-	}*/
+	}
 }
 
 

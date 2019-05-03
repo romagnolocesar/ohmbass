@@ -15,7 +15,7 @@ public:
 	double length;
 
 	void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
-	void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx);
+	void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized);
 
 	/*if (isPluginInitialized) {
 

@@ -33,12 +33,9 @@ void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGr
 	IControlsManager->addParam(this->moduleName, "Fader Handler OFF Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0, iGraphic, kVertical);
 }
 
-void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx)
+void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized)
 {
-	if (IControlsManager->controlsCollection[paramIdx]) {
-		//IControlsManager->controlsCollection[paramIdx]->GrayOut();
-		//IControlsManager->controlsCollection[paramIdx]->Hide();
-	}	
+		
 }
 
 
