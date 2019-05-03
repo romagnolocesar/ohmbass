@@ -19,7 +19,6 @@
 #include "MIDIReceiver.h"
 #include <functional>
 
-
 class OhmBass : public IPlug
 {
 public:
@@ -30,12 +29,13 @@ public:
 	controlsManager* iControlsManager = new controlsManager();
 	graphicsManager* iGraphicsManager = new graphicsManager();
 
-	//Load Modules
+	//Create Modules
 	ModOscillators* iModOscillators = new ModOscillators();
 	ModGainFaders* iModGainFaders = new ModGainFaders();
 	//ModFilters* iModFilters = new ModFilters();
 	//ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
 	//ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
+		
 
 	void Reset();
 	void OnParamChange(int paramIdx);
@@ -51,6 +51,7 @@ public:
 	inline bool GetKeyStatus(int key) const { return mMIDIReceiver.getKeyStatus(key); };
 	int lastVirtualKeyboardNoteNumber = graphicsManager::lastVirtualKeyboardNoteNumber;
 	int virtualKeyboardMinimumNoteNumber = graphicsManager::virtualKeyboardMinimumNoteNumber;
+	void doModelsControlsInIControlsCollection();
 	
 
 private:

@@ -20,7 +20,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Sine Wave Off OSC1", ControlsModel::NONE, 58, 218, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Sine Wave Off OSC1", ControlsModel::NONE, 58, 218, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -30,7 +30,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Saw Wave Off OSC1", ControlsModel::NONE, 114, 218, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Saw Wave Off OSC1", ControlsModel::NONE, 114, 218, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -40,7 +40,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Square Wave Off OSC1", ControlsModel::NONE, 170, 218, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Square Wave Off OSC1", ControlsModel::NONE, 170, 218, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -50,17 +50,17 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave Off OSC1", ControlsModel::NONE, 226, 218, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave Off OSC1", ControlsModel::NONE, 226, 218, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave On OSC1", ControlsModel::NONE, 226, 218, FALSE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave On OSC1", ControlsModel::NONE, 226, 218, TRUE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Sine Wave Off OSC2", ControlsModel::NONE, 58, 318, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Sine Wave Off OSC2", ControlsModel::NONE, 58, 318, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -70,7 +70,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Saw Wave Off OSC2", ControlsModel::NONE, 114, 318, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Saw Wave Off OSC2", ControlsModel::NONE, 114, 318, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -80,7 +80,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Square Wave Off OSC2", ControlsModel::NONE, 170, 318, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Square Wave Off OSC2", ControlsModel::NONE, 170, 318, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -90,12 +90,12 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave Off OSC2", ControlsModel::NONE, 226, 318, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave Off OSC2", ControlsModel::NONE, 226, 318, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave On OSC2", ControlsModel::NONE, 226, 318, FALSE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Triangle Wave On OSC2", ControlsModel::NONE, 226, 318, TRUE, iGraphic);
 
 	/* Oscillators LFO Pitch */
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
@@ -110,6 +110,169 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 
 }
 
+void ModOscillators::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i) {
+	IBitmap graphic = iControlsManager->controlsModelsCollection[i]->graphicsModel->bitmap;
+	IControl * control;
+	
+	switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
+	case GraphicsModel::RADIOBUTTONSCONTROL:
+		control = new IRadioButtonsControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->graphicsModel->iRect, i, 4, &graphic, kHorizontal);
+		break;
+	case GraphicsModel::BITMAPCONTROL:
+		control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+		if (iControlsManager->controlsModelsCollection[i]->state) {
+			control->Hide(TRUE);
+		}
+		else {
+			control->Hide(FALSE);
+		}
+		control->GrayOut(TRUE, 0.99f);
+			break;
+	case GraphicsModel::KNOBMULTICONTROL:
+		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+		break;
+	case GraphicsModel::FADERCONTROL:
+		control = new IFaderControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, 210, i, &graphic, EDirection::kVertical);
+		break;
+	}
+
+	iControlsManager->AddControlsCollection(control);
+	iGraphicsManager->pGraphics->AttachControl(control);
+}
+
+void ModOscillators::fillSetOfWavesIcons(IPlug* myOhmBass, controlsManager* iControlsManager) {
+	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
+		IParam * param;
+		param = iControlsManager->controlsCollection[i]->GetParam();
+
+		if (strcmp(param->GetNameForHost(),"Icon Sine Wave Off OSC1") == 0) {
+			mapWavesIconsIdx[0][0][0] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Sine Wave On OSC1") == 0) {
+			mapWavesIconsIdx[0][0][1] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Saw Wave Off OSC1") == 0) {
+			mapWavesIconsIdx[0][1][0] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Saw Wave On OSC1") == 0) {
+			mapWavesIconsIdx[0][1][1] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Square Wave Off OSC1") == 0) {
+			mapWavesIconsIdx[0][2][0] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Square Wave On OSC1") == 0) {
+			mapWavesIconsIdx[0][2][1] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave Off OSC1") == 0) {
+			mapWavesIconsIdx[0][3][0] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave On OSC1") == 0) {
+			mapWavesIconsIdx[0][3][1] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Sine Wave Off OSC2") == 0) {
+			mapWavesIconsIdx[1][0][0] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Sine Wave On OSC2") == 0) {
+			mapWavesIconsIdx[1][0][1] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Saw Wave Off OSC2") == 0) {
+			mapWavesIconsIdx[1][1][0] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Saw Wave On OSC2") == 0) {
+			mapWavesIconsIdx[1][1][1] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Square Wave Off OSC2") == 0) {
+			mapWavesIconsIdx[1][2][0] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Square Wave On OSC2") == 0) {
+			mapWavesIconsIdx[1][2][1] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave Off OSC2") == 0) {
+			mapWavesIconsIdx[1][3][0] = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave On OSC2") == 0) {
+			mapWavesIconsIdx[1][3][1] = i;
+		}
+	}	
+}
+
+
+void ModOscillators::OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized)
+{
+	IParam * param;
+	param = IControlsManager->controlsCollection[paramIdx]->GetParam();
+	/*if (!isPluginInitialized && IControlsManager->controlsCollection[paramIdx]) {
+		IControlsManager->controlsCollection[paramIdx]->GrayOut(TRUE, 0.99f);
+		IControlsManager->controlsCollection[paramIdx]->Hide(TRUE);
+	}
+	else if (param->GetNameForHost() == "cesar") {
+		IControlsManager->controlsCollection[paramIdx]->GrayOut(TRUE, 0.99f);
+		IControlsManager->controlsCollection[paramIdx]->Hide(TRUE);
+	} */
+
+	
+}
+void ModOscillators::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
+{
+	/*if (nOsc == 1) {
+		switch (idxWaveMode) {
+		case 0:
+			Osc1ControlSineOn->Hide(FALSE);
+			Osc1ControlSawOn->Hide(TRUE);
+			Osc1ControlSquareOn->Hide(TRUE);
+			Osc1ControlTriagleOn->Hide(TRUE);
+			break;
+		case 1:
+			Osc1ControlSineOn->Hide(TRUE);
+			Osc1ControlSawOn->Hide(FALSE);
+			Osc1ControlSquareOn->Hide(TRUE);
+			Osc1ControlTriagleOn->Hide(TRUE);
+			break;
+		case 2:
+			Osc1ControlSineOn->Hide(TRUE);
+			Osc1ControlSawOn->Hide(TRUE);
+			Osc1ControlSquareOn->Hide(FALSE);
+			Osc1ControlTriagleOn->Hide(TRUE);
+			break;
+		case 3:
+			Osc1ControlSineOn->Hide(TRUE);
+			Osc1ControlSawOn->Hide(TRUE);
+			Osc1ControlSquareOn->Hide(TRUE);
+			Osc1ControlTriagleOn->Hide(FALSE);
+			break;
+		}
+
+	}
+	else if (nOsc == 2) {
+		switch (idxWaveMode) {
+		case 0:
+			Osc2ControlSineOn->Hide(FALSE);
+			Osc2ControlSawOn->Hide(TRUE);
+			Osc2ControlSquareOn->Hide(TRUE);
+			Osc2ControlTriagleOn->Hide(TRUE);
+			break;
+		case 1:
+			Osc2ControlSineOn->Hide(TRUE);
+			Osc2ControlSawOn->Hide(FALSE);
+			Osc2ControlSquareOn->Hide(TRUE);
+			Osc2ControlTriagleOn->Hide(TRUE);
+			break;
+		case 2:
+			Osc2ControlSineOn->Hide(TRUE);
+			Osc2ControlSawOn->Hide(TRUE);
+			Osc2ControlSquareOn->Hide(FALSE);
+			Osc2ControlTriagleOn->Hide(TRUE);
+			break;
+		case 3:
+			Osc2ControlSineOn->Hide(TRUE);
+			Osc2ControlSawOn->Hide(TRUE);
+			Osc2ControlSquareOn->Hide(TRUE);
+			Osc2ControlTriagleOn->Hide(FALSE);
+			break;
+		}
+
+	}*/
+}
 
 
 

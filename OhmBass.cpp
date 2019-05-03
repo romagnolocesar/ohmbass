@@ -9,13 +9,9 @@
 #include <math.h>
 #include <algorithm>
 
-
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
-
-const int kNumParams = 26; //Qtd for params
-
-
+const int kNumParams = 20; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -26,7 +22,6 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Initializing all modules (controls)
 	iModOscillators->init(iControlsManager, iGraphicsManager);
 	iModGainFaders->init(iControlsManager, iGraphicsManager);
-
 	
 	//create all params
 	iControlsManager->createParams(this);
@@ -36,7 +31,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iGraphicsManager->attachBackgroundMainDisplay();
 
 	//Creating a Collection of IControls objects
-	iGraphicsManager->doModelsControlsInIControlsCollection(this, iControlsManager);
+	doModelsControlsInIControlsCollection();
 
 
 	//iGraphicsManager->loadKeyboard();
@@ -51,16 +46,19 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//create keyboard
 	CreateKeyboard();
 
-	
-
-	//Flag to indicate when the plugin was full started
-	isPluginInitialized = TRUE;
-
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
 
 	//Create all default presets
 	CreatePresets();
+
+	//Flag to indicate when the plugin was full started
+	isPluginInitialized = TRUE;
+
+	//FillSetOfWavesIcons
+	if (isPluginInitialized) {
+		iModOscillators->fillSetOfWavesIcons(this, iControlsManager);
+	}
 
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
@@ -69,6 +67,21 @@ OhmBass::~OhmBass() {}
 
 void OhmBass::CreateMainDisplay() {
 	iGraphicsManager->pGraphics = MakeGraphics(this, iGraphicsManager->kWidth, iGraphicsManager->kHeight);
+}
+
+void OhmBass::doModelsControlsInIControlsCollection() {
+	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
+		switch (iControlsManager->controlsModelsCollection[i]->moduleName) {
+		case ModulesModel::OSCILATORS:
+			this->iModOscillators->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
+			break;
+		}
+	}
+
+	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
+		//OnParamChange(i);
+	}
+
 }
 
 void OhmBass::CreateKeyboard() {
@@ -122,6 +135,9 @@ void OhmBass::OnParamChange(int paramIdx)
 	int idxWaveMode = 0;
 	if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
 		iModGainFaders->OnParamChange(iControlsManager, paramIdx);
+	}
+	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::OSCILATORS) {
+		iModOscillators->OnParamChange(iControlsManager, paramIdx, isPluginInitialized);
 	}
 	
 

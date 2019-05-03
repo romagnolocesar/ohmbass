@@ -157,7 +157,6 @@ public:
 
 	void createParams(IPlug* myOhmBass);
 	static int getKNumParams();
-	void ToggleIconsWavesButtons(int nOsc, int idxWaveMode);
 
 private:
 

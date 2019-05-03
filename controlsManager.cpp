@@ -114,9 +114,6 @@ void controlsManager::createParams(IPlug* myOhmBass)
 
 
 	}
-	for (int i = 0; i < Count(); i++) {
-		//myOhmBass->OnParamChange(i);
-	}
 }
 	
 
@@ -209,69 +206,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 26;
-}
-
-void controlsManager::ToggleIconsWavesButtons(int nOsc, int idxWaveMode)
-{
-	/*if (nOsc == 1) {
-		switch (idxWaveMode) {
-		case 0:
-			Osc1ControlSineOn->Hide(FALSE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(TRUE);
-			break;
-		case 1:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(FALSE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(TRUE);
-			break;
-		case 2:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(FALSE);
-			Osc1ControlTriagleOn->Hide(TRUE);
-			break;
-		case 3:
-			Osc1ControlSineOn->Hide(TRUE);
-			Osc1ControlSawOn->Hide(TRUE);
-			Osc1ControlSquareOn->Hide(TRUE);
-			Osc1ControlTriagleOn->Hide(FALSE);
-			break;
-		}
-
-	}
-	else if (nOsc == 2) {
-		switch (idxWaveMode) {
-		case 0:
-			Osc2ControlSineOn->Hide(FALSE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(TRUE);
-			break;
-		case 1:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(FALSE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(TRUE);
-			break;
-		case 2:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(FALSE);
-			Osc2ControlTriagleOn->Hide(TRUE);
-			break;
-		case 3:
-			Osc2ControlSineOn->Hide(TRUE);
-			Osc2ControlSawOn->Hide(TRUE);
-			Osc2ControlSquareOn->Hide(TRUE);
-			Osc2ControlTriagleOn->Hide(FALSE);
-			break;
-		}
-
-	}*/
+	return 20;
 }
 
 

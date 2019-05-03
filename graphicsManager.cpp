@@ -20,32 +20,15 @@ void graphicsManager::attachBackgroundMainDisplay()
 }
 void graphicsManager::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager) {
 	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
-		IParam* param = myOhmBass->GetParam(i);
-		IBitmap graphic = iControlsManager->controlsModelsCollection[i]->graphicsModel->bitmap;
-		IControl * control;
-
-		switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
-		case GraphicsModel::RADIOBUTTONSCONTROL:
-			control = new IRadioButtonsControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->graphicsModel->iRect, i, 4, &graphic, kHorizontal);
-			break;
-		case GraphicsModel::BITMAPCONTROL:
-			control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
-				break;
-		case GraphicsModel::KNOBMULTICONTROL:
-			control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
-			break;
-		case GraphicsModel::FADERCONTROL:
-			control = new IFaderControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, 210, i, &graphic, EDirection::kVertical);
+		switch (iControlsManager->controlsModelsCollection[i]->moduleName) {
+		case ModulesModel::OSCILATORS:
+			
 			break;
 		}
-		if (iControlsManager->controlsModelsCollection[i]->hide) {
-			control->Hide(TRUE);
-			control->GrayOut(TRUE, 0.99f);
-
-		}
-
-		iControlsManager->AddControlsCollection(control);
-		pGraphics->AttachControl(control);
+	}
+		
+	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
+		//myOhmBass->OnParamChange(i);
 	}
 
 }
