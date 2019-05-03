@@ -15,12 +15,12 @@ void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGr
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler ON Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical, TRUE);
+	IControlsManager->addParam(this->moduleName, "Fader Handler ON Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler OFF Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical);
+	IControlsManager->addParam(this->moduleName, "Fader Handler OFF Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical, TRUE);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
@@ -33,75 +33,109 @@ void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGr
 	IControlsManager->addParam(this->moduleName, "Fader Handler OFF Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0, iGraphic, kVertical);
 }
 
-void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized)
-{
-		
+void ModGainFaders::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i) {
+	IBitmap graphic = iControlsManager->controlsModelsCollection[i]->graphicsModel->bitmap;
+	IControl * control;
+
+	switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
+	case GraphicsModel::BITMAPCONTROL:
+		control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+		break;
+	case GraphicsModel::FADERCONTROL:
+		control = new IFaderControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, 210, i, &graphic, EDirection::kVertical);
+		if (iControlsManager->controlsModelsCollection[i]->hide) {
+			control->Hide(TRUE);
+			control->GrayOut(TRUE, 0.99f);
+		}
+		break;
+	}
+
+	iControlsManager->AddControlsCollection(control);
+	iGraphicsManager->pGraphics->AttachControl(control);
 }
 
+void ModGainFaders::fillSetOfFaders(IPlug* myOhmBass, controlsManager* iControlsManager) {
+	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
+		IParam * param;
+		param = iControlsManager->controlsCollection[i]->GetParam();
 
+		if (strcmp(param->GetNameForHost(), "Fader Handler ON Osc1") == 0) {
+			mFadersHandlerOnOsc1 = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Fader Handler OFF Osc1") == 0) {
+			mFadersHandlerOffOsc1 = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Fader Handler ON Osc2") == 0) {
+			mFadersHandlerOnOsc2 = i;
+		}
+		else if (strcmp(param->GetNameForHost(), "Fader Handler OFF Osc2") == 0) {
+			mFadersHandlerOffOsc2 = i;
+		}
+	}
+}
 
-//	IControlsManager->addParam(this->moduleName, "Fader Handler Off Osc1", );
-//	IControlsManager->addParam(this->moduleName, "Fader Handler Off Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "Fader Handler On Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "Fader Handler On Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0);
-//}
+void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized, IParam* param)
+{
+	if (isPluginInitialized) {
+		if (paramIdx == mFadersHandlerOnOsc1) {
+			ToggleFaders(IControlsManager, 1, paramIdx, param);
+		}
+		else if (paramIdx == mFadersHandlerOffOsc1) {
+			ToggleFaders(IControlsManager, 1, paramIdx, param);
+		}
+		else if (paramIdx == mFadersHandlerOnOsc2) {
+			ToggleFaders(IControlsManager, 2, paramIdx, param);
+		}
+		else if (paramIdx == mFadersHandlerOffOsc2) {
+			ToggleFaders(IControlsManager, 2, paramIdx, param);
+		}
+	}
+}
 
+void ModGainFaders::ToggleFaders(controlsManager* IControlsManager, int nOsc, int paramIdx, IParam* param)
+{
+	if (nOsc == 1) {
+		if (paramIdx == mFadersHandlerOnOsc1) {
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->SetValueFromPlug(param->Value());
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->SetValueFromPlug(param->Value());
+		}
+		else if (paramIdx == mFadersHandlerOffOsc1) {
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->Hide(TRUE);
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->GrayOut(TRUE, 0.99f);
 
-//void ModGainFaders::init(controlsManager* IControlsManager) {
-//
-//	IControlsManager->addParam(this->moduleName, "", ControlsModel::DOUBLE, 452, 219, 0.0, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "", ControlsModel::DOUBLE, 533, 219, 0.0, 0.0, 1.0);
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->Hide(FALSE);
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->GrayOut(FALSE);
 
-//	IControlsManager->addParam(this->moduleName, "", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0);
-//}
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->Hide(TRUE);
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->GrayOut(TRUE, 0.99f);
 
-//Faders
-//	this->fadersHandlerOnOsc1 = pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
-//	this->fadersHandlerOnOsc2 = pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
-//	this->fadersHandlerOffOsc1 = pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
-//	this->fadersHandlerOffOsc2 = pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
-//	//Glows
-//	this->faderGlowBarOsc1 = pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
-//	this->faderGlowBarOsc2 = pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->Hide(FALSE);
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->GrayOut(FALSE);
 
-//Faders Oscillators
-//		case controlsManager::mFadersHandlerOffOsc1:
-//			graphic = &fadersHandlerOffOsc1;
-//			iControlsManager->Osc1FaderHandlerOff = new
-//			pGraphics->AttachControl(iControlsManager->Osc1FaderHandlerOff);
-//			break;
-//		case controlsManager::mFadersHandlerOffOsc2:
-//			graphic = &fadersHandlerOffOsc2;
-//			iControlsManager->Osc2FaderHandlerOff = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
-//			pGraphics->AttachControl(iControlsManager->Osc2FaderHandlerOff);
-//			break;
-//		case controlsManager::mFadersHandlerOnOsc1:
-//			graphic = &fadersHandlerOnOsc1;
-//			iControlsManager->Osc1FaderHandlerOn = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
-//			iControlsManager->Osc1FaderHandlerOn->Hide(TRUE);
-//			iControlsManager->Osc1FaderHandlerOn->GrayOut(TRUE, 0.99f);
-//			pGraphics->AttachControl(iControlsManager->Osc1FaderHandlerOn);
-//			break;
-//		case controlsManager::mFadersHandlerOnOsc2:
-//			graphic = &fadersHandlerOnOsc2;
-//			iControlsManager->Osc2FaderHandlerOn = new IFaderControl(myOhmBass, properties.x, properties.y, 210, i, graphic, EDirection::kVertical);
-//			iControlsManager->Osc2FaderHandlerOn->Hide(TRUE);
-//			iControlsManager->Osc2FaderHandlerOn->GrayOut(TRUE, 0.99f);
-//			pGraphics->AttachControl(iControlsManager->Osc2FaderHandlerOn);
-//			break;
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->SetValueFromPlug(param->Value());
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->SetValueFromPlug(param->Value());
+		}
+	}
+	else if (nOsc == 2) {
+		if (paramIdx == mFadersHandlerOnOsc2) {
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->SetValueFromPlug(param->Value());
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->SetValueFromPlug(param->Value());
+		}
+		else if (paramIdx == mFadersHandlerOffOsc2) {
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->Hide(TRUE);
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->GrayOut(TRUE, 0.99f);
 
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->Hide(FALSE);
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->GrayOut(FALSE);
 
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->Hide(TRUE);
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->GrayOut(TRUE, 0.99f);
 
-//		case controlsManager::mFadersGlowOsc1:
-//			graphic = &faderGlowBarOsc1;
-//			iControlsManager->Osc1FaderGlow = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
-//			pGraphics->AttachControl(iControlsManager->Osc1FaderGlow);
-//			break;
-//		case controlsManager::mFadersGlowOsc2:
-//			graphic = &faderGlowBarOsc2;
-//			iControlsManager->Osc2FaderGlow = new IBitmapControl(myOhmBass, properties.x, properties.y, i, graphic);
-//			pGraphics->AttachControl(iControlsManager->Osc2FaderGlow);
-//			break;
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->Hide(FALSE);
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->GrayOut(FALSE);
+
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->SetValueFromPlug(param->Value());
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->SetValueFromPlug(param->Value());
+		}
+	}
+}

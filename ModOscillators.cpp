@@ -25,7 +25,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Sine Wave On OSC1", ControlsModel::NONE, 58, 218, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Sine Wave On OSC1", ControlsModel::NONE, 58, 218, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -35,7 +35,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Saw Wave On OSC1", ControlsModel::NONE, 114, 218, FALSE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Saw Wave On OSC1", ControlsModel::NONE, 114, 218, TRUE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -65,7 +65,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Sine Wave On OSC2", ControlsModel::NONE, 58, 318, TRUE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Sine Wave On OSC2", ControlsModel::NONE, 58, 318, FALSE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -75,7 +75,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Icon Saw Wave On OSC2", ControlsModel::NONE, 114, 318, FALSE, iGraphic);
+	IControlsManager->addParam(this->moduleName, "Icon Saw Wave On OSC2", ControlsModel::NONE, 114, 318, TRUE, iGraphic);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
@@ -130,9 +130,6 @@ void ModOscillators::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 			break;
 	case GraphicsModel::KNOBMULTICONTROL:
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
-		break;
-	case GraphicsModel::FADERCONTROL:
-		control = new IFaderControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, 210, i, &graphic, EDirection::kVertical);
 		break;
 	}
 
@@ -205,11 +202,12 @@ void ModOscillators::fillSetOfWavesIcons(IPlug* myOhmBass, controlsManager* iCon
 
 void ModOscillators::OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized)
 {
-	IParam * param;
-	param = IControlsManager->controlsCollection[paramIdx]->GetParam();
-	int idxWaveMode = param->Int();
-	idxWaveMode--;
 	if (isPluginInitialized) {
+		IParam * param;
+		param = IControlsManager->controlsCollection[paramIdx]->GetParam();
+		int idxWaveMode = param->Int();
+		idxWaveMode--;
+
 		if (paramIdx == mBgBtnOscWavesOsc1) {
 			ToggleIconsWavesButtons(IControlsManager, 1, idxWaveMode);
 		}

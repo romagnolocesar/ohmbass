@@ -11,7 +11,7 @@
 
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
-const int kNumParams = 20; //Qtd for params
+const int kNumParams = 26; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -34,7 +34,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	doModelsControlsInIControlsCollection();
 
 
-	//iGraphicsManager->loadKeyboard();
+	iGraphicsManager->loadKeyboard();
 	/*iGraphicsManager->loadOscWavesModes();
 	iGraphicsManager->loadFiltersModes();
 	iGraphicsManager->loadKnobs();
@@ -55,9 +55,10 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Flag to indicate when the plugin was full started
 	isPluginInitialized = TRUE;
 
-	//FillSetOfWavesIcons
+	//Fills
 	if (isPluginInitialized) {
 		iModOscillators->fillSetOfWavesIcons(this, iControlsManager);
+		iModGainFaders->fillSetOfFaders(this, iControlsManager);
 	}
 
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
@@ -75,13 +76,11 @@ void OhmBass::doModelsControlsInIControlsCollection() {
 		case ModulesModel::OSCILATORS:
 			this->iModOscillators->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
 			break;
+		case ModulesModel::GAINFADERS:
+			this->iModGainFaders->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
+			break;
 		}
 	}
-
-	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
-		//OnParamChange(i);
-	}
-
 }
 
 void OhmBass::CreateKeyboard() {
@@ -139,17 +138,28 @@ void OhmBass::OnParamChange(int paramIdx)
 	idxWaveMode = param->Int();
 	idxWaveMode--;
 	VoiceManager::VoiceChangerFunction changer;
-	changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
 	if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::OSCILATORS) {
-		if (paramIdx == 0) {
+		if (paramIdx == iModOscillators->mBgBtnOscWavesOsc1) {
 			changer = bind(&VoiceManager::setOscillatorMode, _1, 1, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
 		}
-		else if (paramIdx == 1) {
+		else if (paramIdx == iModOscillators->mBgBtnOscWavesOsc2) {
 			changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
 		}
 		iModOscillators->OnParamChange(iControlsManager, paramIdx, isPluginInitialized);
 	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
-
+		if (paramIdx == iModGainFaders->mFadersHandlerOnOsc1) {
+			changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
+		}
+		else if (paramIdx == iModGainFaders->mFadersHandlerOffOsc1) {
+			changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
+		}
+		else if (paramIdx == iModGainFaders->mFadersHandlerOnOsc2) {
+			changer = bind(&VoiceManager::setOscillatorTwoOutput, _1, param->Value());
+		}
+		else if (paramIdx == iModGainFaders->mFadersHandlerOffOsc2) {
+			changer = bind(&VoiceManager::setOscillatorTwoOutput, _1, param->Value());
+		}
+		iModGainFaders->OnParamChange(iControlsManager, paramIdx, isPluginInitialized, param);
 	}
 	if (changer) {
 		voiceManager.changeAllVoices(changer);

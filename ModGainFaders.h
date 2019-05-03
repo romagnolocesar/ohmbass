@@ -14,8 +14,16 @@ public:
 	EDirection* EDirection;
 	double length;
 
+	int mFadersHandlerOffOsc1;
+	int mFadersHandlerOnOsc1;
+	int mFadersHandlerOffOsc2;
+	int mFadersHandlerOnOsc2;
+
 	void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
-	void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized);
+	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
+	void fillSetOfFaders(IPlug* myOhmBass, controlsManager* iControlsManager);
+	void ToggleFaders(controlsManager* IControlsManager, int nOsc, int idxWaveMode, IParam* param);
+	void OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized, IParam* param);
 
 	/*if (isPluginInitialized) {
 

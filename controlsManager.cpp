@@ -109,10 +109,9 @@ void controlsManager::createParams(IPlug* myOhmBass)
 				parameterStep
 			);
 		}
-
-
-
-
+	}
+	for (int i = 0; i < kNumParams; i++) {
+		myOhmBass->OnParamChange(i);
 	}
 }
 	
@@ -206,7 +205,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 20;
+	return 26;
 }
 
 

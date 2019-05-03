@@ -18,28 +18,13 @@ void graphicsManager::attachBackgroundMainDisplay()
 	//background
 	pGraphics->AttachBackground(BG_ID, BG_FN);
 }
-void graphicsManager::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager) {
-	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
-		switch (iControlsManager->controlsModelsCollection[i]->moduleName) {
-		case ModulesModel::OSCILATORS:
-			
-			break;
-		}
-	}
-		
-	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
-		//myOhmBass->OnParamChange(i);
-	}
 
+void graphicsManager::loadKeyboard()
+{
+	//keybooards
+	this->whiteKeyImage = pGraphics->LoadIBitmap(WHITE_KEY_ID, WHITE_KEY_FN, 6);
+	this->blackKeyImage = pGraphics->LoadIBitmap(BLACK_KEY_ID, BLACK_KEY_FN);
 }
-	
-
-//void graphicsManager::loadKeyboard()
-//{
-//	//keybooards
-//	this->whiteKeyImage = pGraphics->LoadIBitmap(WHITE_KEY_ID, WHITE_KEY_FN, 6);
-//	this->blackKeyImage = pGraphics->LoadIBitmap(BLACK_KEY_ID, BLACK_KEY_FN);
-//}
 //
 //void graphicsManager::loadOscWavesModes()
 //{
