@@ -11,7 +11,7 @@
 
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
-const int kNumParams = 41; //Qtd for params
+const int kNumParams = 47; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -25,6 +25,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iModGainFaders->init(iControlsManager, iGraphicsManager);
 	iModFilters->init(iControlsManager, iGraphicsManager);
 	iModAmpEnvelope->init(iControlsManager, iGraphicsManager);
+	iModEQuilibrium->init(iControlsManager, iGraphicsManager);
 	
 	//create all params
 	iControlsManager->createParams(this);
@@ -66,6 +67,8 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
+
+	//iGraphicsManager->pGraphics->Resize(GUI_WIDTH / 2, GUI_HEIGHT / 2);
 }
 OhmBass::~OhmBass() {}
 
@@ -88,6 +91,9 @@ void OhmBass::doModelsControlsInIControlsCollection() {
 			break;
 		case ModulesModel::AMPENVELOPE:
 			this->iModAmpEnvelope->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
+			break;
+		case ModulesModel::EQUILIBRIUM:
+			this->iModEQuilibrium->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
 			break;
 		}
 	}
@@ -213,7 +219,21 @@ void OhmBass::OnParamChange(int paramIdx)
 				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_RELEASE, param->Value());
 			}
 
-		}		
+		}
+	}
+	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::AMPENVELOPE) {
+		if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Volume Env Attack") == 0) {
+			changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_ATTACK, param->Value());
+		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Volume Env Decay") == 0) {
+			changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_DECAY, param->Value());
+		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Volume Env Sustain") == 0) {
+			changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_SUSTAIN, param->Value());
+		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Volume Env Release") == 0) {
+			changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_RELEASE, param->Value());
+		}
 	}
 	if (changer) {
 		voiceManager.changeAllVoices(changer);

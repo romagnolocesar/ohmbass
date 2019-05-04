@@ -82,6 +82,17 @@ public:
 		bool hide
 	);
 	ControlsModel(
+		ModulesModel::EModulesName moduleName,
+		int idx,
+		EControlsDataType dataType,
+		char* alias,
+		int x,
+		int y,
+		int defaultValEnum,
+		int Enums,
+		GraphicsModel* graphicsModel
+	);
+	ControlsModel(
 		GraphicsModel* graphicsModel,
 		int idx,
 		ModulesModel::EModulesName moduleName,

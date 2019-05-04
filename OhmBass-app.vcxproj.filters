@@ -168,7 +168,4 @@
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="resources\img\oscillators\wavetype_indicator.png" />
-  </ItemGroup>
 </Project>

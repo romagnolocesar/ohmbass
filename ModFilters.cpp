@@ -14,62 +14,59 @@ ModFilters::~ModFilters()
 }
 
 void ModFilters::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
+	ControlsModel* myControl;
+
 	//Filter Mode
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FILTERMODE_ID, FILTERMODE_FN, 3);
 	graphicType = GraphicsModel::SWITCHCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter Mode", ControlsModel::ENUM, 875, 300, Filter::FILTER_MODE_LOWPASS, Filter::kNumFilterModes, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Filter Mode", 875, 300, Filter::FILTER_MODE_LOWPASS, Filter::kNumFilterModes, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
 
-	//Knobs
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter Cutoff", ControlsModel::DOUBLE, 635, 343, 0.99, 0.0, 0.99, iGraphic);
-
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter Resonance", ControlsModel::DOUBLE, 730, 343, 0.0, 0.0, 1.0, iGraphic);
-
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter LFO Amount", ControlsModel::DOUBLE, 840, 343, 0.0, 0.0, 1.0, iGraphic);
-
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter Envelope Amount", ControlsModel::DOUBLE, 915, 343, 0.0, -1.0, 1.0, iGraphic);
-
+	//LFO Wave Mode
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
 	graphicType = GraphicsModel::SWITCHCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "LFO Waveform", ControlsModel::ENUM, 30, 520, Oscillator::OSCILLATOR_MODE_TRIANGLE, Oscillator::kNumOscillatorModes, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "LFO Waveform", 30, 520, Oscillator::OSCILLATOR_MODE_TRIANGLE, Oscillator::kNumOscillatorModes, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "LFO Frequency", ControlsModel::DOUBLE, 75, 510, 6.0, 0.01, 30.0, iGraphic);
+	//Knobs
+	iGraphic = new GraphicsModel(
+		IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), 
+		GraphicsModel::KNOBMULTICONTROL
+	);
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter Env Attack", ControlsModel::DOUBLE, 635, 193, 0.01, 0.01, 10.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Cutoff", 635, 343, 0.99, 0.0, 0.99, iGraphic);
+	myControl->setShape(2.0);
+	IControlsManager->AddModelsCollection(myControl);
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter Env Decay", ControlsModel::DOUBLE, 730, 193, 0.5, 0.01, 15.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Resonance", 730, 343, 0.0, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter Env Sustain", ControlsModel::DOUBLE, 820, 193, 0.1, 0.001, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter LFO Amount", 820, 343, 0.0, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Filter Env Release", ControlsModel::DOUBLE, 915, 193, 1.0, 0.01, 15.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Envelope Amount", 915, 343, 0.0, -1.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "LFO Frequency", 75, 510, 6.0, 0.01, 30.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Attack", 635, 193, 0.01, 0.01, 10.0, iGraphic);
+	myControl->setShape(3.0);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Decay", 730, 193, 0.5, 0.01, 15.0, iGraphic);
+	myControl->setShape(3.0);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Sustain", 820, 193, 0.1, 0.001, 1.0, iGraphic);
+	myControl->setShape(2.0);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Release", 915, 193, 1.0, 0.01, 15.0, iGraphic);
+	myControl->setShape(3.0);
+	IControlsManager->AddModelsCollection(myControl);
 
 }
 

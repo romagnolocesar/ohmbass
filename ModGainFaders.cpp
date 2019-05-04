@@ -1,36 +1,44 @@
 #include "ModGainFaders.h"
 
 void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
+	ControlsModel* myControl;
+
 	/* Glows */
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Glow Osc1", ControlsModel::DOUBLE, 452, 219, 0.0, 0.0, 1.0, iGraphic, kVertical);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Glow Osc1", 452, 219, 0.0, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Glow Osc2", ControlsModel::DOUBLE, 533, 219, 0.0, 0.0, 1.0, iGraphic, kVertical);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Glow Osc2", 533, 219, 0.0, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler ON Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Handler ON Osc1", 429, 210, 0.8, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler OFF Osc1", ControlsModel::DOUBLE, 429, 210, 0.8, 0.0, 1.0, iGraphic, kVertical, TRUE);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Handler OFF Osc1", 429, 210, 0.8, 0.0, 1.0, iGraphic, TRUE);
+	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler ON Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0, iGraphic, kVertical, TRUE);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Handler ON Osc2", 510, 210, 0.0, 0.0, 1.0, iGraphic, TRUE);
+	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	IControlsManager->addParam(this->moduleName, "Fader Handler OFF Osc2", ControlsModel::DOUBLE, 510, 210, 0.0, 0.0, 1.0, iGraphic, kVertical);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Handler OFF Osc2", 510, 210, 0.0, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
 }
 
 void ModGainFaders::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i) {

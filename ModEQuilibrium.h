@@ -1,10 +1,15 @@
 #pragma once
-#include "ModulesModel.h"
+#include "controlsManager.h"
+#include "graphicsManager.h"
 
 class ModEQuilibrium : public ModulesModel
 {
 public:
 	EModulesName moduleName = EQUILIBRIUM;
+
+	IBitmap pBitmap;
+	GraphicsModel::EGraphicsType graphicType;
+	GraphicsModel* iGraphic;
 
 
 	void setLowFreq(double newLowFreq);
@@ -12,12 +17,15 @@ public:
 	void setHighFreq(double newHighFreq);
 	void setHighShelf(double newHighShelf);
 
-	/*void init(controlsManager* IControlsManager);*/
-
 	double getLowFreq();
 	double getLowBoost();
 	double getHighFreq();
 	double getHighShelf();
+
+	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
+	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
+
+	
  
 	
 private:

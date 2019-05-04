@@ -15,6 +15,11 @@ void graphicsManager::loadCommonsBitmaps() {
 	IBitmap myBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
 	tCommonsBitmaps<char*, IBitmap> knobMedium = tCommonsBitmaps(name, myBitmap);
 	this->mknobMedium = AddCommonsBitmapsCollection(knobMedium);
+
+	name = "KNOB_MEDIUM";
+	myBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);
+	tCommonsBitmaps<char*, IBitmap> knobMediumParam = tCommonsBitmaps(name, myBitmap);
+	this->mknobMediumParam = AddCommonsBitmapsCollection(knobMediumParam);
 };
 
 IBitmap graphicsManager::getBitmapFromCommonsColletion(int idxBitmap) {
@@ -73,7 +78,7 @@ void graphicsManager::loadKeyboard()
 //
 //void graphicsManager::loadGhrrEqlControls() {
 //	this->knobGhrTab1 = pGraphics->LoadIBitmap(GHRRTAB1_ID, GHRRTAB1_FN);
-//	this->knobGhrEqlTitleOn = pGraphics->LoadIBitmap(GHREQLONTITLE_ID, GHREQLONTITLE_FN);
+//	this->knobGhrEqlTitleOn = pGraphics->LoadIBitmap();
 //	this->knobGhrEqlLow = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);
 //	this->knobGhrEqlBost = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);
 //	this->knobGhrEqlHihg = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);

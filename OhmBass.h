@@ -12,7 +12,7 @@
 #include "ModGainFaders.h"
 #include "ModFilters.h"
 #include "ModAmpEnvelope.h"
-//#include "ModEQuilibrium.h"
+#include "ModEQuilibrium.h"
 //Voices
 #include "VoiceManager.h"
 //MIDI
@@ -34,7 +34,7 @@ public:
 	ModGainFaders* iModGainFaders = new ModGainFaders();
 	ModFilters* iModFilters = new ModFilters();
 	ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
-	//ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
+	ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
 		
 
 	void Reset();

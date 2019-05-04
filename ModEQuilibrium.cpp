@@ -1,4 +1,4 @@
-#include "ModEQuilibrium.h"
+	#include "ModEQuilibrium.h"
 
 
 void ModEQuilibrium::setLowFreq(double newLowFreq)
@@ -41,13 +41,66 @@ double ModEQuilibrium::getHighShelf()
 	return this->highShelf;
 }
 
-//void ModEQuilibrium::init(controlsManager* IControlsManager) {
-//	IControlsManager->addParam(this->moduleName, "Tab1 Ghrr", ControlsModel::DOUBLE, 548, 522, 0.0, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "Knb Eql title on", ControlsModel::DOUBLE, 552, 530, 0.0, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "Knb Eql Low freq", ControlsModel::DOUBLE, 560, 640, 0.3, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "Knb Bost Low freq", ControlsModel::DOUBLE, 639, 640, 0.5, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "Knb Eql High freq", ControlsModel::DOUBLE, 718, 640, 0.5, 0.0, 1.0);
-//	IControlsManager->addParam(this->moduleName, "Knb Shelf Hihg freq", ControlsModel::DOUBLE, 797, 640, 0.1, 0.0, 1.0);
-//}
-//
-//
+void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
+	ControlsModel* myControl;
+
+	//Tab1
+	iGraphic = new GraphicsModel(
+		IGraphicsManager->pGraphics->LoadIBitmap(GHRRTAB1_ID, GHRRTAB1_FN),
+		GraphicsModel::BITMAPCONTROL
+	);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Tab1 Ghrr", 548, 522, 0.0, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+	//Titles
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(GHREQLONTITLE_ID, GHREQLONTITLE_FN);
+	graphicType = GraphicsModel::KNOBMULTICONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql title on", 552, 530, 0.0, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+	//Knobs
+	iGraphic = new GraphicsModel(
+		IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium),
+		GraphicsModel::KNOBMULTICONTROL
+	);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql Low freq", 560, 640, 0.3, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low freq", 639, 640, 0.5, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 0.5, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg freq", 797, 640, 0.1, 0.0, 1.0, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+}
+
+void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i) {
+	IBitmap graphic = iControlsManager->controlsModelsCollection[i]->graphicsModel->bitmap;
+	IControl * control;
+
+	switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
+	case GraphicsModel::BITMAPCONTROL:
+		control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+		if (iControlsManager->controlsModelsCollection[i]->hide) {
+			control->Hide(TRUE);
+		}
+		else {
+			control->Hide(FALSE);
+		}
+		control->GrayOut(TRUE, 0.99f);
+		break;
+	case GraphicsModel::KNOBMULTICONTROL:
+		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+		break;
+	}
+
+	iControlsManager->AddControlsCollection(control);
+	iGraphicsManager->pGraphics->AttachControl(control);
+}
+
+

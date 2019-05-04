@@ -81,6 +81,19 @@ ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ECo
 	this->hide = hide;
 }
 
+ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, EControlsDataType dataType, char* alias, int x, int y, int defaultValEnum, int Enums, GraphicsModel* graphicsModel)
+{
+	this->moduleName = moduleName;
+	this->dataType = dataType;
+	this->idx = idx;
+	this->alias = alias;
+	this->x = x;
+	this->y = y;
+	this->defaultValEnum = defaultValEnum;
+	this->Enums = Enums;
+	this->graphicsModel = graphicsModel;
+}
+
 ControlsModel::ControlsModel(GraphicsModel * graphicsModel, int idx, ModulesModel::EModulesName moduleName, EControlsDataType dataType, char * alias, int x, int y, int lenght, bool hide)
 {
 	this->moduleName = moduleName;

@@ -12,15 +12,29 @@ ModAmpEnvelope::~ModAmpEnvelope()
 }
 
 void ModAmpEnvelope::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
+	ControlsModel* myControl;
 
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	//Knobs
+	iGraphic = new GraphicsModel(
+		IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium),
+		GraphicsModel::KNOBMULTICONTROL
+	);
 
-	IControlsManager->addParam(this->moduleName, "Volume Env Attack", ControlsModel::DOUBLE, 35, 15, 0.01, 0.01, 10.0, iGraphic);
-	IControlsManager->addParam(this->moduleName, "Volume Env Decay", ControlsModel::DOUBLE, 130, 15, 0.5, 0.01, 15.0, iGraphic);
-	IControlsManager->addParam(this->moduleName, "Volume Env Sustain", ControlsModel::DOUBLE, 225, 15, 0.1, 0.001, 1.0, iGraphic);
-	IControlsManager->addParam(this->moduleName, "Volume Env Release", ControlsModel::DOUBLE, 320, 15, 1.0, 0.01, 15.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Volume Env Attack", 35, 15, 0.01, 0.01, 10.0, iGraphic);
+	myControl->setShape(3.0);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Volume Env Decay", 130, 15, 0.5, 0.01, 15.0, iGraphic);
+	myControl->setShape(3.0);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Volume Env Sustain", 225, 15, 0.1, 0.001, 1.0, iGraphic);
+	myControl->setShape(2.0);
+	IControlsManager->AddModelsCollection(myControl);
+
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Volume Env Release", 320, 15, 1.0, 0.01, 15.0, iGraphic);
+	myControl->setShape(3.0);
+	IControlsManager->AddModelsCollection(myControl);
 
 }
 

@@ -42,6 +42,7 @@ public:
 	std::vector<class tCommonsBitmaps<char*, IBitmap>> commonsBitmapsCollection;
 
 	int mknobMedium;
+	int mknobMediumParam;
 
 	IBitmap getBitmapFromCommonsColletion(int idxBitmap);
 	int AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap> myInstance);

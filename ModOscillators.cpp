@@ -1,7 +1,6 @@
 #include "ModOscillators.h"
 
 void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
-	int idx;
 	ControlsModel* myControl;
 	
 	//BitMaps
