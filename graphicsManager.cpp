@@ -1,23 +1,32 @@
 #include "OhmBass.h"
 #include "graphicsManager.h"
 #include "controlsManager.h"
+#include "VectorLib.h"
 
-
-
-graphicsManager::graphicsManager()
-{
-}
-
-
-graphicsManager::~graphicsManager()
-{
-}
 
 void graphicsManager::attachBackgroundMainDisplay()
 {
 	//background
 	pGraphics->AttachBackground(BG_ID, BG_FN);
-}
+};
+
+void graphicsManager::loadCommonsBitmaps() {
+	char* name = "KNOB_MEDIUM";
+	IBitmap myBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
+	tCommonsBitmaps<char*, IBitmap> knobMedium = tCommonsBitmaps(name, myBitmap);
+	this->mknobMedium = AddCommonsBitmapsCollection(knobMedium);
+};
+
+IBitmap graphicsManager::getBitmapFromCommonsColletion(int idxBitmap) {
+	return this->commonsBitmapsCollection[idxBitmap].bitmap;
+};
+
+int graphicsManager::AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap> myInstance)
+{
+	this->commonsBitmapsCollection.push_back(myInstance);
+	return (this->commonsBitmapsCollection.size() - 1);
+};
+
 
 void graphicsManager::loadKeyboard()
 {

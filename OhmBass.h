@@ -10,8 +10,8 @@
 //Modules
 #include "ModOscillators.h"
 #include "ModGainFaders.h"
-//#include "ModFilters.h"
-//#include "ModAmpEnvelope.h"
+#include "ModFilters.h"
+#include "ModAmpEnvelope.h"
 //#include "ModEQuilibrium.h"
 //Voices
 #include "VoiceManager.h"
@@ -32,8 +32,8 @@ public:
 	//Create Modules
 	ModOscillators* iModOscillators = new ModOscillators();
 	ModGainFaders* iModGainFaders = new ModGainFaders();
-	//ModFilters* iModFilters = new ModFilters();
-	//ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
+	ModFilters* iModFilters = new ModFilters();
+	ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
 	//ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
 		
 

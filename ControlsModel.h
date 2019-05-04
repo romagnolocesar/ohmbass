@@ -24,7 +24,29 @@ public:
 		double minVal,
 		double maxVal,
 		GraphicsModel* graphicsModel,
-		bool hide = FALSE
+		bool hide
+	);
+	ControlsModel(
+		ModulesModel::EModulesName moduleName,
+		int idx,
+		EControlsDataType dataType,
+		char* alias,
+		int x,
+		int y,
+		double defaultVal,
+		double minVal,
+		double maxVal,
+		GraphicsModel* graphicsModel
+	);
+	ControlsModel(
+		ModulesModel::EModulesName moduleName,
+		int idx,
+		EControlsDataType dataType,
+		char* alias,
+		int x,
+		int y,
+		GraphicsModel* graphicsModel,
+		bool hide
 	);
 	ControlsModel(
 		ModulesModel::EModulesName moduleName,
@@ -35,7 +57,17 @@ public:
 		int y,
 		bool state,
 		GraphicsModel* graphicsModel,
-		bool hide = FALSE
+		bool hide
+	);
+	ControlsModel(
+		ModulesModel::EModulesName moduleName,
+		int idx,
+		EControlsDataType dataType,
+		char* alias,
+		int x,
+		int y,
+		bool state,
+		GraphicsModel* graphicsModel
 	);
 	ControlsModel(
 		ModulesModel::EModulesName moduleName,
@@ -47,7 +79,7 @@ public:
 		int defaultValEnum,
 		int Enums,
 		GraphicsModel* graphicsModel,
-		bool hide = FALSE
+		bool hide
 	);
 	ControlsModel(
 		GraphicsModel* graphicsModel,
@@ -58,11 +90,10 @@ public:
 		int x,
 		int y,
 		int lenght,
-		bool hide = FALSE
+		bool hide
 	);
 
-	~ControlsModel();
-
+	void setShape(double shape);
 	
 	ModulesModel::EModulesName moduleName;
 	int idx;
@@ -77,6 +108,7 @@ public:
 	bool state;
 	int Enums;
 	bool hide = FALSE;
+	double shape = 1.0;
 	EControlsDataType dataType;
 	GraphicsModel* graphicsModel;
 };

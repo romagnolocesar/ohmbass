@@ -70,6 +70,7 @@
     <ClInclude Include="graphicsModel.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="VectorLib.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">

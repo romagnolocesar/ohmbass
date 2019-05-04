@@ -299,6 +299,7 @@
     <ClInclude Include="Oscillator.h" />
     <ClInclude Include="PolyBLEPOscillator.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="VectorLib.h" />
     <ClInclude Include="Voice.h" />
     <ClInclude Include="VoiceManager.h" />
   </ItemGroup>

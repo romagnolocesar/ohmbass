@@ -11,7 +11,7 @@
 
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
-const int kNumParams = 26; //Qtd for params
+const int kNumParams = 41; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -19,9 +19,12 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//create the main display
 	CreateMainDisplay();
 
+
 	//Initializing all modules (controls)
 	iModOscillators->init(iControlsManager, iGraphicsManager);
 	iModGainFaders->init(iControlsManager, iGraphicsManager);
+	iModFilters->init(iControlsManager, iGraphicsManager);
+	iModAmpEnvelope->init(iControlsManager, iGraphicsManager);
 	
 	//create all params
 	iControlsManager->createParams(this);
@@ -68,6 +71,7 @@ OhmBass::~OhmBass() {}
 
 void OhmBass::CreateMainDisplay() {
 	iGraphicsManager->pGraphics = MakeGraphics(this, iGraphicsManager->kWidth, iGraphicsManager->kHeight);
+	iGraphicsManager->loadCommonsBitmaps();
 }
 
 void OhmBass::doModelsControlsInIControlsCollection() {
@@ -78,6 +82,12 @@ void OhmBass::doModelsControlsInIControlsCollection() {
 			break;
 		case ModulesModel::GAINFADERS:
 			this->iModGainFaders->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
+			break;
+		case ModulesModel::FILTERS:
+			this->iModFilters->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
+			break;
+		case ModulesModel::AMPENVELOPE:
+			this->iModAmpEnvelope->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
 			break;
 		}
 	}
@@ -145,7 +155,13 @@ void OhmBass::OnParamChange(int paramIdx)
 		else if (paramIdx == iModOscillators->mBgBtnOscWavesOsc2) {
 			changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
 		}
-		iModOscillators->OnParamChange(iControlsManager, paramIdx, isPluginInitialized);
+		else if (paramIdx == iModOscillators->mOsc1PitchMod) {
+			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
+		}
+		else if (paramIdx == iModOscillators->mOsc2PitchMod) {
+			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
+		}
+		iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isPluginInitialized);
 	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
 		if (paramIdx == iModGainFaders->mFadersHandlerOnOsc1) {
 			changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
@@ -161,11 +177,48 @@ void OhmBass::OnParamChange(int paramIdx)
 		}
 		iModGainFaders->OnParamChange(iControlsManager, paramIdx, isPluginInitialized, param);
 	}
+	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::FILTERS) {
+		if (isPluginInitialized) {
+			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Mode") == 0) {
+				changer = bind(&VoiceManager::setFilterMode, _1, static_cast<Filter::FilterMode>(param->Int()));
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Cutoff") == 0) {
+				changer = bind(&VoiceManager::setFilterCutoff, _1, param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Resonance") == 0) {
+				changer = bind(&VoiceManager::setFilterResonance, _1, param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter LFO Amount") == 0) {
+				changer = bind(&VoiceManager::setFilterLFOAmount, _1, param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Envelope Amount") == 0) {
+				changer = bind(&VoiceManager::setFilterEnvAmount, _1, param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform") == 0) {
+				voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency") == 0) {
+				voiceManager.setLFOFrequency(param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Env Attack") == 0) {
+				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_ATTACK, param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Env Decay") == 0) {
+				changer = bind(&VoiceManager::setVolumeEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_DECAY, param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Env Sustain") == 0) {
+				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_SUSTAIN, param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Env Release") == 0) {
+				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_RELEASE, param->Value());
+			}
+
+		}		
+	}
 	if (changer) {
 		voiceManager.changeAllVoices(changer);
 	}
 	
-
 
 	//if (paramIdx == iControlsManager->mLFOWaveform) {
 	//	//voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));

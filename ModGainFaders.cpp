@@ -76,7 +76,6 @@ void ModGainFaders::fillSetOfFaders(IPlug* myOhmBass, controlsManager* iControls
 
 void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized, IParam* param)
 {
-	if (isPluginInitialized) {
 		if (paramIdx == mFadersHandlerOnOsc1) {
 			ToggleFaders(IControlsManager, 1, paramIdx, param);
 		}
@@ -89,7 +88,6 @@ void ModGainFaders::OnParamChange(controlsManager* IControlsManager, int paramId
 		else if (paramIdx == mFadersHandlerOffOsc2) {
 			ToggleFaders(IControlsManager, 2, paramIdx, param);
 		}
-	}
 }
 
 void ModGainFaders::ToggleFaders(controlsManager* IControlsManager, int nOsc, int paramIdx, IParam* param)
