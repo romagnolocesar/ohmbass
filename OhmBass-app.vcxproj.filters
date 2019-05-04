@@ -16,6 +16,12 @@
     <Filter Include="Models">
       <UniqueIdentifier>{a5ff62e1-fb5b-48e5-b88b-e0d697c89f76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vendors">
+      <UniqueIdentifier>{b22c36ec-ef25-4c51-a63b-ec8e1e120dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{bc94787a-1b8d-4b2d-9616-4ef0fff1e07d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_wrapper\app_main.h">
@@ -27,22 +33,9 @@
     <ClInclude Include="Oscillator.h" />
     <ClInclude Include="MIDIReceiver.h" />
     <ClInclude Include="EnvelopeGenerator.h" />
-    <ClInclude Include="Delegate.h" />
-    <ClInclude Include="GallantSignal.h" />
     <ClInclude Include="Filter.h" />
     <ClInclude Include="Voice.h" />
     <ClInclude Include="VoiceManager.h" />
-    <ClInclude Include="PolyBLEPOscillator.h" />
-    <ClInclude Include="..\..\SDKs\ASIO_SDK\asio.h" />
-    <ClInclude Include="..\..\SDKs\ASIO_SDK\asiodrivers.h" />
-    <ClInclude Include="..\..\SDKs\ASIO_SDK\asiolist.h" />
-    <ClInclude Include="..\..\SDKs\ASIO_SDK\asiosys.h" />
-    <ClInclude Include="..\..\SDKs\ASIO_SDK\ginclude.h" />
-    <ClInclude Include="..\..\SDKs\ASIO_SDK\iasiodrv.h" />
-    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugStandalone.h" />
-    <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtAudio.h" />
-    <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtError.h" />
-    <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.h" />
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="graphicsManager.h" />
     <ClInclude Include="ModEQuilibrium.h">
@@ -70,7 +63,48 @@
     <ClInclude Include="graphicsModel.h">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="VectorLib.h" />
+    <ClInclude Include="..\..\SDKs\ASIO_SDK\asio.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\ASIO_SDK\asiodrivers.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\ASIO_SDK\asiolist.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\ASIO_SDK\asiosys.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="GallantSignal.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\ASIO_SDK\ginclude.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\ASIO_SDK\iasiodrv.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtAudio.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtError.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.h">
+      <Filter>Vendors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugStandalone.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyBLEPOscillator.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorLib.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -86,13 +120,6 @@
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="Voice.cpp" />
     <ClCompile Include="VoiceManager.cpp" />
-    <ClCompile Include="PolyBLEPOscillator.cpp" />
-    <ClCompile Include="..\..\SDKs\ASIO_SDK\asio.cpp" />
-    <ClCompile Include="..\..\SDKs\ASIO_SDK\asiodrivers.cpp" />
-    <ClCompile Include="..\..\SDKs\ASIO_SDK\asiolist.cpp" />
-    <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugStandalone.cpp" />
-    <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtAudio.cpp" />
-    <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.cpp" />
     <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="ModEQuilibrium.cpp">
@@ -115,6 +142,27 @@
     </ClCompile>
     <ClCompile Include="graphicsModel.cpp">
       <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDKs\ASIO_SDK\asio.cpp">
+      <Filter>Vendors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDKs\ASIO_SDK\asiodrivers.cpp">
+      <Filter>Vendors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDKs\ASIO_SDK\asiolist.cpp">
+      <Filter>Vendors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtAudio.cpp">
+      <Filter>Vendors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDKs\WDL\rtaudiomidi\RtMidi.cpp">
+      <Filter>Vendors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugStandalone.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyBLEPOscillator.cpp">
+      <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
