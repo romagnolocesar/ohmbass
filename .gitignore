@@ -4,7 +4,7 @@
 *.zip
 *.suo
 *.ncb
-*.vcproj.*
+//*.vcproj.*
 *.pkg
 *.dmg
 *.depend
@@ -12,9 +12,9 @@
 *.mode1v3
 *.db
 *.LSOverride
-*.xcworkspace
-*.xcuserdata
-*.xcschememanagement.plist
+//*.xcworkspace
+//*.xcuserdata
+//*.xcschememanagement.plist
 build-*
 ipch/*
 gui/*

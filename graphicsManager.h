@@ -1,6 +1,7 @@
+#include <vector> using namespace std; 
 #pragma once
-#include "OhmBass.h"
 #include "controlsManager.h"
+
 
 class graphicsManager
 {
@@ -14,74 +15,41 @@ public:
 	};
 
 	IControl* mVirtualKeyboard;
-
-	IBitmap //icons
-		iconSineWaveOnOsc1,
-		iconSineWaveOffOsc1,
-		iconSawWaveOnOsc1,
-		iconSawWaveOffOsc1,
-		iconSquareWaveOnOsc1,
-		iconSquareWaveOffOsc1,
-		iconTriangleWaveOnOsc1,
-		iconTriangleWaveOffOsc1,
-		iconSineWaveOnOsc2,
-		iconSineWaveOffOsc2,
-		iconSawWaveOnOsc2,
-		iconSawWaveOffOsc2,
-		iconSquareWaveOnOsc2,
-		iconSquareWaveOffOsc2,
-		iconTriangleWaveOnOsc2,
-		iconTriangleWaveOffOsc2,
-		//backgrounds
-		bgBtnOscWavesOsc1,
-		bgBtnOscWavesOsc2,
-		//keyboards
-		whiteKeyImage,
-		blackKeyImage,
-		//waveforms
-		waveformBitmap,
-		//filters
-		filterModeBitmap,
-		//knobs
-		knobBitmap,
-		//Faders
-		faderGlowBarOsc1,
-		faderGlowBarOsc2,
-		fadersHandlerOffOsc1,
-		fadersHandlerOffOsc2,
-		fadersHandlerOnOsc1,
-		fadersHandlerOnOsc2,
-		//GHRR PLACE
-			//Eq-Librium
-		knobGhrTab1,
-		knobGhrEqlTitleOn,
-		knobGhrEqlLow,
-		knobGhrEqlBost,
-		knobGhrEqlHihg,
-		knobGhrEqlShelf;
-		
-			
-
 	IGraphics* pGraphics;
+	IBitmap whiteKeyImage, blackKeyImage;
+
 	static const int virtualKeyboardMinimumNoteNumber = 23;
 	static int lastVirtualKeyboardNoteNumber;
-
 	
 
+	//Template class of commons bitmaps
+	template<class N, class B>
+	class tCommonsBitmaps
+	{
+	public:
+		N name;
+		B bitmap;
 
-	graphicsManager();
-	~graphicsManager();
+		tCommonsBitmaps(N name, B bitmap) {
+			this->name = name;
+			this->bitmap = bitmap;
+		};
 
-	void AttachBackgroundMainDisplay();
+		tCommonsBitmaps() {};
+	};
+
+	//Collection of commonsBitmaps
+	std::vector<class tCommonsBitmaps<char*, IBitmap>> commonsBitmapsCollection;
+
+	int mknobMedium;
+	int mknobMediumParam;
+
+	IBitmap getBitmapFromCommonsColletion(int idxBitmap);
+	int AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap> myInstance);
+	void loadCommonsBitmaps();
+	void attachBackgroundMainDisplay();
 	void loadKeyboard();
-	void loadOscWavesModes();
-	void loadFiltersModes();
-	void loadKnobs();
-	void loadWavesIcons();
-	void loadFaders();
-	void loadOscWavesButtonsBackgrounds();
-	void loadGhrrEqlControls();
-	void attachGraphicsInControls(IPlug* myOhmBass, controlsManager* iControlsManager);
+	
 
 private:
 	
