@@ -39,13 +39,6 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 
 
 	iGraphicsManager->loadKeyboard();
-	/*iGraphicsManager->loadOscWavesModes();
-	iGraphicsManager->loadFiltersModes();
-	iGraphicsManager->loadKnobs();
-	iGraphicsManager->loadWavesIcons();
-	iGraphicsManager->loadOscWavesButtonsBackgrounds();
-	iGraphicsManager->loadGhrrEqlControls();
-	iGraphicsManager->loadFaders();*/
 	
 	//create keyboard
 	CreateKeyboard();
@@ -68,7 +61,6 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 
-	//iGraphicsManager->pGraphics->Resize(GUI_WIDTH / 2, GUI_HEIGHT / 2);
 }
 OhmBass::~OhmBass() {}
 
