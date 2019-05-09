@@ -13,17 +13,15 @@ double Voice::nextSample() {
 	double volumeEnvelopeValue = mVolumeEnvelope.nextSample();
 	double filterEnvelopeValue = mFilterEnvelope.nextSample();
 
-	double CutoffEquilibriumLow = mEQuilibriumLowFreq;
 
 
 	mFilter.setCutoffMod(filterEnvelopeValue * mFilterEnvelopeAmount + mLFOValue * mFilterLFOAmount);
-	mFilter.setCutoffEquilibriumLow(CutoffEquilibriumLow);
 
 	mOscillatorOne.setPitchMod(mLFOValue * mOscillatorOnePitchAmount);
 	mOscillatorTwo.setPitchMod(mLFOValue * mOscillatorTwoPitchAmount);
 
 
-	return mFilter.process((oscillatorSum * volumeEnvelopeValue * mVelocity / 127.0), mEQuilibriumLowGain);
+	return mFilter.process(oscillatorSum * volumeEnvelopeValue * mVelocity / 127.0);
 }
 
 void Voice::setFree() {

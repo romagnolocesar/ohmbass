@@ -290,7 +290,6 @@
     <ClInclude Include="ModGainFaders.h" />
     <ClInclude Include="ModOscillators.h" />
     <ClInclude Include="ModulesModel.h" />
-    <ClInclude Include="ModulesManager.h" />
     <ClInclude Include="graphicsManager.h" />
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="Filter.h" />

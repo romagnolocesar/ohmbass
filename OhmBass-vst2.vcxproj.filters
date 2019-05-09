@@ -11,7 +11,6 @@
     <ClCompile Include="PolyBLEPOscillator.cpp" />
     <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugVST.cpp" />
     <ClCompile Include="controlsManager.cpp" />
-    <ClCompile Include="ModulesManager.cpp" />
     <ClCompile Include="ModEQuilibrium.cpp" />
     <ClCompile Include="GraphicsModel.cpp" />
     <ClCompile Include="ModOscillators.cpp" />
@@ -27,7 +26,6 @@
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST.h" />
     <ClInclude Include="graphicsModel.h" />
     <ClInclude Include="ModulesModel.h" />
-    <ClInclude Include="ModulesManager.h" />
     <ClInclude Include="ModOscillators.h" />
     <ClInclude Include="ModGainFaders.h" />
     <ClInclude Include="ModFilters.h" />

@@ -66,7 +66,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql Low freq", 560, 640, 0.1, 0.1, 0.99, iGraphic);
-	myControl->setShape(3.0);
+	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low boost", 639, 640, 0.01, 0.01, 0.99, iGraphic);
