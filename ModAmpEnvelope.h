@@ -1,6 +1,7 @@
 #include "controlsManager.h"
 #include "graphicsManager.h"
 
+
 class ModAmpEnvelope : public ModulesModel
 {
 public:

@@ -228,12 +228,10 @@ void OhmBass::OnParamChange(int paramIdx)
 		}
 	}
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::EQUILIBRIUM) {
-		if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Eql Low freq") == 0)
-		{
-			changer = bind(&VoiceManager::setEQuilibriumLowFreq, _1, param->Value());
-		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Bost Low boost") == 0)
-		{
-			changer = bind(&VoiceManager::setEQuilibriumLowGain, _1, param->Value());
+		if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Eql Low freq") == 0){
+			iModEQuilibrium->setLowFreq(param->Value());
+		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Bost Low boost") == 0){
+			iModEQuilibrium->setLowBoost(param->Value());
 		}
 		
 	}

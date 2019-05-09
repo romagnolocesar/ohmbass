@@ -37,6 +37,7 @@ void VoiceManager::onNoteOff(int noteNumber, int velocity) {
 	}
 }
 
+
 double VoiceManager::nextSample() {
 	double output = 0.0;
 	double lfoValue = mLFO.nextSample();

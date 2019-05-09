@@ -107,4 +107,8 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 	iGraphicsManager->pGraphics->AttachControl(control);
 }
 
+void ModEQuilibrium::process() {
+	
+}
+
 

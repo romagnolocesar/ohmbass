@@ -104,6 +104,9 @@
     <ClInclude Include="VectorLib.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Biquad.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -161,6 +164,9 @@
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="PolyBLEPOscillator.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Biquad.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>

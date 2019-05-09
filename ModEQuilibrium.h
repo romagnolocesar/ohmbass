@@ -1,6 +1,7 @@
 #pragma once
 #include "controlsManager.h"
 #include "graphicsManager.h"
+#include "Biquad.h"
 
 class ModEQuilibrium : public ModulesModel
 {
@@ -24,6 +25,8 @@ public:
 
 	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
+
+	void process();
 
 	
  
