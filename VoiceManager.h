@@ -37,6 +37,12 @@ public:
 	static void setVolumeEnvelopeStageValue(Voice& voice, EnvelopeGenerator::EnvelopeStage stage, double value) {
 		voice.mVolumeEnvelope.setStageValue(stage, value);
 	}
+	static void setEQuilibriumLowFreq(Voice& voice, double amount) { 
+		voice.setEQuilibriumLowFreq(amount);
+	}
+	static void setEQuilibriumLowGain(Voice& voice, double amount) {
+		voice.setEQuilibriumLowGain(amount);
+	}
 	static void setFilterEnvelopeStageValue(Voice& voice, EnvelopeGenerator::EnvelopeStage stage, double value) {
 		voice.mFilterEnvelope.setStageValue(stage, value);
 	}

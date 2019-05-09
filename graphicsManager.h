@@ -30,22 +30,23 @@ public:
 		N name;
 		B bitmap;
 
-		tCommonsBitmaps(N name, B bitmap) {
+		tCommonsBitmaps::tCommonsBitmaps(N name, B bitmap) {
 			this->name = name;
 			this->bitmap = bitmap;
 		};
 
-		tCommonsBitmaps() {};
+		tCommonsBitmaps::tCommonsBitmaps() {};
 	};
 
+
 	//Collection of commonsBitmaps
-	std::vector<class tCommonsBitmaps<char*, IBitmap>> commonsBitmapsCollection;
+	std::vector<class tCommonsBitmaps<char*, IBitmap> * > commonsBitmapsCollection;
 
 	int mknobMedium;
 	int mknobMediumParam;
 
 	IBitmap getBitmapFromCommonsColletion(int idxBitmap);
-	int AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap> myInstance);
+	int AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap> * myInstance);
 	void loadCommonsBitmaps();
 	void attachBackgroundMainDisplay();
 	void loadKeyboard();

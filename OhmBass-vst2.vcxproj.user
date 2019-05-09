@@ -38,4 +38,7 @@
     <LocalDebuggerCommandArguments>$(TargetPath) /noload /nosave</LocalDebuggerCommandArguments>
     <LocalDebuggerCommand>$(VST2_64_HOST_PATH)</LocalDebuggerCommand>
   </PropertyGroup>
+  <PropertyGroup>
+    <ShowAllFiles>false</ShowAllFiles>
+  </PropertyGroup>
 </Project>

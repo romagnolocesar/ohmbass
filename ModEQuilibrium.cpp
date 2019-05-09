@@ -61,20 +61,21 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 
 	//Knobs
 	iGraphic = new GraphicsModel(
-		IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium),
-		GraphicsModel::KNOBMULTICONTROL
+		IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMediumParam),
+		GraphicsModel::KNOBMULTICONTROLPARAM
 	);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql Low freq", 560, 640, 0.3, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql Low freq", 560, 640, 0.1, 0.1, 0.99, iGraphic);
+	myControl->setShape(3.0);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low freq", 639, 640, 0.5, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low boost", 639, 640, 0.01, 0.01, 0.99, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 0.5, 0.0, 1.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg freq", 797, 640, 0.1, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg shelf", 797, 640, 0.1, 0.0, 1.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 }
@@ -95,6 +96,9 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		control->GrayOut(TRUE, 0.99f);
 		break;
 	case GraphicsModel::KNOBMULTICONTROL:
+		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+		break;
+	case GraphicsModel::KNOBMULTICONTROLPARAM:
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
 	}

@@ -13,20 +13,23 @@ void graphicsManager::attachBackgroundMainDisplay()
 void graphicsManager::loadCommonsBitmaps() {
 	char* name = "KNOB_MEDIUM";
 	IBitmap myBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_ID, KNOB_MEDIUM_FN, 47);
-	tCommonsBitmaps<char*, IBitmap> knobMedium = tCommonsBitmaps(name, myBitmap);
+	tCommonsBitmaps<char*, IBitmap>* knobMedium = new tCommonsBitmaps<char*, IBitmap>(name, myBitmap);
 	this->mknobMedium = AddCommonsBitmapsCollection(knobMedium);
 
-	name = "KNOB_MEDIUM";
+	name = "KNOB_MEDIUM_PARAM";
 	myBitmap = pGraphics->LoadIBitmap(KNOB_MEDIUM_PARAM_ID, KNOB_MEDIUM_PARAM_FN, 10);
-	tCommonsBitmaps<char*, IBitmap> knobMediumParam = tCommonsBitmaps(name, myBitmap);
+
+	tCommonsBitmaps<char*, IBitmap>* knobMediumParam = new tCommonsBitmaps<char*, IBitmap>(name, myBitmap);
 	this->mknobMediumParam = AddCommonsBitmapsCollection(knobMediumParam);
 };
 
 IBitmap graphicsManager::getBitmapFromCommonsColletion(int idxBitmap) {
-	return this->commonsBitmapsCollection[idxBitmap].bitmap;
+	tCommonsBitmaps<char*, IBitmap> * instance;
+	instance = this->commonsBitmapsCollection[idxBitmap];
+	return  instance->bitmap;
 };
 
-int graphicsManager::AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap> myInstance)
+int graphicsManager::AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap>* myInstance)
 {
 	this->commonsBitmapsCollection.push_back(myInstance);
 	return (this->commonsBitmapsCollection.size() - 1);

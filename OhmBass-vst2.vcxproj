@@ -146,6 +146,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>$(VST_DEFS);$(DEBUG_DEFS);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(APP_INCLUDES);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -236,17 +237,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST.h" />
+    <ClInclude Include="controlsManager.h" />
+    <ClInclude Include="ControlsModel.h" />
+    <ClInclude Include="graphicsModel.h" />
+    <ClInclude Include="ModAmpEnvelope.h" />
+    <ClInclude Include="ModEQuilibrium.h" />
+    <ClInclude Include="ModFilters.h" />
+    <ClInclude Include="ModGainFaders.h" />
+    <ClInclude Include="ModOscillators.h" />
+    <ClInclude Include="ModulesManager.h" />
+    <ClInclude Include="ModulesModel.h" />
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugVST.cpp" />
     <ClCompile Include="controlsManager.cpp" />
+    <ClCompile Include="ControlsModel.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />
     <ClCompile Include="Filter.cpp" />
-    <ClCompile Include="GhrrEQuilibrium.cpp" />
-    <ClCompile Include="GhrrManager.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
+    <ClCompile Include="GraphicsModel.cpp" />
+    <ClCompile Include="ModAmpEnvelope.cpp" />
+    <ClCompile Include="ModEQuilibrium.cpp" />
+    <ClCompile Include="ModFilters.cpp" />
+    <ClCompile Include="ModGainFaders.cpp" />
+    <ClCompile Include="ModOscillators.cpp" />
+    <ClCompile Include="ModulesManager.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="MIDIReceiver.cpp" />
     <ClCompile Include="Oscillator.cpp" />

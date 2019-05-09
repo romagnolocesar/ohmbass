@@ -3,6 +3,7 @@
 
 #include "PolyBLEPOscillator.h"
 #include "EnvelopeGenerator.h"
+#include "ModEQuilibrium.h"
 #include "Filter.h"
 
 class Voice
@@ -19,6 +20,8 @@ public:
 		mOscilatorOneOutput(0.8),
 		mOscilatorTwoOutput(0.0),
 		mLFOValue(0.0),
+		mEQuilibriumLowFreq(0.01),
+		mEQuilibriumLowGain(0.01),
 	isActive(false) {
 		// Set myself free everytime my volume envelope has fully faded out of RELEASE stage:
 		mVolumeEnvelope.finishedEnvelopeCycle.Connect(this, &Voice::setFree);
@@ -26,6 +29,8 @@ public:
 
 	inline void setFilterEnvelopeAmount(double amount) { mFilterEnvelopeAmount = amount; }
 	inline void setFilterLFOAmount(double amount) { mFilterLFOAmount = amount; }
+	inline void setEQuilibriumLowGain(double amount) { mEQuilibriumLowGain = amount; }
+	inline void setEQuilibriumLowFreq(double amount) { mEQuilibriumLowFreq = amount; }
 	inline void setOscillatorOnePitchAmount(double amount) { mOscillatorOnePitchAmount = amount; }
 	inline void setOscillatorTwoPitchAmount(double amount) { mOscillatorTwoPitchAmount = amount; }
 	inline void setOscillatorOneOutput(double amount) { mOscilatorOneOutput = amount; }
@@ -48,6 +53,7 @@ private:
 	PolyBLEPOscillator mOscillatorTwo;
 	EnvelopeGenerator mVolumeEnvelope;
 	EnvelopeGenerator mFilterEnvelope;
+	ModEQuilibrium mEQuilibrium;
 	Filter mFilter;
 	int mNoteNumber;
 	int mVelocity;
@@ -58,6 +64,8 @@ private:
 	double mFilterLFOAmount;
 	double mOscillatorOnePitchAmount;
 	double mOscillatorTwoPitchAmount;
+	double mEQuilibriumLowFreq;
+	double mEQuilibriumLowGain;
 	double mLFOValue;
 	bool isActive;
 };

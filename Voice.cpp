@@ -7,20 +7,23 @@ double Voice::nextSample() {
 
 	double oscillatorOneOutput = mOscillatorOne.nextSample();
 	double oscillatorTwoOutput = mOscillatorTwo.nextSample();
-	//Old way, when you use percentage for sum two oscilator
-	//double oscillatorSum = ((1 - mOscillatorMix) * oscillatorOneOutput) + (mOscillatorMix * oscillatorTwoOutput); 
-	//Actiohm way, independent outputs
+
 	double oscillatorSum = (oscillatorOneOutput*mOscilatorOneOutput) + (oscillatorTwoOutput*mOscilatorTwoOutput);
 
 	double volumeEnvelopeValue = mVolumeEnvelope.nextSample();
 	double filterEnvelopeValue = mFilterEnvelope.nextSample();
 
+	double CutoffEquilibriumLow = mEQuilibriumLowFreq;
+
+
 	mFilter.setCutoffMod(filterEnvelopeValue * mFilterEnvelopeAmount + mLFOValue * mFilterLFOAmount);
+	mFilter.setCutoffEquilibriumLow(CutoffEquilibriumLow);
 
 	mOscillatorOne.setPitchMod(mLFOValue * mOscillatorOnePitchAmount);
 	mOscillatorTwo.setPitchMod(mLFOValue * mOscillatorTwoPitchAmount);
 
-	return mFilter.process(oscillatorSum * volumeEnvelopeValue * mVelocity / 127.0);
+
+	return mFilter.process((oscillatorSum * volumeEnvelopeValue * mVelocity / 127.0), mEQuilibriumLowGain);
 }
 
 void Voice::setFree() {

@@ -11,14 +11,30 @@
     <ClCompile Include="PolyBLEPOscillator.cpp" />
     <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugVST.cpp" />
     <ClCompile Include="controlsManager.cpp" />
+    <ClCompile Include="ModulesManager.cpp" />
+    <ClCompile Include="ModEQuilibrium.cpp" />
+    <ClCompile Include="GraphicsModel.cpp" />
+    <ClCompile Include="ModOscillators.cpp" />
+    <ClCompile Include="ModGainFaders.cpp" />
+    <ClCompile Include="ModFilters.cpp" />
+    <ClCompile Include="ModAmpEnvelope.cpp" />
+    <ClCompile Include="ControlsModel.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
-    <ClCompile Include="GhrrEQuilibrium.cpp" />
-    <ClCompile Include="GhrrManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST.h" />
+    <ClInclude Include="graphicsModel.h" />
+    <ClInclude Include="ModulesModel.h" />
+    <ClInclude Include="ModulesManager.h" />
+    <ClInclude Include="ModOscillators.h" />
+    <ClInclude Include="ModGainFaders.h" />
+    <ClInclude Include="ModFilters.h" />
+    <ClInclude Include="ModEQuilibrium.h" />
+    <ClInclude Include="ModAmpEnvelope.h" />
+    <ClInclude Include="ControlsModel.h" />
+    <ClInclude Include="controlsManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />
