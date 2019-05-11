@@ -122,14 +122,16 @@ void OhmBass::CreatePresets() {
 
 void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames)
 {
-	Biquad * filterPeakLow = iModEQuilibrium->filterPeakLow;
+	//Update GhrrPlace (EQLIBRIUM) Filters
+	Biquad * filterGainLow = iModEQuilibrium->filterPeakLow;
+
 	// Mutex is already locked for us.
 	double *leftOutput = outputs[0];
 	double *rightOutput = outputs[1];
 	processVirtualKeyboard();
 	for (int i = 0; i < nFrames; ++i) {
 		mMIDIReceiver.advance();
-		leftOutput[i] = rightOutput[i] = voiceManager.nextSample(filterPeakLow);
+		leftOutput[i] = rightOutput[i] = voiceManager.nextSample(filterGainLow);
 	}
 
 	mMIDIReceiver.Flush(nFrames);
