@@ -3,22 +3,22 @@
 
 void ModEQuilibrium::setLowFreq(double newLowFreq)
 {
-	this->lowFreq = newLowFreq;
+	lowFreq = newLowFreq;
 }
 
 void ModEQuilibrium::setLowBoost(double newLowBoost)
 {
-	this->lowBoost = newLowBoost;
+	lowBoost = newLowBoost;
 }
 
 void ModEQuilibrium::setHighFreq(double newHighFreq)
 {
-	this->highFreq = newHighFreq;
+	highFreq = newHighFreq;
 }
 
 void ModEQuilibrium::setHighShelf(double newHighShelf)
 {
-	this->highShelf = newHighShelf;
+	highShelf = newHighShelf;
 }
 
 double ModEQuilibrium::getLowFreq()
@@ -28,17 +28,17 @@ double ModEQuilibrium::getLowFreq()
 
 double ModEQuilibrium::getLowBoost()
 {
-	return this->lowBoost;
+	return lowBoost;
 }
 
 double ModEQuilibrium::getHighFreq()
 {
-	return this->highFreq;
+	return highFreq;
 }
 
 double ModEQuilibrium::getHighShelf()
 {
-	return this->highShelf;
+	return highShelf;
 }
 
 void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
@@ -65,11 +65,12 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 		GraphicsModel::KNOBMULTICONTROLPARAM
 	);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql Low freq", 560, 640, 0.1, 0.1, 0.99, iGraphic);
-	myControl->setShape(2.0);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql Low freq", 560, 640, 2000.0, 20.0, 20000.0, iGraphic);
+	myControl->setShape(3.0);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low boost", 639, 640, 0.01, 0.01, 0.99, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low boost", 639, 640, 0.0, -6.0, 20.0, iGraphic);
+	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 0.5, 0.0, 1.0, iGraphic);
@@ -77,6 +78,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg shelf", 797, 640, 0.1, 0.0, 1.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
+
 
 }
 
@@ -105,6 +107,18 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 
 	iControlsManager->AddControlsCollection(control);
 	iGraphicsManager->pGraphics->AttachControl(control);
+
+	
+}
+
+void ModEQuilibrium::updateLowFilterValues() {
+	//Biquad *filterPeakLow = new Biquad(bq_type_peak, 2000.0 /*lowFreq*/ / 44100, 12.0, 20.0/*lowBoost*/);
+	filterPeakLow->setType(bq_type_peak);
+	filterPeakLow->setFc(getLowFreq() /44100);
+	//this->filterPeakLow->setFc(2000.0 / 44100);
+	filterPeakLow->setQ(12.0);
+	//this->filterPeakLow->setPeakGain(*lowBoost);
+	filterPeakLow->setPeakGain(getLowBoost());
 }
 
 void ModEQuilibrium::process() {

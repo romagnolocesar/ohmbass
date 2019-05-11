@@ -251,6 +251,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugVST.cpp" />
+    <ClCompile Include="Biquad.cpp" />
     <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="ControlsModel.cpp" />
     <ClCompile Include="EnvelopeGenerator.cpp" />

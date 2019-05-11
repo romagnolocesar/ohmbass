@@ -25,6 +25,7 @@ public:
 		mVolumeEnvelope.finishedEnvelopeCycle.Connect(this, &Voice::setFree);
 	};
 
+
 	inline void setFilterEnvelopeAmount(double amount) { mFilterEnvelopeAmount = amount; }
 	inline void setFilterLFOAmount(double amount) { mFilterLFOAmount = amount; }
 	inline void setOscillatorOnePitchAmount(double amount) { mOscillatorOnePitchAmount = amount; }
@@ -39,7 +40,7 @@ public:
 		mOscillatorOne.setFrequency(frequency);
 		mOscillatorTwo.setFrequency(frequency);
 	}
-	double nextSample();
+	double nextSample(Biquad * filterPeakLow);
 	void setFree();
 	void reset();
 
@@ -49,7 +50,6 @@ private:
 	PolyBLEPOscillator mOscillatorTwo;
 	EnvelopeGenerator mVolumeEnvelope;
 	EnvelopeGenerator mFilterEnvelope;
-	ModEQuilibrium mEQuilibrium;
 	Filter mFilter;
 	int mNoteNumber;
 	int mVelocity;

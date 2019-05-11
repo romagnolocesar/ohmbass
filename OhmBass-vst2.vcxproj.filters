@@ -19,6 +19,7 @@
     <ClCompile Include="ModAmpEnvelope.cpp" />
     <ClCompile Include="ControlsModel.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
+    <ClCompile Include="Biquad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />

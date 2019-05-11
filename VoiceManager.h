@@ -9,9 +9,10 @@
 
 class VoiceManager {
 public:
+	double EQuilibriumLowFreq, EQuilibriumLowGain;
 	void onNoteOn(int noteNumber, int velocity);
 	void onNoteOff(int noteNumber, int velocity);
-	double nextSample();
+	double nextSample(Biquad * filter);
 
 	void setSampleRate(double sampleRate) {
 		EnvelopeGenerator::setSampleRate(sampleRate);
@@ -36,6 +37,12 @@ public:
 	// Functions to change a single voice:
 	static void setVolumeEnvelopeStageValue(Voice& voice, EnvelopeGenerator::EnvelopeStage stage, double value) {
 		voice.mVolumeEnvelope.setStageValue(stage, value);
+	}
+	void setEQuilibriumLowFreq(double amount) { 
+		this->EQuilibriumLowFreq = amount;
+	}
+	void setEQuilibriumLowGain(double amount) {
+		this->EQuilibriumLowGain = amount;
 	}
 	static void setFilterEnvelopeStageValue(Voice& voice, EnvelopeGenerator::EnvelopeStage stage, double value) {
 		voice.mFilterEnvelope.setStageValue(stage, value);

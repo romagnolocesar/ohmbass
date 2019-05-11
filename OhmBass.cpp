@@ -9,6 +9,7 @@
 #include <math.h>
 #include <algorithm>
 
+
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
 const int kNumParams = 47; //Qtd for params
@@ -26,6 +27,8 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iModFilters->init(iControlsManager, iGraphicsManager);
 	iModAmpEnvelope->init(iControlsManager, iGraphicsManager);
 	iModEQuilibrium->init(iControlsManager, iGraphicsManager);
+
+
 	
 	//create all params
 	iControlsManager->createParams(this);
@@ -37,6 +40,9 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Creating a Collection of IControls objects
 	doModelsControlsInIControlsCollection();
 
+	//Set default params on Filters (BiQuad Filter)
+	iModEQuilibrium->updateLowFilterValues();
+
 
 	iGraphicsManager->loadKeyboard();
 	
@@ -46,11 +52,13 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
 
+
 	//Create all default presets
 	CreatePresets();
 
 	//Flag to indicate when the plugin was full started
 	isPluginInitialized = TRUE;
+
 
 	//Fills
 	if (isPluginInitialized) {
@@ -114,14 +122,14 @@ void OhmBass::CreatePresets() {
 
 void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames)
 {
+	Biquad * filterPeakLow = iModEQuilibrium->filterPeakLow;
 	// Mutex is already locked for us.
-
 	double *leftOutput = outputs[0];
 	double *rightOutput = outputs[1];
 	processVirtualKeyboard();
 	for (int i = 0; i < nFrames; ++i) {
 		mMIDIReceiver.advance();
-		leftOutput[i] = rightOutput[i] = voiceManager.nextSample();
+		leftOutput[i] = rightOutput[i] = voiceManager.nextSample(filterPeakLow);
 	}
 
 	mMIDIReceiver.Flush(nFrames);
@@ -229,9 +237,13 @@ void OhmBass::OnParamChange(int paramIdx)
 	}
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::EQUILIBRIUM) {
 		if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Eql Low freq") == 0){
+			this->voiceManager.setEQuilibriumLowFreq(param->Value());
 			iModEQuilibrium->setLowFreq(param->Value());
+			iModEQuilibrium->updateLowFilterValues();
 		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Bost Low boost") == 0){
+			this->voiceManager.setEQuilibriumLowGain(param->Value());
 			iModEQuilibrium->setLowBoost(param->Value());
+			iModEQuilibrium->updateLowFilterValues();
 		}
 		
 	}

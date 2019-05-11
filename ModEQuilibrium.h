@@ -13,6 +13,8 @@ public:
 	GraphicsModel* iGraphic;
 
 
+
+
 	void setLowFreq(double newLowFreq);
 	void setLowBoost(double newLowBoost);
 	void setHighFreq(double newHighFreq);
@@ -26,13 +28,21 @@ public:
 	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
 
+	void updateLowFilterValues();
+
 	void process();
+
+	//EQuilibrium Filterzzzzz
+	Biquad *filterPeakLow = new Biquad();
 
 	
  
 	
 private:
-	double lowFreq, lowBoost, highFreq, highShelf;
+	double lowFreq;
+	double lowBoost;
+	double highFreq;
+	double highShelf;
 };
 
 

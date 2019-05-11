@@ -2,7 +2,7 @@
 
 
 
-double Voice::nextSample() {
+double Voice::nextSample(Biquad * filterPeakLow) {
 	if (!isActive) return 0.0;
 
 	double oscillatorOneOutput = mOscillatorOne.nextSample();
@@ -13,15 +13,12 @@ double Voice::nextSample() {
 	double volumeEnvelopeValue = mVolumeEnvelope.nextSample();
 	double filterEnvelopeValue = mFilterEnvelope.nextSample();
 
-
-
 	mFilter.setCutoffMod(filterEnvelopeValue * mFilterEnvelopeAmount + mLFOValue * mFilterLFOAmount);
 
 	mOscillatorOne.setPitchMod(mLFOValue * mOscillatorOnePitchAmount);
 	mOscillatorTwo.setPitchMod(mLFOValue * mOscillatorTwoPitchAmount);
 
-
-	return mFilter.process(oscillatorSum * volumeEnvelopeValue * mVelocity / 127.0);
+	return filterPeakLow->process(mFilter.process(oscillatorSum * volumeEnvelopeValue * mVelocity / 127.0));
 }
 
 void Voice::setFree() {
