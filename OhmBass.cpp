@@ -4,8 +4,9 @@
 #pragma clang diagnostic ignored "-Wmain"
 #include "IPlug_include_in_plug_src.h"
 #pragma clang diagnostic pop
-#include "resource.h"
 #include "IKeyboardControl.h"
+#include "resource.h"
+
 #include <math.h>
 #include <algorithm>
 
@@ -69,8 +70,17 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 
+	//Set my APP Storage
+	/*OhmBass::iOhmBass = this;*/
+
 }
 OhmBass::~OhmBass() {}
+
+//Get my Plugin APP instance
+//OhmBass* OhmBass::GetInstance() {
+//	return iOhmBass;
+//}
+
 
 void OhmBass::CreateMainDisplay() {
 	iGraphicsManager->pGraphics = MakeGraphics(this, iGraphicsManager->kWidth, iGraphicsManager->kHeight);
@@ -122,8 +132,6 @@ void OhmBass::CreatePresets() {
 
 void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames)
 {
-	//Update GhrrPlace (EQLIBRIUM) Filters
-	Biquad * filterGainLow = iModEQuilibrium->filterPeakLow;
 
 	// Mutex is already locked for us.
 	double *leftOutput = outputs[0];
@@ -131,7 +139,7 @@ void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFra
 	processVirtualKeyboard();
 	for (int i = 0; i < nFrames; ++i) {
 		mMIDIReceiver.advance();
-		leftOutput[i] = rightOutput[i] = voiceManager.nextSample(filterGainLow);
+		leftOutput[i] = rightOutput[i] = voiceManager.nextSample();
 	}
 
 	mMIDIReceiver.Flush(nFrames);

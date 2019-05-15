@@ -1,4 +1,4 @@
-#ifndef __OHMBASS_H
+#ifndef __OHMBASS__
 #define __OHMBASS__
 #include "IPlug_include_in_plug_hdr.h"
 #pragma clang diagnostic pop
@@ -19,13 +19,23 @@
 #include "MIDIReceiver.h"
 #include <functional>
 
+
+
 class OhmBass : public IPlug
 {
+//protected:
+//	static OhmBass iOhmBass;
 public:
+	
+
+	/*OhmBass* OhmBass::GetInstance();*/
+
 	OhmBass(IPlugInstanceInfo instanceInfo);
+
+
 	~OhmBass();
 
-	//Helpers for managers elements
+	//Managers
 	controlsManager* iControlsManager = new controlsManager();
 	graphicsManager* iGraphicsManager = new graphicsManager();
 
@@ -59,6 +69,8 @@ public:
 
 	
 private:
+	
+
 	bool isParametersInitialized = FALSE; // All parameters were trigged when opening the GUI for the first time
 	double mFrequency;
 	void CreatePresets();

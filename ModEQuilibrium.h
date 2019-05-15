@@ -13,8 +13,6 @@ public:
 	GraphicsModel* iGraphic;
 
 
-
-
 	void setLowFreq(double newLowFreq);
 	void setLowBoost(double newLowBoost);
 	void setHighFreq(double newHighFreq);

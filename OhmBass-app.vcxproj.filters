@@ -22,6 +22,9 @@
     <Filter Include="Helpers">
       <UniqueIdentifier>{bc94787a-1b8d-4b2d-9616-4ef0fff1e07d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{a185c7e8-c74f-4e59-b7c6-16ca8a8182b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_wrapper\app_main.h">
@@ -35,9 +38,6 @@
     <ClInclude Include="EnvelopeGenerator.h" />
     <ClInclude Include="Filter.h" />
     <ClInclude Include="Voice.h" />
-    <ClInclude Include="VoiceManager.h" />
-    <ClInclude Include="controlsManager.h" />
-    <ClInclude Include="graphicsManager.h" />
     <ClInclude Include="ModEQuilibrium.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -98,15 +98,20 @@
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugStandalone.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="PolyBLEPOscillator.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="VectorLib.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Biquad.h">
-      <Filter>Helpers</Filter>
+    <ClInclude Include="PolyBLEPOscillator.h" />
+    <ClInclude Include="controlsManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="graphicsManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="VoiceManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Biquad.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -121,9 +126,6 @@
     <ClCompile Include="EnvelopeGenerator.cpp" />
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="Voice.cpp" />
-    <ClCompile Include="VoiceManager.cpp" />
-    <ClCompile Include="controlsManager.cpp" />
-    <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="ModEQuilibrium.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -163,12 +165,17 @@
     <ClCompile Include="..\..\SDKs\WDL\IPlug\IPlugStandalone.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="PolyBLEPOscillator.cpp">
-      <Filter>Helpers</Filter>
+    <ClCompile Include="PolyBLEPOscillator.cpp" />
+    <ClCompile Include="controlsManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Biquad.cpp">
-      <Filter>Helpers</Filter>
+    <ClCompile Include="graphicsManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="VoiceManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Biquad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />
