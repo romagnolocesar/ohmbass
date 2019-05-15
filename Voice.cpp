@@ -5,7 +5,7 @@
 double Voice::nextSample() {
 	if (!isActive) return 0.0;
 
-	Biquad * filterGainLow;
+	//Biquad * filterGainLow;
 
 	double oscillatorOneOutput = mOscillatorOne.nextSample();
 	double oscillatorTwoOutput = mOscillatorTwo.nextSample();

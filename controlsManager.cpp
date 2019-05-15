@@ -1,4 +1,3 @@
-#include "OhmBass.h"
 #include "controlsManager.h"
 
 void controlsManager::addParam(

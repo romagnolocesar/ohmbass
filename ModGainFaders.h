@@ -21,7 +21,7 @@ public:
 
 	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
-	void fillSetOfFaders(IPlug* myOhmBass, controlsManager* iControlsManager);
+	void fillSetOfFaders(controlsManager* iControlsManager);
 	void ToggleFaders(controlsManager* IControlsManager, int nOsc, int idxWaveMode, IParam* param);
 	void OnParamChange(controlsManager* IControlsManager, int paramIdx, bool isPluginInitialized, IParam* param);
 };

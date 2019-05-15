@@ -3,7 +3,6 @@
 
 #include "PolyBLEPOscillator.h"
 #include "EnvelopeGenerator.h"
-#include "ModEQuilibrium.h"
 #include "Filter.h"
 
 class Voice

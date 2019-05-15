@@ -18,7 +18,7 @@ public:
 
 	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
-	void fillSetOfWavesIcons(IPlug* myOhmBass, controlsManager* iControlsManager);
+	void fillSetOfWavesIcons(controlsManager* iControlsManager);
 	void OnParamChange(controlsManager* IControlsManager, int paramIdx, int idxWaveMode, bool isPluginInitialized);
 	void ToggleIconsWavesButtons(controlsManager* IControlsManager, int nOsc, int idxWaveMode);
 };

@@ -157,7 +157,7 @@ void ModOscillators::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 	iGraphicsManager->pGraphics->AttachControl(control);
 }
 
-void ModOscillators::fillSetOfWavesIcons(IPlug* myOhmBass, controlsManager* iControlsManager) {
+void ModOscillators::fillSetOfWavesIcons(controlsManager* iControlsManager) {
 	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
 		IParam * param;
 		param = iControlsManager->controlsCollection[i]->GetParam();

@@ -5,14 +5,9 @@
 //Managers
 #include "controlsManager.h"
 #include "graphicsManager.h"
-//#include "ModulesModel.h"
+#include "modulesManager.h"
 
-//Modules
-#include "ModOscillators.h"
-#include "ModGainFaders.h"
-#include "ModFilters.h"
-#include "ModAmpEnvelope.h"
-#include "ModEQuilibrium.h"
+
 //Voices
 #include "VoiceManager.h"
 //MIDI
@@ -38,14 +33,8 @@ public:
 	//Managers
 	controlsManager* iControlsManager = new controlsManager();
 	graphicsManager* iGraphicsManager = new graphicsManager();
+	modulesManager* iModulesManager = new modulesManager();
 
-	//Create Modules
-	ModOscillators* iModOscillators = new ModOscillators();
-	ModGainFaders* iModGainFaders = new ModGainFaders();
-	ModFilters* iModFilters = new ModFilters();
-	ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
-	ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
-		
 
 	void Reset();
 	void OnParamChange(int paramIdx);

@@ -112,6 +112,9 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Biquad.h" />
+    <ClInclude Include="modulesManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -176,6 +179,9 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Biquad.cpp" />
+    <ClCompile Include="modulesManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />

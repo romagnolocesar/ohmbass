@@ -291,6 +291,7 @@
     <ClInclude Include="ModFilters.h" />
     <ClInclude Include="ModGainFaders.h" />
     <ClInclude Include="ModOscillators.h" />
+    <ClInclude Include="modulesManager.h" />
     <ClInclude Include="ModulesModel.h" />
     <ClInclude Include="graphicsManager.h" />
     <ClInclude Include="OhmBass.h" />
@@ -324,6 +325,7 @@
     <ClCompile Include="ModFilters.cpp" />
     <ClCompile Include="ModGainFaders.cpp" />
     <ClCompile Include="ModOscillators.cpp" />
+    <ClCompile Include="modulesManager.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="MIDIReceiver.cpp" />

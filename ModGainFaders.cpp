@@ -62,7 +62,7 @@ void ModGainFaders::doModelsControlsInIControlsCollection(IPlug* myOhmBass, cont
 	iGraphicsManager->pGraphics->AttachControl(control);
 }
 
-void ModGainFaders::fillSetOfFaders(IPlug* myOhmBass, controlsManager* iControlsManager) {
+void ModGainFaders::fillSetOfFaders(controlsManager* iControlsManager) {
 	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
 		IParam * param;
 		param = iControlsManager->controlsCollection[i]->GetParam();
