@@ -115,7 +115,8 @@ void ModEQuilibrium::updateLowFilterValues() {
 	//Biquad *filterPeakLow = new Biquad(bq_type_peak, 2000.0 /*lowFreq*/ / 44100, 12.0, 20.0/*lowBoost*/);
 	filterPeakLow->setType(bq_type_peak);
 	filterPeakLow->setFc(getLowFreq() /44100);
-	filterPeakLow->setQ(0.0027 * getLowFreq()); //Razão para um bom Q
+	//filterPeakLow->setQ(0.0027 * getLowFreq()); //Razão para um bom Q
+	filterPeakLow->setQ(0.01 * getLowFreq()); //Razão para um bom Q
 	filterPeakLow->setPeakGain(getLowBoost());
 }
 

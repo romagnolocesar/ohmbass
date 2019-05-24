@@ -20,6 +20,7 @@
     <ClCompile Include="ControlsModel.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="Biquad.cpp" />
+    <ClCompile Include="modulesManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />

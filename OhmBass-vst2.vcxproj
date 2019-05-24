@@ -263,6 +263,7 @@
     <ClCompile Include="ModFilters.cpp" />
     <ClCompile Include="ModGainFaders.cpp" />
     <ClCompile Include="ModOscillators.cpp" />
+    <ClCompile Include="modulesManager.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="MIDIReceiver.cpp" />
     <ClCompile Include="Oscillator.cpp" />

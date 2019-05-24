@@ -12,7 +12,7 @@ public:
 	double EQuilibriumLowFreq, EQuilibriumLowGain;
 	void onNoteOn(int noteNumber, int velocity);
 	void onNoteOff(int noteNumber, int velocity);
-	double nextSample();
+	double nextSample(Biquad * filterGainLow);
 
 	void setSampleRate(double sampleRate) {
 		EnvelopeGenerator::setSampleRate(sampleRate);

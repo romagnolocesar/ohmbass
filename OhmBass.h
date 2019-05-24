@@ -18,12 +18,8 @@
 
 class OhmBass : public IPlug
 {
-//protected:
-//	static OhmBass iOhmBass;
 public:
 	
-
-	/*OhmBass* OhmBass::GetInstance();*/
 
 	OhmBass(IPlugInstanceInfo instanceInfo);
 

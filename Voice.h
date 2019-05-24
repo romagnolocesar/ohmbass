@@ -3,6 +3,7 @@
 
 #include "PolyBLEPOscillator.h"
 #include "EnvelopeGenerator.h"
+#include "ModEQuilibrium.h"
 #include "Filter.h"
 
 class Voice
@@ -39,7 +40,7 @@ public:
 		mOscillatorOne.setFrequency(frequency);
 		mOscillatorTwo.setFrequency(frequency);
 	}
-	double nextSample();
+	double nextSample(Biquad * filterPeakLows);
 	void setFree();
 	void reset();
 

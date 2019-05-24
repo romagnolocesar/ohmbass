@@ -38,7 +38,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	doModelsControlsInIControlsCollection();
 
 	//Set default params on Filters (BiQuad Filter)
-	//iModEQuilibrium->updateLowFilterValues();
+	iModulesManager->iModEQuilibrium->updateLowFilterValues();
 
 
 	iGraphicsManager->loadKeyboard();
@@ -65,16 +65,8 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 
-	//Set my APP Storage
-	/*OhmBass::iOhmBass = this;*/
-
 }
 OhmBass::~OhmBass() {}
-
-//Get my Plugin APP instance
-//OhmBass* OhmBass::GetInstance() {
-//	return iOhmBass;
-//}
 
 
 void OhmBass::CreateMainDisplay() {
@@ -128,13 +120,16 @@ void OhmBass::CreatePresets() {
 void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames)
 {
 
+	//Update GhrrPlace (EQLIBRIUM) Filters	
+	Biquad * filterGainLow = iModulesManager->iModEQuilibrium->filterPeakLow;
+
 	// Mutex is already locked for us.
 	double *leftOutput = outputs[0];
 	double *rightOutput = outputs[1];
 	processVirtualKeyboard();
 	for (int i = 0; i < nFrames; ++i) {
 		mMIDIReceiver.advance();
-		leftOutput[i] = rightOutput[i] = voiceManager.nextSample();
+		leftOutput[i] = rightOutput[i] = voiceManager.nextSample(filterGainLow);
 	}
 
 	mMIDIReceiver.Flush(nFrames);
@@ -243,13 +238,12 @@ void OhmBass::OnParamChange(int paramIdx)
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::EQUILIBRIUM) {
 		if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Eql Low freq") == 0){
 			this->voiceManager.setEQuilibriumLowFreq(param->Value());
-			iModulesManager->iModEQuilibrium->setLowFreq(param->Value());
-			iModulesManager->iModEQuilibrium->updateLowFilterValues();
+			iModulesManager->iModEQuilibrium->setLowFreq(param->Value());	
 		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Bost Low boost") == 0){
 			this->voiceManager.setEQuilibriumLowGain(param->Value());
 			iModulesManager->iModEQuilibrium->setLowBoost(param->Value());
-			iModulesManager->iModEQuilibrium->updateLowFilterValues();
 		}
+		iModulesManager->iModEQuilibrium->updateLowFilterValues();
 		
 	}
 	if (changer) {
