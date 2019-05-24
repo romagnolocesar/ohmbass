@@ -9,10 +9,10 @@
 
 class VoiceManager {
 public:
-	double EQuilibriumLowFreq, EQuilibriumLowGain;
+	double EQuilibriumLowFreq, EQuilibriumLowGain, EQuilibriumHighFreq, EQuilibriumHighShelf;
 	void onNoteOn(int noteNumber, int velocity);
 	void onNoteOff(int noteNumber, int velocity);
-	double nextSample(Biquad * filterGainLow);
+	double nextSample(Biquad * filterGainLow, Biquad * filterShelfHigh);
 
 	void setSampleRate(double sampleRate) {
 		EnvelopeGenerator::setSampleRate(sampleRate);
@@ -43,6 +43,12 @@ public:
 	}
 	void setEQuilibriumLowGain(double amount) {
 		this->EQuilibriumLowGain = amount;
+	}
+	void setHighFreq(double amount) {
+		this->EQuilibriumHighFreq = amount;
+	}
+	void setHighShelf(double amount) {
+		this->EQuilibriumHighShelf = amount;
 	}
 	static void setFilterEnvelopeStageValue(Voice& voice, EnvelopeGenerator::EnvelopeStage stage, double value) {
 		voice.mFilterEnvelope.setStageValue(stage, value);

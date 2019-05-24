@@ -35,13 +35,13 @@ void VoiceManager::onNoteOff(int noteNumber, int velocity) {
 	}
 }
 
-double VoiceManager::nextSample(Biquad * filterGainLow) {
+double VoiceManager::nextSample(Biquad * filterGainLow, Biquad * filterShelfHigh) {
 	double output = 0.0;
 	double lfoValue = mLFO.nextSample();
 	for (int i = 0; i < NumberOfVoices; i++) {
 		Voice& voice = voices[i];
 		voice.setLFOValue(lfoValue);
-		output += voice.nextSample(filterGainLow);
+		output += voice.nextSample(filterGainLow, filterShelfHigh);
 	}
 	return output;
 }

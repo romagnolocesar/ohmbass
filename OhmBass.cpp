@@ -122,6 +122,7 @@ void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFra
 
 	//Update GhrrPlace (EQLIBRIUM) Filters	
 	Biquad * filterGainLow = iModulesManager->iModEQuilibrium->filterPeakLow;
+	Biquad * filterGainHigh = iModulesManager->iModEQuilibrium->filterPeakHigh;
 
 	// Mutex is already locked for us.
 	double *leftOutput = outputs[0];
@@ -129,7 +130,7 @@ void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFra
 	processVirtualKeyboard();
 	for (int i = 0; i < nFrames; ++i) {
 		mMIDIReceiver.advance();
-		leftOutput[i] = rightOutput[i] = voiceManager.nextSample(filterGainLow);
+		leftOutput[i] = rightOutput[i] = voiceManager.nextSample(filterGainLow, filterGainHigh);
 	}
 
 	mMIDIReceiver.Flush(nFrames);
@@ -239,11 +240,24 @@ void OhmBass::OnParamChange(int paramIdx)
 		if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Eql Low freq") == 0){
 			this->voiceManager.setEQuilibriumLowFreq(param->Value());
 			iModulesManager->iModEQuilibrium->setLowFreq(param->Value());	
-		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Bost Low boost") == 0){
+			iModulesManager->iModEQuilibrium->updateLowFilterValues();
+		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Bost Low boost") == 0){
 			this->voiceManager.setEQuilibriumLowGain(param->Value());
 			iModulesManager->iModEQuilibrium->setLowBoost(param->Value());
+			iModulesManager->iModEQuilibrium->updateLowFilterValues();
 		}
-		iModulesManager->iModEQuilibrium->updateLowFilterValues();
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Eql High freq") == 0) {
+			this->voiceManager.setHighFreq(param->Value());
+			iModulesManager->iModEQuilibrium->setHighFreq(param->Value());
+			iModulesManager->iModEQuilibrium->updateHighFilterValues();
+		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Shelf Hihg shelf") == 0) {
+			this->voiceManager.setHighShelf(param->Value());
+			iModulesManager->iModEQuilibrium->setHighShelf(param->Value());
+			iModulesManager->iModEQuilibrium->updateHighFilterValues();
+		}
+		
 		
 	}
 	if (changer) {

@@ -1,3 +1,5 @@
 ===TODO====
 Revisar a formula da onda Triangulo.
 Alinhar as teclas do teclado.
+EQ Librium alterando pitch quando toca as notas rapido demais
+EQ LIBRIUM filtros paralelos soando estranho

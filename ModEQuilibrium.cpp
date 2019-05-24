@@ -65,7 +65,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 		GraphicsModel::KNOBMULTICONTROLPARAM
 	);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql Low freq", 560, 640, 200.0, 150.0, 350.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql Low freq", 560, 640, 150.0, 150.0, 350.0, iGraphic);
 	myControl->setShape(3.0);
 	IControlsManager->AddModelsCollection(myControl);
 
@@ -73,10 +73,12 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 0.5, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 418.6, 418.6, 790.2, iGraphic);
+	myControl->setShape(3.0);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg shelf", 797, 640, 0.1, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg shelf", 797, 640, 0.0, 0.0, 10.0, iGraphic);
+	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
 
@@ -116,8 +118,15 @@ void ModEQuilibrium::updateLowFilterValues() {
 	filterPeakLow->setType(bq_type_peak);
 	filterPeakLow->setFc(getLowFreq() /44100);
 	//filterPeakLow->setQ(0.0027 * getLowFreq()); //Razão para um bom Q
-	filterPeakLow->setQ(0.01 * getLowFreq()); //Razão para um bom Q
+	filterPeakLow->setQ(0.01 * getLowFreq());
 	filterPeakLow->setPeakGain(getLowBoost());
+}
+
+void ModEQuilibrium::updateHighFilterValues() {
+	filterPeakHigh->setType(bq_type_peak);
+	filterPeakHigh->setFc((getHighFreq()*10) / 44100);
+	filterPeakHigh->setQ(0.9);
+	filterPeakHigh->setPeakGain(getHighShelf()*10);
 }
 
 void ModEQuilibrium::process() {

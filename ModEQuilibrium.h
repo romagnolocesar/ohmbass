@@ -27,11 +27,13 @@ public:
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
 
 	void updateLowFilterValues();
+	void updateHighFilterValues();
 
 	void process();
 
 	//EQuilibrium Filterzzzzz
 	Biquad *filterPeakLow = new Biquad();
+	Biquad *filterPeakHigh = new Biquad();
 
 	
  
