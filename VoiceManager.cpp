@@ -16,6 +16,7 @@ void VoiceManager::onNoteOn(int noteNumber, int velocity) {
 	if (!voice) {
 		return;
 	}
+	
 	voice->reset();
 	voice->setNoteNumber(noteNumber);
 	voice->mVelocity = velocity;
@@ -35,13 +36,13 @@ void VoiceManager::onNoteOff(int noteNumber, int velocity) {
 	}
 }
 
-double VoiceManager::nextSample(Biquad * filterGainLow, Biquad * filterShelfHigh) {
+double VoiceManager::nextSample() {
 	double output = 0.0;
 	double lfoValue = mLFO.nextSample();
 	for (int i = 0; i < NumberOfVoices; i++) {
 		Voice& voice = voices[i];
 		voice.setLFOValue(lfoValue);
-		output += voice.nextSample(filterGainLow, filterShelfHigh);
+		output += voice.nextSample();
 	}
-	return output;
+	return output * 0.3; // 30% of AMP total 
 }

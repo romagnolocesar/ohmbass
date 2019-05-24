@@ -70,7 +70,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	IControlsManager->AddModelsCollection(myControl);
 
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low boost", 639, 640, 0.0, 0.0, 10.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low boost", 639, 640, 0.0, 0.0, 20.0, iGraphic);
 	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
@@ -78,7 +78,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl->setShape(3.0);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg shelf", 797, 640, 0.0, 0.0, 10.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg shelf", 797, 640, 0.0, 0.0, 20.0, iGraphic);
 	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
@@ -126,7 +126,7 @@ void ModEQuilibrium::updateLowFilterValues() {
 void ModEQuilibrium::updateHighFilterValues() {
 	filterPeakHigh->setType(bq_type_peak);
 	filterPeakHigh->setFc((getHighFreq()*10) / 44100);
-	filterPeakHigh->setQ(3.0);
+	filterPeakHigh->setQ(1.3);
 	filterPeakHigh->setPeakGain(getHighShelf());
 }
 

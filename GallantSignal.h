@@ -80,8 +80,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 
@@ -151,8 +151,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 
@@ -222,8 +222,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 
@@ -293,8 +293,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 
@@ -364,8 +364,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 
@@ -435,8 +435,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 
@@ -506,8 +506,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 
@@ -577,8 +577,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 
@@ -648,8 +648,8 @@ public:
 
 	bool Empty() const
 	{
-        return delegateList.empty();
-    }
+		return delegateList.empty();
+	}
 };
 
 

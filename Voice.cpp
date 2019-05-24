@@ -2,7 +2,7 @@
 
 
 
-double Voice::nextSample(Biquad* filterGainLow, Biquad* filterShelfHigh) {
+double Voice::nextSample() {
 	if (!isActive) return 0.0;
 
 	double oscillatorOneOutput = mOscillatorOne.nextSample();
@@ -19,16 +19,20 @@ double Voice::nextSample(Biquad* filterGainLow, Biquad* filterShelfHigh) {
 	mOscillatorTwo.setPitchMod(mLFOValue * mOscillatorTwoPitchAmount);
 
 
-	//PARALEL FILTER
-	return mFilter.process(
-		filterShelfHigh->process(
-			filterGainLow->process(
-				oscillatorSum * volumeEnvelopeValue * mVelocity / 127.0
-			)
-		)
-	);
 
+	double result = 0.0;
+	result = oscillatorSum * volumeEnvelopeValue * mVelocity / 127.0;
 
+	//*********** FILTERS AND EQUALIZERS ******************
+	
+	//Filter 
+	result = mFilter.process(result);
+
+	
+	
+	
+
+	return result;
 }
 
 void Voice::setFree() {

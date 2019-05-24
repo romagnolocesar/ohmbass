@@ -130,7 +130,11 @@ void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFra
 	processVirtualKeyboard();
 	for (int i = 0; i < nFrames; ++i) {
 		mMIDIReceiver.advance();
-		leftOutput[i] = rightOutput[i] = voiceManager.nextSample(filterGainLow, filterGainHigh);
+		leftOutput[i] = rightOutput[i] = filterGainHigh->process(
+			filterGainLow->process(
+				voiceManager.nextSample()
+			)
+		);
 	}
 
 	mMIDIReceiver.Flush(nFrames);

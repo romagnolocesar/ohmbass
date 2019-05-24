@@ -122,9 +122,6 @@ instrument determined by PLUG _IS _INST
 
 
 
-
-
-
 // GUI default dimensions
 #define GUI_WIDTH 1024
 #define GUI_HEIGHT 768

@@ -26,6 +26,7 @@ double PolyBLEPOscillator::nextSample() {
 	double value = 0.0;
 	double t = mPhase / twoPI;
 
+
 	if (mOscillatorMode == OSCILLATOR_MODE_SINE) {
 		value = naiveWaveformForMode(OSCILLATOR_MODE_SINE);
 	}

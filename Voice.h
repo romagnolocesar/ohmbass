@@ -40,7 +40,7 @@ public:
 		mOscillatorOne.setFrequency(frequency);
 		mOscillatorTwo.setFrequency(frequency);
 	}
-	double nextSample(Biquad * filterPeakLows, Biquad * filterShelfHigh);
+	double nextSample();
 	void setFree();
 	void reset();
 
