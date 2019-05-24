@@ -27,6 +27,8 @@ double Voice::nextSample(Biquad* filterGainLow, Biquad* filterShelfHigh) {
 			)
 		)
 	);
+
+
 }
 
 void Voice::setFree() {

@@ -264,6 +264,7 @@ void OhmBass::OnParamChange(int paramIdx)
 		voiceManager.changeAllVoices(changer);
 	}
 
+
 }
 
 void OhmBass::ProcessMidiMsg(IMidiMsg* pMsg) {

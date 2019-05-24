@@ -44,6 +44,8 @@ public:
 	void setFree();
 	void reset();
 
+	
+
 
 private:
 	PolyBLEPOscillator mOscillatorOne;
