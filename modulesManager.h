@@ -14,8 +14,7 @@ public:
 
 	void InitAllModules(controlsManager* iControlsManager, graphicsManager* iGraphicsManager);
 	void loadAuxParameters(controlsManager* iControlsManager);
-
-	//Graphics and Controls Manager
+	double process(double output);
 
 
 	//Create Modules

@@ -14,6 +14,15 @@ void modulesManager::loadAuxParameters(controlsManager* iControlsManager) {
 	iModGainFaders->fillSetOfFaders(iControlsManager);
 }
 
+double modulesManager::process(double output)
+{
+	//(EQLIBRIUM) Filters	
+	output = iModEQuilibrium->filterPeakLow->process(output);
+	output = iModEQuilibrium->filterPeakHigh->process(output);
+
+	return output;
+}
+
 modulesManager::modulesManager()
 {}
 
