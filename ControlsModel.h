@@ -10,7 +10,8 @@ public:
 		INT,
 		DOUBLE,
 		ENUM,
-		NONE
+		NONE,
+		BOOL
 	};
 
 	ControlsModel(

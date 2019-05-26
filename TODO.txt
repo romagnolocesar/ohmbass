@@ -1,5 +1,9 @@
 ===TODO====
 Revisar a formula da onda Triangulo.
 Alinhar as teclas do teclado.
-EQ Librium alterando pitch quando toca as notas rapido demais
+EQ Librium alterando pitch quando toca as notas rapido demais (DONE)
 EQ LIBRIUM filtros paralelos soando estranho
+EQ LIBRIUM com compensação de Amplitude na saida
+Modo Stereo na aplicação
+Conflito entre 2 ou mais instancias da mesma DLL (aplicação)
+Consumo excessivo de CPU (investigar)

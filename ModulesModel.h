@@ -11,6 +11,13 @@ public:
 
 	};
 
+	enum EModulesOnOff {
+		OFF = 0,
+		ON,
+		kNumModulesOnOff
+
+	};
+
 	ModulesModel::ModulesModel(){}
 	ModulesModel::~ModulesModel() {}
 

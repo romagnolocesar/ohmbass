@@ -19,8 +19,6 @@
 class OhmBass : public IPlug
 {
 public:
-	
-
 	OhmBass(IPlugInstanceInfo instanceInfo);
 
 
@@ -54,7 +52,7 @@ public:
 
 	
 private:
-	
+	double globals_sampleRate;
 
 	bool isParametersInitialized = FALSE; // All parameters were trigged when opening the GUI for the first time
 	double mFrequency;

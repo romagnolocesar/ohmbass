@@ -21,6 +21,11 @@ void ModEQuilibrium::setHighShelf(double newHighShelf)
 	highShelf = newHighShelf;
 }
 
+void ModEQuilibrium::setActiOhmBassMagic(bool newState)
+{
+	actiOhmBassMagic = newState;
+}
+
 double ModEQuilibrium::getLowFreq()
 {
 	return lowFreq;
@@ -39,6 +44,11 @@ double ModEQuilibrium::getHighFreq()
 double ModEQuilibrium::getHighShelf()
 {
 	return highShelf;
+}
+
+bool ModEQuilibrium::getActiOhmBassMagic()
+{
+	return actiOhmBassMagic;
 }
 
 void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
@@ -82,6 +92,13 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
+	//Magic ActiOhm Button
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(BTN_MAGIC_ACTIOHM_ID, BTN_MAGIC_ACTIOHM_FN, 2);
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "ActiOhm Bass Magic", 819, 568, ModulesModel::OFF, ModulesModel::kNumModulesOnOff, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
 
 }
 
@@ -90,6 +107,9 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 	IControl * control;
 
 	switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
+	case GraphicsModel::SWITCHCONTROL:
+		control = new ISwitchControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
+		break;
 	case GraphicsModel::BITMAPCONTROL:
 		control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		if (iControlsManager->controlsModelsCollection[i]->hide) {
@@ -115,10 +135,8 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 }
 
 void ModEQuilibrium::updateLowFilterValues() {
-	//Biquad *filterPeakLow = new Biquad(bq_type_peak, 2000.0 /*lowFreq*/ / 44100, 12.0, 20.0/*lowBoost*/);
 	filterPeakLow->setType(bq_type_peak);
-	filterPeakLow->setFc(getLowFreq() /44100);
-	//filterPeakLow->setQ(0.0027 * getLowFreq()); //Razão para um bom Q
+	filterPeakLow->setFc(getLowFreq() / 44100);
 	filterPeakLow->setQ(0.01 * getLowFreq());
 	filterPeakLow->setPeakGain(getLowBoost());
 }
@@ -130,8 +148,48 @@ void ModEQuilibrium::updateHighFilterValues() {
 	filterPeakHigh->setPeakGain(getHighShelf());
 }
 
-void ModEQuilibrium::process() {
+void ModEQuilibrium::updateLowShelfFilter() {
+	filterLowShelf->setType(bq_type_lowshelf);
+	filterLowShelf->setFc(120 / 44100);
+	filterLowShelf->setQ(0.47);
+	filterLowShelf->setPeakGain(-10.5);
+}
+
+void ModEQuilibrium::updateControlNasalHighFreq(){
+	filterNasalHighFreq->setType(bq_type_peak);
+	filterNasalHighFreq->setFc(1600.0 /44100);
+	filterNasalHighFreq->setQ(2);
+	filterNasalHighFreq->setPeakGain(-3.0);
+}
+
+void ModEQuilibrium::updateControlNasalLowFreq(){
+	filterNasalLowFreq->setType(bq_type_peak);
+	filterNasalLowFreq->setFc(350 /44100);
+	filterNasalLowFreq->setQ(3.2);
+	filterNasalLowFreq->setPeakGain(-3.0);
+}
+
+void ModEQuilibrium::updateHighCutFilter(){
+	filterHighCut->setType(bq_type_lowpass);
+	filterHighCut->setFc(15400.0 / 44100);
+	filterHighCut->setQ(1);
+}
+
+double ModEQuilibrium::process(double output) {
+	//(EQLIBRIUM) Filters	
+	output = filterPeakLow->process(output);
+	output = filterPeakHigh->process(output);
+	if (this->getActiOhmBassMagic()) {
+		output = filterLowShelf->process(output);
+	}
 	
+
+	/*Biquad *filterLowShelf = new Biquad();
+	Biquad *filterNasalHighFreq = new Biquad();
+	Biquad *filterNasalLowFreq = new Biquad();
+	Biquad *filterHighCut = new Biquad();*/
+	
+	return output;
 }
 
 

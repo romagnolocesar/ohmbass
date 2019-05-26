@@ -13,24 +13,22 @@
 
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
-const int kNumParams = 47; //Qtd for params
+const int kNumParams = 48; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
 
+	this->globals_sampleRate = mSampleRate;
+
 	//create the main display
 	CreateMainDisplay();
-
 
 	//Initializing all modules (controls)
 	iModulesManager->InitAllModules(iControlsManager, iGraphicsManager);
 
-
-	
 	//create all params
 	iControlsManager->createParams(this);
 
-	
 	//Attach Background in Main Display
 	iGraphicsManager->attachBackgroundMainDisplay();
 
@@ -40,7 +38,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Set default params on Filters (BiQuad Filter)
 	iModulesManager->iModEQuilibrium->updateLowFilterValues();
 
-
+	//Load Keyboard
 	iGraphicsManager->loadKeyboard();
 	
 	//create keyboard
@@ -49,13 +47,11 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
 
-
 	//Create all default presets
 	CreatePresets();
 
 	//Flag to indicate when the plugin was full started
 	isPluginInitialized = TRUE;
-
 
 	//Fills
 	if (isPluginInitialized) {
@@ -258,6 +254,14 @@ void OhmBass::OnParamChange(int paramIdx)
 			this->voiceManager.setHighShelf(param->Value());
 			iModulesManager->iModEQuilibrium->setHighShelf(param->Value());
 			iModulesManager->iModEQuilibrium->updateHighFilterValues();
+		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ActiOhm Bass Magic") == 0) {
+			iModulesManager->iModEQuilibrium->setActiOhmBassMagic(param->Value());
+			//Init Filters
+			iModulesManager->iModEQuilibrium->updateLowShelfFilter();
+			iModulesManager->iModEQuilibrium->updateControlNasalHighFreq();
+			iModulesManager->iModEQuilibrium->updateControlNasalLowFreq();
+			iModulesManager->iModEQuilibrium->updateHighCutFilter();
 		}
 		
 		

@@ -16,9 +16,7 @@ void modulesManager::loadAuxParameters(controlsManager* iControlsManager) {
 
 double modulesManager::process(double output)
 {
-	//(EQLIBRIUM) Filters	
-	output = iModEQuilibrium->filterPeakLow->process(output);
-	output = iModEQuilibrium->filterPeakHigh->process(output);
+	output = iModEQuilibrium->process(output);
 
 	return output;
 }

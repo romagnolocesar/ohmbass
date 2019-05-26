@@ -87,6 +87,8 @@ instrument determined by PLUG _IS _INST
 #define GHREQLONTITLE_ID			126
 #define KNOB_MEDIUM_PARAM_ID		127
 
+#define BTN_MAGIC_ACTIOHM_ID		128
+
 
 
 // ===== IMAGES LOCATIONS =====================//
@@ -115,6 +117,8 @@ instrument determined by PLUG _IS _INST
 #define GHRRTAB1_FN							"resources/img/ghrrmode/tab1.png"
 #define GHREQLONTITLE_FN					"resources/img/ghrrmode/eqlibrium/ontitle.png"
 #define KNOB_MEDIUM_PARAM_FN				"resources/img/knob_medium_param.png"
+
+#define BTN_MAGIC_ACTIOHM_FN				"resources/img/ghrrmode/eqlibrium/act_wave.png"
 
 
 
