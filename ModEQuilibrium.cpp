@@ -150,9 +150,9 @@ void ModEQuilibrium::updateHighFilterValues() {
 
 void ModEQuilibrium::updateLowShelfFilter() {
 	filterLowShelf->setType(bq_type_lowshelf);
-	filterLowShelf->setFc(120 / 44100);
+	filterLowShelf->setFc(120.0 / 44100);
 	filterLowShelf->setQ(0.47);
-	filterLowShelf->setPeakGain(-10.5);
+	filterLowShelf->setPeakGain(-3.5);
 }
 
 void ModEQuilibrium::updateControlNasalHighFreq(){
@@ -164,7 +164,7 @@ void ModEQuilibrium::updateControlNasalHighFreq(){
 
 void ModEQuilibrium::updateControlNasalLowFreq(){
 	filterNasalLowFreq->setType(bq_type_peak);
-	filterNasalLowFreq->setFc(350 /44100);
+	filterNasalLowFreq->setFc(350.0 / 44100);
 	filterNasalLowFreq->setQ(3.2);
 	filterNasalLowFreq->setPeakGain(-3.0);
 }
@@ -181,13 +181,10 @@ double ModEQuilibrium::process(double output) {
 	output = filterPeakHigh->process(output);
 	if (this->getActiOhmBassMagic()) {
 		output = filterLowShelf->process(output);
+		output = filterNasalHighFreq->process(output);
+		output = filterNasalLowFreq->process(output);
+		output = filterHighCut->process(output);
 	}
-	
-
-	/*Biquad *filterLowShelf = new Biquad();
-	Biquad *filterNasalHighFreq = new Biquad();
-	Biquad *filterNasalLowFreq = new Biquad();
-	Biquad *filterHighCut = new Biquad();*/
 	
 	return output;
 }
