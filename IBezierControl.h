@@ -12,7 +12,57 @@ public:
 	float xend;
 	float yend;
 
+	//Set Properties
+	void setxStart(float xstart) {
+		this->xstart = xstart;
+	}
 
+	void setyStart(float ystart) {
+		this->ystart = ystart;
+	}
+
+	void setxctl(float xctl) {
+		this->xctl = xctl;
+	}
+
+	void setyctl(float yctl) {
+		this->yctl = yctl;
+	}
+
+	void setxend(float xend) {
+		this->xend = xend;
+	}
+
+	void setyend(float yend) {
+		this->yend = yend;
+	}
+
+	//Get Properties
+	float getxStart() {
+		return this->xstart;
+	}
+
+	float getyStart() {
+		return this->ystart;
+	}
+
+	float getxctl() {
+		return this->ystart;
+	}
+
+	float getyctl() {
+		return this->ystart;
+	}
+
+	float getxend() {
+		return this->xend;
+	}
+
+	float getyend() {
+		return this->yend;
+	}
+
+	//Structure
 	struct beziers {
 		LICE_pixel color;
 		float alpha;
@@ -73,4 +123,6 @@ public:
 			SetAllAuxParamsFromGUI();
 		}*/
 	}
+
+	bool IsDirty() { return true; }
 };

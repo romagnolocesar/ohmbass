@@ -8,14 +8,10 @@ class ModEQuilibrium : public ModulesModel
 public:
 	EModulesName moduleName = EQUILIBRIUM;
 
-	float LINE_STARTX = 562;
-	float LINE_STARTY = 630;
-	float LINE_ENDX = 803;
-	float LINE_ENDY = 630;
-
 	IBitmap pBitmap;
 	GraphicsModel::EGraphicsType graphicType;
 	GraphicsModel* iGraphic;
+	IBezierControl* iBezierControl;
 
 
 	void setLowFreq(double newLowFreq);

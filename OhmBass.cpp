@@ -36,7 +36,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	doModelsControlsInIControlsCollection();
 
 	//Set default params on Filters (BiQuad Filter)
-	iModulesManager->iModEQuilibrium->updateLowFilterValues();
+	//iModulesManager->iModEQuilibrium->updateLowFilterValues();
 
 	//Load Keyboard
 	iGraphicsManager->loadKeyboard();

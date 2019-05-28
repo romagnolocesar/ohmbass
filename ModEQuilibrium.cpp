@@ -136,17 +136,28 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
 	case GraphicsModel::BEZIERCONTROL:
-		int testx = 4;
-		int testy = 13;
-		control = new IBezierControl(
+		
+		//Alias
+		ControlsModel* iBezierInstance = iControlsManager->controlsModelsCollection[i];
+
+		//Test
+		float lowFreq = this->getLowFreq()-150;
+		//int lowBoost = this->getLowBoost();
+		float lowBoost = 30.0f;
+
+		//Calc bezier pointer
+		float xctl = (iBezierInstance->x + ((iBezierInstance->x2 - iBezierInstance->x) / 2)) + lowFreq;
+		float yctl = iBezierInstance->y - lowBoost;
+
+		control = iBezierControl = new IBezierControl(
 			myOhmBass, 
 			IRECT(570, 600, 800, 640), 
-			LINE_STARTX, 
-			LINE_STARTY, 
-			(LINE_STARTX + ((LINE_ENDX - LINE_STARTX)/2)) + testx,
-			LINE_STARTY - testy,
-			LINE_ENDX, 
-			LINE_ENDY
+			iBezierInstance->x,
+			iBezierInstance->y,
+			xctl,
+			yctl,
+			iBezierInstance->x2,
+			iBezierInstance->y2
 		);
 	}
 
@@ -161,6 +172,11 @@ void ModEQuilibrium::updateLowFilterValues() {
 	filterPeakLow->setFc(getLowFreq() / 44100);
 	filterPeakLow->setQ(0.01 * getLowFreq());
 	filterPeakLow->setPeakGain(getLowBoost());
+
+	if (iBezierControl != nullptr) {
+		iBezierControl->setxctl(682.0f);
+		iBezierControl->setyctl(570.0f);
+	}	
 }
 
 void ModEQuilibrium::updateHighFilterValues() {
