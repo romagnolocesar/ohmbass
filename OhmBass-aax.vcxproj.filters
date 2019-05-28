@@ -60,6 +60,7 @@
     <ClInclude Include="..\..\SDKs\WDL\IPlug\Log.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\AAX\AAX_CIPlugParameters.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugAAX.h" />
+    <ClInclude Include="ITempoDisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />

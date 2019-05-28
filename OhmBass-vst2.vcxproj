@@ -240,6 +240,7 @@
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="ControlsModel.h" />
     <ClInclude Include="graphicsModel.h" />
+    <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="ModAmpEnvelope.h" />
     <ClInclude Include="ModEQuilibrium.h" />
     <ClInclude Include="ModFilters.h" />

@@ -2,6 +2,9 @@
 #include "GraphicsModel.h"
 #include <IPlugStructs.h>
 
+//Customs Controls
+#include "ITempoDisplay.h"
+
 
 class ControlsModel
 {

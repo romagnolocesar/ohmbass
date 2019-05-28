@@ -52,6 +52,7 @@
     <ClInclude Include="..\..\SDKs\WDL\IPlug\RTAS\IPlugProcessRTAS.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\RTAS\ProcessInterface.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\RTAS\digicode.h" />
+    <ClInclude Include="ITempoDisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OhmBass.cpp" />

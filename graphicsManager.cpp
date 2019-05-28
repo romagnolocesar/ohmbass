@@ -8,7 +8,15 @@ void graphicsManager::attachBackgroundMainDisplay()
 {
 	//background
 	pGraphics->AttachBackground(BG_ID, BG_FN);
+	/*const IColor * color = new IColor(255, 255, 255, 255);
+	IRECT * rect = new IRECT(560, 568, 860, 568);
+	pGraphics->DrawHorizontalLine(color, rect, 0.0f);*/
 };
+
+void graphicsManager::createLines(IPlugBase* iOhmBass) {
+	IText text = IText(14);
+	pGraphics->AttachControl(new ITempoDisplay(iOhmBass, IRECT(300, 10, kWidth, 20), &text, &mTimeInfo));
+}
 
 void graphicsManager::loadCommonsBitmaps() {
 	char* name = "KNOB_MEDIUM";

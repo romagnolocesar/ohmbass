@@ -6,6 +6,8 @@
 class graphicsManager
 {
 public:
+	ITimeInfo mTimeInfo;
+
 	enum ELayout
 	{
 		kWidth = GUI_WIDTH,
@@ -13,6 +15,8 @@ public:
 		kKeybX = 36,
 		kKeybY = 606
 	};
+
+	
 
 	IControl* mVirtualKeyboard;
 	IGraphics* pGraphics;
@@ -49,6 +53,7 @@ public:
 	int AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap> * myInstance);
 	void loadCommonsBitmaps();
 	void attachBackgroundMainDisplay();
+	void createLines(IPlugBase* iOhmBass);
 	void loadKeyboard();
 	
 

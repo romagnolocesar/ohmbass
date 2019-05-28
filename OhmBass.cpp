@@ -13,7 +13,7 @@
 
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
-const int kNumParams = 48; //Qtd for params
+const int kNumParams = 49; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -40,9 +40,13 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 
 	//Load Keyboard
 	iGraphicsManager->loadKeyboard();
+
+	
 	
 	//create keyboard
 	CreateKeyboard();
+
+	iGraphicsManager->createLines(this);
 
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
@@ -57,7 +61,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	if (isPluginInitialized) {
 		iModulesManager->loadAuxParameters(iControlsManager);
 	}
-
+	
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 
@@ -115,6 +119,9 @@ void OhmBass::CreatePresets() {
 
 void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames)
 {
+	//Update all information about time
+	GetTime(&iGraphicsManager->mTimeInfo);
+
 	// Mutex is already locked for us.
 	double *leftOutput = outputs[0];
 	double *rightOutput = outputs[1];

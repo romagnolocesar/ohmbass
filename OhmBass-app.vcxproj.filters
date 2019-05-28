@@ -25,6 +25,9 @@
     <Filter Include="Managers">
       <UniqueIdentifier>{a185c7e8-c74f-4e59-b7c6-16ca8a8182b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models\CustomsControls">
+      <UniqueIdentifier>{59f6b9e3-264e-4b35-9180-6bf02629cad6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_wrapper\app_main.h">
@@ -114,6 +117,9 @@
     <ClInclude Include="Biquad.h" />
     <ClInclude Include="modulesManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ITempoDisplay.h">
+      <Filter>Models\CustomsControls</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

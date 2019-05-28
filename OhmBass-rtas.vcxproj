@@ -304,6 +304,7 @@ copy /Y "$(TargetPath)".rsr "$(RTAS_PLUGINS_PATH)\$(BINARY_NAME).dpm.rsr"
     <ClInclude Include="..\..\SDKs\WDL\IPlug\RTAS\IPlugProcessRTAS.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\RTAS\ProcessInterface.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\RTAS\digicode.h" />
+    <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

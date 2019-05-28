@@ -35,6 +35,7 @@
     <ClInclude Include="ModAmpEnvelope.h" />
     <ClInclude Include="ControlsModel.h" />
     <ClInclude Include="controlsManager.h" />
+    <ClInclude Include="ITempoDisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />

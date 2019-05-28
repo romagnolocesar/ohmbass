@@ -85,6 +85,7 @@
     <ClInclude Include="..\..\SDKs\VST3_SDK\public.sdk\source\vst\vstparameters.h" />
     <ClInclude Include="..\..\SDKs\VST3_SDK\public.sdk\source\vst\vstsinglecomponenteffect.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST3.h" />
+    <ClInclude Include="ITempoDisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="vst3">
