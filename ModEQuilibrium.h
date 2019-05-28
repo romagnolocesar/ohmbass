@@ -13,6 +13,12 @@ public:
 	GraphicsModel* iGraphic;
 	IBezierControl* iBezierControl;
 
+	//Bezier default position
+	float BezierXstart = 560.0f;
+	float BezierYstart = 610.0f;
+	float BezierXend = 800.0f;
+	float BezierYend = 610.0f;
+
 
 	void setLowFreq(double newLowFreq);
 	void setLowBoost(double newLowBoost);
@@ -36,6 +42,7 @@ public:
 	void updateControlNasalHighFreq();
 	void updateControlNasalLowFreq();
 	void updateHighCutFilter();
+	void updateBezierLine();
 
 
 	double process(double output);

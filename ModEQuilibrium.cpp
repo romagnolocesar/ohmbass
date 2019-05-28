@@ -1,6 +1,7 @@
 	#include "ModEQuilibrium.h"
 
 
+//Setters
 void ModEQuilibrium::setLowFreq(double newLowFreq)
 {
 	lowFreq = newLowFreq;
@@ -26,6 +27,8 @@ void ModEQuilibrium::setActiOhmBassMagic(bool newState)
 	actiOhmBassMagic = newState;
 }
 
+//Getters
+
 double ModEQuilibrium::getLowFreq()
 {
 	return lowFreq;
@@ -50,6 +53,58 @@ bool ModEQuilibrium::getActiOhmBassMagic()
 {
 	return actiOhmBassMagic;
 }
+
+//Updates
+
+void ModEQuilibrium::updateLowFilterValues() {
+	filterPeakLow->setType(bq_type_peak);
+	filterPeakLow->setFc(getLowFreq() / 44100);
+	filterPeakLow->setQ(0.01 * getLowFreq());
+	filterPeakLow->setPeakGain(getLowBoost());	
+}
+
+void ModEQuilibrium::updateHighFilterValues() {
+	filterPeakHigh->setType(bq_type_peak);
+	filterPeakHigh->setFc((getHighFreq()*10) / 44100);
+	filterPeakHigh->setQ(1.3);
+	filterPeakHigh->setPeakGain(getHighShelf());
+}
+
+void ModEQuilibrium::updateLowShelfFilter() {
+	filterLowShelf->setType(bq_type_lowshelf);
+	filterLowShelf->setFc(120.0 / 44100);
+	filterLowShelf->setQ(0.47);
+	filterLowShelf->setPeakGain(-3.5);
+}
+
+void ModEQuilibrium::updateControlNasalHighFreq(){
+	filterNasalHighFreq->setType(bq_type_peak);
+	filterNasalHighFreq->setFc(1600.0 /44100);
+	filterNasalHighFreq->setQ(2);
+	filterNasalHighFreq->setPeakGain(-3.0);
+}
+
+void ModEQuilibrium::updateControlNasalLowFreq(){
+	filterNasalLowFreq->setType(bq_type_peak);
+	filterNasalLowFreq->setFc(350.0 / 44100);
+	filterNasalLowFreq->setQ(3.2);
+	filterNasalLowFreq->setPeakGain(-3.0);
+}
+
+void ModEQuilibrium::updateHighCutFilter(){
+	filterHighCut->setType(bq_type_lowpass);
+	filterHighCut->setFc(15400.0 / 44100);
+	filterHighCut->setQ(1);
+}
+
+void ModEQuilibrium::updateBezierLine() {
+	float xPosition = this->getLowFreq();
+	float yPosition = this->getLowBoost();
+
+	this->iBezierControl->setyctl(BezierYend - yPosition);
+}
+
+//Process
 
 void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
 	ControlsModel* myControl;
@@ -102,10 +157,10 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	//EQ BezierLines
 	graphicType = GraphicsModel::BEZIERCONTROL;
 	iGraphic = new GraphicsModel(graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "EQLibrium BezierLines", 562.0f, 630.0f, 803.0f, 630.0f, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "EQLibrium BezierLines", BezierXstart, BezierYstart, BezierXend, BezierYend, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
-	
+
 
 
 }
@@ -113,7 +168,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i) {
 
 	IBitmap graphic = iControlsManager->controlsModelsCollection[i]->graphicsModel->bitmap;
-	IControl * control;	
+	IControl * control;
 
 	switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
 	case GraphicsModel::SWITCHCONTROL:
@@ -136,22 +191,21 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
 	case GraphicsModel::BEZIERCONTROL:
-		
+
 		//Alias
 		ControlsModel* iBezierInstance = iControlsManager->controlsModelsCollection[i];
 
 		//Test
-		float lowFreq = this->getLowFreq()-150;
-		//int lowBoost = this->getLowBoost();
-		float lowBoost = 30.0f;
+		float lowFreq = this->getLowFreq() - 150;
+		int lowBoost = this->getLowBoost();
 
 		//Calc bezier pointer
 		float xctl = (iBezierInstance->x + ((iBezierInstance->x2 - iBezierInstance->x) / 2)) + lowFreq;
 		float yctl = iBezierInstance->y - lowBoost;
 
 		control = iBezierControl = new IBezierControl(
-			myOhmBass, 
-			IRECT(570, 600, 800, 640), 
+			myOhmBass,
+			IRECT(570, 600, 800, 640),
 			iBezierInstance->x,
 			iBezierInstance->y,
 			xctl,
@@ -164,53 +218,7 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 	iControlsManager->AddControlsCollection(control);
 	iGraphicsManager->pGraphics->AttachControl(control);
 
-	
-}
 
-void ModEQuilibrium::updateLowFilterValues() {
-	filterPeakLow->setType(bq_type_peak);
-	filterPeakLow->setFc(getLowFreq() / 44100);
-	filterPeakLow->setQ(0.01 * getLowFreq());
-	filterPeakLow->setPeakGain(getLowBoost());
-
-	if (iBezierControl != nullptr) {
-		iBezierControl->setxctl(682.0f);
-		iBezierControl->setyctl(570.0f);
-	}	
-}
-
-void ModEQuilibrium::updateHighFilterValues() {
-	filterPeakHigh->setType(bq_type_peak);
-	filterPeakHigh->setFc((getHighFreq()*10) / 44100);
-	filterPeakHigh->setQ(1.3);
-	filterPeakHigh->setPeakGain(getHighShelf());
-}
-
-void ModEQuilibrium::updateLowShelfFilter() {
-	filterLowShelf->setType(bq_type_lowshelf);
-	filterLowShelf->setFc(120.0 / 44100);
-	filterLowShelf->setQ(0.47);
-	filterLowShelf->setPeakGain(-3.5);
-}
-
-void ModEQuilibrium::updateControlNasalHighFreq(){
-	filterNasalHighFreq->setType(bq_type_peak);
-	filterNasalHighFreq->setFc(1600.0 /44100);
-	filterNasalHighFreq->setQ(2);
-	filterNasalHighFreq->setPeakGain(-3.0);
-}
-
-void ModEQuilibrium::updateControlNasalLowFreq(){
-	filterNasalLowFreq->setType(bq_type_peak);
-	filterNasalLowFreq->setFc(350.0 / 44100);
-	filterNasalLowFreq->setQ(3.2);
-	filterNasalLowFreq->setPeakGain(-3.0);
-}
-
-void ModEQuilibrium::updateHighCutFilter(){
-	filterHighCut->setType(bq_type_lowpass);
-	filterHighCut->setFc(15400.0 / 44100);
-	filterHighCut->setQ(1);
 }
 
 double ModEQuilibrium::process(double output) {

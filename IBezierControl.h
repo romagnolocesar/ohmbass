@@ -66,7 +66,7 @@ public:
 	struct beziers {
 		LICE_pixel color;
 		float alpha;
-	} beziers[1];
+	} beziers[2];
 
 	IBezierControl(IPlugBase *pPlug, IRECT pR, float xstart, float ystart, float xctl, float yctl, float xend, float yend)
 		: IControl(pPlug, pR)

@@ -12,7 +12,6 @@
 
 
 const int kNumPrograms = 5; //Qtd of presets
-bool isPluginInitialized = FALSE;
 const int kNumParams = 49; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
@@ -54,10 +53,10 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	CreatePresets();
 
 	//Flag to indicate when the plugin was full started
-	isPluginInitialized = TRUE;
+	isParametersInitialized = TRUE;
 
 	//Fills
-	if (isPluginInitialized) {
+	if (isParametersInitialized) {
 		iModulesManager->loadAuxParameters(iControlsManager);
 	}
 	
@@ -172,7 +171,7 @@ void OhmBass::OnParamChange(int paramIdx)
 		else if (paramIdx == iModulesManager->iModOscillators->mOsc2PitchMod) {
 			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 		}
-		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isPluginInitialized);
+		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
 	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
 		if (paramIdx == iModulesManager->iModGainFaders->mFadersHandlerOnOsc1) {
 			changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
@@ -186,10 +185,10 @@ void OhmBass::OnParamChange(int paramIdx)
 		else if (paramIdx == iModulesManager->iModGainFaders->mFadersHandlerOffOsc2) {
 			changer = bind(&VoiceManager::setOscillatorTwoOutput, _1, param->Value());
 		}
-		iModulesManager->iModGainFaders->OnParamChange(iControlsManager, paramIdx, isPluginInitialized, param);
+		iModulesManager->iModGainFaders->OnParamChange(iControlsManager, paramIdx, isParametersInitialized, param);
 	}
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::FILTERS) {
-		if (isPluginInitialized) {
+		if (isParametersInitialized) {
 			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Mode") == 0) {
 				changer = bind(&VoiceManager::setFilterMode, _1, static_cast<Filter::FilterMode>(param->Int()));
 			}
@@ -245,11 +244,19 @@ void OhmBass::OnParamChange(int paramIdx)
 			this->voiceManager.setEQuilibriumLowFreq(param->Value());
 			iModulesManager->iModEQuilibrium->setLowFreq(param->Value());	
 			iModulesManager->iModEQuilibrium->updateLowFilterValues();
+
+			if (this->isParametersInitialized) {
+				iModulesManager->iModEQuilibrium->updateBezierLine();
+			}
 		}
 		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Bost Low boost") == 0){
 			this->voiceManager.setEQuilibriumLowGain(param->Value());
 			iModulesManager->iModEQuilibrium->setLowBoost(param->Value());
 			iModulesManager->iModEQuilibrium->updateLowFilterValues();
+
+			if (this->isParametersInitialized) {
+				iModulesManager->iModEQuilibrium->updateBezierLine();
+			}
 		}
 		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Eql High freq") == 0) {
 			this->voiceManager.setHighFreq(param->Value());
