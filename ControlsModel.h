@@ -54,13 +54,16 @@ public:
 		GraphicsModel* graphicsModel,
 		bool hide
 	);
+	//bezier
 	ControlsModel(
 		ModulesModel::EModulesName moduleName,
 		int idx,
 		EControlsDataType dataType,
 		char* alias,
-		int x,
-		int y,
+		float x,
+		float y,
+		float x2,
+		float y2,
 		GraphicsModel* graphicsModel
 	);
 	ControlsModel(
@@ -126,6 +129,8 @@ public:
 	char* alias;
 	int x;
 	int y;
+	int x2;
+	int y2;
 	int lenght;
 	double defaultVal;
 	int defaultValEnum;

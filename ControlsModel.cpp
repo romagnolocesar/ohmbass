@@ -42,7 +42,7 @@ ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, Con
 	this->hide = hide;
 }
 
-ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ControlsModel::EControlsDataType dataType, char* alias, int x, int y, GraphicsModel* graphicsModel)
+ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ControlsModel::EControlsDataType dataType, char* alias, float x, float y, float x2, float y2, GraphicsModel* graphicsModel)
 {
 	this->moduleName = moduleName;
 	this->dataType = dataType;
@@ -50,6 +50,8 @@ ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, Con
 	this->alias = alias;
 	this->x = x;
 	this->y = y;
+	this->x2 = x2;
+	this->y2 = y2;
 	this->graphicsModel = graphicsModel;
 }
 

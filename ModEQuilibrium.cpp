@@ -102,7 +102,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	//EQ BezierLines
 	graphicType = GraphicsModel::BEZIERCONTROL;
 	iGraphic = new GraphicsModel(graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "EQLibrium BezierLines", 570, 600, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "EQLibrium BezierLines", 562.0f, 630.0f, 803.0f, 630.0f, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	
@@ -136,7 +136,18 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
 	case GraphicsModel::BEZIERCONTROL:
-		control = new IBezierControl(myOhmBass, IRECT(570, 600, 800, 640), 562, 640, 600, 570, 803, 640);
+		int testx = 4;
+		int testy = 13;
+		control = new IBezierControl(
+			myOhmBass, 
+			IRECT(570, 600, 800, 640), 
+			LINE_STARTX, 
+			LINE_STARTY, 
+			(LINE_STARTX + ((LINE_ENDX - LINE_STARTX)/2)) + testx,
+			LINE_STARTY - testy,
+			LINE_ENDX, 
+			LINE_ENDY
+		);
 	}
 
 	iControlsManager->AddControlsCollection(control);
