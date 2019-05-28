@@ -8,14 +8,15 @@ void graphicsManager::attachBackgroundMainDisplay()
 {
 	//background
 	pGraphics->AttachBackground(BG_ID, BG_FN);
-	/*const IColor * color = new IColor(255, 255, 255, 255);
-	IRECT * rect = new IRECT(560, 568, 860, 568);
-	pGraphics->DrawHorizontalLine(color, rect, 0.0f);*/
 };
 
-void graphicsManager::createLines(IPlugBase* iOhmBass) {
+void graphicsManager::createTempoInfo(IPlugBase* iOhmBass) {
 	IText text = IText(14);
 	pGraphics->AttachControl(new ITempoDisplay(iOhmBass, IRECT(300, 10, kWidth, 20), &text, &mTimeInfo));
+}
+
+void graphicsManager::createLines(IPlugBase* iOhmBass) {
+	pGraphics->AttachControl(new IBezierControl(iOhmBass, IRECT(570, 600, 800, 640), 43, 44));
 }
 
 void graphicsManager::loadCommonsBitmaps() {

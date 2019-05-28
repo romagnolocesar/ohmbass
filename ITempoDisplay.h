@@ -21,5 +21,6 @@ public:
 		return pGraphics->DrawIText(&mText, mDisplay.Get(), &mRECT);
 	}
 
+
 	bool IsDirty() { return true; }
 };

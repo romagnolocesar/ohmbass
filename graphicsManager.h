@@ -53,6 +53,7 @@ public:
 	int AddCommonsBitmapsCollection(tCommonsBitmaps<char*, IBitmap> * myInstance);
 	void loadCommonsBitmaps();
 	void attachBackgroundMainDisplay();
+	void createTempoInfo(IPlugBase* iOhmBass);
 	void createLines(IPlugBase* iOhmBass);
 	void loadKeyboard();
 	

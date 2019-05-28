@@ -286,6 +286,8 @@
     <ClInclude Include="EnvelopeGenerator.h" />
     <ClInclude Include="ControlsModel.h" />
     <ClInclude Include="graphicsModel.h" />
+    <ClInclude Include="IBezierControl.h" />
+    <ClInclude Include="IEQLineDisplay.h" />
     <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="ModAmpEnvelope.h" />
     <ClInclude Include="ModEQuilibrium.h" />

@@ -99,12 +99,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "ActiOhm Bass Magic", 819, 568, ModulesModel::OFF, ModulesModel::kNumModulesOnOff, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
-	//LINE TEST
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(BTN_MAGIC_ACTIOHM_ID, BTN_MAGIC_ACTIOHM_FN, 2);
-	graphicType = GraphicsModel::SWITCHCONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "test", 560, 568, ModulesModel::OFF, ModulesModel::kNumModulesOnOff, iGraphic);
-	IControlsManager->AddModelsCollection(myControl);
+	
 
 
 }

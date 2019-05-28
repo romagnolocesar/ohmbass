@@ -41,6 +41,8 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Load Keyboard
 	iGraphicsManager->loadKeyboard();
 
+	
+	
 	//create keyboard
 	CreateKeyboard();
 

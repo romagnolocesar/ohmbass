@@ -118,7 +118,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 49;
+	return 48;
 }
 
 
