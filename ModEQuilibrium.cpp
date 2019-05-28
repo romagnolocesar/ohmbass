@@ -136,7 +136,7 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
 	case GraphicsModel::BEZIERCONTROL:
-		control = new IBezierControl(myOhmBass, IRECT(570, 600, 800, 640), 43, 44);
+		control = new IBezierControl(myOhmBass, IRECT(570, 600, 800, 640), 562, 640, 600, 570, 803, 640);
 	}
 
 	iControlsManager->AddControlsCollection(control);

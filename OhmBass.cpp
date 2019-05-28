@@ -269,14 +269,6 @@ void OhmBass::OnParamChange(int paramIdx)
 			iModulesManager->iModEQuilibrium->updateControlNasalLowFreq();
 			iModulesManager->iModEQuilibrium->updateHighCutFilter();
 		}
-		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ActiOhm Bass Magic") == 0) {
-			iModulesManager->iModEQuilibrium->setActiOhmBassMagic(param->Value());
-			//Init Filters
-			iModulesManager->iModEQuilibrium->updateLowShelfFilter();
-			iModulesManager->iModEQuilibrium->updateControlNasalHighFreq();
-			iModulesManager->iModEQuilibrium->updateControlNasalLowFreq();
-			iModulesManager->iModEQuilibrium->updateHighCutFilter();
-		}
 		
 		
 	}
