@@ -67,18 +67,21 @@ void ModGainFaders::fillSetOfFaders(controlsManager* iControlsManager) {
 		IParam * param;
 		param = iControlsManager->controlsCollection[i]->GetParam();
 
-		if (strcmp(param->GetNameForHost(), "Fader Handler ON Osc1") == 0) {
-			mFadersHandlerOnOsc1 = i;
+		if (param != nullptr) {
+			if (strcmp(param->GetNameForHost(), "Fader Handler ON Osc1") == 0) {
+				mFadersHandlerOnOsc1 = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Fader Handler OFF Osc1") == 0) {
+				mFadersHandlerOffOsc1 = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Fader Handler ON Osc2") == 0) {
+				mFadersHandlerOnOsc2 = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Fader Handler OFF Osc2") == 0) {
+				mFadersHandlerOffOsc2 = i;
+			}
 		}
-		else if (strcmp(param->GetNameForHost(), "Fader Handler OFF Osc1") == 0) {
-			mFadersHandlerOffOsc1 = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Fader Handler ON Osc2") == 0) {
-			mFadersHandlerOnOsc2 = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Fader Handler OFF Osc2") == 0) {
-			mFadersHandlerOffOsc2 = i;
-		}
+		
 	}
 }
 

@@ -13,7 +13,7 @@
 
 const int kNumPrograms = 5; //Qtd of presets
 bool isPluginInitialized = FALSE;
-const int kNumParams = 48; //Qtd for params
+const int kNumParams = 49; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -46,9 +46,6 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 
 	//Tempo Infos
 	//iGraphicsManager->createTempoInfo(this);
-
-	//Tempo Lines
-	iGraphicsManager->createLines(this);
 
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
@@ -263,6 +260,14 @@ void OhmBass::OnParamChange(int paramIdx)
 			this->voiceManager.setHighShelf(param->Value());
 			iModulesManager->iModEQuilibrium->setHighShelf(param->Value());
 			iModulesManager->iModEQuilibrium->updateHighFilterValues();
+		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ActiOhm Bass Magic") == 0) {
+			iModulesManager->iModEQuilibrium->setActiOhmBassMagic(param->Value());
+			//Init Filters
+			iModulesManager->iModEQuilibrium->updateLowShelfFilter();
+			iModulesManager->iModEQuilibrium->updateControlNasalHighFreq();
+			iModulesManager->iModEQuilibrium->updateControlNasalLowFreq();
+			iModulesManager->iModEQuilibrium->updateHighCutFilter();
 		}
 		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ActiOhm Bass Magic") == 0) {
 			iModulesManager->iModEQuilibrium->setActiOhmBassMagic(param->Value());

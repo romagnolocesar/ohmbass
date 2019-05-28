@@ -161,66 +161,67 @@ void ModOscillators::fillSetOfWavesIcons(controlsManager* iControlsManager) {
 	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
 		IParam * param;
 		param = iControlsManager->controlsCollection[i]->GetParam();
-
-		if (strcmp(param->GetNameForHost(),"Icon Sine Wave Off OSC1") == 0) {
-			mapWavesIconsIdx[0][0][0] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Sine Wave On OSC1") == 0) {
-			mapWavesIconsIdx[0][0][1] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Saw Wave Off OSC1") == 0) {
-			mapWavesIconsIdx[0][1][0] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Saw Wave On OSC1") == 0) {
-			mapWavesIconsIdx[0][1][1] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Square Wave Off OSC1") == 0) {
-			mapWavesIconsIdx[0][2][0] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Square Wave On OSC1") == 0) {
-			mapWavesIconsIdx[0][2][1] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave Off OSC1") == 0) {
-			mapWavesIconsIdx[0][3][0] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave On OSC1") == 0) {
-			mapWavesIconsIdx[0][3][1] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Sine Wave Off OSC2") == 0) {
-			mapWavesIconsIdx[1][0][0] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Sine Wave On OSC2") == 0) {
-			mapWavesIconsIdx[1][0][1] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Saw Wave Off OSC2") == 0) {
-			mapWavesIconsIdx[1][1][0] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Saw Wave On OSC2") == 0) {
-			mapWavesIconsIdx[1][1][1] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Square Wave Off OSC2") == 0) {
-			mapWavesIconsIdx[1][2][0] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Square Wave On OSC2") == 0) {
-			mapWavesIconsIdx[1][2][1] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave Off OSC2") == 0) {
-			mapWavesIconsIdx[1][3][0] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave On OSC2") == 0) {
-			mapWavesIconsIdx[1][3][1] = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Bg Btn Osc 1 Waves") == 0) {
-			mBgBtnOscWavesOsc1 = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Bg Btn Osc 2 Waves") == 0) {
-			mBgBtnOscWavesOsc2 = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Osc 1 Pitch Mod") == 0) {
-			mOsc1PitchMod = i;
-		}
-		else if (strcmp(param->GetNameForHost(), "Osc 2 Pitch Mod") == 0) {
-			mOsc2PitchMod = i;
+		if (param != nullptr) {
+			if (strcmp(param->GetNameForHost(), "Icon Sine Wave Off OSC1") == 0) {
+				mapWavesIconsIdx[0][0][0] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Sine Wave On OSC1") == 0) {
+				mapWavesIconsIdx[0][0][1] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Saw Wave Off OSC1") == 0) {
+				mapWavesIconsIdx[0][1][0] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Saw Wave On OSC1") == 0) {
+				mapWavesIconsIdx[0][1][1] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Square Wave Off OSC1") == 0) {
+				mapWavesIconsIdx[0][2][0] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Square Wave On OSC1") == 0) {
+				mapWavesIconsIdx[0][2][1] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave Off OSC1") == 0) {
+				mapWavesIconsIdx[0][3][0] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave On OSC1") == 0) {
+				mapWavesIconsIdx[0][3][1] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Sine Wave Off OSC2") == 0) {
+				mapWavesIconsIdx[1][0][0] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Sine Wave On OSC2") == 0) {
+				mapWavesIconsIdx[1][0][1] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Saw Wave Off OSC2") == 0) {
+				mapWavesIconsIdx[1][1][0] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Saw Wave On OSC2") == 0) {
+				mapWavesIconsIdx[1][1][1] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Square Wave Off OSC2") == 0) {
+				mapWavesIconsIdx[1][2][0] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Square Wave On OSC2") == 0) {
+				mapWavesIconsIdx[1][2][1] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave Off OSC2") == 0) {
+				mapWavesIconsIdx[1][3][0] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Icon Triangle Wave On OSC2") == 0) {
+				mapWavesIconsIdx[1][3][1] = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Bg Btn Osc 1 Waves") == 0) {
+				mBgBtnOscWavesOsc1 = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Bg Btn Osc 2 Waves") == 0) {
+				mBgBtnOscWavesOsc2 = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Osc 1 Pitch Mod") == 0) {
+				mOsc1PitchMod = i;
+			}
+			else if (strcmp(param->GetNameForHost(), "Osc 2 Pitch Mod") == 0) {
+				mOsc2PitchMod = i;
+			}
 		}
 	}	
 }

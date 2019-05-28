@@ -99,14 +99,21 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "ActiOhm Bass Magic", 819, 568, ModulesModel::OFF, ModulesModel::kNumModulesOnOff, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
+	//EQ BezierLines
+	graphicType = GraphicsModel::BEZIERCONTROL;
+	iGraphic = new GraphicsModel(graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "EQLibrium BezierLines", 570, 600, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
 	
 
 
 }
 
 void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i) {
+
 	IBitmap graphic = iControlsManager->controlsModelsCollection[i]->graphicsModel->bitmap;
-	IControl * control;
+	IControl * control;	
 
 	switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
 	case GraphicsModel::SWITCHCONTROL:
@@ -128,6 +135,8 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 	case GraphicsModel::KNOBMULTICONTROLPARAM:
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
+	case GraphicsModel::BEZIERCONTROL:
+		control = new IBezierControl(myOhmBass, IRECT(570, 600, 800, 640), 43, 44);
 	}
 
 	iControlsManager->AddControlsCollection(control);

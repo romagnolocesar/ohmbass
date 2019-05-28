@@ -17,7 +17,7 @@ public:
 	};
 
 	
-
+	IPlugBase* iOhmBass;
 	IControl* mVirtualKeyboard;
 	IGraphics* pGraphics;
 	IBitmap whiteKeyImage, blackKeyImage;
@@ -54,8 +54,11 @@ public:
 	void loadCommonsBitmaps();
 	void attachBackgroundMainDisplay();
 	void createTempoInfo(IPlugBase* iOhmBass);
-	void createLines(IPlugBase* iOhmBass);
 	void loadKeyboard();
+
+	graphicsManager(IPlugBase* iOhmBass) {
+		this->iOhmBass = iOhmBass;
+	};
 	
 
 private:

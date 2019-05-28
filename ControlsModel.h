@@ -61,6 +61,15 @@ public:
 		char* alias,
 		int x,
 		int y,
+		GraphicsModel* graphicsModel
+	);
+	ControlsModel(
+		ModulesModel::EModulesName moduleName,
+		int idx,
+		EControlsDataType dataType,
+		char* alias,
+		int x,
+		int y,
 		bool state,
 		GraphicsModel* graphicsModel,
 		bool hide

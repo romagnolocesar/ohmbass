@@ -45,29 +45,29 @@ public:
 
 	void OnMouseDown(int x, int y, IMouseMod* pMod)
 	{
-		return SnapToMouse(x, y);
+		//return SnapToMouse(x, y);
 	}
 
 	void OnMouseDrag(int x, int y, int dX, int dY, IMouseMod* pMod)
 	{
-		return SnapToMouse(x, y);
+		//return SnapToMouse(x, y);
 	}
 
 	void SnapToMouse(int x, int y)
 	{
-		GetAuxParam(0)->mValue = BOUNDED((double)x / (double)mRECT.W(), 0, 1);
-		GetAuxParam(1)->mValue = BOUNDED((double)y / (double)mRECT.H(), 0, 1);
+		//GetAuxParam(0)->mValue = BOUNDED((double)x / (double)mRECT.W(), 0, 1);
+		//GetAuxParam(1)->mValue = BOUNDED((double)y / (double)mRECT.H(), 0, 1);
 
-		SetDirty();
+		//SetDirty();
 	}
 
 	void SetDirty(bool pushParamToPlug = true)
 	{
-		mDirty = true;
+		//mDirty = true;
 
-		if (pushParamToPlug && mPlug)
-		{
-			SetAllAuxParamsFromGUI();
-		}
+		//if (pushParamToPlug && mPlug)
+		//{
+		//	SetAllAuxParamsFromGUI();
+		//}
 	}
 };

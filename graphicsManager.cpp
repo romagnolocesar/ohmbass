@@ -15,9 +15,6 @@ void graphicsManager::createTempoInfo(IPlugBase* iOhmBass) {
 	pGraphics->AttachControl(new ITempoDisplay(iOhmBass, IRECT(300, 10, kWidth, 20), &text, &mTimeInfo));
 }
 
-void graphicsManager::createLines(IPlugBase* iOhmBass) {
-	pGraphics->AttachControl(new IBezierControl(iOhmBass, IRECT(570, 600, 800, 640), 43, 44));
-}
 
 void graphicsManager::loadCommonsBitmaps() {
 	char* name = "KNOB_MEDIUM";

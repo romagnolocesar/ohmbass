@@ -11,7 +11,8 @@ public:
 		KNOBMULTICONTROL,
 		KNOBMULTICONTROLPARAM,
 		FADERCONTROL,
-		SWITCHCONTROL
+		SWITCHCONTROL,
+		BEZIERCONTROL
 	};
 
 	IBitmap bitmap;
@@ -30,4 +31,5 @@ public:
 		IBitmap bitmap,
 		GraphicsModel::EGraphicsType graphicsType
 	);
+	GraphicsModel(GraphicsModel::EGraphicsType graphicsType);
 };

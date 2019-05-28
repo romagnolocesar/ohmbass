@@ -13,3 +13,8 @@ GraphicsModel::GraphicsModel(IBitmap bitmap, GraphicsModel::EGraphicsType graphi
 	this->bitmap = bitmap;
 	this->graphicsType = graphicsType;
 };
+
+GraphicsModel::GraphicsModel(GraphicsModel::EGraphicsType graphicsType)
+{
+	this->graphicsType = graphicsType;
+};

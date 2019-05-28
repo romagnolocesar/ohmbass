@@ -26,7 +26,7 @@ public:
 
 	//Managers
 	controlsManager* iControlsManager = new controlsManager();
-	graphicsManager* iGraphicsManager = new graphicsManager();
+	graphicsManager* iGraphicsManager = new graphicsManager(this);
 	modulesManager* iModulesManager = new modulesManager();
 
 
