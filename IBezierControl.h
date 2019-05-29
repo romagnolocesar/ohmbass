@@ -119,138 +119,48 @@ public:
 		int bezierWidth = bezierXend - bezierXstart;
 		int bezierHeight = bezierYend - bezierYstart;
 
+		double unityVariance = bezierWidth * 0.05;
+
 
 		int p1x = bezierXstart;
-		int p1y = bezierYstart + bezierHeight;
+		int p1y = bezierYend;
 
-		int p2x = p1x + (bezierWidth * 0.1);
-		int p2y = bezierYstart + bezierHeight;
+		int p2x = bezierXstart + (unityVariance * 2);
+		int p2y = bezierYend;
 
-		int p3x = bezierXstart + (bezierWidth * 0.06);
-		int p3y = bezierYstart + (bezierHeight * 0.2);
+		int p3x = bezierXstart + (unityVariance * 1);
+		int p3y = bezierYstart;
 	
-		int p4x = bezierXstart + (bezierWidth * 0.15);
-		int p4y = bezierYend - bezierHeight;
+		int p4x = bezierXstart + (unityVariance * 3);
+		int p4y = bezierYstart;
 
-		int p5x = p4x + (bezierWidth * 0.1);
-		int p5y = bezierYend - bezierHeight * 0.8;
+		int p5x = bezierXstart + (unityVariance * 5);
+		int p5y = bezierYstart;
 
-		int p6x = p5x - (bezierWidth * 0.06);
-		int p6y = bezierYstart + bezierHeight;
+		int p6x = bezierXstart + (unityVariance * 4);
+		int p6y = bezierYend;
 
-		int p7x = p4x + (bezierWidth *0.15);
-		int p7y = bezierYstart + bezierHeight;
-
-
-
-		LICE_Circle(
-			pGraphics->GetDrawBitmap(), 
-			p1x,
-			p1y,
-			2, 
-			LICE_RGBA(255, 0, 0, 0)
-		);
-
-		LICE_Circle(
-			pGraphics->GetDrawBitmap(),
-			p2x,
-			p2y,
-			2,
-			LICE_RGBA(0, 255, 0, 0)
-		);
-
-		LICE_Circle(
-			pGraphics->GetDrawBitmap(),
-			p3x,
-			p3y,
-			2,
-			LICE_RGBA(0, 0, 255, 0)
-		);
-
-		LICE_Circle(
-			pGraphics->GetDrawBitmap(),
-			p4x,
-			p4y,
-			2,
-			LICE_RGBA(255, 0, 255, 0)
-		);
+		int p7x = bezierXstart + (unityVariance * 6);
+		int p7y = bezierYend;
 
 
-		LICE_Circle(
-			pGraphics->GetDrawBitmap(),
-			p5x,
-			p5y,
-			2,
-			LICE_RGBA(255, 0, 0, 0)
-		);
+		//POINTERS 
+		LICE_Circle(pGraphics->GetDrawBitmap(), p1x, p1y, 2, LICE_RGBA(255, 0, 0, 0));
+		LICE_Circle(pGraphics->GetDrawBitmap(), p2x, p2y, 2, LICE_RGBA(0, 255, 0, 0));
+		LICE_Circle(pGraphics->GetDrawBitmap(), p3x, p3y, 2, LICE_RGBA(0, 0, 255, 0));
+		LICE_Circle(pGraphics->GetDrawBitmap(), p4x, p4y, 2, LICE_RGBA(255, 0, 255, 0));
+		LICE_Circle(pGraphics->GetDrawBitmap(), p5x, p5y, 2, LICE_RGBA(255, 0, 0, 0));
+		LICE_Circle(pGraphics->GetDrawBitmap(), p6x, p6y, 2, LICE_RGBA(0, 255, 0, 0));
+		LICE_Circle(pGraphics->GetDrawBitmap(), p7x, p7y, 2, LICE_RGBA(255, 0, 255, 0));
 
-		LICE_Circle(
-			pGraphics->GetDrawBitmap(),
-			p6x,
-			p6y,
-			2,
-			LICE_RGBA(0, 255, 0, 0)
-		);
-
-		LICE_Circle(
-			pGraphics->GetDrawBitmap(),
-			p7x,
-			p7y,
-			2,
-			LICE_RGBA(255, 0, 255, 0)
-		);
 
 		//BEZIER1
-		LICE_DrawCBezier(
-			pGraphics->GetDrawBitmap(), 
-			p1x,
-			p1y,
-			p2x,
-			p2y,
-			p3x,
-			p3y,
-			p4x,
-			p4y,
-			LICE_RGBA(0, 0, 0, 255), 0.5
-		);
-		LICE_DrawCBezier(
-			pGraphics->GetDrawBitmap(),
-			p1x,
-			p1y,
-			p2x,
-			p2y,
-			p3x,
-			p3y,
-			p4x,
-			p4y,
-			LICE_RGBA(255, 255, 255, 255)
-		);
+		LICE_DrawCBezier(pGraphics->GetDrawBitmap(), p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y, LICE_RGBA(0, 0, 0, 255), 0.5);
+		LICE_DrawCBezier(pGraphics->GetDrawBitmap(), p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y, LICE_RGBA(255, 255, 255, 255));
 
 		//BEZIER2
-		LICE_DrawCBezier(
-			pGraphics->GetDrawBitmap(),
-			p4x,
-			p4y,
-			p5x,
-			p5y,
-			p6x,
-			p6y,
-			p7x,
-			p7y,
-			LICE_RGBA(0, 0, 0, 255), 0.5
-		);
-		LICE_DrawCBezier(
-			pGraphics->GetDrawBitmap(),
-			p4x,
-			p4y,
-			p5x,
-			p5y,
-			p6x,
-			p6y,
-			p7x,
-			p7y,
-			LICE_RGBA(255, 255, 255, 255)
-		);
+		LICE_DrawCBezier(pGraphics->GetDrawBitmap(), p4x, p4y, p5x, p5y, p6x, p6y, p7x, p7y, LICE_RGBA(0, 0, 0, 255), 0.5);
+		LICE_DrawCBezier(pGraphics->GetDrawBitmap(), p4x, p4y, p5x, p5y, p6x, p6y, p7x, p7y, LICE_RGBA(255, 255, 255, 255));
 
 
 		

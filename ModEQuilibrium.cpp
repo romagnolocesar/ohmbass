@@ -59,14 +59,14 @@ bool ModEQuilibrium::getActiOhmBassMagic()
 void ModEQuilibrium::updateLowFilterValues() {
 	filterPeakLow->setType(bq_type_peak);
 	filterPeakLow->setFc(getLowFreq() / 44100);
-	filterPeakLow->setQ(0.01 * getLowFreq());
+	filterPeakLow->setQ(1.2);
 	filterPeakLow->setPeakGain(getLowBoost());	
 }
 
 void ModEQuilibrium::updateHighFilterValues() {
 	filterPeakHigh->setType(bq_type_peak);
 	filterPeakHigh->setFc((getHighFreq()*10) / 44100);
-	filterPeakHigh->setQ(1.3);
+	filterPeakHigh->setQ(1.8);
 	filterPeakHigh->setPeakGain(getHighShelf());
 }
 
