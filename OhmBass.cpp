@@ -35,7 +35,8 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	doModelsControlsInIControlsCollection();
 
 	//Set default params on Filters (BiQuad Filter)
-	//iModulesManager->iModEQuilibrium->updateLowFilterValues();
+	iModulesManager->iModEQuilibrium->updateLowFilterValues();
+	iModulesManager->iModEQuilibrium->updateHighFilterValues();
 
 	//Load Keyboard
 	iGraphicsManager->loadKeyboard();
@@ -262,11 +263,19 @@ void OhmBass::OnParamChange(int paramIdx)
 			this->voiceManager.setHighFreq(param->Value());
 			iModulesManager->iModEQuilibrium->setHighFreq(param->Value());
 			iModulesManager->iModEQuilibrium->updateHighFilterValues();
+
+			if (this->isParametersInitialized) {
+				iModulesManager->iModEQuilibrium->updateBezierLine();
+			}
 		}
 		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Knb Shelf Hihg shelf") == 0) {
 			this->voiceManager.setHighShelf(param->Value());
 			iModulesManager->iModEQuilibrium->setHighShelf(param->Value());
 			iModulesManager->iModEQuilibrium->updateHighFilterValues();
+
+			if (this->isParametersInitialized) {
+				iModulesManager->iModEQuilibrium->updateBezierLine();
+			}
 		}
 		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ActiOhm Bass Magic") == 0) {
 			iModulesManager->iModEQuilibrium->setActiOhmBassMagic(param->Value());

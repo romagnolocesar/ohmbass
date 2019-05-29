@@ -98,10 +98,11 @@ void ModEQuilibrium::updateHighCutFilter(){
 }
 
 void ModEQuilibrium::updateBezierLine() {
-	float xPosition = this->getLowFreq();
-	float yPosition = this->getLowBoost();
+	iBezierControl->lowBellFreq = this->getLowFreq();
+	iBezierControl->lowBellGain = this->getLowBoost();
+	iBezierControl->highBellFreq = this->getHighFreq();
+	iBezierControl->highBellGain = this->getHighShelf();
 
-	this->iBezierControl->setyStart(yPosition);
 }
 
 //Process
@@ -135,15 +136,15 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	IControlsManager->AddModelsCollection(myControl);
 
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low boost", 639, 640, 0.0, 0.0, 20.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Bost Low boost", 639, 640, 0.0, 0.0, 10.0, iGraphic);
 	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 418.6, 418.6, 790.2, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 419, 419, 790, iGraphic);
 	myControl->setShape(3.0);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg shelf", 797, 640, 0.0, 0.0, 20.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Shelf Hihg shelf", 797, 640, 0.0, 0.0, 10.0, iGraphic);
 	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
@@ -191,29 +192,12 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
 	case GraphicsModel::BEZIERCONTROL:
-
-
-		//Alias
-		ControlsModel* iBezierInstance = iControlsManager->controlsModelsCollection[i];
-
-		//Test
-		float lowFreq = this->getLowFreq() - 150;
-		int lowBoost = this->getLowBoost();
-
-		//Calc bezier pointer
-		float xctl = (iBezierInstance->x + ((iBezierInstance->x2 - iBezierInstance->x) / 2)) + lowFreq;
-		float yctl = iBezierInstance->y - lowBoost;
-
-		control = iBezierControl = new IBezierControl(
-			myOhmBass,
-			IRECT(555, 570, 815, 645),
-			iBezierInstance->x,
-			iBezierInstance->y,
-			xctl,
-			yctl,
-			iBezierInstance->x2,
-			iBezierInstance->y2
-		);
+		iBezierControl = new IBezierControl(myOhmBass,IRECT(this->BezierXstart, this->BezierYstart, this->BezierXend, this->BezierYend));
+		iBezierControl->lowBellFreq = this->getLowFreq();
+		iBezierControl->lowBellGain = this->getLowBoost();
+		iBezierControl->highBellFreq = this->getHighFreq();
+		iBezierControl->highBellGain = this->getHighShelf();
+		control = iBezierControl;
 	}
 
 	iControlsManager->AddControlsCollection(control);

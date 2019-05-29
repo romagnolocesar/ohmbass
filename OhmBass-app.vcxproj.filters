@@ -28,6 +28,9 @@
     <Filter Include="Models\CustomsControls">
       <UniqueIdentifier>{59f6b9e3-264e-4b35-9180-6bf02629cad6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\ghrr">
+      <UniqueIdentifier>{c888fa05-4a54-4387-ac9c-5a06f44b6ea9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app_wrapper\app_main.h">
@@ -41,9 +44,6 @@
     <ClInclude Include="EnvelopeGenerator.h" />
     <ClInclude Include="Filter.h" />
     <ClInclude Include="Voice.h" />
-    <ClInclude Include="ModEQuilibrium.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModOscillators.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -121,8 +121,11 @@
     <ClInclude Include="ITempoDisplay.h">
       <Filter>Models\CustomsControls</Filter>
     </ClInclude>
+    <ClInclude Include="ModEQuilibrium.h">
+      <Filter>Modules\ghrr</Filter>
+    </ClInclude>
     <ClInclude Include="IBezierControl.h">
-      <Filter>Models\CustomsControls</Filter>
+      <Filter>Modules\ghrr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +141,6 @@
     <ClCompile Include="EnvelopeGenerator.cpp" />
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="Voice.cpp" />
-    <ClCompile Include="ModEQuilibrium.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModOscillators.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -190,6 +190,9 @@
     <ClCompile Include="Biquad.cpp" />
     <ClCompile Include="modulesManager.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ModEQuilibrium.cpp">
+      <Filter>Modules\ghrr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

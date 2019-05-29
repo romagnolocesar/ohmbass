@@ -13,11 +13,11 @@ public:
 	GraphicsModel* iGraphic;
 	IBezierControl* iBezierControl;
 
-	//Bezier default position
-	float BezierXstart = 560.0f;
-	float BezierYstart = 610.0f;
-	float BezierXend = 800.0f;
-	float BezierYend = 610.0f;
+	////Bezier default position
+	int BezierXstart = 555;
+	int BezierYstart = 570;
+	int BezierXend = 815;
+	int BezierYend = 630;
 
 
 	void setLowFreq(double newLowFreq);

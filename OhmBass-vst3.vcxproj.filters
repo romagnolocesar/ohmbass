@@ -34,6 +34,7 @@
     <ClCompile Include="ModAmpEnvelope.cpp" />
     <ClCompile Include="ModEQuilibrium.cpp" />
     <ClCompile Include="ModFilters.cpp" />
+    <ClCompile Include="modulesManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />
