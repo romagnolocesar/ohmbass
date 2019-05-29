@@ -36,11 +36,11 @@ void ModFilters::init(controlsManager* IControlsManager, graphicsManager* IGraph
 		GraphicsModel::KNOBMULTICONTROL
 	);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Cutoff", 635, 343, 0.99, 0.0, 0.99, iGraphic);
-	myControl->setShape(2.0);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Cutoff", 635, 343, 0.99, 0.01, 0.99, iGraphic);
+	myControl->setShape(2);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Resonance", 730, 343, 0.0, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Resonance", 730, 343, 0.01, 0.01, 1.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter LFO Amount", 820, 343, 0.0, 0.0, 1.0, iGraphic);
@@ -53,19 +53,19 @@ void ModFilters::init(controlsManager* IControlsManager, graphicsManager* IGraph
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Attack", 635, 193, 0.01, 0.01, 10.0, iGraphic);
-	myControl->setShape(3.0);
+	myControl->setShape(3);
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Decay", 730, 193, 0.5, 0.01, 15.0, iGraphic);
-	myControl->setShape(3.0);
+	myControl->setShape(3);
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Sustain", 820, 193, 0.1, 0.001, 1.0, iGraphic);
-	myControl->setShape(2.0);
+	myControl->setShape(2);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Release", 915, 193, 1.0, 0.01, 15.0, iGraphic);
-	myControl->setShape(3.0);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Release", 915, 193, 1.0, 0.001, 15.0, iGraphic);
+	myControl->setShape(3);
 	IControlsManager->AddModelsCollection(myControl);
 
 }
