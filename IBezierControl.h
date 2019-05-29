@@ -6,6 +6,7 @@
 class IBezierControl : public IControl
 {
 public:
+	bool showPoints = FALSE;
 	float xstart;
 	float ystart;
 	float xctl;
@@ -63,11 +64,6 @@ public:
 		return this->yend;
 	}
 
-	//Structure
-	struct beziers {
-		LICE_pixel color;
-		float alpha;
-	} beziers[2];
 
 	IBezierControl(IPlugBase *pPlug, IRECT pR, float xstart, float ystart, float xctl, float yctl, float xend, float yend)
 		: IControl(pPlug, pR)
@@ -82,12 +78,6 @@ public:
 
 	bool Draw(IGraphics* pGraphics)
 	{
-
-
-		/*LICE_DrawQBezier(pGraphics->GetDrawBitmap(), this->xstart, this->ystart, this->xctl, this->yctl, this->xend, this->yend, LICE_RGBA(0, 0, 0, 255), 0.5);
-		LICE_DrawQBezier(pGraphics->GetDrawBitmap(), this->xstart, this->ystart, this->xctl, this->yctl, this->xend, this->yend, LICE_RGBA(255, 255, 255, 255));*/
-
-		
 
 		//Wrapper (container)
 		int wrapperXstart = 555;
@@ -144,14 +134,17 @@ public:
 		int p7y = bezierYend;
 
 
-		//POINTERS 
-		LICE_Circle(pGraphics->GetDrawBitmap(), p1x, p1y, 2, LICE_RGBA(255, 0, 0, 0));
-		LICE_Circle(pGraphics->GetDrawBitmap(), p2x, p2y, 2, LICE_RGBA(0, 255, 0, 0));
-		LICE_Circle(pGraphics->GetDrawBitmap(), p3x, p3y, 2, LICE_RGBA(0, 0, 255, 0));
-		LICE_Circle(pGraphics->GetDrawBitmap(), p4x, p4y, 2, LICE_RGBA(255, 0, 255, 0));
-		LICE_Circle(pGraphics->GetDrawBitmap(), p5x, p5y, 2, LICE_RGBA(255, 0, 0, 0));
-		LICE_Circle(pGraphics->GetDrawBitmap(), p6x, p6y, 2, LICE_RGBA(0, 255, 0, 0));
-		LICE_Circle(pGraphics->GetDrawBitmap(), p7x, p7y, 2, LICE_RGBA(255, 0, 255, 0));
+		if (this->showPoints) {
+			//POINTERS 
+			LICE_Circle(pGraphics->GetDrawBitmap(), p1x, p1y, 2, LICE_RGBA(255, 0, 0, 0));
+			LICE_Circle(pGraphics->GetDrawBitmap(), p2x, p2y, 2, LICE_RGBA(0, 255, 0, 0));
+			LICE_Circle(pGraphics->GetDrawBitmap(), p3x, p3y, 2, LICE_RGBA(0, 0, 255, 0));
+			LICE_Circle(pGraphics->GetDrawBitmap(), p4x, p4y, 2, LICE_RGBA(255, 0, 255, 0));
+			LICE_Circle(pGraphics->GetDrawBitmap(), p5x, p5y, 2, LICE_RGBA(255, 0, 0, 0));
+			LICE_Circle(pGraphics->GetDrawBitmap(), p6x, p6y, 2, LICE_RGBA(0, 255, 0, 0));
+			LICE_Circle(pGraphics->GetDrawBitmap(), p7x, p7y, 2, LICE_RGBA(255, 0, 255, 0));
+		}
+		
 
 
 		//BEZIER1

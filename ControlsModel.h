@@ -4,7 +4,6 @@
 
 //Customs Controls
 #include "ITempoDisplay.h"
-#include "IEQLineDisplay.h"
 #include "IBezierControl.h"
 
 

@@ -121,9 +121,6 @@
     <ClInclude Include="ITempoDisplay.h">
       <Filter>Models\CustomsControls</Filter>
     </ClInclude>
-    <ClInclude Include="IEQLineDisplay.h">
-      <Filter>Models\CustomsControls</Filter>
-    </ClInclude>
     <ClInclude Include="IBezierControl.h">
       <Filter>Models\CustomsControls</Filter>
     </ClInclude>
