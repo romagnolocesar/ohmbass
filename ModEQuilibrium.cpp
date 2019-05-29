@@ -101,7 +101,7 @@ void ModEQuilibrium::updateBezierLine() {
 	float xPosition = this->getLowFreq();
 	float yPosition = this->getLowBoost();
 
-	this->iBezierControl->setyctl(BezierYend - yPosition);
+	this->iBezierControl->setyStart(yPosition);
 }
 
 //Process
@@ -192,6 +192,7 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		break;
 	case GraphicsModel::BEZIERCONTROL:
 
+
 		//Alias
 		ControlsModel* iBezierInstance = iControlsManager->controlsModelsCollection[i];
 
@@ -205,7 +206,7 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 
 		control = iBezierControl = new IBezierControl(
 			myOhmBass,
-			IRECT(570, 600, 800, 640),
+			IRECT(555, 570, 815, 645),
 			iBezierInstance->x,
 			iBezierInstance->y,
 			xctl,

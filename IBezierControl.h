@@ -1,5 +1,6 @@
 #pragma once
 #include "IPlug_include_in_plug_hdr.h"
+#include <algorithm>
 
 
 class IBezierControl : public IControl
@@ -83,15 +84,175 @@ public:
 	{
 
 
-		beziers[0].color = LICE_RGBA(0, 0, 0, 255);
-		beziers[0].alpha = 0.5f;
-		beziers[1].color = LICE_RGBA(255, 255, 255, 255);
-		beziers[1].alpha = 1.0f;
+		/*LICE_DrawQBezier(pGraphics->GetDrawBitmap(), this->xstart, this->ystart, this->xctl, this->yctl, this->xend, this->yend, LICE_RGBA(0, 0, 0, 255), 0.5);
+		LICE_DrawQBezier(pGraphics->GetDrawBitmap(), this->xstart, this->ystart, this->xctl, this->yctl, this->xend, this->yend, LICE_RGBA(255, 255, 255, 255));*/
 
-		for (int i = 0; i < 2; i++)
-		{
-			LICE_DrawQBezier(pGraphics->GetDrawBitmap(), this->xstart, this->ystart, this->xctl, this->yctl, this->xend, this->yend, beziers[i].color, beziers[i].alpha);
-		}
+		
+
+		//Wrapper (container)
+		int wrapperXstart = 555;
+		int wrapperYstart = 570;
+		int wrapperXend = 815;
+		int wrapperYend = 645;
+
+		//Dimensions
+		int wrapperWidth = wrapperXend - wrapperXstart;
+		int wrapperHeight = wrapperYend - wrapperYstart;
+
+		//Paddings
+		int paddingTop = 10;
+		int paddingRight = 10;
+		int paddingBottom = 10;
+		int paddingLeft = 10;
+
+		//Range Lock
+		int minX = wrapperXstart + paddingLeft;
+		int minY = wrapperYstart + paddingTop;
+		int maxX = wrapperXend - paddingRight;
+		int maxY = wrapperYend - paddingBottom;
+
+		//Bezier default position
+		int bezierXstart = wrapperXstart + paddingLeft;
+		int bezierYstart = (wrapperYstart + paddingTop);
+		int bezierXend = wrapperXend - paddingRight;
+		int bezierYend = wrapperYend - paddingBottom;
+		int bezierWidth = bezierXend - bezierXstart;
+		int bezierHeight = bezierYend - bezierYstart;
+
+
+		int p1x = bezierXstart;
+		int p1y = bezierYstart + bezierHeight;
+
+		int p2x = p1x + (bezierWidth * 0.1);
+		int p2y = bezierYstart + bezierHeight;
+
+		int p3x = bezierXstart + (bezierWidth * 0.06);
+		int p3y = bezierYstart + (bezierHeight * 0.2);
+	
+		int p4x = bezierXstart + (bezierWidth * 0.15);
+		int p4y = bezierYend - bezierHeight;
+
+		int p5x = p4x + (bezierWidth * 0.1);
+		int p5y = bezierYend - bezierHeight * 0.8;
+
+		int p6x = p5x - (bezierWidth * 0.06);
+		int p6y = bezierYstart + bezierHeight;
+
+		int p7x = p4x + (bezierWidth *0.15);
+		int p7y = bezierYstart + bezierHeight;
+
+
+
+		LICE_Circle(
+			pGraphics->GetDrawBitmap(), 
+			p1x,
+			p1y,
+			2, 
+			LICE_RGBA(255, 0, 0, 0)
+		);
+
+		LICE_Circle(
+			pGraphics->GetDrawBitmap(),
+			p2x,
+			p2y,
+			2,
+			LICE_RGBA(0, 255, 0, 0)
+		);
+
+		LICE_Circle(
+			pGraphics->GetDrawBitmap(),
+			p3x,
+			p3y,
+			2,
+			LICE_RGBA(0, 0, 255, 0)
+		);
+
+		LICE_Circle(
+			pGraphics->GetDrawBitmap(),
+			p4x,
+			p4y,
+			2,
+			LICE_RGBA(255, 0, 255, 0)
+		);
+
+
+		LICE_Circle(
+			pGraphics->GetDrawBitmap(),
+			p5x,
+			p5y,
+			2,
+			LICE_RGBA(255, 0, 0, 0)
+		);
+
+		LICE_Circle(
+			pGraphics->GetDrawBitmap(),
+			p6x,
+			p6y,
+			2,
+			LICE_RGBA(0, 255, 0, 0)
+		);
+
+		LICE_Circle(
+			pGraphics->GetDrawBitmap(),
+			p7x,
+			p7y,
+			2,
+			LICE_RGBA(255, 0, 255, 0)
+		);
+
+		//BEZIER1
+		LICE_DrawCBezier(
+			pGraphics->GetDrawBitmap(), 
+			p1x,
+			p1y,
+			p2x,
+			p2y,
+			p3x,
+			p3y,
+			p4x,
+			p4y,
+			LICE_RGBA(0, 0, 0, 255), 0.5
+		);
+		LICE_DrawCBezier(
+			pGraphics->GetDrawBitmap(),
+			p1x,
+			p1y,
+			p2x,
+			p2y,
+			p3x,
+			p3y,
+			p4x,
+			p4y,
+			LICE_RGBA(255, 255, 255, 255)
+		);
+
+		//BEZIER2
+		LICE_DrawCBezier(
+			pGraphics->GetDrawBitmap(),
+			p4x,
+			p4y,
+			p5x,
+			p5y,
+			p6x,
+			p6y,
+			p7x,
+			p7y,
+			LICE_RGBA(0, 0, 0, 255), 0.5
+		);
+		LICE_DrawCBezier(
+			pGraphics->GetDrawBitmap(),
+			p4x,
+			p4y,
+			p5x,
+			p5y,
+			p6x,
+			p6y,
+			p7x,
+			p7y,
+			LICE_RGBA(255, 255, 255, 255)
+		);
+
+
 		
 		return true;
 	}
