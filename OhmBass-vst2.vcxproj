@@ -239,6 +239,7 @@
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST.h" />
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="ControlsModel.h" />
+    <ClInclude Include="fft.h" />
     <ClInclude Include="graphicsModel.h" />
     <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="ModAmpEnvelope.h" />

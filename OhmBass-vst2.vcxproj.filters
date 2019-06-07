@@ -36,6 +36,7 @@
     <ClInclude Include="ControlsModel.h" />
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="ITempoDisplay.h" />
+    <ClInclude Include="fft.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />

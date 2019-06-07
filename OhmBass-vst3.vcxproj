@@ -339,6 +339,7 @@ if exist "%programfiles(x86)%" (copy /y "$(TargetPath)" "$(VST3_64_PATH)\OhmBass
     <ClInclude Include="..\..\SDKs\VST3_SDK\public.sdk\source\vst\vstparameters.h" />
     <ClInclude Include="..\..\SDKs\VST3_SDK\public.sdk\source\vst\vstsinglecomponenteffect.h" />
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST3.h" />
+    <ClInclude Include="fft.h" />
     <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="resource.h" />

@@ -285,6 +285,7 @@
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="EnvelopeGenerator.h" />
     <ClInclude Include="ControlsModel.h" />
+    <ClInclude Include="fft.h" />
     <ClInclude Include="graphicsModel.h" />
     <ClInclude Include="IBezierControl.h" />
     <ClInclude Include="ITempoDisplay.h" />

@@ -10,12 +10,51 @@
 #include <math.h>
 #include <algorithm>
 
+#include <iostream>
+#include "fft.h"
+
+
+int test_fft() {
+	const Complex test[] = { 3.0, 1.0, 1.0, 4.0, 0.0, 0.0, 0.0, 0.0 };
+	CArray data(test, 8);
+
+	// forward fft
+	fft(data);
+
+	std::cout << "fft" << std::endl;
+	for (int i = 0; i < 8; ++i)
+	{
+		std::cout << data[i] << std::endl;
+
+
+		char buf[2048];
+		sprintf(buf, "Valor %d \n", data[i]);
+		OutputDebugString(buf);
+	}
+
+	// inverse fft
+	ifft(data);
+
+	std::cout << std::endl << "ifft" << std::endl;
+	for (int i = 0; i < 8; ++i)
+	{
+		std::cout << data[i] << std::endl;
+
+		char buf2[2048];
+		sprintf(buf2, "-Valor %f \n", data[i]);
+		OutputDebugString(buf2);
+	}
+	return 0;
+}
+
 
 const int kNumPrograms = 5; //Qtd of presets
 const int kNumParams = 49; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
+	int test;
+	test = test_fft();
 
 	this->globals_sampleRate = mSampleRate;
 

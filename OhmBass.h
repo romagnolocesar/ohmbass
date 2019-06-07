@@ -16,6 +16,7 @@
 
 
 
+
 class OhmBass : public IPlug
 {
 public:
@@ -35,6 +36,8 @@ public:
 	void ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames);
 	// to receive MIDI messages:
 	void ProcessMidiMsg(IMidiMsg* pMsg);
+
+	
 
 
 	// Needed for the GUI keyboard:

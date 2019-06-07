@@ -127,6 +127,9 @@
     <ClInclude Include="IBezierControl.h">
       <Filter>Modules\ghrr</Filter>
     </ClInclude>
+    <ClInclude Include="fft.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
