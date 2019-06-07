@@ -183,7 +183,7 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		else {
 			control->Hide(FALSE);
 		}
-		control->GrayOut(TRUE, 0.99f);
+		control->GrayOut(TRUE /*,0.99f*/);
 		break;
 	case GraphicsModel::KNOBMULTICONTROL:
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);

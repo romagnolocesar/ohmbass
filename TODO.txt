@@ -7,3 +7,4 @@ EQ LIBRIUM com compensação de Amplitude na saida
 Modo Stereo na aplicação
 Conflito entre 2 ou mais instancias da mesma DLL (aplicação)
 Consumo excessivo de CPU (investigar)
+Colocar FFT nos osciladores

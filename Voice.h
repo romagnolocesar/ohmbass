@@ -1,7 +1,8 @@
 #ifndef __OhmBass__Voice__
 #define __OhmBass__Voice__
 
-#include "PolyBLEPOscillator.h"
+#include "PolyBLEPOscillator.h"	
+#include "Oscillator.h"
 #include "EnvelopeGenerator.h"
 #include "ModEQuilibrium.h"
 #include "Filter.h"
@@ -50,6 +51,8 @@ public:
 private:
 	PolyBLEPOscillator mOscillatorOne;
 	PolyBLEPOscillator mOscillatorTwo;
+	/*Oscillator mOscillatorOne;
+	Oscillator mOscillatorTwo;*/
 	EnvelopeGenerator mVolumeEnvelope;
 	EnvelopeGenerator mFilterEnvelope;
 	Filter mFilter;

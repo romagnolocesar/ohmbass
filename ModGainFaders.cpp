@@ -53,7 +53,7 @@ void ModGainFaders::doModelsControlsInIControlsCollection(IPlug* myOhmBass, cont
 		control = new IFaderControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, 210, i, &graphic, EDirection::kVertical);
 		if (iControlsManager->controlsModelsCollection[i]->hide) {
 			control->Hide(TRUE);
-			control->GrayOut(TRUE, 0.99f);
+			control->GrayOut(TRUE/*, 0.99f*/);
 		}
 		break;
 	}
@@ -110,13 +110,13 @@ void ModGainFaders::ToggleFaders(controlsManager* IControlsManager, int nOsc, in
 		}
 		else if (paramIdx == mFadersHandlerOffOsc1) {
 			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->Hide(TRUE);
-			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->GrayOut(TRUE, 0.99f);
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->GrayOut(TRUE/*, 0.99f*/);
 
 			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->Hide(FALSE);
 			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->GrayOut(FALSE);
 
 			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->Hide(TRUE);
-			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->GrayOut(TRUE, 0.99f);
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->GrayOut(TRUE/*, 0.99f*/);
 
 			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->Hide(FALSE);
 			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->GrayOut(FALSE);
@@ -132,13 +132,13 @@ void ModGainFaders::ToggleFaders(controlsManager* IControlsManager, int nOsc, in
 		}
 		else if (paramIdx == mFadersHandlerOffOsc2) {
 			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->Hide(TRUE);
-			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->GrayOut(TRUE, 0.99f);
+			IControlsManager->controlsCollection[mFadersHandlerOffOsc2]->GrayOut(TRUE/*, 0.99f*/);
 
 			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->Hide(FALSE);
 			IControlsManager->controlsCollection[mFadersHandlerOnOsc2]->GrayOut(FALSE);
 
 			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->Hide(TRUE);
-			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->GrayOut(TRUE, 0.99f);
+			IControlsManager->controlsCollection[mFadersHandlerOnOsc1]->GrayOut(TRUE/*, 0.99f*/);
 
 			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->Hide(FALSE);
 			IControlsManager->controlsCollection[mFadersHandlerOffOsc1]->GrayOut(FALSE);

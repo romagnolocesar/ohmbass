@@ -36,8 +36,6 @@
     <ClCompile Include="..\..\SDKs\WDL\IPlug\AAX\IPlugAAX_Describe.cpp" />
     <ClCompile Include="controlsManager.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
-    <ClCompile Include="GhrrEQuilibrium.cpp" />
-    <ClCompile Include="GhrrManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />
