@@ -42,20 +42,5 @@ double Filter::process(double inputValue) {
 				return 0.0;
 			}
 		break;
-	}
-	
-
-	//caso 12db
-	/*switch (mode){
-	case FILTER_MODE_LOWPASS:
-		return buf3;
-	case FILTER_MODE_HIGHPASS:
-		return inputValue - buf3;
-	case FILTER_MODE_BANDPASS:
-		return buf0 - buf3;
-	default:
-		return 0.0;
-	}*/
-
-	
+	}	
 }

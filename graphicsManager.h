@@ -22,7 +22,7 @@ public:
 	IGraphics* pGraphics;
 	IBitmap whiteKeyImage, blackKeyImage;
 
-	static const int virtualKeyboardMinimumNoteNumber = 23;
+	static const int virtualKeyboardMinimumNoteNumber = 24;
 	static int lastVirtualKeyboardNoteNumber;
 	
 

@@ -7,13 +7,13 @@ void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGr
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Glow Osc1", 452, 219, 0.0, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Glow Osc1", 452, 219, 0, 0, 1.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Glow Osc2", 533, 219, 0.0, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Glow Osc2", 533, 219, 0, 0, 1.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
