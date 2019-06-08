@@ -16,11 +16,11 @@ ModFilters::~ModFilters()
 void ModFilters::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
 	ControlsModel* myControl;
 
-	//Filter Mode
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FILTERMODE_ID, FILTERMODE_FN, 3);
+	//Drop Down Menu Filters Mode
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(DROP_DOWN_FILTERS_MODES_ID, DROP_DOWN_FILTERS_MODES_FN, 3);
 	graphicType = GraphicsModel::SWITCHCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Filter Mode", 875, 300, Filter::FILTER_MODE_LOWPASS, Filter::kNumFilterModes, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Drop Down Filters Mode", 695, 303, Filter::FILTER_MODE_LOWPASS, Filter::kNumFilterModes, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	//LFO Wave Mode

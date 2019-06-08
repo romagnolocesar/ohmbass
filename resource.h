@@ -66,7 +66,7 @@ instrument determined by PLUG _IS _INST
 #define WHITE_KEY_ID				102
 #define BLACK_KEY_ID				103
 #define WAVEFORM_ID					104
-#define FILTERMODE_ID				107
+
 #define KNOB_MEDIUM_ID				108
 // --- Waves Buttons ----
 #define BGBTNOSCWAVES_ID			113
@@ -88,6 +88,7 @@ instrument determined by PLUG _IS _INST
 #define KNOB_MEDIUM_PARAM_ID		127
 
 #define BTN_MAGIC_ACTIOHM_ID		128
+#define DROP_DOWN_FILTERS_MODES_ID		129
 
 
 
@@ -98,7 +99,7 @@ instrument determined by PLUG _IS _INST
 #define BLACK_KEY_FN						"resources/img/blackkey.png"
 #define WAVEFORM_FN							"resources/img/waveform.png"
 #define KNOB_MEDIUM_FN						"resources/img/knob_medium.png"
-#define FILTERMODE_FN						"resources/img/filtermode.png"
+
 // --- Waves Buttons ---- //
 #define BGBTNOSCWAVES_FN					"resources/img/wavesbuttons/bg_btn_osc_waves.png"
 #define ICONSAWWAVEON_FN					"resources/img/wavesbuttons/icon_saw_wave_on.png"
@@ -119,6 +120,7 @@ instrument determined by PLUG _IS _INST
 #define KNOB_MEDIUM_PARAM_FN				"resources/img/knob_medium_param.png"
 
 #define BTN_MAGIC_ACTIOHM_FN				"resources/img/ghrrmode/eqlibrium/act_wave.png"
+#define DROP_DOWN_FILTERS_MODES_FN			"resources/img/drop_down_filters_modes.png"
 
 
 

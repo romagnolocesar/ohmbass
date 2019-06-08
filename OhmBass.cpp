@@ -95,7 +95,7 @@ void OhmBass::doModelsControlsInIControlsCollection() {
 
 void OhmBass::CreateKeyboard() {
 	//                            C#     D#          F#      G#      A# (Quantos PX as notas # deslocam pra esquerda) 
-	int keyCoordinates[12] = { 0, 20, 33, 57, 67, 99, 120, 132, 155, 165, 189, 198 };
+	int keyCoordinates[12] = { 0, 20, 33, 56, 67, 99, 119, 130, 154, 165, 188, 198 };
 	iGraphicsManager->mVirtualKeyboard = new IKeyboardControl(
 		this,
 		iGraphicsManager->kKeybX,
@@ -191,7 +191,7 @@ void OhmBass::OnParamChange(int paramIdx)
 	}
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::FILTERS) {
 		if (isParametersInitialized) {
-			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Mode") == 0) {
+			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Drop Down Filters Mode") == 0) {
 				changer = bind(&VoiceManager::setFilterMode, _1, static_cast<Filter::FilterMode>(param->Int()));
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Cutoff") == 0) {
