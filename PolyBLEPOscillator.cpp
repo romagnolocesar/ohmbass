@@ -1,7 +1,6 @@
 #include "PolyBLEPOscillator.h"
 
 
-
 // PolyBLEP by Tale
 // (slightly modified)
 // http://www.kvraudio.com/forum/viewtopic.php?t=375517
@@ -33,7 +32,8 @@ double PolyBLEPOscillator::nextSample() {
 	else if (mOscillatorMode == OSCILLATOR_MODE_SAW) {
 		value = naiveWaveformForMode(OSCILLATOR_MODE_SAW);
 		value -= poly_blep(t);
-	}else {
+		value -= poly_blep(t); //fazer opção de escolha
+	}else {		
 		value = naiveWaveformForMode(OSCILLATOR_MODE_SQUARE);
 		value += poly_blep(t);
 		value -= poly_blep(fmod(t + 0.5, 1.0));

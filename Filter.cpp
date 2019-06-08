@@ -10,6 +10,7 @@ double Filter::process(double inputValue) {
 	buf2 += calculatedCutoff * (buf1 - buf2);
 	buf3 += calculatedCutoff * (buf2 - buf3);
 
+	//caso 12db
 	switch (mode){
 	case FILTER_MODE_LOWPASS:
 		return buf3;
@@ -20,4 +21,16 @@ double Filter::process(double inputValue) {
 	default:
 		return 0.0;
 	}
+
+	//caso 24db
+	/*switch (mode) {
+	case FILTER_MODE_LOWPASS:
+		return buf3;
+	case FILTER_MODE_HIGHPASS:
+		return inputValue - buf3;
+	case FILTER_MODE_BANDPASS:
+		return buf0 - buf3;
+	default:
+		return 0.0;
+	}*/
 }

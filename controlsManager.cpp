@@ -79,7 +79,7 @@ void controlsManager::createParams(IPlug* myOhmBass)
 				controlsModelsCollection[i]->defaultVal,
 				controlsModelsCollection[i]->minVal,
 				controlsModelsCollection[i]->maxVal,
-				1
+				parameterStep
 			);
 			break;
 		case ControlsModel::INT:

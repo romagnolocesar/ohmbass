@@ -10,7 +10,7 @@ public:
 	};
 	Filter() :
 		cutoff(0.99),
-		resonance(0.0),
+		resonance(0.01),
 		cutoffMod(0.0),
 		mode(FILTER_MODE_LOWPASS),
 		buf0(0.0),
