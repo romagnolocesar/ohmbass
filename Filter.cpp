@@ -28,8 +28,8 @@ double Filter::process(double inputValue) {
 		}
 		break;
 	case FILTER_SLOPE_12:
-		buf0 += cutoff * (inputValue - buf0);
-		buf1 += cutoff * (buf0 - buf1);
+		buf0 += calculatedCutoff * (inputValue - buf0 + feedbackAmount * (buf0 - buf1));
+		buf1 += calculatedCutoff * (buf0 - buf1);
 
 		switch (mode) {
 			case FILTER_MODE_LOWPASS:
