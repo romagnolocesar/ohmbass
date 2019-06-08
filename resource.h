@@ -88,7 +88,8 @@ instrument determined by PLUG _IS _INST
 #define KNOB_MEDIUM_PARAM_ID		127
 
 #define BTN_MAGIC_ACTIOHM_ID		128
-#define DROP_DOWN_FILTERS_MODES_ID		129
+#define DROP_DOWN_FILTERS_MODES_ID	129
+#define SWITCH_DROP_ID				130
 
 
 
@@ -121,6 +122,7 @@ instrument determined by PLUG _IS _INST
 
 #define BTN_MAGIC_ACTIOHM_FN				"resources/img/ghrrmode/eqlibrium/act_wave.png"
 #define DROP_DOWN_FILTERS_MODES_FN			"resources/img/drop_down_filters_modes.png"
+#define SWITCH_DROP_FN						"resources/img/switch_plug.png"
 
 
 

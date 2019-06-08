@@ -23,6 +23,13 @@ void ModFilters::init(controlsManager* IControlsManager, graphicsManager* IGraph
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Drop Down Filters Mode", 695, 303, Filter::FILTER_MODE_LOWPASS, Filter::kNumFilterModes, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
+	//Slope of Filter
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(SWITCH_DROP_ID, SWITCH_DROP_FN, 2);
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Slope Filter", 873, 302, Filter::FILTER_SLOPE_24, Filter::kNumSlopeModes, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
 	//LFO Wave Mode
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
 	graphicType = GraphicsModel::SWITCHCONTROL;

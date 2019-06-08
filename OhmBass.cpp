@@ -12,7 +12,7 @@
 
 
 const int kNumPrograms = 5; //Qtd of presets
-const int kNumParams = 49; //Qtd for params
+const int kNumParams = 50; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -196,6 +196,9 @@ void OhmBass::OnParamChange(int paramIdx)
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Cutoff") == 0) {
 				changer = bind(&VoiceManager::setFilterCutoff, _1, param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Slope Filter") == 0) {
+				changer = bind(&VoiceManager::setSlopeMode, _1, param->Value());
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Resonance") == 0) {
 				changer = bind(&VoiceManager::setFilterResonance, _1, param->Value());

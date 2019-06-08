@@ -44,5 +44,5 @@ double VoiceManager::nextSample() {
 		voice.setLFOValue(lfoValue);
 		output += voice.nextSample();
 	}
-	return output * 0.6; // 60% of AMP total 
+	return output; //* 0.6; // 60% of AMP total 
 }

@@ -82,6 +82,9 @@ public:
 	static void setFilterCutoff(Voice& voice, double cutoff) {
 		voice.mFilter.setCutoff(cutoff);
 	}
+	static void setSlopeMode(Voice& voice, int slope) {
+		voice.mFilter.setSlopeMode(slope);
+	}
 	static void setFilterResonance(Voice& voice, double resonance) {
 		voice.mFilter.setResonance(resonance);
 	}
