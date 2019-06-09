@@ -13,7 +13,9 @@ public:
 	std::vector<class ControlsModel * > controlsModelsCollection;
 	std::vector<class IControl * > controlsCollection;
 
-	IControl* control;
+	std::vector<std::string> controlsGroupsCollection;
+	//std::vector<char, std::vector<class IControl * >> wrapperControlsAndGroupsCollection;
+
 
 	int kNumParams = getKNumParams();
 
@@ -53,12 +55,15 @@ public:
 		bool hide = FALSE
 );
 
+
 	int AddModelsCollection(ControlsModel* myInstance);
 	int AddControlsCollection(IControl* myInstance);
+	void AddControlsGroupsCollection(std::string groupName);
 
 	int Count(void);
 
 	void createParams(IPlug* myOhmBass);
+	void fillControlsGroupCollection();
 	static int getKNumParams();
 
 private:

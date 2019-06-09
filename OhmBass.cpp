@@ -12,7 +12,7 @@
 
 
 const int kNumPrograms = 5; //Qtd of presets
-const int kNumParams = 50; //Qtd for params
+const int kNumParams = 51; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -31,8 +31,11 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Attach Background in Main Display
 	iGraphicsManager->attachBackgroundMainDisplay();
 
-	//Creating a Collection of IControls objects
+	//Creating a Collection of Controls Models
 	doModelsControlsInIControlsCollection();
+
+	//Creating a Collection of Controls Groups 
+	iControlsManager->fillControlsGroupCollection();
 
 	//Set default params on Filters (BiQuad Filter)
 	iModulesManager->iModEQuilibrium->updateLowFilterValues();
@@ -43,7 +46,6 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 
 	//create keyboard
 	CreateKeyboard();
-
 
 	//Attach all graphics with your respective controls in main screen
 	AttachGraphics(iGraphicsManager->pGraphics);
@@ -172,6 +174,12 @@ void OhmBass::OnParamChange(int paramIdx)
 		}
 		else if (paramIdx == iModulesManager->iModOscillators->mOsc2PitchMod) {
 			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
+		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Power Button Osc 1") == 0) {
+			for (int i = 0; i < iControlsManager->controlsGroupsCollection.size(); i++) {
+				/*char buf[2048];
+				sprintf(buf, "The value of variable num is %u \n", iControlsManager->controlsGroupsCollection[i].);
+				OutputDebugString(buf);*/
+			}	
 		}
 		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
 	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
@@ -289,6 +297,7 @@ void OhmBass::OnParamChange(int paramIdx)
 			iModulesManager->iModEQuilibrium->updateControlNasalLowFreq();
 			iModulesManager->iModEQuilibrium->updateHighCutFilter();
 		}
+		
 		
 		
 	}

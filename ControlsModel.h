@@ -6,6 +6,8 @@
 #include "ITempoDisplay.h"
 #include "IBezierControl.h"
 
+#include <string>
+
 
 class ControlsModel
 {
@@ -122,6 +124,9 @@ public:
 	);
 
 	void setShape(double shape);
+
+	void setGroupName(std::string groupName);
+	std::string getGroupName();
 	
 	ModulesModel::EModulesName moduleName;
 	int idx;
@@ -141,4 +146,5 @@ public:
 	double shape = 1.0;
 	EControlsDataType dataType;
 	GraphicsModel* graphicsModel;
+	std::string groupName;
 };

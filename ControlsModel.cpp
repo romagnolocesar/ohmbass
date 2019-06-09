@@ -123,4 +123,16 @@ ControlsModel::ControlsModel(GraphicsModel * graphicsModel, int idx, ModulesMode
 void ControlsModel::setShape(double shape) {
 	this->shape = shape;
 }
+
+//Set a group for the control.
+//A way to manage multiples controls
+void ControlsModel::setGroupName(std::string groupName)
+{
+	this->groupName = groupName;
+}
+
+std::string ControlsModel::getGroupName()
+{
+	return this->groupName;
+}
 			

@@ -2,7 +2,7 @@
 
 void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager) {
 	ControlsModel* myControl;
-	
+
 	//BitMaps
 	IBitmap mBgBtnOscWavesBitmap = IGraphicsManager->pGraphics->LoadIBitmap(BGBTNOSCWAVES_ID, BGBTNOSCWAVES_FN, 2);
 
@@ -10,12 +10,22 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	iRect = IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4));
 	iGraphic = new GraphicsModel(mBgBtnOscWavesBitmap, GraphicsModel::RADIOBUTTONSCONTROL, iRect, EDirection::kHorizontal);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 1 Waves", 99, 206, 1, 1, 4, iGraphic);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Waves Buttons of Oscillator 2*/
 	iRect = IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4));
 	iGraphic = new GraphicsModel(mBgBtnOscWavesBitmap, GraphicsModel::RADIOBUTTONSCONTROL, iRect, EDirection::kHorizontal);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 2 Waves", 99, 306, 1,1, 4, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 2 Waves", 99, 306, 1, 1, 4, iGraphic);
+	myControl->setGroupName("oscilator2");
+	IControlsManager->AddModelsCollection(myControl);
+
+	/* Power Buttons */
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(BUTTON_POWER_WHITE_ID, BUTTON_POWER_WHITE_FN, 2);
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Power Button Osc 1", 348, 145, ModulesModel::ON, ModulesModel::kNumModulesOnOff, iGraphic);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Waves Icons */
@@ -23,96 +33,112 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Sine Wave Off OSC1", 58, 218, iGraphic, FALSE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Sine Wave On OSC1", 58, 218, iGraphic, FALSE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Saw Wave Off OSC1", 114, 218, iGraphic, FALSE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Saw Wave On OSC1", 114, 218, iGraphic, TRUE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Square Wave Off OSC1", 170, 218, iGraphic, FALSE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Square Wave On OSC1", 170, 218, iGraphic, TRUE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Triangle Wave Off OSC1", 226, 218, iGraphic, FALSE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Triangle Wave On OSC1", 226, 218, iGraphic, TRUE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Sine Wave Off OSC2", 58, 318, iGraphic, FALSE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEON_ID, ICONSINEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Sine Wave On OSC2", 58, 318, iGraphic, FALSE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEOFF_ID, ICONSAWWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Saw Wave Off OSC2", 114, 318, iGraphic, FALSE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSAWWAVEON_ID, ICONSAWWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Saw Wave On OSC2", 114, 318, iGraphic, TRUE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEOFF_ID, ICONSQUAREWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Square Wave Off OSC2", 170, 318, iGraphic, FALSE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSQUAREWAVEON_ID, ICONSQUAREWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Square Wave On OSC2", 170, 318, iGraphic, TRUE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONTRIANGLEWAVEOFF_ID, ICONTRIANGLEWAVEOFF_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Triangle Wave Off OSC2", 226, 318, iGraphic, FALSE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONTRIANGLEWAVEON_ID, ICONTRIANGLEWAVEON_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Triangle Wave On OSC2", 226, 318, iGraphic, TRUE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Oscillators LFO Pitch */
@@ -120,12 +146,14 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	graphicType = GraphicsModel::KNOBMULTICONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0, iGraphic);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium);
 	graphicType = GraphicsModel::KNOBMULTICONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0, iGraphic);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 }
@@ -137,6 +165,9 @@ void ModOscillators::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 	switch (iControlsManager->controlsModelsCollection[i]->graphicsModel->graphicsType) {
 	case GraphicsModel::RADIOBUTTONSCONTROL:
 		control = new IRadioButtonsControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->graphicsModel->iRect, i, 4, &graphic, kHorizontal);
+		break;
+	case GraphicsModel::SWITCHCONTROL:
+		control = new ISwitchControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
 	case GraphicsModel::BITMAPCONTROL:
 		control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
@@ -151,8 +182,10 @@ void ModOscillators::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 	case GraphicsModel::KNOBMULTICONTROL:
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		break;
+	case GraphicsModel::BITMAPOVERLAYCONTROL:
+		control = new IBitmapOverlayControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic, iControlsManager->controlsModelsCollection[i]->graphicsModel->iRect);
+		break;
 	}
-
 	iControlsManager->AddControlsCollection(control);
 	iGraphicsManager->pGraphics->AttachControl(control);
 }

@@ -5,6 +5,7 @@
 class ModOscillators : public ModulesModel
 {
 public:
+	
 	EModulesName moduleName = OSCILATORS;
 
 	IBitmap pBitmap;

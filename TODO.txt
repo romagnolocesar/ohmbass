@@ -1,4 +1,5 @@
 ===TODO====
+
 Revisar a formula da onda Triangulo.
 Alinhar as teclas do teclado.
 EQ Librium alterando pitch quando toca as notas rapido demais (DONE)
@@ -8,3 +9,6 @@ Modo Stereo na aplicação
 Conflito entre 2 ou mais instancias da mesma DLL (aplicação)
 Consumo excessivo de CPU (investigar)
 Colocar FFT nos osciladores
+
++++Dinamizar a quantidade de parametros necessários sem hardcode.
++++Atualizar o Sample Rate (44100) buscando do Host (Ableton, Cubase, Logic etc.)
