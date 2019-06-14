@@ -13,8 +13,11 @@ public:
 	std::vector<class ControlsModel * > controlsModelsCollection;
 	std::vector<class IControl * > controlsCollection;
 
-	std::vector<std::string> controlsGroupsCollection;
-	//std::vector<char, std::vector<class IControl * >> wrapperControlsAndGroupsCollection;
+	typedef std::vector<std::string> groupsCollection;
+	groupsCollection controlsGroupsCollection;
+	
+	
+	//std::vector<std::string, std::vector<class IControl * >> wrapperControlsAndGroupsCollection;
 
 
 	int kNumParams = getKNumParams();
@@ -64,6 +67,7 @@ public:
 
 	void createParams(IPlug* myOhmBass);
 	void fillControlsGroupCollection();
+	void fillWrapperControlsGroupCollection();
 	static int getKNumParams();
 
 private:

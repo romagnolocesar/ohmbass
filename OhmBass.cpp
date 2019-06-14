@@ -175,11 +175,7 @@ void OhmBass::OnParamChange(int paramIdx)
 		else if (paramIdx == iModulesManager->iModOscillators->mOsc2PitchMod) {
 			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Power Button Osc 1") == 0) {
-			for (int i = 0; i < iControlsManager->controlsGroupsCollection.size(); i++) {
-				/*char buf[2048];
-				sprintf(buf, "The value of variable num is %u \n", iControlsManager->controlsGroupsCollection[i].);
-				OutputDebugString(buf);*/
-			}	
+			iControlsManager->fillWrapperControlsGroupCollection();
 		}
 		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
 	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {

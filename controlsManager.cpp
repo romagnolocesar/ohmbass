@@ -69,6 +69,7 @@ void controlsManager::AddControlsGroupsCollection(std::string groupName){
 	if (groupName != "") {
 		bool isGroupExist = FALSE;
 		int groupIdx = NULL;
+
 		const std::string tempGroupName = groupName;
 
 		//Check if group exist and get the index 
@@ -150,6 +151,16 @@ void controlsManager::fillControlsGroupCollection() {
 		AddControlsGroupsCollection(controlsModelsCollection[i]->getGroupName());
 	}
 	
+}
+
+void controlsManager::fillWrapperControlsGroupCollection() {
+	for (int i = 0; i < controlsGroupsCollection.size(); i++)
+	{
+		char buf[2048];
+		sprintf(buf, "The value of variable num is %u \n", controlsGroupsCollection[i]);
+		OutputDebugString(buf);
+	}
+
 }
 
 //Return how much Params the Application has
