@@ -170,11 +170,11 @@ void ModOscillators::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
 		if (iControlsManager->controlsModelsCollection[i]->hide) {
 			control->Hide(TRUE);
+			control->GrayOut(TRUE/*, 0.99f*/);
 		}
 		else {
 			control->Hide(FALSE);
 		}
-		control->GrayOut(TRUE/*, 0.99f*/);
 			break;
 	case GraphicsModel::KNOBMULTICONTROL:
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);

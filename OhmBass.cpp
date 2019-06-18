@@ -183,7 +183,7 @@ void OhmBass::OnParamChange(int paramIdx)
 				for (int i = 0; i < iControlsManager->wrapperControlsAndGroupsCollection.find("oscilator1")->second.size(); i++) {
 					IControl * element;
 					element = iControlsManager->wrapperControlsAndGroupsCollection.find("oscilator1")->second.at(i);
-					element->GrayOut(!oscilator1Status);
+					element->GrayOut(oscilator1Status);
 				}
 				iModulesManager->iModOscillators->oscilator1Status = !oscilator1Status;
 			}
