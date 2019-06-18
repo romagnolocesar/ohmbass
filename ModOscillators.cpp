@@ -10,14 +10,12 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	iRect = IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4));
 	iGraphic = new GraphicsModel(mBgBtnOscWavesBitmap, GraphicsModel::RADIOBUTTONSCONTROL, iRect, EDirection::kHorizontal);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 1 Waves", 99, 206, 1, 1, 4, iGraphic);
-	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Waves Buttons of Oscillator 2*/
 	iRect = IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4));
 	iGraphic = new GraphicsModel(mBgBtnOscWavesBitmap, GraphicsModel::RADIOBUTTONSCONTROL, iRect, EDirection::kHorizontal);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 2 Waves", 99, 306, 1, 1, 4, iGraphic);
-	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Power Buttons */
@@ -25,7 +23,6 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	graphicType = GraphicsModel::SWITCHCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Power Button Osc 1", 348, 145, ModulesModel::ON, ModulesModel::kNumModulesOnOff, iGraphic);
-	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Waves Icons */

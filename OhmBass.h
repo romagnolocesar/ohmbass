@@ -31,6 +31,7 @@ public:
 	modulesManager* iModulesManager = new modulesManager();
 
 
+
 	void Reset();
 	void OnParamChange(int paramIdx);
 	void ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames);

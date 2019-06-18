@@ -17,6 +17,9 @@ public:
 	int mapWavesIconsIdx[2][4][2];
 	int mBgBtnOscWavesOsc1, mBgBtnOscWavesOsc2, mOsc1PitchMod, mOsc2PitchMod;
 
+	bool oscilator1Status = TRUE;
+	bool oscilator2Status = FALSE;
+
 	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
 	void fillSetOfWavesIcons(controlsManager* iControlsManager);

@@ -41,6 +41,9 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iModulesManager->iModEQuilibrium->updateLowFilterValues();
 	iModulesManager->iModEQuilibrium->updateHighFilterValues();
 
+	//Fill Wrapper of Group of Controls
+	iControlsManager->fillWrapperControlsGroupCollection();
+
 	//Load Keyboard
 	iGraphicsManager->loadKeyboard();
 
@@ -175,7 +178,15 @@ void OhmBass::OnParamChange(int paramIdx)
 		else if (paramIdx == iModulesManager->iModOscillators->mOsc2PitchMod) {
 			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Power Button Osc 1") == 0) {
-			iControlsManager->fillWrapperControlsGroupCollection();
+			bool oscilator1Status = iModulesManager->iModOscillators->oscilator1Status;
+			if (isParametersInitialized) {
+				for (int i = 0; i < iControlsManager->wrapperControlsAndGroupsCollection.find("oscilator1")->second.size(); i++) {
+					IControl * element;
+					element = iControlsManager->wrapperControlsAndGroupsCollection.find("oscilator1")->second.at(i);
+					element->GrayOut(!oscilator1Status);
+				}
+				iModulesManager->iModOscillators->oscilator1Status = !oscilator1Status;
+			}
 		}
 		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
 	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {

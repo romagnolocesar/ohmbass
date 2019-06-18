@@ -6,18 +6,22 @@
 
 //Load Modules
 #include <vector> using namespace std; 
+#include <map>;
 
 class controlsManager{
 public:
 	const double parameterStep = 0.001;
 	std::vector<class ControlsModel * > controlsModelsCollection;
-	std::vector<class IControl * > controlsCollection;
 
-	typedef std::vector<std::string> groupsCollection;
-	groupsCollection controlsGroupsCollection;
+	typedef std::vector<class IControl * > iControlsCollection;
+	iControlsCollection controlsCollection;
+
+	typedef std::vector<std::string> groupsNamesCollection;
+	groupsNamesCollection controlsGroupsNamesCollection;
 	
 	
-	//std::vector<std::string, std::vector<class IControl * >> wrapperControlsAndGroupsCollection;
+	
+	std::map<std::string, std::vector<class IControl * >> wrapperControlsAndGroupsCollection;
 
 
 	int kNumParams = getKNumParams();

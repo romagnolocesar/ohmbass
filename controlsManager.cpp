@@ -1,5 +1,6 @@
 #include "controlsManager.h"
 
+
 void controlsManager::addParam(
 	ModulesModel::EModulesName moduleName,
 	char* alias,
@@ -73,9 +74,9 @@ void controlsManager::AddControlsGroupsCollection(std::string groupName){
 		const std::string tempGroupName = groupName;
 
 		//Check if group exist and get the index 
-		for (int i = 0; i < controlsGroupsCollection.size(); i++)
+		for (int i = 0; i < controlsGroupsNamesCollection.size(); i++)
 		{
-			std::string auxGroupNameCollection = controlsGroupsCollection.at(i);
+			std::string auxGroupNameCollection = controlsGroupsNamesCollection.at(i);
 			const std::string tempGroupNameCollection = auxGroupNameCollection;
 			if (tempGroupNameCollection == tempGroupName) {
 				groupIdx = i;
@@ -86,8 +87,8 @@ void controlsManager::AddControlsGroupsCollection(std::string groupName){
 
 		//If the group was not initialized, initialize it in the group
 		if (!isGroupExist) {
-			controlsGroupsCollection.push_back(groupName);
-			groupIdx = controlsGroupsCollection.size() - 1;
+			controlsGroupsNamesCollection.push_back(groupName);
+			groupIdx = controlsGroupsNamesCollection.size() - 1;
 		}
 	}
 };
@@ -154,12 +155,19 @@ void controlsManager::fillControlsGroupCollection() {
 }
 
 void controlsManager::fillWrapperControlsGroupCollection() {
-	for (int i = 0; i < controlsGroupsCollection.size(); i++)
+	for (int i = 0; i < controlsGroupsNamesCollection.size(); i++)
 	{
-		char buf[2048];
-		sprintf(buf, "The value of variable num is %u \n", controlsGroupsCollection[i]);
-		OutputDebugString(buf);
+		std::vector<class IControl *> tempListControls;	
+		for (int j = 0; j < controlsModelsCollection.size(); j++)
+		{
+			
+			if (controlsGroupsNamesCollection[i] == controlsModelsCollection[j]->getGroupName()) {
+				tempListControls.push_back(controlsCollection[j]);
+			}
+		}
+		wrapperControlsAndGroupsCollection[controlsGroupsNamesCollection[i]].swap(tempListControls);
 	}
+	
 
 }
 
