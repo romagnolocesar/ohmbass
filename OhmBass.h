@@ -14,7 +14,6 @@
 
 
 
-
 class OhmBass : public IPlug
 {
 public:
@@ -28,6 +27,7 @@ public:
 	graphicsManager* iGraphicsManager = new graphicsManager(this);
 	modulesManager* iModulesManager = new modulesManager();
 
+	
 
 
 	void Reset();
@@ -51,6 +51,8 @@ public:
 
 	//Create all controls based on Models Controls Collection 
 	void doModelsControlsInIControlsCollection();
+
+	void LoadModalStructure();
 
 	
 private:

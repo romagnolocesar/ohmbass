@@ -10,6 +10,11 @@
 
 class controlsManager{
 public:
+	//Modal Background
+	IBitmap modalBackground;
+	IControl* modalControl;
+
+	//CONTROLS GROUPS STRUCTURE
 	const double parameterStep = 0.001;
 	std::vector<class ControlsModel * > controlsModelsCollection;
 
@@ -19,9 +24,10 @@ public:
 	typedef std::vector<std::string> groupsNamesCollection;
 	groupsNamesCollection controlsGroupsNamesCollection;
 	
-	
-	
 	std::map<std::string, std::vector<class IControl * >> wrapperControlsAndGroupsCollection;
+
+
+
 
 
 	int kNumParams = getKNumParams();

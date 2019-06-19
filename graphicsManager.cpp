@@ -2,6 +2,7 @@
 #include "graphicsManager.h"
 #include "controlsManager.h"
 #include "VectorLib.h"
+#include "IGraphics.h"
 
 
 void graphicsManager::attachBackgroundMainDisplay()

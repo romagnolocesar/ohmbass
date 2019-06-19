@@ -47,6 +47,9 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Load Keyboard
 	iGraphicsManager->loadKeyboard();
 
+	//Load Modal Structure
+	LoadModalStructure();
+
 	//create keyboard
 	CreateKeyboard();
 
@@ -197,6 +200,7 @@ void OhmBass::OnParamChange(int paramIdx)
 					element->GrayOut(oscilator2Status);
 				}
 				iModulesManager->iModOscillators->oscilator2Status = !oscilator2Status;
+				iControlsManager->modalControl->Hide(FALSE);
 			}
 		}
 		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
@@ -351,4 +355,11 @@ void OhmBass::processVirtualKeyboard() {
 	}
 
 	lastVirtualKeyboardNoteNumber = virtualKeyboardNoteNumber;
+}
+
+void OhmBass::LoadModalStructure() {
+	iControlsManager->modalBackground = iGraphicsManager->pGraphics->LoadIBitmap(MODAL_BG_ID, MODAL_BG_FN);
+	iControlsManager->modalControl = new IBitmapControl(this, 0, 0, -1, &iControlsManager->modalBackground);
+	iControlsManager->modalControl->Hide(TRUE);
+	iGraphicsManager->pGraphics->AttachControl(iControlsManager->modalControl);
 }

@@ -66,6 +66,7 @@ instrument determined by PLUG _IS _INST
 #define WHITE_KEY_ID				102
 #define BLACK_KEY_ID				103
 #define WAVEFORM_ID					104
+#define MODAL_BG_ID					132
 
 #define KNOB_MEDIUM_ID				108
 // --- Waves Buttons ----
@@ -101,6 +102,7 @@ instrument determined by PLUG _IS _INST
 #define BLACK_KEY_FN						"resources/img/blackkey.png"
 #define WAVEFORM_FN							"resources/img/waveform.png"
 #define KNOB_MEDIUM_FN						"resources/img/knob_medium.png"
+#define MODAL_BG_FN							"resources/img/modal_bg.png"
 
 // --- Waves Buttons ---- //
 #define BGBTNOSCWAVES_FN					"resources/img/wavesbuttons/bg_btn_osc_waves.png"
