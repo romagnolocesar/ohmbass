@@ -6,8 +6,6 @@
 #include "controlsManager.h"
 #include "graphicsManager.h"
 #include "modulesManager.h"
-
-
 //Voices
 #include "VoiceManager.h"
 //MIDI

@@ -38,10 +38,10 @@ public:
 	inline void setNoteNumber(int noteNumber) {
 		mNoteNumber = noteNumber;
 		double frequency = 440.0 * pow(2.0, (mNoteNumber - 69.0) / 12.0);
-		mOscillatorOne.setFrequency(frequency);
+		mOscillatorOne.setFrequency(frequency);	
 		mOscillatorTwo.setFrequency(frequency);
 	}
-	double nextSample();
+	double nextSample(bool osc1status = TRUE, bool osc2status = TRUE);
 	void setFree();
 	void reset();
 

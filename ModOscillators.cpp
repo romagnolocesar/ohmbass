@@ -168,19 +168,11 @@ void ModOscillators::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		break;
 	case GraphicsModel::BITMAPCONTROL:
 		control = new IBitmapControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
-		if (iControlsManager->controlsModelsCollection[i]->hide) {
-			control->Hide(TRUE);
-			control->GrayOut(TRUE/*, 0.99f*/);
-		}
-		else {
-			control->Hide(FALSE);
-		}
+		control->Hide(iControlsManager->controlsModelsCollection[i]->hide);
+		control->GrayOut(iControlsManager->controlsModelsCollection[i]->hide);
 			break;
 	case GraphicsModel::KNOBMULTICONTROL:
 		control = new IKnobMultiControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic);
-		break;
-	case GraphicsModel::BITMAPOVERLAYCONTROL:
-		control = new IBitmapOverlayControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, i, &graphic, iControlsManager->controlsModelsCollection[i]->graphicsModel->iRect);
 		break;
 	}
 	iControlsManager->AddControlsCollection(control);
@@ -260,10 +252,10 @@ void ModOscillators::fillSetOfWavesIcons(controlsManager* iControlsManager) {
 void ModOscillators::OnParamChange(controlsManager* IControlsManager, int paramIdx, int idxWaveMode, bool isPluginInitialized)
 {
 	if (isPluginInitialized) {
-		if (paramIdx == mBgBtnOscWavesOsc1) {
+		if (paramIdx == mBgBtnOscWavesOsc1 && oscilator1Status) {
 			ToggleIconsWavesButtons(IControlsManager, 1, idxWaveMode);
 		}
-		else if (paramIdx == mBgBtnOscWavesOsc2) {
+		else if (paramIdx == mBgBtnOscWavesOsc2 && oscilator2Status) {
 			ToggleIconsWavesButtons(IControlsManager, 2, idxWaveMode);
 		}
 	}		

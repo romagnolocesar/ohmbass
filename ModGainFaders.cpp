@@ -8,36 +8,42 @@ void ModGainFaders::init(controlsManager* IControlsManager, graphicsManager* IGr
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Glow Osc1", 452, 219, 0, 0, 1.0, iGraphic);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERGLOW_ID, FADERGLOW_FN);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Glow Osc2", 533, 219, 0, 0, 1.0, iGraphic);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Handler ON Osc1", 429, 210, 0.8, 0.0, 1.0, iGraphic);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Handler OFF Osc1", 429, 210, 0.8, 0.0, 1.0, iGraphic, TRUE);
+	myControl->setGroupName("oscilator1");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLERON_ID, FADERHANDLERON_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Handler ON Osc2", 510, 210, 0.0, 0.0, 1.0, iGraphic, TRUE);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(FADERHANDLEROFF_ID, FADERHANDLEROFF_FN);
 	graphicType = GraphicsModel::FADERCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Fader Handler OFF Osc2", 510, 210, 0.0, 0.0, 1.0, iGraphic);
+	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 }
 
@@ -53,7 +59,7 @@ void ModGainFaders::doModelsControlsInIControlsCollection(IPlug* myOhmBass, cont
 		control = new IFaderControl(myOhmBass, iControlsManager->controlsModelsCollection[i]->x, iControlsManager->controlsModelsCollection[i]->y, 210, i, &graphic, EDirection::kVertical);
 		if (iControlsManager->controlsModelsCollection[i]->hide) {
 			control->Hide(TRUE);
-			control->GrayOut(TRUE/*, 0.99f*/);
+			control->GrayOut(TRUE);
 		}
 		break;
 	}

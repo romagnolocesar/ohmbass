@@ -12,7 +12,7 @@ public:
 	double EQuilibriumLowFreq, EQuilibriumLowGain, EQuilibriumHighFreq, EQuilibriumHighShelf;
 	void onNoteOn(int noteNumber, int velocity);
 	void onNoteOff(int noteNumber, int velocity);
-	double nextSample();
+	double nextSample(bool osc1status, bool osc2status);
 
 	void setSampleRate(double sampleRate) {
 		EnvelopeGenerator::setSampleRate(sampleRate);

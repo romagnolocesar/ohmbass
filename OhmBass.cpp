@@ -133,7 +133,7 @@ void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFra
 
 		//Audio processing and FX
 		double result;
-		result = voiceManager.nextSample();
+		result = voiceManager.nextSample(iModulesManager->iModOscillators->oscilator1Status, iModulesManager->iModOscillators->oscilator2Status);
 		result = iModulesManager->process(result);
 
 		//Audio Final Output

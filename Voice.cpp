@@ -2,11 +2,19 @@
 
 
 
-double Voice::nextSample() {
+double Voice::nextSample(bool osc1status, bool osc2status) {
 	if (!isActive) return 0.0;
 
-	double oscillatorOneOutput = mOscillatorOne.nextSample();
-	double oscillatorTwoOutput = mOscillatorTwo.nextSample();
+	double oscillatorOneOutput = 0.0;
+	double oscillatorTwoOutput = 0.0;
+
+	if(osc1status) {
+		oscillatorOneOutput = mOscillatorOne.nextSample();
+	}
+
+	if (osc2status) {
+		oscillatorTwoOutput = mOscillatorTwo.nextSample();
+	}
 
 	double oscillatorSum = (oscillatorOneOutput*mOscilatorOneOutput) + (oscillatorTwoOutput*mOscilatorTwoOutput);
 
