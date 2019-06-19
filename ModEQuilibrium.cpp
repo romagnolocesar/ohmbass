@@ -198,6 +198,7 @@ void ModEQuilibrium::doModelsControlsInIControlsCollection(IPlug* myOhmBass, con
 		iBezierControl->highBellFreq = this->getHighFreq();
 		iBezierControl->highBellGain = this->getHighShelf();
 		control = iBezierControl;
+		break;
 	}
 
 	iControlsManager->AddControlsCollection(control);

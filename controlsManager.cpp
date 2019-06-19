@@ -175,7 +175,7 @@ void controlsManager::fillWrapperControlsGroupCollection() {
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 51;
+	return 52;
 }
 
 
