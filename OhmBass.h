@@ -26,18 +26,12 @@ public:
 	controlsManager* iControlsManager = new controlsManager();
 	graphicsManager* iGraphicsManager = new graphicsManager(this);
 	modulesManager* iModulesManager = new modulesManager();
-
 	
-
-
 	void Reset();
 	void OnParamChange(int paramIdx);
 	void ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames);
 	// to receive MIDI messages:
 	void ProcessMidiMsg(IMidiMsg* pMsg);
-
-	
-
 
 	// Needed for the GUI keyboard:
 	// Should return non-zero if one or more keys are playing.
@@ -51,8 +45,6 @@ public:
 
 	//Create all controls based on Models Controls Collection 
 	void doModelsControlsInIControlsCollection();
-
-	void LoadModalStructure();
 
 	
 private:

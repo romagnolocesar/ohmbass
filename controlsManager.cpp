@@ -99,6 +99,29 @@ int controlsManager::Count(void)
 	return controlsModelsCollection.size();
 };
 
+//Load Modal Background
+void controlsManager::LoadModalStructure(IPlug* myOhmBass, IGraphics* pGraphics)
+{
+	IBitmap modalBackground;
+	modalBackground = pGraphics->LoadIBitmap(MODAL_BG_ID, MODAL_BG_FN);
+	this->modalBackgroundControl = new IBitmapControl(myOhmBass, 0, 0, -1, &modalBackground);
+	pGraphics->AttachControl(this->modalBackgroundControl);
+
+	this->hideModalBackground();
+}
+
+//Show ModalBackground
+void controlsManager::showModalBackground()
+{
+	this->modalBackgroundControl->Hide(FALSE);
+}
+
+//Hide ModalBackground
+void controlsManager::hideModalBackground()
+{
+	this->modalBackgroundControl->Hide(TRUE);
+}
+
 //Create all need Params
 void controlsManager::createParams(IPlug* myOhmBass)
 {

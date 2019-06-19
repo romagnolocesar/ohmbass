@@ -10,10 +10,6 @@
 
 class controlsManager{
 public:
-	//Modal Background
-	IBitmap modalBackground;
-	IControl* modalControl;
-
 	//CONTROLS GROUPS STRUCTURE
 	const double parameterStep = 0.001;
 	std::vector<class ControlsModel * > controlsModelsCollection;
@@ -25,9 +21,6 @@ public:
 	groupsNamesCollection controlsGroupsNamesCollection;
 	
 	std::map<std::string, std::vector<class IControl * >> wrapperControlsAndGroupsCollection;
-
-
-
 
 
 	int kNumParams = getKNumParams();
@@ -72,8 +65,13 @@ public:
 	int AddModelsCollection(ControlsModel* myInstance);
 	int AddControlsCollection(IControl* myInstance);
 	void AddControlsGroupsCollection(std::string groupName);
-
 	int Count(void);
+
+
+	//Modal
+	void LoadModalStructure(IPlug* myOhmBass, IGraphics* pGraphics);
+	void showModalBackground();
+	void hideModalBackground();
 
 	void createParams(IPlug* myOhmBass);
 	void fillControlsGroupCollection();
@@ -81,6 +79,6 @@ public:
 	static int getKNumParams();
 
 private:
-
+	IControl* modalBackgroundControl;
 };
 #endif
