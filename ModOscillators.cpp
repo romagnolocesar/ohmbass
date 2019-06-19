@@ -20,9 +20,16 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 
 	/* Power Buttons */
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(BUTTON_POWER_WHITE_ID, BUTTON_POWER_WHITE_FN, 2);
+
+
 	graphicType = GraphicsModel::SWITCHCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Power Button Osc 1", 348, 145, ModulesModel::ON, ModulesModel::kNumModulesOnOff, iGraphic);
+	IControlsManager->AddModelsCollection(myControl);
+
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Power Button Osc 2", 348, 388, ModulesModel::ON, ModulesModel::kNumModulesOnOff, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Waves Icons */

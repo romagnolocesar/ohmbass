@@ -188,6 +188,17 @@ void OhmBass::OnParamChange(int paramIdx)
 				iModulesManager->iModOscillators->oscilator1Status = !oscilator1Status;
 			}
 		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Power Button Osc 2") == 0) {
+			bool oscilator2Status = iModulesManager->iModOscillators->oscilator2Status;
+			if (isParametersInitialized) {
+				for (int i = 0; i < iControlsManager->wrapperControlsAndGroupsCollection.find("oscilator2")->second.size(); i++) {
+					IControl * element;
+					element = iControlsManager->wrapperControlsAndGroupsCollection.find("oscilator2")->second.at(i);
+					element->GrayOut(oscilator2Status);
+				}
+				iModulesManager->iModOscillators->oscilator2Status = !oscilator2Status;
+			}
+		}
 		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
 	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
 		if (paramIdx == iModulesManager->iModGainFaders->mFadersHandlerOnOsc1) {

@@ -18,7 +18,7 @@ public:
 	int mBgBtnOscWavesOsc1, mBgBtnOscWavesOsc2, mOsc1PitchMod, mOsc2PitchMod;
 
 	bool oscilator1Status = TRUE;
-	bool oscilator2Status = FALSE;
+	bool oscilator2Status = TRUE;
 
 	void init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
