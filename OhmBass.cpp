@@ -51,7 +51,7 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	iControlsManager->LoadModalStructure(this, iGraphicsManager->pGraphics);
 
 	//Create Modals of Modules
-	iModulesManager->iModOscillators->createModalBox(this, iGraphicsManager->pGraphics, 500, 300);
+	iModulesManager->iModConfLfo->createModalBox(this, iGraphicsManager->pGraphics, 500, 300);
 
 	//create keyboard
 	CreateKeyboard();
@@ -208,8 +208,9 @@ void OhmBass::OnParamChange(int paramIdx)
 		}
 		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ToolBar LFO Osc 1") == 0) {
 			if (isParametersInitialized) {
+				
 				iControlsManager->showModalBackground();
-				iModulesManager->iModOscillators->showModalBox();
+				iModulesManager->iModConfLfo->showModalBox();
 			}
 		}
 

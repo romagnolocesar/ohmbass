@@ -133,6 +133,9 @@
     <ClInclude Include="IModalBox.h">
       <Filter>Models\CustomsControls</Filter>
     </ClInclude>
+    <ClInclude Include="ModConfLfo.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="ModEQuilibrium.cpp">
       <Filter>Modules\ghrr</Filter>
+    </ClCompile>
+    <ClCompile Include="ModConfLfo.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

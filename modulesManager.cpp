@@ -7,6 +7,7 @@ void modulesManager::InitAllModules(controlsManager* iControlsManager, graphicsM
 	iModFilters->init(iControlsManager, iGraphicsManager);
 	iModAmpEnvelope->init(iControlsManager, iGraphicsManager);
 	iModEQuilibrium->init(iControlsManager, iGraphicsManager);
+
 }
 
 void modulesManager::loadAuxParameters(controlsManager* iControlsManager) {

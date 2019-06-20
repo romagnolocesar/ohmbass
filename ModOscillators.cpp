@@ -336,24 +336,6 @@ void ModOscillators::ToggleIconsWavesButtons(controlsManager* IControlsManager, 
 	}
 }
 
-void ModOscillators::createModalBox(IPlug * myOhmBass, IGraphics * pGraphics, int w, int h)
-{
-	IRECT pRect;
-	pRect.L = ((1024 / 2) - (w / 2));
-	pRect.T = ((768 / 2) - (h / 2));
-	pRect.R = ((1024 / 2) + (w / 2));
-	pRect.B = ((768 / 2) + (h / 2));
-
-	this->modalBoxLfoOsc1 = new IModalBox(myOhmBass, pRect, w, h);
-
-	pGraphics->AttachControl(this->modalBoxLfoOsc1);
-}
-
-//Show ModalBackground
-void ModOscillators::showModalBox()
-{
-	this->modalBoxLfoOsc1->showModalBox();
-}
 
 
 

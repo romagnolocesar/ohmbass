@@ -291,6 +291,7 @@
     <ClInclude Include="IModalBox.h" />
     <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="ModAmpEnvelope.h" />
+    <ClInclude Include="ModConfLfo.h" />
     <ClInclude Include="ModEQuilibrium.h" />
     <ClInclude Include="ModFilters.h" />
     <ClInclude Include="ModGainFaders.h" />
@@ -324,6 +325,7 @@
     <ClCompile Include="ControlsModel.cpp" />
     <ClCompile Include="graphicsModel.cpp" />
     <ClCompile Include="ModAmpEnvelope.cpp" />
+    <ClCompile Include="ModConfLfo.cpp" />
     <ClCompile Include="ModEQuilibrium.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="ModFilters.cpp" />

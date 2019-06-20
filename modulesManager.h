@@ -4,6 +4,7 @@
 #include "ModFilters.h"
 #include "ModAmpEnvelope.h"
 #include "ModEQuilibrium.h"
+#include "ModConfLfo.h"
 
 
 class modulesManager
@@ -23,5 +24,6 @@ public:
 	ModFilters* iModFilters = new ModFilters();
 	ModAmpEnvelope* iModAmpEnvelope = new ModAmpEnvelope();
 	ModEQuilibrium* iModEQuilibrium = new ModEQuilibrium();
+	ModConfLfo* iModConfLfo = new ModConfLfo();
 };
 

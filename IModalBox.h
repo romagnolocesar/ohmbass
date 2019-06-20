@@ -33,35 +33,24 @@ public:
 		pColor.R = 78;
 		pColor.G = 78;
 		pColor.B = 84;
-		this->modalBox = new IPanelControl(pPlug, pR, &pColor);
-		this->hideModalBox();
-
-		this->createDividerLine(pGraphics);
+		modalBox = new IPanelControl(pPlug, pR, &pColor);
+		hideModalBox();
 		
-		return pGraphics->AttachControl(this->modalBox);
-	}
-
-	void createDividerLine(IGraphics* pGraphics) {
-		IColor pColorLine;
-		pColorLine.A = 255; //255 = Without Alpha
-		pColorLine.R = 0;
-		pColorLine.G = 0;
-		pColorLine.B = 0;
-		pGraphics->DrawLine(&pColorLine, 200, 200, 500, 200, 0, FALSE);
+		return pGraphics->AttachControl(modalBox);
 	}
 
 	//Show ModalBackground
 	void showModalBox()
 	{
-		this->GrayOut(FALSE);
-		this->modalBox->Hide(FALSE);
+		modalBox->GrayOut(FALSE);
+		modalBox->Hide(FALSE);
 	}
 
 	//Hide ModalBackground
 	void hideModalBox()
 	{
-		this->GrayOut(TRUE);
-		this->modalBox->Hide(TRUE);
+		modalBox->GrayOut(TRUE);
+		modalBox->Hide(TRUE);
 	}
 
 
