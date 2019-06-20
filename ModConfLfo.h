@@ -23,8 +23,9 @@ public:
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
 
 
-	void createModalBox(IPlug* myOhmBass, IGraphics* pGraphics, int w, int h);
-	void showModalBox();
+	//void createModalBox(IPlug* myOhmBass, IGraphics* pGraphics, int w, int h);
+	void showModalBox(controlsManager* iControlsManager);
+	void hideModalBox(controlsManager* iControlsManager);
 
 
 

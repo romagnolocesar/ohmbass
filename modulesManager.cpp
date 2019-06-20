@@ -2,12 +2,12 @@
 
 void modulesManager::InitAllModules(controlsManager* iControlsManager, graphicsManager* iGraphicsManager) {
 	//Initializing all modules (controls)
-	iModConfLfo->init(iControlsManager, iGraphicsManager);
 	iModOscillators->init(iControlsManager, iGraphicsManager);
 	iModGainFaders->init(iControlsManager, iGraphicsManager);
 	iModFilters->init(iControlsManager, iGraphicsManager);
 	iModAmpEnvelope->init(iControlsManager, iGraphicsManager);
 	iModEQuilibrium->init(iControlsManager, iGraphicsManager);
+	iModConfLfo->init(iControlsManager, iGraphicsManager);
 	
 }
 

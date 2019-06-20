@@ -94,6 +94,8 @@ instrument determined by PLUG _IS _INST
 #define BUTTON_POWER_WHITE_ID		131
 
 #define ICONLFO_ID					133
+#define MODAL_CLOSE_ICON_ID			134
+#define MODAL_MEDIUM_ONE_ID			135
 
 
 
@@ -131,6 +133,8 @@ instrument determined by PLUG _IS _INST
 #define BUTTON_POWER_WHITE_FN				"resources/img/button_power_white.png"
 
 #define ICONLFO_FN							"resources/img/lfoicon.png"
+#define MODAL_CLOSE_ICON_FN					"resources/img/modal_close_icon.png"
+#define MODAL_MEDIUM_ONE_FN					"resources/img/modals/medium_one.png"
 
 
 

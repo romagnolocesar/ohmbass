@@ -12,7 +12,7 @@
 
 
 const int kNumPrograms = 5; //Qtd of presets
-const int kNumParams = 53; //Qtd for params
+const int kNumParams = 55; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -47,11 +47,11 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Load Keyboard
 	iGraphicsManager->loadKeyboard();
 
-	//Load Modal Structure &&&&&&
-	iControlsManager->LoadModalStructure(this, iGraphicsManager->pGraphics);
+	//Load Modal Structure &&&&&& --- ARRUMAR A ORDERM
+	//iControlsManager->LoadModalStructure(this, iGraphicsManager->pGraphics);
 
 	//Create Modals of Modules
-	iModulesManager->iModConfLfo->createModalBox(this, iGraphicsManager->pGraphics, 500, 300);
+	//iModulesManager->iModConfLfo->createModalBox(this, iGraphicsManager->pGraphics, 500, 300);
 
 	//create keyboard
 	CreateKeyboard();
@@ -85,9 +85,6 @@ void OhmBass::CreateMainDisplay() {
 void OhmBass::doModelsControlsInIControlsCollection() {
 	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
 		switch (iControlsManager->controlsModelsCollection[i]->moduleName) {
-		case ModulesModel::CONFLFO:
-			iModulesManager->iModConfLfo->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
-			break;
 		case ModulesModel::OSCILATORS:
 			iModulesManager->iModOscillators->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
 			break;
@@ -102,6 +99,10 @@ void OhmBass::doModelsControlsInIControlsCollection() {
 			break;
 		case ModulesModel::EQUILIBRIUM:
 			iModulesManager->iModEQuilibrium->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
+			break;
+		//MODALS
+		case ModulesModel::CONFLFO:
+			iModulesManager->iModConfLfo->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
 			break;
 		}
 		
@@ -214,8 +215,8 @@ void OhmBass::OnParamChange(int paramIdx)
 			if (isParametersInitialized) {
 				
 				
-				iModulesManager->iModConfLfo->showModalBox();
-				iControlsManager->showModalBackground();
+				iModulesManager->iModConfLfo->showModalBox(iControlsManager);
+				//iControlsManager->showModalBackground(); ----------ARRUMAR A ORDEM 
 			}
 		}
 
@@ -243,6 +244,9 @@ void OhmBass::OnParamChange(int paramIdx)
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency") == 0) {
 				voiceManager.setLFOFrequency(param->Value());
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Modal Close Icon") == 0) {
+				iModulesManager->iModConfLfo->hideModalBox(iControlsManager);
 			}
 		}
 	}
