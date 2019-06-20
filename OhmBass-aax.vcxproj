@@ -457,6 +457,7 @@ CALL ..\..\SDKs\AAX_SDK\Utilities\CreatePackage.bat $(OutDir) ..\..\SDKs\AAX_SDK
     <ClCompile Include="EnvelopeGenerator.cpp" />
     <ClCompile Include="Filter.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
+    <ClCompile Include="ModConfLfo.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="MIDIReceiver.cpp" />
     <ClCompile Include="Oscillator.cpp" />
@@ -514,6 +515,7 @@ CALL ..\..\SDKs\AAX_SDK\Utilities\CreatePackage.bat $(OutDir) ..\..\SDKs\AAX_SDK
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugAAX.h" />
     <ClInclude Include="IBezierControl.h" />
     <ClInclude Include="ITempoDisplay.h" />
+    <ClInclude Include="ModConfLfo.h" />
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

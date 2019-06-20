@@ -35,6 +35,7 @@
     <ClCompile Include="ModEQuilibrium.cpp" />
     <ClCompile Include="ModFilters.cpp" />
     <ClCompile Include="modulesManager.cpp" />
+    <ClCompile Include="ModConfLfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST3.h" />
     <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="fft.h" />
+    <ClInclude Include="ModConfLfo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="vst3">

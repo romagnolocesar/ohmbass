@@ -85,6 +85,9 @@ void OhmBass::CreateMainDisplay() {
 void OhmBass::doModelsControlsInIControlsCollection() {
 	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
 		switch (iControlsManager->controlsModelsCollection[i]->moduleName) {
+		case ModulesModel::CONFLFO:
+			iModulesManager->iModConfLfo->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
+			break;
 		case ModulesModel::OSCILATORS:
 			iModulesManager->iModOscillators->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
 			break;
@@ -101,6 +104,7 @@ void OhmBass::doModelsControlsInIControlsCollection() {
 			iModulesManager->iModEQuilibrium->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
 			break;
 		}
+		
 	}
 }
 
@@ -209,8 +213,9 @@ void OhmBass::OnParamChange(int paramIdx)
 		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ToolBar LFO Osc 1") == 0) {
 			if (isParametersInitialized) {
 				
-				iControlsManager->showModalBackground();
+				
 				iModulesManager->iModConfLfo->showModalBox();
+				iControlsManager->showModalBackground();
 			}
 		}
 
@@ -231,6 +236,16 @@ void OhmBass::OnParamChange(int paramIdx)
 		}
 		iModulesManager->iModGainFaders->OnParamChange(iControlsManager, paramIdx, isParametersInitialized, param);
 	}
+	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::CONFLFO) {
+		if (isParametersInitialized) {
+			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform") == 0) {
+				voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
+			}
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency") == 0) {
+				voiceManager.setLFOFrequency(param->Value());
+			}
+		}
+	}
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::FILTERS) {
 		if (isParametersInitialized) {
 			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Drop Down Filters Mode") == 0) {
@@ -250,12 +265,6 @@ void OhmBass::OnParamChange(int paramIdx)
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Envelope Amount") == 0) {
 				changer = bind(&VoiceManager::setFilterEnvAmount, _1, param->Value());
-			}
-			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform") == 0) {
-				voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
-			}
-			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency") == 0) {
-				voiceManager.setLFOFrequency(param->Value());
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Env Attack") == 0) {
 				changer = bind(&VoiceManager::setFilterEnvelopeStageValue, _1, EnvelopeGenerator::ENVELOPE_STAGE_ATTACK, param->Value());

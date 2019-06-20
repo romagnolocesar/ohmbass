@@ -4,14 +4,15 @@
 class IModalBox : public IControl
 {
 private:
-	
+	IControl* modalBox;
 
 public:
-	IControl* modalBox;
+	
 	int w, h;
 	IPlugBase* pPlug;
 	IRECT pR;
 	IGraphics* pGraphics;
+	
 
 
 	IModalBox(IPlugBase* pPlug, IRECT pR, int w, int h)
@@ -33,24 +34,25 @@ public:
 		pColor.R = 78;
 		pColor.G = 78;
 		pColor.B = 84;
-		modalBox = new IPanelControl(pPlug, pR, &pColor);
-		hideModalBox();
+		this->modalBox = new IPanelControl(pPlug, pR, &pColor);
+
+		this->hideModalBox();
 		
-		return pGraphics->AttachControl(modalBox);
+		return pGraphics->AttachControl(this->modalBox);
 	}
 
 	//Show ModalBackground
 	void showModalBox()
 	{
-		modalBox->GrayOut(FALSE);
-		modalBox->Hide(FALSE);
+		this->GrayOut(FALSE);
+		this->modalBox->Hide(FALSE);
 	}
 
 	//Hide ModalBackground
 	void hideModalBox()
 	{
-		modalBox->GrayOut(TRUE);
-		modalBox->Hide(TRUE);
+		this->GrayOut(TRUE);
+		this->modalBox->Hide(TRUE);
 	}
 
 

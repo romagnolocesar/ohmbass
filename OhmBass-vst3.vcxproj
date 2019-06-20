@@ -341,6 +341,7 @@ if exist "%programfiles(x86)%" (copy /y "$(TargetPath)" "$(VST3_64_PATH)\OhmBass
     <ClInclude Include="..\..\SDKs\WDL\IPlug\IPlugVST3.h" />
     <ClInclude Include="fft.h" />
     <ClInclude Include="ITempoDisplay.h" />
+    <ClInclude Include="ModConfLfo.h" />
     <ClInclude Include="OhmBass.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -367,6 +368,7 @@ if exist "%programfiles(x86)%" (copy /y "$(TargetPath)" "$(VST3_64_PATH)\OhmBass
     <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="GraphicsModel.cpp" />
     <ClCompile Include="ModAmpEnvelope.cpp" />
+    <ClCompile Include="ModConfLfo.cpp" />
     <ClCompile Include="ModEQuilibrium.cpp" />
     <ClCompile Include="ModFilters.cpp" />
     <ClCompile Include="ModGainFaders.cpp" />

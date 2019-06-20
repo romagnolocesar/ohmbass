@@ -21,6 +21,7 @@
     <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="Biquad.cpp" />
     <ClCompile Include="modulesManager.cpp" />
+    <ClCompile Include="ModConfLfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="controlsManager.h" />
     <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="fft.h" />
+    <ClInclude Include="ModConfLfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="OhmBass.rc" />

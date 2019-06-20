@@ -243,6 +243,7 @@
     <ClInclude Include="graphicsModel.h" />
     <ClInclude Include="ITempoDisplay.h" />
     <ClInclude Include="ModAmpEnvelope.h" />
+    <ClInclude Include="ModConfLfo.h" />
     <ClInclude Include="ModEQuilibrium.h" />
     <ClInclude Include="ModFilters.h" />
     <ClInclude Include="ModGainFaders.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="GraphicsModel.cpp" />
     <ClCompile Include="ModAmpEnvelope.cpp" />
+    <ClCompile Include="ModConfLfo.cpp" />
     <ClCompile Include="ModEQuilibrium.cpp" />
     <ClCompile Include="ModFilters.cpp" />
     <ClCompile Include="ModGainFaders.cpp" />

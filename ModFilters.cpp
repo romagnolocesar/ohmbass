@@ -1,6 +1,5 @@
 #include "ModFilters.h"
 #include "Filter.h"
-#include "Oscillator.h"
 
 
 
@@ -30,13 +29,6 @@ void ModFilters::init(controlsManager* IControlsManager, graphicsManager* IGraph
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Slope Filter", 873, 302, Filter::FILTER_SLOPE_24, Filter::kNumSlopeModes, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
-	//LFO Wave Mode
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
-	graphicType = GraphicsModel::SWITCHCONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "LFO Waveform", 30, 520, Oscillator::OSCILLATOR_MODE_TRIANGLE, Oscillator::kNumOscillatorModes, iGraphic);
-	IControlsManager->AddModelsCollection(myControl);
-
 	//Knobs
 	iGraphic = new GraphicsModel(
 		IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), 
@@ -54,9 +46,6 @@ void ModFilters::init(controlsManager* IControlsManager, graphicsManager* IGraph
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Envelope Amount", 915, 343, 0.0, -1.0, 1.0, iGraphic);
-	IControlsManager->AddModelsCollection(myControl);
-
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "LFO Frequency", 75, 510, 6.0, 0.01, 30.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter Env Attack", 635, 193, 0.01, 0.01, 10.0, iGraphic);

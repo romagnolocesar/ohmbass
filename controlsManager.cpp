@@ -107,7 +107,7 @@ void controlsManager::LoadModalStructure(IPlug* myOhmBass, IGraphics* pGraphics)
 	this->modalBackgroundControl = new IBitmapControl(myOhmBass, 0, 0, -1, &modalBackground);
 	pGraphics->AttachControl(this->modalBackgroundControl);
 
-	this->hideModalBackground();
+	hideModalBackground();
 }
 
 //Show ModalBackground
