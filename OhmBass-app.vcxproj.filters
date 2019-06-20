@@ -130,6 +130,9 @@
     <ClInclude Include="fft.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="IModalBox.h">
+      <Filter>Models\CustomsControls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">

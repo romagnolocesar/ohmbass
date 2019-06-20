@@ -122,6 +122,8 @@ void controlsManager::hideModalBackground()
 	this->modalBackgroundControl->Hide(TRUE);
 }
 
+
+
 //Create all need Params
 void controlsManager::createParams(IPlug* myOhmBass)
 {
@@ -198,7 +200,7 @@ void controlsManager::fillWrapperControlsGroupCollection() {
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 52;
+	return 53;
 }
 
 

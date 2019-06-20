@@ -93,6 +93,8 @@ instrument determined by PLUG _IS _INST
 #define SWITCH_DROP_ID				130
 #define BUTTON_POWER_WHITE_ID		131
 
+#define ICONLFO_ID					133
+
 
 
 // ===== IMAGES LOCATIONS =====================//
@@ -128,6 +130,7 @@ instrument determined by PLUG _IS _INST
 #define SWITCH_DROP_FN						"resources/img/switch_plug.png"
 #define BUTTON_POWER_WHITE_FN				"resources/img/button_power_white.png"
 
+#define ICONLFO_FN							"resources/img/lfoicon.png"
 
 
 

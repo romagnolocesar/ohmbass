@@ -8,6 +8,8 @@
 #include <vector> using namespace std; 
 #include <map>;
 
+#include "IModalBox.h";
+
 class controlsManager{
 public:
 	//CONTROLS GROUPS STRUCTURE
@@ -72,6 +74,7 @@ public:
 	void LoadModalStructure(IPlug* myOhmBass, IGraphics* pGraphics);
 	void showModalBackground();
 	void hideModalBackground();
+
 
 	void createParams(IPlug* myOhmBass);
 	void fillControlsGroupCollection();

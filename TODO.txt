@@ -14,3 +14,4 @@ IText nas labels dos modules (for inactive fix working)
 
 +++Dinamizar a quantidade de parametros necessários sem hardcode.
 +++Atualizar o Sample Rate (44100) buscando do Host (Ableton, Cubase, Logic etc.)
+++++COLOCAR DOIS KNOB PRA MOD LFO (SE COMBINANDO) para aplicar o range onde o LFO vai agir

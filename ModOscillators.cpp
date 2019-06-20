@@ -32,8 +32,16 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Power Button Osc 2", 348, 388, ModulesModel::ON, ModulesModel::kNumModulesOnOff, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
+	/* ToolBar */
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONLFO_ID, ICONLFO_FN, 2);
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "ToolBar LFO Osc 1", 164, 151, ModulesModel::OFF, ModulesModel::kNumModulesOnOff, iGraphic);
+	myControl->setGroupName("oscilator1");
+	IControlsManager->AddModelsCollection(myControl);
+
 	/* Waves Icons */
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN);
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN, 2);
 	graphicType = GraphicsModel::BITMAPCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::NONE, "Icon Sine Wave Off OSC1", 58, 218, iGraphic, FALSE);
@@ -326,6 +334,25 @@ void ModOscillators::ToggleIconsWavesButtons(controlsManager* IControlsManager, 
 			break;
 		}
 	}
+}
+
+void ModOscillators::createModalBox(IPlug * myOhmBass, IGraphics * pGraphics, int w, int h)
+{
+	IRECT pRect;
+	pRect.L = ((1024 / 2) - (w / 2));
+	pRect.T = ((768 / 2) - (h / 2));
+	pRect.R = ((1024 / 2) + (w / 2));
+	pRect.B = ((768 / 2) + (h / 2));
+
+	this->modalBoxLfoOsc1 = new IModalBox(myOhmBass, pRect, w, h);
+
+	pGraphics->AttachControl(this->modalBoxLfoOsc1);
+}
+
+//Show ModalBackground
+void ModOscillators::showModalBox()
+{
+	this->modalBoxLfoOsc1->showModalBox();
 }
 
 

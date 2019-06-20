@@ -12,7 +12,7 @@
 
 
 const int kNumPrograms = 5; //Qtd of presets
-const int kNumParams = 52; //Qtd for params
+const int kNumParams = 53; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -49,6 +49,9 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 
 	//Load Modal Structure &&&&&&
 	iControlsManager->LoadModalStructure(this, iGraphicsManager->pGraphics);
+
+	//Create Modals of Modules
+	iModulesManager->iModOscillators->createModalBox(this, iGraphicsManager->pGraphics, 500, 300);
 
 	//create keyboard
 	CreateKeyboard();
@@ -200,9 +203,17 @@ void OhmBass::OnParamChange(int paramIdx)
 					element->GrayOut(oscilator2Status);
 				}
 				iModulesManager->iModOscillators->oscilator2Status = !oscilator2Status;
-				iControlsManager->showModalBackground();
+				
 			}
 		}
+		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ToolBar LFO Osc 1") == 0) {
+			if (isParametersInitialized) {
+				iControlsManager->showModalBackground();
+				iModulesManager->iModOscillators->showModalBox();
+			}
+		}
+
+		
 		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
 	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
 		if (paramIdx == iModulesManager->iModGainFaders->mFadersHandlerOnOsc1) {

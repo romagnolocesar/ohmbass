@@ -25,5 +25,10 @@ public:
 	void fillSetOfWavesIcons(controlsManager* iControlsManager);
 	void OnParamChange(controlsManager* IControlsManager, int paramIdx, int idxWaveMode, bool isPluginInitialized);
 	void ToggleIconsWavesButtons(controlsManager* IControlsManager, int nOsc, int idxWaveMode);
+
+	void createModalBox(IPlug* myOhmBass, IGraphics* pGraphics, int w, int h);
+	void showModalBox();
+private:
+	IModalBox* modalBoxLfoOsc1;
 };
 
