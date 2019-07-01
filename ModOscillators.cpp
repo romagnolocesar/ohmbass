@@ -9,13 +9,13 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	/* Waves Buttons of Oscillator 1*/
 	iRect = IRECT(43, 206, 43 + (56 * 4), 56 + (60 * 4));
 	iGraphic = new GraphicsModel(mBgBtnOscWavesBitmap, GraphicsModel::RADIOBUTTONSCONTROL, iRect, EDirection::kHorizontal);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 1 Waves", 99, 206, 1, 1, 4, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 1 Waves", 99, 206, 1.0, 1.0, 4.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Waves Buttons of Oscillator 2*/
 	iRect = IRECT(43, 306, 43 + (56 * 4), 126 + (60 * 4));
 	iGraphic = new GraphicsModel(mBgBtnOscWavesBitmap, GraphicsModel::RADIOBUTTONSCONTROL, iRect, EDirection::kHorizontal);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 2 Waves", 99, 306, 1, 1, 4, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::INT, "Bg Btn Osc 2 Waves", 99, 306, 1.0, 1.0, 4.0, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
 	/* Power Buttons */

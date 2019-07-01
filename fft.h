@@ -6,10 +6,14 @@
 #include <iostream>
 #include <valarray>
 
+#include <Winbase.h>
+
 const float nPI = 3.141592653589793238460;
 
 typedef std::complex<double> Complex;
 typedef std::valarray<Complex> CArray;
+
+
 
 // Cooley–Tukey FFT (in-place, divide-and-conquer)
 // Higher memory requirements and redundancy although more intuitive
@@ -102,4 +106,39 @@ void ifft(CArray& x)
 	// scale the numbers
 	x /= x.size();
 }
+
+int test_fft() {
+	const Complex test[] = { 3.0, 1.0, 1.0, 4.0, 0.0, 0.0, 0.0, 0.0 };
+	CArray data(test, 8);
+
+	//Log
+	char buf[52];
+
+	//Real
+	for (int i = 0; i < 8; ++i)
+	{
+		sprintf(buf, "Valor Real %d: %f \n", i, data[i]);
+		OutputDebugString(buf);
+	}
+
+	// forward fft
+	fft(data);
+	for (int i = 0; i < 8; ++i)
+	{
+		sprintf(buf, "Valor FFT %d[0]: %f \n", i, data[i]._Val[0]);
+		OutputDebugString(buf);
+		sprintf(buf, "Valor FFT %d[1]: %f \n", i, data[i]._Val[1]);
+		OutputDebugString(buf);
+	}
+
+	// inverse fft
+	ifft(data);
+	for (int i = 0; i < 8; ++i)
+	{
+		sprintf(buf, "Valor Invertido %d: %f \n", i, data[i]);
+		OutputDebugString(buf);
+	}
+	return 0;
+}
+
 #endif

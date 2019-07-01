@@ -10,12 +10,19 @@
 #include <math.h>
 #include <algorithm>
 
+//Fourier
+#include "fft.h";
+
 
 const int kNumPrograms = 5; //Qtd of presets
-const int kNumParams = 59; //Qtd for params
+const int kNumParams = 71; //Qtd for params
+
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
+
+	//Test of Fourier
+	//test_fft();
 
 	this->globals_sampleRate = mSampleRate;
 
@@ -253,7 +260,7 @@ void OhmBass::OnParamChange(int paramIdx)
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Modal Close Icon") == 0) {
 				iModulesManager->iModConfLfo->hideModalBox(iControlsManager);
-			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter LFO Amount") == 0) {
+			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter AB LFO Amount") == 0) {
 				changer = bind(&VoiceManager::setFilterLFOAmount, _1, param->Value());
 			}
 			

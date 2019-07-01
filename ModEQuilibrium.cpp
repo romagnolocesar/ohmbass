@@ -140,7 +140,7 @@ void ModEQuilibrium::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl->setShape(2.0);
 	IControlsManager->AddModelsCollection(myControl);
 
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 419, 419, 790, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Knb Eql High freq", 718, 640, 419.0, 419.0, 790.0, iGraphic);
 	myControl->setShape(3.0);
 	IControlsManager->AddModelsCollection(myControl);
 

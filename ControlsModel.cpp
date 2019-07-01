@@ -107,6 +107,21 @@ ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, ECo
 	this->graphicsModel = graphicsModel;
 }
 
+ControlsModel::ControlsModel(ModulesModel::EModulesName moduleName, int idx, EControlsDataType dataType, char* alias, int L, int T, int R, int B, char* Text, GraphicsModel* graphicsModel, int textSize)
+{
+	this->moduleName = moduleName;
+	this->dataType = dataType;
+	this->idx = idx;
+	this->alias = alias;
+	this->L = L;
+	this->T = T;
+	this->R = R;
+	this->B = B;
+	this->pText = Text;
+	this->graphicsModel = graphicsModel;
+	this->textSize = textSize;
+}
+
 ControlsModel::ControlsModel(GraphicsModel * graphicsModel, int idx, ModulesModel::EModulesName moduleName, EControlsDataType dataType, char * alias, int x, int y, int lenght, bool hide)
 {
 	this->moduleName = moduleName;

@@ -112,6 +112,19 @@ public:
 		GraphicsModel* graphicsModel
 	);
 	ControlsModel(
+		ModulesModel::EModulesName moduleName,
+		int idx,
+		EControlsDataType dataType,
+		char * alias,
+		int L,
+		int T,
+		int R,
+		int B,
+		char * pText,
+		GraphicsModel * graphicsModel,
+		int textSize
+	);
+	ControlsModel(
 		GraphicsModel* graphicsModel,
 		int idx,
 		ModulesModel::EModulesName moduleName,
@@ -135,6 +148,8 @@ public:
 	int y;
 	int x2;
 	int y2;
+	int L, T, R, B;
+	char* pText;
 	int lenght;
 	double defaultVal;
 	int defaultValEnum;
@@ -147,4 +162,5 @@ public:
 	EControlsDataType dataType;
 	GraphicsModel* graphicsModel;
 	std::string groupName;
+	int textSize;
 };
