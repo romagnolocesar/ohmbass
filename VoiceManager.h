@@ -21,11 +21,33 @@ public:
 			voice.mOscillatorOne.setSampleRate(sampleRate);
 			voice.mOscillatorTwo.setSampleRate(sampleRate);
 		}
-		mLFO.setSampleRate(sampleRate);
+		mLFO1.setSampleRate(sampleRate);
 	}
 
-	inline void setLFOMode(Oscillator::OscillatorMode mode) { mLFO.setMode(mode); };
-	inline void setLFOFrequency(double frequency) { mLFO.setFrequency(frequency); };
+	inline void setLFOMode(int oscNumber, Oscillator::OscillatorMode mode) {
+		if (oscNumber == 1) {
+			mLFO1.setMode(mode);
+		}
+		else if (oscNumber == 2) {
+			mLFO2.setMode(mode);
+		}
+		else if (oscNumber == 3) {
+			mLFO3.setMode(mode);
+		}
+		
+	};
+	inline void setLFOFrequency(int oscNumber, double frequency) { 
+		if (oscNumber == 1) {
+			mLFO1.setFrequency(frequency);
+		}
+		else if (oscNumber == 2) {
+			mLFO2.setFrequency(frequency);
+		}
+		else if (oscNumber == 3) {
+			mLFO3.setFrequency(frequency);
+		}
+		
+	};
 
 	typedef std::function<void(Voice&)> VoiceChangerFunction;
 
@@ -100,7 +122,7 @@ public:
 private:
 	static const int NumberOfVoices = 64;
 	Voice voices[NumberOfVoices];
-	Oscillator mLFO;
+	Oscillator mLFO1, mLFO2, mLFO3;
 	Voice* findFreeVoice();
 };
 

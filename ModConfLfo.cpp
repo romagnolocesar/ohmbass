@@ -31,19 +31,70 @@ void ModConfLfo::init(controlsManager* IControlsManager, graphicsManager* IGraph
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
-	//LFO Wave Mode
+	//&&&&&&&&&&&&&&&& OSC 1 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+	//Wave Mode
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
 	graphicType = GraphicsModel::SWITCHCONTROL;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "LFO Waveform", 270, 290, Oscillator::OSCILLATOR_MODE_TRIANGLE, Oscillator::kNumOscillatorModes, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "LFO Waveform OSC 1", 270, 290, Oscillator::OSCILLATOR_MODE_TRIANGLE, Oscillator::kNumOscillatorModes, iGraphic);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
-	//LFO FREQ
+	//FREQ
 	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium),GraphicsModel::KNOBMULTICONTROL);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "LFO Frequency", 330, 280, 6.0, 0.01, 30.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "LFO Frequency OSC 1", 330, 280, 6.0, 0.01, 30.0, iGraphic);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
+
+	/* Pitch Amount*/
+	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), GraphicsModel::KNOBMULTICONTROL);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 1 Pitch Mod", 400, 280, 0.0, 0.0, 1.0, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	//&&&&&&&&&&&&&&&& OSC 2 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+	//Wave Mode
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "LFO Waveform OSC 2", 270, 390, Oscillator::OSCILLATOR_MODE_TRIANGLE, Oscillator::kNumOscillatorModes, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	//FREQ
+	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), GraphicsModel::KNOBMULTICONTROL);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "LFO Frequency OSC 2", 330, 380, 6.0, 0.01, 30.0, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	/* Pitch Amount*/
+	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), GraphicsModel::KNOBMULTICONTROL);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 2 Pitch Mod", 400, 380, 0.0, 0.0, 1.0, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	//&&&&&&&&&&&&&&&& FILTER AB &&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+	//Wave Mode
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(WAVEFORM_ID, WAVEFORM_FN, 4);
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "LFO Waveform Filter AB", 270, 490, Oscillator::OSCILLATOR_MODE_TRIANGLE, Oscillator::kNumOscillatorModes, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	//FREQ
+	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), GraphicsModel::KNOBMULTICONTROL);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "LFO Frequency Filter AB", 330, 480, 6.0, 0.01, 30.0, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	/* Filter AB Amount*/
+	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), GraphicsModel::KNOBMULTICONTROL);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter LFO Amount", 400, 480, 0.0, 0.0, 1.0, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	
 
 }
 
@@ -106,5 +157,19 @@ void ModConfLfo::hideModalBox(controlsManager* iControlsManager)
 		element = iControlsManager->wrapperControlsAndGroupsCollection.find("modal_conflfo")->second.at(i);
 		element->GrayOut(TRUE);
 		element->Hide(TRUE);
+	}
+}
+
+void ModConfLfo::fillAuxParams(controlsManager* iControlsManager) {
+	for (int i = 0; i < iControlsManager->getKNumParams(); i++) {
+		IParam * param;
+		param = iControlsManager->controlsCollection[i]->GetParam();
+		if (param != nullptr) {
+			if (strcmp(param->GetNameForHost(), "Osc 1 Pitch Mod") == 0) {
+				mOsc1PitchMod = i;
+			}else if (strcmp(param->GetNameForHost(), "Osc 2 Pitch Mod") == 0) {
+				mOsc2PitchMod = i;
+			}
+		}
 	}
 }

@@ -20,7 +20,9 @@ public:
 		mOscillatorTwoPitchAmount(0.0),
 		mOscilatorOneOutput(0.8),
 		mOscilatorTwoOutput(0.0),
-		mLFOValue(0.0),
+		mLFO1Value(0.0),
+		mLFO2Value(0.0),
+		mLFO3Value(0.0),
 	isActive(false) {
 		// Set myself free everytime my volume envelope has fully faded out of RELEASE stage:
 		mVolumeEnvelope.finishedEnvelopeCycle.Connect(this, &Voice::setFree);
@@ -33,7 +35,11 @@ public:
 	inline void setOscillatorTwoPitchAmount(double amount) { mOscillatorTwoPitchAmount = amount; }
 	inline void setOscillatorOneOutput(double amount) { mOscilatorOneOutput = amount; }
 	inline void setOscillatorTwoOutput(double amount) { mOscilatorTwoOutput = amount; }
-	inline void setLFOValue(double value) { mLFOValue = value; }
+	inline void setLFOValue(double LFO1value, double LFO2value, double LFO3value) {
+		mLFO1Value = LFO1value;
+		mLFO2Value = LFO2value;
+		mLFO3Value = LFO3value;
+	}
 
 	inline void setNoteNumber(int noteNumber) {
 		mNoteNumber = noteNumber;
@@ -65,7 +71,7 @@ private:
 	double mFilterLFOAmount;
 	double mOscillatorOnePitchAmount;
 	double mOscillatorTwoPitchAmount;
-	double mLFOValue;
+	double mLFO1Value, mLFO2Value, mLFO3Value;
 	bool isActive;
 };
 

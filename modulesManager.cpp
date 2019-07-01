@@ -13,6 +13,7 @@ void modulesManager::InitAllModules(controlsManager* iControlsManager, graphicsM
 
 void modulesManager::loadAuxParameters(controlsManager* iControlsManager) {
 	iModOscillators->fillSetOfWavesIcons(iControlsManager);
+	iModConfLfo->fillAuxParams(iControlsManager);
 	iModGainFaders->fillSetOfFaders(iControlsManager);
 }
 

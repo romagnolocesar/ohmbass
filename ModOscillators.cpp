@@ -153,21 +153,6 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl->setGroupName("oscilator2");
 	IControlsManager->AddModelsCollection(myControl);
 
-	/* Oscillators LFO Pitch */
-	pBitmap = IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 1 Pitch Mod", 308, 195, 0.0, 0.0, 1.0, iGraphic);
-	myControl->setGroupName("oscilator1");
-	IControlsManager->AddModelsCollection(myControl);
-
-	pBitmap = IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium);
-	graphicType = GraphicsModel::KNOBMULTICONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 2 Pitch Mod", 308, 295, 0.0, 0.0, 1.0, iGraphic);
-	myControl->setGroupName("oscilator2");
-	IControlsManager->AddModelsCollection(myControl);
-
 }
 
 void ModOscillators::doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i) {
@@ -252,12 +237,6 @@ void ModOscillators::fillSetOfWavesIcons(controlsManager* iControlsManager) {
 			}
 			else if (strcmp(param->GetNameForHost(), "Bg Btn Osc 2 Waves") == 0) {
 				mBgBtnOscWavesOsc2 = i;
-			}
-			else if (strcmp(param->GetNameForHost(), "Osc 1 Pitch Mod") == 0) {
-				mOsc1PitchMod = i;
-			}
-			else if (strcmp(param->GetNameForHost(), "Osc 2 Pitch Mod") == 0) {
-				mOsc2PitchMod = i;
 			}
 		}
 	}	

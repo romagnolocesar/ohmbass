@@ -6,10 +6,6 @@ class ModConfLfo :
 	public ModulesModel
 {
 public:
-	
-
-
-
 	EModulesName moduleName = CONFLFO;
 
 	ModConfLfo();
@@ -19,6 +15,8 @@ public:
 	GraphicsModel::EGraphicsType graphicType;
 	GraphicsModel* iGraphic;
 
+	int mOsc1PitchMod, mOsc2PitchMod;
+
 	void ModConfLfo::init(controlsManager* IControlsManager, graphicsManager* IGraphicsManager);
 	void doModelsControlsInIControlsCollection(IPlug* myOhmBass, controlsManager* iControlsManager, graphicsManager* iGraphicsManager, int i);
 
@@ -26,6 +24,8 @@ public:
 	//void createModalBox(IPlug* myOhmBass, IGraphics* pGraphics, int w, int h);
 	void showModalBox(controlsManager* iControlsManager);
 	void hideModalBox(controlsManager* iControlsManager);
+
+	void fillAuxParams(controlsManager * iControlsManager);
 
 
 

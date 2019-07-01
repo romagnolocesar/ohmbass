@@ -38,10 +38,12 @@ void VoiceManager::onNoteOff(int noteNumber, int velocity) {
 
 double VoiceManager::nextSample(bool osc1status, bool osc2status) {
 	double output = 0.0;
-	double lfoValue = mLFO.nextSample();
+	double lfo1Value = mLFO1.nextSample();
+	double lfo2Value = mLFO2.nextSample();
+	double lfo3Value = mLFO3.nextSample();
 	for (int i = 0; i < NumberOfVoices; i++) {
 		Voice& voice = voices[i];
-		voice.setLFOValue(lfoValue);
+		voice.setLFOValue(lfo1Value, lfo2Value, lfo3Value);
 		output += voice.nextSample(osc1status, osc2status);
 	}
 	return output; //* 0.6; // 60% of AMP total 

@@ -15,7 +15,7 @@ public:
 	EDirection* EDirection;
 	IGraphics* pGraphics;
 	int mapWavesIconsIdx[2][4][2];
-	int mBgBtnOscWavesOsc1, mBgBtnOscWavesOsc2, mOsc1PitchMod, mOsc2PitchMod;
+	int mBgBtnOscWavesOsc1, mBgBtnOscWavesOsc2;
 
 	bool oscilator1Status = TRUE;
 	bool oscilator2Status = TRUE;

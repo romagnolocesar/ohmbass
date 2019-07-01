@@ -12,7 +12,7 @@
 
 
 const int kNumPrograms = 5; //Qtd of presets
-const int kNumParams = 55; //Qtd for params
+const int kNumParams = 59; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
@@ -182,12 +182,6 @@ void OhmBass::OnParamChange(int paramIdx)
 		}
 		else if (paramIdx == iModulesManager->iModOscillators->mBgBtnOscWavesOsc2) {
 			changer = bind(&VoiceManager::setOscillatorMode, _1, 2, static_cast<Oscillator::OscillatorMode>(idxWaveMode));
-		}
-		else if (paramIdx == iModulesManager->iModOscillators->mOsc1PitchMod) {
-			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
-		}
-		else if (paramIdx == iModulesManager->iModOscillators->mOsc2PitchMod) {
-			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
 		}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Power Button Osc 1") == 0) {
 			bool oscilator1Status = iModulesManager->iModOscillators->oscilator1Status;
 			if (isParametersInitialized) {
@@ -238,16 +232,31 @@ void OhmBass::OnParamChange(int paramIdx)
 		iModulesManager->iModGainFaders->OnParamChange(iControlsManager, paramIdx, isParametersInitialized, param);
 	}
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::CONFLFO) {
-		if (isParametersInitialized) {
-			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform") == 0) {
-				voiceManager.setLFOMode(static_cast<Oscillator::OscillatorMode>(param->Int()));
+		if (paramIdx == iModulesManager->iModConfLfo->mOsc1PitchMod) {
+			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
+		}else if (paramIdx == iModulesManager->iModConfLfo->mOsc2PitchMod) {
+			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
+		}else if (isParametersInitialized) {
+			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform OSC 1") == 0) {
+				voiceManager.setLFOMode(1, static_cast<Oscillator::OscillatorMode>(param->Int()));
+			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency OSC 1") == 0) {
+				voiceManager.setLFOFrequency(1, param->Value());
+			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform OSC 2") == 0) {
+				voiceManager.setLFOMode(2, static_cast<Oscillator::OscillatorMode>(param->Int()));
 			}
-			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency") == 0) {
-				voiceManager.setLFOFrequency(param->Value());
+			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency OSC 2") == 0) {
+				voiceManager.setLFOFrequency(2, param->Value());
+			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform Filter AB") == 0) {
+				voiceManager.setLFOMode(3, static_cast<Oscillator::OscillatorMode>(param->Int()));
+			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency Filter AB") == 0) {
+				voiceManager.setLFOFrequency(3, param->Value());
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Modal Close Icon") == 0) {
 				iModulesManager->iModConfLfo->hideModalBox(iControlsManager);
+			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter LFO Amount") == 0) {
+				changer = bind(&VoiceManager::setFilterLFOAmount, _1, param->Value());
 			}
+			
 		}
 	}
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::FILTERS) {
@@ -263,9 +272,6 @@ void OhmBass::OnParamChange(int paramIdx)
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Resonance") == 0) {
 				changer = bind(&VoiceManager::setFilterResonance, _1, param->Value());
-			}
-			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter LFO Amount") == 0) {
-				changer = bind(&VoiceManager::setFilterLFOAmount, _1, param->Value());
 			}
 			else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter Envelope Amount") == 0) {
 				changer = bind(&VoiceManager::setFilterEnvAmount, _1, param->Value());

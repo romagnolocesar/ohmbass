@@ -21,10 +21,10 @@ double Voice::nextSample(bool osc1status, bool osc2status) {
 	double volumeEnvelopeValue = mVolumeEnvelope.nextSample();
 	double filterEnvelopeValue = mFilterEnvelope.nextSample();
 
-	mFilter.setCutoffMod(filterEnvelopeValue * mFilterEnvelopeAmount + mLFOValue * mFilterLFOAmount);
+	mFilter.setCutoffMod(filterEnvelopeValue * mFilterEnvelopeAmount + mLFO3Value * mFilterLFOAmount);
 
-	mOscillatorOne.setPitchMod(mLFOValue * mOscillatorOnePitchAmount);
-	mOscillatorTwo.setPitchMod(mLFOValue * mOscillatorTwoPitchAmount);
+	mOscillatorOne.setPitchMod(mLFO1Value * mOscillatorOnePitchAmount);
+	mOscillatorTwo.setPitchMod(mLFO2Value * mOscillatorTwoPitchAmount);
 
 
 
