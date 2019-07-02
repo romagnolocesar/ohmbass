@@ -69,19 +69,21 @@ OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPr
 	//Create all default presets
 	CreatePresets();
 
-	//Flag to indicate when the plugin was full started
-	isParametersInitialized = TRUE;
-
 	//Fills
-	if (isParametersInitialized) {
+	/*if (isParametersInitialized) {*/
 		iModulesManager->loadAuxParameters(iControlsManager);
-	}
+	/*}*/
 	
 	mMIDIReceiver.noteOn.Connect(&voiceManager, &VoiceManager::onNoteOn);
 	mMIDIReceiver.noteOff.Connect(&voiceManager, &VoiceManager::onNoteOff);
 
 }
 OhmBass::~OhmBass() {}
+
+void OhmBass::OnGUIOpen() {
+	//Flag to indicate when the plugin was full started
+	isParametersInitialized = TRUE;
+}
 
 
 void OhmBass::CreateMainDisplay() {
@@ -239,12 +241,12 @@ void OhmBass::OnParamChange(int paramIdx)
 		iModulesManager->iModGainFaders->OnParamChange(iControlsManager, paramIdx, isParametersInitialized, param);
 	}
 	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::CONFLFO) {
-		if (paramIdx == iModulesManager->iModConfLfo->mOsc1PitchMod) {
-			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
-		}else if (paramIdx == iModulesManager->iModConfLfo->mOsc2PitchMod) {
-			changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
-		}else if (isParametersInitialized) {
-			if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform OSC 1") == 0) {
+		if (isParametersInitialized) {
+			if (paramIdx == iModulesManager->iModConfLfo->mOsc1PitchMod) {
+				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 1, param->Value());
+			}else if (paramIdx == iModulesManager->iModConfLfo->mOsc2PitchMod) {
+				changer = bind(&VoiceManager::setOscillatorPitchMod, _1, 2, param->Value());
+			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Waveform OSC 1") == 0) {
 				voiceManager.setLFOMode(1, static_cast<Oscillator::OscillatorMode>(param->Int()));
 			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "LFO Frequency OSC 1") == 0) {
 				voiceManager.setLFOFrequency(1, param->Value());

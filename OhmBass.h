@@ -31,6 +31,7 @@ public:
 	
 	void Reset();
 	void OnParamChange(int paramIdx);
+	void OnGUIOpen();
 	void ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames);
 	// to receive MIDI messages:
 	void ProcessMidiMsg(IMidiMsg* pMsg);

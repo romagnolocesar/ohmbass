@@ -23,7 +23,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerWorkingDirectory>$(TargetDir)</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>$(TargetPath) /noload /nosave</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>$(TargetPath) /noload /nosave /noexc /noft</LocalDebuggerCommandArguments>
     <LocalDebuggerCommand>$(VST2_64_HOST_PATH)</LocalDebuggerCommand>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
