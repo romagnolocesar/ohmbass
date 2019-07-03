@@ -86,6 +86,7 @@
     <ClCompile Include="graphicsManager.cpp" />
     <ClCompile Include="GhrrEQuilibrium.cpp" />
     <ClCompile Include="GhrrManager.cpp" />
+    <ClCompile Include="ModToolsBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OhmBass-rtas.def" />

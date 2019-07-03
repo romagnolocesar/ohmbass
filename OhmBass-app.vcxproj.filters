@@ -136,6 +136,9 @@
     <ClInclude Include="ModConfLfo.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModToolsBar.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app_wrapper\app_dialog.cpp">
@@ -204,6 +207,9 @@
       <Filter>Modules\ghrr</Filter>
     </ClCompile>
     <ClCompile Include="ModConfLfo.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModToolsBar.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

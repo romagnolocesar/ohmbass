@@ -36,6 +36,7 @@
     <ClCompile Include="ModFilters.cpp" />
     <ClCompile Include="modulesManager.cpp" />
     <ClCompile Include="ModConfLfo.cpp" />
+    <ClCompile Include="ModToolsBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />

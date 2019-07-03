@@ -8,6 +8,7 @@ void modulesManager::InitAllModules(controlsManager* iControlsManager, graphicsM
 	iModAmpEnvelope->init(iControlsManager, iGraphicsManager);
 	iModEQuilibrium->init(iControlsManager, iGraphicsManager);
 	iModConfLfo->init(iControlsManager, iGraphicsManager);
+	iModToolsBar->init(iControlsManager, iGraphicsManager);
 	
 }
 

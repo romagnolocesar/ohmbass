@@ -109,6 +109,10 @@ void OhmBass::doModelsControlsInIControlsCollection() {
 		case ModulesModel::EQUILIBRIUM:
 			iModulesManager->iModEQuilibrium->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
 			break;
+		case ModulesModel::TOOLSBAR:
+			iModulesManager->iModToolsBar->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
+			break;
+
 		//MODALS
 		case ModulesModel::CONFLFO:
 			iModulesManager->iModConfLfo->doModelsControlsInIControlsCollection(this, iControlsManager, iGraphicsManager, i);
@@ -214,18 +218,19 @@ void OhmBass::OnParamChange(int paramIdx)
 				
 			}
 		}
-		else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ToolBar LFO Osc 1") == 0) {
+
+		
+		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
+	}
+	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::TOOLSBAR) {
+		if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "ToolsBar LFO") == 0) {
 			if (isParametersInitialized) {
-				
-				
 				iModulesManager->iModConfLfo->showModalBox(iControlsManager);
 				//iControlsManager->showModalBackground(); ----------ARRUMAR A ORDEM 
 			}
 		}
-
-		
-		iModulesManager->iModOscillators->OnParamChange(iControlsManager, paramIdx, idxWaveMode, isParametersInitialized);
-	}else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
+	}
+	else if (iControlsManager->controlsModelsCollection[paramIdx]->moduleName == ModulesModel::EModulesName::GAINFADERS) {
 		if (paramIdx == iModulesManager->iModGainFaders->mFadersHandlerOnOsc1) {
 			changer = bind(&VoiceManager::setOscillatorOneOutput, _1, param->Value());
 		}

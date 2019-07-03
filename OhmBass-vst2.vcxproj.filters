@@ -22,6 +22,7 @@
     <ClCompile Include="Biquad.cpp" />
     <ClCompile Include="modulesManager.cpp" />
     <ClCompile Include="ModConfLfo.cpp" />
+    <ClCompile Include="ModToolsBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OhmBass.h" />

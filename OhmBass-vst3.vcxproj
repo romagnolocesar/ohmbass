@@ -373,6 +373,7 @@ if exist "%programfiles(x86)%" (copy /y "$(TargetPath)" "$(VST3_64_PATH)\OhmBass
     <ClCompile Include="ModFilters.cpp" />
     <ClCompile Include="ModGainFaders.cpp" />
     <ClCompile Include="ModOscillators.cpp" />
+    <ClCompile Include="ModToolsBar.cpp" />
     <ClCompile Include="modulesManager.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="Filter.cpp" />

@@ -334,6 +334,7 @@ copy /Y "$(TargetPath)".rsr "$(RTAS_PLUGINS_PATH)\$(BINARY_NAME).dpm.rsr"
     <ClCompile Include="GhrrEQuilibrium.cpp" />
     <ClCompile Include="GhrrManager.cpp" />
     <ClCompile Include="graphicsManager.cpp" />
+    <ClCompile Include="ModToolsBar.cpp" />
     <ClCompile Include="OhmBass.cpp" />
     <ClCompile Include="MIDIReceiver.cpp" />
     <ClCompile Include="Oscillator.cpp" />

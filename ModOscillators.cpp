@@ -32,13 +32,7 @@ void ModOscillators::init(controlsManager* IControlsManager, graphicsManager* IG
 	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Power Button Osc 2", 348, 388, ModulesModel::ON, ModulesModel::kNumModulesOnOff, iGraphic);
 	IControlsManager->AddModelsCollection(myControl);
 
-	/* ToolBar */
-	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONLFO_ID, ICONLFO_FN, 2);
-	graphicType = GraphicsModel::SWITCHCONTROL;
-	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "ToolBar LFO Osc 1", 164, 151, ModulesModel::OFF, ModulesModel::kNumModulesOnOff, iGraphic);
-	myControl->setGroupName("oscilator1");
-	IControlsManager->AddModelsCollection(myControl);
+	
 
 	/* Waves Icons */
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(ICONSINEWAVEOFF_ID, ICONSINEWAVEOFF_FN, 2);
