@@ -24,6 +24,13 @@ void ModConfLfo::init(controlsManager* IControlsManager, graphicsManager* IGraph
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
+	//Title
+	graphicType = GraphicsModel::TEXT;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "MODAL LFO TITLE", 236, 207, 236 + 80, 207 + 30, "LFOs", iGraphic, 17);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
 	//CLOSE BUTTON
 	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(MODAL_CLOSE_ICON_ID, MODAL_CLOSE_ICON_FN);
 	graphicType = GraphicsModel::SWITCHCONTROL;

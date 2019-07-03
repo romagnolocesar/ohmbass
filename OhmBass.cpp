@@ -15,7 +15,7 @@
 
 
 const int kNumPrograms = 5; //Qtd of presets
-const int kNumParams = 71; //Qtd for params
+const int kNumParams = 72; //Qtd for params
 
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
