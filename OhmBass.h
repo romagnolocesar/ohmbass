@@ -49,6 +49,7 @@ public:
 	//Create all controls based on Models Controls Collection 
 	void doModelsControlsInIControlsCollection();
 
+	ITimeInfo mTimeInfo;
 	
 private:
 	double globals_sampleRate;

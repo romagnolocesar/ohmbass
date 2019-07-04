@@ -96,6 +96,8 @@ instrument determined by PLUG _IS _INST
 #define ICONLFO_ID					133
 #define MODAL_CLOSE_ICON_ID			134
 #define MODAL_MEDIUM_ONE_ID			135
+#define BUTTON_GLOW_ID				136
+#define SELECT_BOX_ONE_ID			137
 
 
 
@@ -135,6 +137,9 @@ instrument determined by PLUG _IS _INST
 #define ICONLFO_FN							"resources/img/lfoicon.png"
 #define MODAL_CLOSE_ICON_FN					"resources/img/modal_close_icon.png"
 #define MODAL_MEDIUM_ONE_FN					"resources/img/modals/medium_one.png"
+
+#define BUTTON_GLOW_FN						"resources/img/button_glow.png"
+#define SELECT_BOX_ONE_FN					"resources/img/select_box_one.png"
 
 
 

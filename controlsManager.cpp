@@ -200,7 +200,7 @@ void controlsManager::fillWrapperControlsGroupCollection() {
 int controlsManager::getKNumParams()
 {
 	//return this->kNumParams;
-	return 72;
+	return 75;
 }
 
 

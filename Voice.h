@@ -20,9 +20,9 @@ public:
 		mOscillatorTwoPitchAmount(0.0),
 		mOscilatorOneOutput(0.8),
 		mOscilatorTwoOutput(0.0),
-		mLFO1Value(0.0),
-		mLFO2Value(0.0),
-		mLFO3Value(0.0),
+		mLFO1Value(6.0),
+		mLFO2Value(6.0),
+		mLFO3Value(6.0),
 	isActive(false) {
 		// Set myself free everytime my volume envelope has fully faded out of RELEASE stage:
 		mVolumeEnvelope.finishedEnvelopeCycle.Connect(this, &Voice::setFree);

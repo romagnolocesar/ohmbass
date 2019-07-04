@@ -74,16 +74,39 @@ void ModConfLfo::init(controlsManager* IControlsManager, graphicsManager* IGraph
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
+	//Sync Button 
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(BUTTON_GLOW_ID, BUTTON_GLOW_FN, 2);
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Sync Button Osc 1", 420, 280, ModulesModel::OFF, ModulesModel::kNumModulesOnOff, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	//Sync Button Label
+	graphicType = GraphicsModel::TEXT;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Sync Button Osc 1 Label", 440, 280, 440 + 40, 280 + 30, "SYNC", iGraphic, 10);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
+	//Sync Options
+	pBitmap = IGraphicsManager->pGraphics->LoadIBitmap(SELECT_BOX_ONE_ID, SELECT_BOX_ONE_FN, 2);
+	graphicType = GraphicsModel::SWITCHCONTROL;
+	iGraphic = new GraphicsModel(pBitmap, graphicType);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::ENUM, "Sync Options Osc 1", 425, 300, ModulesModel::OFF, ModulesModel::kNumModulesOnOff, iGraphic);
+	myControl->setGroupName("modal_conflfo");
+	IControlsManager->AddModelsCollection(myControl);
+
 	//Pitch Amount
 	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), GraphicsModel::KNOBMULTICONTROL);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 1 Pitch Mod", 440, 270, 0.0, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 1 Pitch Mod", 580, 270, 0.0, 0.0, 1.0, iGraphic);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
 	//Pitch Amount Label
 	graphicType = GraphicsModel::TEXT;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 1 Pitch Mod Label", 430, 340, 430 + 80, 340 + 30, "PITCH AMOUNT", iGraphic, 12);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 1 Pitch Mod Label", 570, 340, 570 + 80, 340 + 30, "PITCH AMOUNT", iGraphic, 12);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
@@ -91,7 +114,7 @@ void ModConfLfo::init(controlsManager* IControlsManager, graphicsManager* IGraph
 	//Title
 	graphicType = GraphicsModel::TEXT;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "MODAL LFO TITLE OSC 2", 270, 380, 270 + 80, 380 + 30, "OSCILLATOR 2", iGraphic, 15);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "MODAL LFO TITLE OSC 2", 270, 380, 270 + 100, 380 + 30, "OSCILLATOR 2", iGraphic, 15);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 	//Wave Mode
@@ -124,14 +147,14 @@ void ModConfLfo::init(controlsManager* IControlsManager, graphicsManager* IGraph
 
 	//Pitch Amount
 	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), GraphicsModel::KNOBMULTICONTROL);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 2 Pitch Mod", 440, 400, 0.0, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 2 Pitch Mod", 580, 400, 0.0, 0.0, 1.0, iGraphic);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
 	//Pitch Amount Label
 	graphicType = GraphicsModel::TEXT;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 2 Pitch Mod Label", 430, 470, 430 + 80, 470 + 30, "PITCH AMOUNT", iGraphic, 12);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Osc 2 Pitch Mod Label", 570, 470, 570 + 80, 470 + 30, "PITCH AMOUNT", iGraphic, 12);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
@@ -173,14 +196,14 @@ void ModConfLfo::init(controlsManager* IControlsManager, graphicsManager* IGraph
 
 	//Filter AB Amount
 	iGraphic = new GraphicsModel(IGraphicsManager->getBitmapFromCommonsColletion(IGraphicsManager->mknobMedium), GraphicsModel::KNOBMULTICONTROL);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter AB LFO Amount", 440, 530, 0.0, 0.0, 1.0, iGraphic);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter AB LFO Amount", 580, 530, 0.0, 0.0, 1.0, iGraphic);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
 	//Pitch Amount Label
 	graphicType = GraphicsModel::TEXT;
 	iGraphic = new GraphicsModel(pBitmap, graphicType);
-	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter AB LFO Amount Label", 430, 600, 430 + 80, 600 + 30, "FILTER AMOUNT", iGraphic, 12);
+	myControl = new ControlsModel(this->moduleName, IControlsManager->Count(), ControlsModel::DOUBLE, "Filter AB LFO Amount Label", 570, 600, 570 + 80, 600 + 30, "FILTER AMOUNT", iGraphic, 12);
 	myControl->setGroupName("modal_conflfo");
 	IControlsManager->AddModelsCollection(myControl);
 
@@ -243,6 +266,47 @@ void ModConfLfo::doModelsControlsInIControlsCollection(IPlug* myOhmBass, control
 //
 //
 
+//Hide Frequency Knob
+void ModConfLfo::showLFOFrequency(controlsManager* iControlsManager, int lfoNumber)
+{
+	IParam * param;
+	if (lfoNumber == 1) {
+		IControl * element;
+		element = iControlsManager->controlsCollection[frequencyKnobLFO1];
+		element->GrayOut(FALSE);
+	}
+	else if (lfoNumber == 2) {
+		IControl * element;
+		element = iControlsManager->controlsCollection[frequencyKnobLFO2];
+		element->GrayOut(FALSE);
+	}
+	else if (lfoNumber == 3) {
+		IControl * element;
+		element = iControlsManager->controlsCollection[frequencyKnobLFO3];
+		element->GrayOut(FALSE);
+	}
+}
+
+//Hide Frequency Knob
+void ModConfLfo::hideLFOFrequency(controlsManager* iControlsManager, int lfoNumber)
+{
+	IParam * param;
+	if (lfoNumber == 1) {
+		IControl * element;
+		element = iControlsManager->controlsCollection[frequencyKnobLFO1];
+		element->GrayOut(TRUE);
+	}
+	else if (lfoNumber == 2) {
+		IControl * element;
+		element = iControlsManager->controlsCollection[frequencyKnobLFO2];
+		element->GrayOut(TRUE);
+	}
+	else if (lfoNumber == 3) {
+		IControl * element;
+		element = iControlsManager->controlsCollection[frequencyKnobLFO3];
+		element->GrayOut(TRUE);
+	}
+}
 
 //Show ModalBackground
 void ModConfLfo::showModalBox(controlsManager* iControlsManager)
@@ -254,6 +318,7 @@ void ModConfLfo::showModalBox(controlsManager* iControlsManager)
 		element->Hide(FALSE);
 	}
 }
+
 
 //Hide ModalBackground
 void ModConfLfo::hideModalBox(controlsManager* iControlsManager)
@@ -275,6 +340,8 @@ void ModConfLfo::fillAuxParams(controlsManager* iControlsManager) {
 				mOsc1PitchMod = i;
 			}else if (strcmp(param->GetNameForHost(), "Osc 2 Pitch Mod") == 0) {
 				mOsc2PitchMod = i;
+			}else if (strcmp(param->GetNameForHost(), "LFO Frequency OSC 1") == 0) {
+				frequencyKnobLFO1 = i;
 			}
 		}
 	}

@@ -15,11 +15,13 @@
 
 
 const int kNumPrograms = 5; //Qtd of presets
-const int kNumParams = 72; //Qtd for params
+const int kNumParams = 75; //Qtd for params
 
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
+	GetTime(&mTimeInfo);
+
 
 	//Test of Fourier
 	//test_fft();
@@ -269,6 +271,14 @@ void OhmBass::OnParamChange(int paramIdx)
 				iModulesManager->iModConfLfo->hideModalBox(iControlsManager);
 			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Filter AB LFO Amount") == 0) {
 				changer = bind(&VoiceManager::setFilterLFOAmount, _1, param->Value());
+			}else if (strcmp(iControlsManager->controlsModelsCollection[paramIdx]->alias, "Sync Button Osc 1") == 0) {
+				bool status = iControlsManager->controlsCollection[paramIdx]->GetValue();
+				if (status) {
+					iModulesManager->iModConfLfo->hideLFOFrequency(iControlsManager, 1);
+				}else {
+					iModulesManager->iModConfLfo->showLFOFrequency(iControlsManager, 1);
+				}
+				
 			}
 			
 		}

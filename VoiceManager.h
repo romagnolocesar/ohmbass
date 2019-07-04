@@ -22,6 +22,8 @@ public:
 			voice.mOscillatorTwo.setSampleRate(sampleRate);
 		}
 		mLFO1.setSampleRate(sampleRate);
+		mLFO2.setSampleRate(sampleRate);
+		mLFO3.setSampleRate(sampleRate);
 	}
 
 	inline void setLFOMode(int oscNumber, Oscillator::OscillatorMode mode) {
