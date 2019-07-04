@@ -10,9 +10,6 @@
 #include <math.h>
 #include <algorithm>
 
-//Fourier
-#include "fft.h";
-
 
 const int kNumPrograms = 5; //Qtd of presets
 const int kNumParams = 75; //Qtd for params
@@ -20,7 +17,6 @@ const int kNumParams = 75; //Qtd for params
 
 OhmBass::OhmBass(IPlugInstanceInfo instanceInfo) : IPLUG_CTOR(kNumParams, kNumPrograms, instanceInfo), lastVirtualKeyboardNoteNumber(virtualKeyboardMinimumNoteNumber - 1) {
 	TRACE;
-	GetTime(&mTimeInfo);
 
 
 	//Test of Fourier
@@ -148,7 +144,7 @@ void OhmBass::CreatePresets() {
 void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFrames)
 {
 	//Update all information about time
-	GetTime(&iGraphicsManager->mTimeInfo);
+	GetTime(&mTimeInfo);
 
 	// Mutex is already locked for us.
 	double *leftOutput = outputs[0];
@@ -163,6 +159,7 @@ void OhmBass::ProcessDoubleReplacing(double** inputs, double** outputs, int nFra
 		result = iModulesManager->process(result);
 
 		//Audio Final Output
+
 		leftOutput[i] = rightOutput[i] = result;
 
 	}

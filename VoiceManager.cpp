@@ -1,5 +1,9 @@
 #include "VoiceManager.h"
 
+//Fourier
+#include "fft.h";
+
+
 Voice* VoiceManager::findFreeVoice() {
 	Voice* freeVoice = NULL;
 	for (int i = 0; i < NumberOfVoices; i++) {
@@ -37,14 +41,28 @@ void VoiceManager::onNoteOff(int noteNumber, int velocity) {
 }
 
 double VoiceManager::nextSample(bool osc1status, bool osc2status) {
+	Complex iFourierCollection[NumberOfVoices];
+	
+
 	double output = 0.0;
+	double outputFourier = 0.0;
 	double lfo1Value = mLFO1.nextSample();
 	double lfo2Value = mLFO2.nextSample();
 	double lfo3Value = mLFO3.nextSample();
 	for (int i = 0; i < NumberOfVoices; i++) {
 		Voice& voice = voices[i];
 		voice.setLFOValue(lfo1Value, lfo2Value, lfo3Value);
-		output += voice.nextSample(osc1status, osc2status);
+		double temp = voice.nextSample(osc1status, osc2status);
+		output += temp;
+		iFourierCollection[i] = temp;
 	}
-	return output; //* 0.6; // 60% of AMP total 
+	CArray fourierData(iFourierCollection, NumberOfVoices);
+
+	//fft(fourierData);
+	//ifft(fourierData);
+	for (int i = 0; i < NumberOfVoices; i++) {
+		outputFourier += fourierData[i]._Val[0];
+	}
+
+	return outputFourier; //* 0.6; // 60% of AMP total 
 }
