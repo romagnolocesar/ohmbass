@@ -1,7 +1,7 @@
 #include "VoiceManager.h"
 
 //Fourier
-#include "fft.h";
+#include "fft.h"
 
 
 Voice* VoiceManager::findFreeVoice() {
@@ -60,6 +60,7 @@ double VoiceManager::nextSample(bool osc1status, bool osc2status) {
 
 	//fft(fourierData);
 	//ifft(fourierData);
+	//test_fft();
 	for (int i = 0; i < NumberOfVoices; i++) {
 		outputFourier += fourierData[i]._Val[0];
 	}

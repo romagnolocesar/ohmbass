@@ -7,11 +7,13 @@
 #include <valarray>
 
 #include <Winbase.h>
+#include "../WDL/fft.c"
 
 const float nPI = 3.141592653589793238460;
 
 typedef std::complex<double> Complex;
 typedef std::valarray<Complex> CArray;
+int cont = 0;
 
 
 
@@ -45,6 +47,13 @@ typedef std::valarray<Complex> CArray;
 // The bug is now fixed @2017/05/30 
 void fft(CArray &x)
 {
+	//Log
+	char buf[52];
+	cont = cont + 1;
+	sprintf(buf, "Contador: %d \n", cont);
+	OutputDebugString(buf);
+
+
 	// DFT
 	unsigned int N = x.size(), k = N, n;
 	double thetaT = 3.14159265358979323846264338328L / N;
@@ -108,7 +117,7 @@ void ifft(CArray& x)
 }
 
 int test_fft() {
-	const Complex test[] = { 3.0, 1.0, 1.0, 4.0, 0.0, 0.0, 0.0, 0.0 };
+	const Complex test[] = { 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0 };
 	CArray data(test, 8);
 
 	//Log
@@ -139,6 +148,53 @@ int test_fft() {
 		OutputDebugString(buf);
 	}
 	return 0;
+}
+
+void test2()
+{
+	//Log
+	char buff[52];
+	WDL_fft_init();
+
+	static const int LEN = 16;
+	WDL_FFT_COMPLEX buf[LEN];
+
+	//for (int i = 0; i < LEN; ++i)
+	//{
+	//	// Test signal: Naive square wave
+	//	buf[i].re = i < LEN / 2 ? 1.0 : -1.0;
+	//	buf[i].im = 0.0;
+	//	sprintf(buff, "%f\t%f\n", buf[i].re, buf[i].im);
+	//	OutputDebugString(buff);
+	//}
+	//sprintf(buff, "\n");
+	//OutputDebugString(buff);
+
+	WDL_fft(buf, LEN, 0);
+	for (int i = 0; i < LEN; ++i)
+	{
+		int sorted_idx = WDL_fft_permute(LEN, i);
+		WDL_FFT_REAL re = buf[sorted_idx].re, im = buf[sorted_idx].im;
+		sprintf(buff, "%f\t%f\n", re, im);
+
+		// \todo Convert complex data to something meaningful, e.g. amplitude and phase.
+		 double amp = sqrt(re*re + im*im);
+		 double phase = -atan2(im, re);
+		 sprintf(buff, "Amp: %f\t Phase: %f\n", amp, phase);
+		 OutputDebugString(buff);
+	}
+	sprintf(buff, "\n");
+	OutputDebugString(buff);
+
+	/*WDL_fft(buf, LEN, 1);
+	for (int i = 0; i < LEN; ++i)
+	{
+		const double scale = (double)1 / LEN;
+		sprintf(buff, "%f\t%f\n", buf[i].re * scale, buf[i].im * scale);
+		OutputDebugString(buff);
+	}
+	sprintf(buff, "\n");
+	OutputDebugString(buff);*/
 }
 
 #endif
